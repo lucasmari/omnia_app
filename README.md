@@ -1,2 +1,1 @@
 # Omnia
-# omnia_app
