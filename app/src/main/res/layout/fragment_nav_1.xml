@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:elevation="4dp"
+            app:tabMinWidth="128dp"
+            app:tabMode="scrollable"
+            app:tabTextAppearance="@style/TextAppearance.AppCompat.Small"
+            tools:ignore="UnusedAttribute" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/pager1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:background="@color/colorPrimary" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addFab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="60dp"
+        android:layout_marginEnd="16dp"
+        android:scaleType="center"
+        android:src="@drawable/ic_add"
+        app:backgroundTint="@color/colorAccent"
+        app:elevation="4dp"
+        app:fabSize="normal"
+        app:pressedTranslationZ="4dp"
+        app:rippleColor="@color/colorPrimary"
+        tools:ignore="RtlHardcoded" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/attachFab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="136dp"
+        android:layout_marginEnd="24dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_attach"
+        android:visibility="gone"
+        app:backgroundTint="@color/colorAccent"
+        app:elevation="4dp"
+        app:fabSize="mini"
+        app:pressedTranslationZ="4dp"
+        app:rippleColor="@color/colorPrimary"
+        tools:ignore="RtlHardcoded" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/cameraFab"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="196dp"
+        android:layout_marginEnd="24dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_camera"
+        android:visibility="gone"
+        app:backgroundTint="@color/colorAccent"
+        app:elevation="4dp"
+        app:fabSize="mini"
+        app:pressedTranslationZ="4dp"
+        app:rippleColor="@color/colorPrimary"
+        tools:ignore="RtlHardcoded" />
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="66dp"
+        android:layout_marginEnd="78dp">
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone">
+
+            <EditText
+                android:id="@+id/editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginEnd="64dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="2dp"
+                android:background="@drawable/rounded_edit_text"
+                android:elevation="4dp"
+                android:ems="10"
+                android:inputType="textCapSentences|textMultiLine"
+                android:labelFor="@+id/pager1"
+                android:paddingBottom="4dp"
+                android:paddingEnd="10dp"
+                android:paddingStart="8dp"
+                android:paddingTop="4dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="16sp"
+                tools:ignore="UnusedAttribute" />
+
+            <ImageButton
+                android:id="@+id/sendButton"
+                android:layout_width="40dp"
+                android:layout_height="36dp"
+                android:layout_alignBottom="@+id/editText"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="false"
+                android:layout_marginEnd="10dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:baselineAlignBottom="true"
+                android:contentDescription="sendText"
+                android:elevation="4dp"
+                android:src="@drawable/ic_send"
+                android:tint="@android:color/background_light"
+                tools:ignore="UnusedAttribute" />
+        </RelativeLayout>
+    </FrameLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

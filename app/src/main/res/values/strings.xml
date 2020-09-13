@@ -1,0 +1,64 @@
+<resources>
+    <!-- App Name -->
+    <string name="app_name">Omnia</string>
+
+    <!-- Bottom Navigation Items -->
+    <string name="item_1">Nav 1</string>
+    <string name="item_2">Nav 2</string>
+    <string name="item_3">Nav 3</string>
+    <string name="item_4">Nav 4</string>
+    <string name="item_5">Nav 5</string>
+
+    <!-- Log In -->
+    <string name="user_hint">Usuário</string>
+    <string name="password_hint">Senha</string>
+    <string name="sign_in_button">Entrar</string>
+    <string name="sign_in_google_button">Google</string>
+    <string name="sign_up_button_1">Cadastrar-se</string>
+
+    <!-- Sign Up -->
+    <string name="sign_up_title">Cadastro</string>
+    <string name="email_hint">Email</string>
+    <string name="state_hint">Estado</string>
+    <string name="sign_up_button_2">Cadastrar</string>
+
+    <!-- Tabs -->
+    <string name="tabFragment1">Tab 1</string>
+    <string name="tabFragment2">Tab 2</string>
+    <string name="tabFragment3">Tab 3</string>
+    <string name="tabFragment4">Tab 4</string>
+    <string name="tv1">Sem conexão com a internet...</string>
+
+    <!-- Menu Items -->
+    <string name="menu_item_1">Item 1</string>
+    <string name="menu_item_2">Item 2</string>
+    <string name="menu_item_3">Item 3</string>
+
+    <!-- App SettingsActivity -->
+    <string name="theme_pref">Tema</string>
+    <string name="theme_pref_key">theme</string>
+    <string name="theme_pref_sum_on">Claro</string>
+    <string name="theme_pref_sum_off">Escuro</string>
+    <string name="theme_pref_default">false</string>
+
+    <!-- CommentsActivity -->
+    <string name="comments_title">Comentários</string>
+    <string name="comment_hint">Comente aqui…</string>
+
+    <!-- ShareActivity -->
+    <string name="share_title">Compartilhar</string>
+    <string name="share_with">Compartilhar com…</string>
+
+    <!-- Profile -->
+    <string name="user_name">Nome de Usuário</string>
+    <string name="user_subscriptions">Inscritos</string>
+    <string name="user_level">Nível 0</string>
+    <string name="description_hint">Adicione uma descrição! ---> </string>
+
+    <!-- User SettingsActivity -->
+    <string name="user_settings_title">Configurações</string>
+    <string name="logout">Sair</string>
+
+    <!-- Recycler View Items -->
+    <string name="reply_button">Responder</string>
+</resources>

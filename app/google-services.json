@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "931541960158",
+    "firebase_url": "https://omnia-91924.firebaseio.com",
+    "project_id": "omnia-91924",
+    "storage_bucket": "omnia-91924.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:931541960158:android:db66db0875a2df6324894f",
+        "android_client_info": {
+          "package_name": "com.lucas.omnia"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "931541960158-8p7vlgvndtv479q9ef7dnn8h35ts3ofr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6tnq__O8sECAVpsKG_r5nSk6ipA29_kM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "931541960158-8p7vlgvndtv479q9ef7dnn8h35ts3ofr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
