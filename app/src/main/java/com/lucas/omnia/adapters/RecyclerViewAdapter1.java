@@ -24,7 +24,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.lucas.omnia.models.DataObject1;
 import com.lucas.omnia.R;
 import com.lucas.omnia.activities.CommentsActivity;
-import com.lucas.omnia.activities.UserPageActivity2;
+import com.lucas.omnia.activities.UserPageActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,7 +42,7 @@ import static com.lucas.omnia.utils.AppConfig.REMOVE_UPVOTE_POST_URL;
 import static com.lucas.omnia.utils.AppConfig.UPVOTE_POST_URL;
 import static com.lucas.omnia.utils.AppController.getInstance;
 import static com.lucas.omnia.activities.MainActivity.hideSoftKeyboard;
-import static com.lucas.omnia.activities.MainActivity.mUserName;
+import static com.lucas.omnia.activities.MainActivity.userName;
 import static com.lucas.omnia.activities.MainActivity.showSoftKeyboard;
 import static com.lucas.omnia.fragments.NavFragment1.mAddFab;
 import static com.lucas.omnia.fragments.NavFragment1.mAttachFab;
@@ -122,7 +122,7 @@ public class RecyclerViewAdapter1 extends RecyclerView
             @Override
             public void onClick(View v) {
                 pos = holder.getAdapterPosition();
-                v.getContext().startActivity(new Intent(v.getContext(), UserPageActivity2.class));
+                v.getContext().startActivity(new Intent(v.getContext(), UserPageActivity.class));
             }
         });
         holder.mComment.setText(mDataSet.get(position).getComment());
@@ -218,7 +218,7 @@ public class RecyclerViewAdapter1 extends RecyclerView
                 final Animation mSlideIn = AnimationUtils.loadAnimation(v.getContext(), R.anim.rl_slide_in);
                 final Animation mHide = AnimationUtils.loadAnimation(v.getContext(), R.anim.rl_hide);
 
-                if(mUserName.equals(mDataSet.get(holder.getAdapterPosition()).getUser())) {
+                if(userName.equals(mDataSet.get(holder.getAdapterPosition()).getUser())) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
                     builder.setItems(options1, new DialogInterface.OnClickListener() {
                         @Override
@@ -294,7 +294,7 @@ public class RecyclerViewAdapter1 extends RecyclerView
 
         JSONObject obj = new JSONObject();
         try {
-            obj.put("user", mUserName);
+            obj.put("user", userName);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -345,7 +345,7 @@ public class RecyclerViewAdapter1 extends RecyclerView
 
         JSONObject obj = new JSONObject();
         try {
-            obj.put("user", mUserName);
+            obj.put("user", userName);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -396,7 +396,7 @@ public class RecyclerViewAdapter1 extends RecyclerView
         JSONObject obj = new JSONObject();
         try {
             obj.put("pid", String.valueOf(position+1));
-            obj.put("user", mUserName);
+            obj.put("user", userName);
             obj.put("upvote", String.valueOf(position+1));
         } catch (JSONException e) {
             e.printStackTrace();
@@ -433,7 +433,7 @@ public class RecyclerViewAdapter1 extends RecyclerView
         JSONObject obj = new JSONObject();
         try {
             obj.put("pid", String.valueOf(position+1));
-            obj.put("user", mUserName);
+            obj.put("user", userName);
             obj.put("downvote", String.valueOf(position+1));
         } catch (JSONException e) {
             e.printStackTrace();
@@ -470,7 +470,7 @@ public class RecyclerViewAdapter1 extends RecyclerView
         JSONObject obj = new JSONObject();
         try {
             obj.put("pid", String.valueOf(position+1));
-            obj.put("user", mUserName);
+            obj.put("user", userName);
             obj.put("upvote", String.valueOf(position+1));
         } catch (JSONException e) {
             e.printStackTrace();
@@ -507,7 +507,7 @@ public class RecyclerViewAdapter1 extends RecyclerView
         JSONObject obj = new JSONObject();
         try {
             obj.put("pid", String.valueOf(position+1));
-            obj.put("user", mUserName);
+            obj.put("user", userName);
             obj.put("downvote", String.valueOf(position+1));
         } catch (JSONException e) {
             e.printStackTrace();
@@ -545,7 +545,7 @@ public class RecyclerViewAdapter1 extends RecyclerView
         JSONObject obj = new JSONObject();
         try {
             obj.put("pid", String.valueOf(position+1));
-            obj.put("user", mUserName);
+            obj.put("user", userName);
             obj.put("post", post);
         } catch (JSONException e) {
             e.printStackTrace();

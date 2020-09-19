@@ -1,15 +1,15 @@
 package com.lucas.omnia.activities;
 
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.lucas.omnia.R;
 
-import static com.lucas.omnia.adapters.RecyclerViewAdapter1.pos;
-import static com.lucas.omnia.fragments.TabFragment1.usersList;
+import static com.lucas.omnia.activities.MainActivity.userName;
 
-public class UserPageActivity2 extends AppCompatActivity {
+public class UserPageActivity extends AppCompatActivity {
 
     private TextView mUserName;
 
@@ -19,6 +19,6 @@ public class UserPageActivity2 extends AppCompatActivity {
         setContentView(R.layout.activity_user_page_2);
 
         mUserName = findViewById(R.id.userName2);
-        mUserName.setText(usersList.get(pos).toString());
+        mUserName.setText(userName);
     }
 }

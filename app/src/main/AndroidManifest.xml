@@ -16,17 +16,12 @@
         android:theme="@style/AppThemeDark">
 
         <activity
-            android:name=".authenticator.AuthActivity"
+            android:name=".activities.AuthActivity"
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <activity
-            android:name=".authenticator.SignUpActivity1"
-            android:launchMode="singleTop">
         </activity>
 
         <activity
@@ -68,6 +63,6 @@
             android:name=".activities.UserSettingsActivity"></activity>
 
         <activity
-            android:name=".activities.UserPageActivity2"></activity>
+            android:name=".activities.UserPageActivity"></activity>
     </application>
 </manifest>

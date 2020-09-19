@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "931541960158-19vc59d8ne4oqr6n95os53co6q92isk1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lucas.omnia",
+            "certificate_hash": "94f4e36df085427de38418cf255c65a9bdb73436"
+          }
+        },
+        {
           "client_id": "931541960158-8p7vlgvndtv479q9ef7dnn8h35ts3ofr.apps.googleusercontent.com",
           "client_type": 3
         }

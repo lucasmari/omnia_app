@@ -35,11 +35,11 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import static com.lucas.omnia.activities.MainActivity.userName;
 import static com.lucas.omnia.utils.AppConfig.GET_ALL_COMMENTS_URL;
 import static com.lucas.omnia.utils.AppConfig.CREATE_COMMENT_URL;
 import static com.lucas.omnia.utils.AppController.getInstance;
 import static com.lucas.omnia.activities.MainActivity.hideSoftKeyboard;
-import static com.lucas.omnia.activities.MainActivity.mUserName;
 import static com.lucas.omnia.activities.MainActivity.showSoftKeyboard;
 import static com.lucas.omnia.adapters.RecyclerViewAdapter2.getDownvotedComments;
 import static com.lucas.omnia.adapters.RecyclerViewAdapter2.getUpvotedComments;
@@ -285,7 +285,7 @@ public class CommentsActivity extends AppCompatActivity {
 
         JSONObject obj = new JSONObject();
         try {
-            obj.put("user", mUserName);
+            obj.put("user", userName);
             obj.put("comment", comment);
             obj.put("votes", "0");
         } catch (JSONException e) {

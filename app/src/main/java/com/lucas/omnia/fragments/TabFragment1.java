@@ -36,6 +36,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import static com.android.volley.Request.Method;
+import static com.lucas.omnia.activities.MainActivity.userName;
 import static com.lucas.omnia.fragments.NavFragment1.mAddFab;
 import static com.lucas.omnia.fragments.NavFragment1.mAttachFab;
 import static com.lucas.omnia.fragments.NavFragment1.mCameraFab;
@@ -46,7 +47,6 @@ import static com.lucas.omnia.utils.AppConfig.CREATE_POST_URL;
 import static com.lucas.omnia.utils.AppConfig.GET_ALL_POSTS_URL;
 import static com.lucas.omnia.utils.AppController.getInstance;
 import static com.lucas.omnia.activities.MainActivity.hideSoftKeyboard;
-import static com.lucas.omnia.activities.MainActivity.mUserName;
 import static com.lucas.omnia.activities.MainActivity.showSoftKeyboard;
 import static com.lucas.omnia.adapters.RecyclerViewAdapter1.getDownvotedPosts;
 import static com.lucas.omnia.adapters.RecyclerViewAdapter1.getUpvotedPosts;
@@ -322,7 +322,7 @@ public class TabFragment1 extends Fragment {
 
         JSONObject obj = new JSONObject();
         try {
-            obj.put("user", mUserName);
+            obj.put("user", userName);
             obj.put("post", post);
             obj.put("votes", "0");
         } catch (JSONException e) {

@@ -24,8 +24,8 @@ import com.lucas.omnia.activities.UserSettingsActivity;
 
 import static android.app.Activity.RESULT_OK;
 import static com.lucas.omnia.activities.MainActivity.hideSoftKeyboard;
-import static com.lucas.omnia.activities.MainActivity.mUserName;
 import static com.lucas.omnia.activities.MainActivity.showSoftKeyboard;
+import static com.lucas.omnia.activities.MainActivity.userName;
 
 /**
  * Created by Lucas on 29/10/2017.
@@ -61,7 +61,7 @@ public class NavFragment2 extends Fragment {
         View view = inflater.inflate(R.layout.fragment_nav_2, container, false);
 
         mUserTv = view.findViewById(R.id.userName);
-        mUserTv.setText(mUserName);
+        mUserTv.setText(userName);
         mProfileImage = view.findViewById(R.id.profileImage);
         mProfileImage.setOnClickListener(new View.OnClickListener() {
             @Override

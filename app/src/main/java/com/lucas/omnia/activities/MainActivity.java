@@ -5,18 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
-import androidx.annotation.NonNull;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
-import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,15 +19,22 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.lucas.omnia.BottomNavigationViewBehavior;
+import com.lucas.omnia.R;
 import com.lucas.omnia.fragments.NavFragment2;
 import com.lucas.omnia.fragments.NavFragment3;
 import com.lucas.omnia.fragments.NavFragment4;
 import com.lucas.omnia.fragments.NavFragment5;
-import com.lucas.omnia.R;
-import com.lucas.omnia.data.SQLiteHandler;
-
-import java.util.HashMap;
 
 import static com.lucas.omnia.fragments.NavFragment1.newInstance;
 import static com.lucas.omnia.fragments.TabFragment1.visible;
@@ -46,8 +45,6 @@ import static com.lucas.omnia.fragments.TabFragment1.visible;
 
 public class MainActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener{
 
-    private SQLiteHandler db;
-    private Toolbar mToolbar;
     private BottomNavigationView mBottomNavigationView;
     private Animation mRotateBackward;
     private Animation mFabHide1;
@@ -60,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     private RelativeLayout mRelativeLayout;
     private EditText mEditText;
 
-    public static String mUserName;
+    public static String userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,16 +65,22 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         setContentView(R.layout.activity_main);
         setupSharedPreferences();
 
-        // SqLite database handler
-        db = new SQLiteHandler(getApplicationContext());
+        // Fetching user details
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            // Name, email address, and profile photo Url
+            userName = user.getDisplayName();
+            String email = user.getEmail();
+            Uri photoUrl = user.getPhotoUrl();
 
-        // Fetching user details from sqlite
-        HashMap<String, String> user = db.getUserDetails();
+            // Check if user's email is verified
+            boolean emailVerified = user.isEmailVerified();
 
-        mUserName = user.get("user");
-
-        mToolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(mToolbar);
+            // The user's ID, unique to the Firebase project. Do NOT use this value to
+            // authenticate with your backend server, if you have one. Use
+            // FirebaseUser.getIdToken() instead.
+            String uid = user.getUid();
+        }
 
         mAddFab = findViewById(R.id.addFab);
         mAttachFab = findViewById(R.id.attachFab);
@@ -91,32 +94,29 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         layoutParams2.setBehavior(new BottomNavigationViewBehavior());
 
         mBottomNavigationView.setOnNavigationItemSelectedListener
-                (new BottomNavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                        Fragment selectedFragment = null;
-                        switch (item.getItemId()) {
-                            case R.id.action_item1:
-                                selectedFragment = newInstance();
-                                break;
-                            case R.id.action_item2:
-                                selectedFragment = NavFragment2.newInstance();
-                                break;
-                            case R.id.action_item3:
-                                selectedFragment = NavFragment3.newInstance();
-                                break;
-                            case R.id.action_item4:
-                                selectedFragment = NavFragment4.newInstance();
-                                break;
-                            case R.id.action_item5:
-                                selectedFragment = NavFragment5.newInstance();
-                                break;
-                        }
-                        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                        transaction.replace(R.id.coordinator_layout, selectedFragment);
-                        transaction.commit();
-                        return true;
+                (item -> {
+                    Fragment selectedFragment = null;
+                    switch (item.getItemId()) {
+                        case R.id.action_item1:
+                            selectedFragment = newInstance();
+                            break;
+                        case R.id.action_item2:
+                            selectedFragment = NavFragment2.newInstance();
+                            break;
+                        case R.id.action_item3:
+                            selectedFragment = NavFragment3.newInstance();
+                            break;
+                        case R.id.action_item4:
+                            selectedFragment = NavFragment4.newInstance();
+                            break;
+                        case R.id.action_item5:
+                            selectedFragment = NavFragment5.newInstance();
+                            break;
                     }
+                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                    transaction.replace(R.id.coordinator_layout, selectedFragment);
+                    transaction.commit();
+                    return true;
                 });
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -161,21 +161,16 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     }
 
     public void setTheme(boolean b) {
-        mToolbar = findViewById(R.id.toolbar);
         mBottomNavigationView = findViewById(R.id.navigation);
 
         if(b) {
             this.setTheme(R.style.AppThemeLight);
-            mToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryLight));
-            mToolbar.setPopupTheme(R.style.AppThemeLight);
             mBottomNavigationView.setBackgroundColor(getResources().getColor(R.color.colorPrimaryLight));
             mBottomNavigationView.setItemIconTintList(ColorStateList.valueOf(getResources().getColor(R.color.selector_light)));
             mBottomNavigationView.setItemTextColor(ColorStateList.valueOf(getResources().getColor(R.color.selector_light)));
         }
         else {
             this.setTheme(R.style.AppThemeDark);
-            mToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-            mToolbar.setPopupTheme(R.style.AppThemeDark);
             mBottomNavigationView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
             mBottomNavigationView.setItemIconTintList(ColorStateList.valueOf(getResources().getColor(R.color.selector)));
             mBottomNavigationView.setItemTextColor(ColorStateList.valueOf(getResources().getColor(R.color.selector)));
