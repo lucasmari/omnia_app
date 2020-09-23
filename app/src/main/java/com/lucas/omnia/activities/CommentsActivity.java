@@ -23,8 +23,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.lucas.omnia.CustomRequest;
-import com.lucas.omnia.models.DataObject2;
-import com.lucas.omnia.models.DataObject3;
+import com.lucas.omnia.models.Comment;
+import com.lucas.omnia.models.Reply;
 import com.lucas.omnia.R;
 import com.lucas.omnia.adapters.RecyclerViewAdapter2;
 import com.lucas.omnia.VerticalSpaceItemDecoration;
@@ -36,8 +36,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import static com.lucas.omnia.activities.MainActivity.userName;
-import static com.lucas.omnia.utils.AppConfig.GET_ALL_COMMENTS_URL;
-import static com.lucas.omnia.utils.AppConfig.CREATE_COMMENT_URL;
 import static com.lucas.omnia.utils.AppController.getInstance;
 import static com.lucas.omnia.activities.MainActivity.hideSoftKeyboard;
 import static com.lucas.omnia.activities.MainActivity.showSoftKeyboard;
@@ -63,17 +61,17 @@ public class CommentsActivity extends AppCompatActivity {
     static int reply = 0;
     private int count2 = 0;
     static int position;
-    ArrayList<DataObject2> comments2 = new ArrayList<>();
-    ArrayList<DataObject3> comments3 = new ArrayList<>();
-    static DataObject2 obj2;
-    DataObject3 obj3;
+    ArrayList<Comment> comments2 = new ArrayList<>();
+    ArrayList<Reply> comments3 = new ArrayList<>();
+    static Comment obj2;
+    Reply obj3;
 
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_COMMENTS = "activity_comments";
     private static final String TAG_PID = "pid";
     private static final String TAG_USER = "user";
-    private static final String TAG_COMMENT = "comment";
+    private static final String TAG_COMMENT = "item_comment";
     private static final String TAG_VOTES = "votes";
 
     static ArrayList idList = new ArrayList(999999);
@@ -188,7 +186,7 @@ public class CommentsActivity extends AppCompatActivity {
                         }
                         mEditText2.clearFocus();
                     } else {
-                        obj3 = new DataObject3(mDataSet2.get(position).getChild2(), mEditText2.getText().toString());
+                        obj3 = new Reply(mDataSet2.get(position).getChild2(), mEditText2.getText().toString());
                         setDataSet3(obj3);
                         mDataSet2.get(position).setChild2();
                         //mAdapter.setData3(obj3, count3);
@@ -213,7 +211,7 @@ public class CommentsActivity extends AppCompatActivity {
 
     public static void getAllComments(final Context context) {
 
-        String url = GET_ALL_COMMENTS_URL;
+        String url = "";
 
         mSwipeRefresh.setRefreshing(true);
 
@@ -252,7 +250,7 @@ public class CommentsActivity extends AppCompatActivity {
                                     commentsList.add(i, post);
                                     votesList.add(i, votes);
 
-                                    obj2 = new DataObject2((int) idList.get(i),
+                                    obj2 = new Comment((int) idList.get(i),
                                             commentsList.get(i).toString(),0);
                                     (mAdapter).addItem2(obj2,(int) idList.get(i));
                                 }
@@ -280,13 +278,13 @@ public class CommentsActivity extends AppCompatActivity {
 
     public void createNewComment(final Context context) {
 
-        String url = CREATE_COMMENT_URL;
+        String url = "";
         String comment = mEditText2.getText().toString();
 
         JSONObject obj = new JSONObject();
         try {
             obj.put("user", userName);
-            obj.put("comment", comment);
+            obj.put("item_comment", comment);
             obj.put("votes", "0");
         } catch (JSONException e) {
             e.printStackTrace();
@@ -353,20 +351,20 @@ public class CommentsActivity extends AppCompatActivity {
         mEditText2.requestFocus();
     }
 
-    private void setDataSet2(DataObject2 object2) {
+    private void setDataSet2(Comment object2) {
         comments2.add(object2);
     }
 
-    private void setDataSet3(DataObject3 object3) {
+    private void setDataSet3(Reply object3) {
         comments3.add(object3);
     }
 
 
-    private ArrayList<DataObject2> getDataSet2() {
+    private ArrayList<Comment> getDataSet2() {
         return comments2;
     }
 
-    private ArrayList<DataObject3> getDataSet3() {
+    private ArrayList<Reply> getDataSet3() {
         return comments3;
     }
 }

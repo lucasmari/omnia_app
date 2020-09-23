@@ -1,19 +1,19 @@
 package com.lucas.omnia.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.tabs.TabLayout;
-import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.RelativeLayout;
 
+import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentPagerAdapter;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.lucas.omnia.R;
-import com.lucas.omnia.adapters.PagerAdapter1;
+import com.lucas.omnia.activities.NewPostActivity;
+import com.lucas.omnia.databinding.FragmentNav1Binding;
 
 /**
  * Created by Lucas on 10/10/2017.
@@ -21,12 +21,7 @@ import com.lucas.omnia.adapters.PagerAdapter1;
 
 public class NavFragment1 extends Fragment{
 
-    public static FloatingActionButton mAddFab;
-    public static FloatingActionButton mAttachFab;
-    public static FloatingActionButton mCameraFab;
-    public static RelativeLayout mRelativeLayout;
-    public static EditText mEditText;
-    public static ImageButton mSendButton;
+    static public FloatingActionButton addFab;
 
     public static NavFragment1 newInstance() { return new NavFragment1(); }
 
@@ -36,46 +31,50 @@ public class NavFragment1 extends Fragment{
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater layoutInflater, ViewGroup viewGroup,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_nav_1, container, false);
+        FragmentNav1Binding binding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_nav_1, viewGroup, false);
+        View view = binding.getRoot();
 
-        TabLayout mTabLayout = view.findViewById(R.id.tabLayout);
+        // Create the adapter that will return a fragment for each section
+        FragmentPagerAdapter mPagerAdapter = new FragmentPagerAdapter(getParentFragmentManager(),
+                FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+            private final Fragment[] mFragments = new Fragment[]{
+                    new TabFragment1(),
+                    new TabFragment2(),
+                    new TabFragment3(),
+                    new TabFragment4()
+            };
+            private final String[] mFragmentNames = new String[]{
+                    getString(R.string.tabFragment1),
+                    getString(R.string.tabFragment2),
+                    getString(R.string.tabFragment3),
+                    getString(R.string.tabFragment4)
+            };
 
-        mTabLayout.addTab(mTabLayout.newTab().setText("TabFragment1"));
-        mTabLayout.addTab(mTabLayout.newTab().setText("TabFragment2"));
-        mTabLayout.addTab(mTabLayout.newTab().setText("TabFragment3"));
-        mTabLayout.addTab(mTabLayout.newTab().setText("TabFragment4"));
-        mTabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-
-        final ViewPager viewPager = view.findViewById(R.id.pager1);
-        final PagerAdapter1 adapter = new PagerAdapter1
-                (getFragmentManager(), mTabLayout.getTabCount());
-        viewPager.setAdapter(adapter);
-        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
-        mTabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                viewPager.setCurrentItem(tab.getPosition());
+            public Fragment getItem(int position) {
+                return mFragments[position];
             }
 
             @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
+            public int getCount() {
+                return mFragments.length;
             }
 
             @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
+            public CharSequence getPageTitle(int position) {
+                return mFragmentNames[position];
             }
+        };
+        // Set up the ViewPager with the sections adapter.
+        binding.pager.setAdapter(mPagerAdapter);
+        binding.tabs.setupWithViewPager(binding.pager);
+
+        addFab = view.findViewById(R.id.addFab);
+        addFab.setOnClickListener(v -> {
+                startActivity(new Intent(view.getContext(), NewPostActivity.class));
         });
-
-        mAddFab = view.findViewById(R.id.addFab);
-        mAttachFab = view.findViewById(R.id.attachFab);
-        mCameraFab = view.findViewById(R.id.cameraFab);
-
-        mRelativeLayout = view.findViewById(R.id.relativeLayout);
-        mEditText = view.findViewById(R.id.editText);
-        mSendButton = view.findViewById(R.id.sendButton);
 
         return view;
     }

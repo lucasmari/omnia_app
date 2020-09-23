@@ -76,12 +76,7 @@ public class NavFragment2 extends Fragment {
         });
 
         mUserSettings = view.findViewById(R.id.userSettings);
-        mUserSettings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                v.getContext().startActivity(new Intent(v.getContext(), UserSettingsActivity.class));
-            }
-        });
+        mUserSettings.setOnClickListener(v -> startActivity(new Intent(v.getContext(), UserSettingsActivity.class)));
 
         mDescriptionEdit = view.findViewById(R.id.descriptionEdit);
         mDescriptionText = view.findViewById(R.id.descriptionText);
@@ -91,27 +86,24 @@ public class NavFragment2 extends Fragment {
         mSlideOut = AnimationUtils.loadAnimation(getContext(), R.anim.et_slide_out);
         mHide = AnimationUtils.loadAnimation(getContext(), R.anim.rl_hide);
 
-        mDescriptionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                visible = !visible;
-                if(visible) {
-                    mDescriptionEdit.startAnimation(mSlideIn);
-                    mDescriptionEdit.setVisibility(View.VISIBLE);
-                    showSoftKeyboard(getContext(),mDescriptionEdit);
+        mDescriptionButton.setOnClickListener(v -> {
+            visible = !visible;
+            if(visible) {
+                mDescriptionEdit.startAnimation(mSlideIn);
+                mDescriptionEdit.setVisibility(View.VISIBLE);
+                showSoftKeyboard(getContext(),mDescriptionEdit);
+            }
+            else {
+                if(mDescriptionEdit.getText().toString().isEmpty()) {
+                    Toast.makeText(getActivity(), "Escreva algo!", Toast.LENGTH_SHORT).show();
+                } else {
+                    mDescriptionText.setText(mDescriptionEdit.getText().toString());
                 }
-                else {
-                    if(mDescriptionEdit.getText().toString().isEmpty()) {
-                        Toast.makeText(getActivity(), "Escreva algo!", Toast.LENGTH_SHORT).show();
-                    } else {
-                        mDescriptionText.setText(mDescriptionEdit.getText().toString());
-                    }
-                    hideSoftKeyboard(getContext(),mDescriptionEdit);
-                    mDescriptionEdit.startAnimation(mSlideOut);
-                    mDescriptionEdit.startAnimation(mHide);
-                    mDescriptionEdit.getText().clear();
-                    mDescriptionEdit.setVisibility(View.GONE);
-                }
+                hideSoftKeyboard(getContext(),mDescriptionEdit);
+                mDescriptionEdit.startAnimation(mSlideOut);
+                mDescriptionEdit.startAnimation(mHide);
+                mDescriptionEdit.getText().clear();
+                mDescriptionEdit.setVisibility(View.GONE);
             }
         });
 

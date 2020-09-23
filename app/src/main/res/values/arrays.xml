@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Post More Button -->
+    <string-array name="options1">
+        <item>Editar</item>
+        <item>Apagar</item>
+    </string-array>
+
+    <string-array name="options2">
+        <item>Reportar</item>
+    </string-array>
+</resources>

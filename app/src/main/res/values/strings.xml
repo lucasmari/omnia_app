@@ -13,17 +13,13 @@
     <string name="email_hint">Email</string>
     <string name="password_hint">Senha</string>
     <string name="sign_in_button">Entrar</string>
-    <string name="sign_in_google_button">Google</string>
     <string name="signing_in">Autenticando…</string>
     <string name="sign_in_failure">Falha ao autenticar</string>
     <string name="invalid_email">Email inválido!</string>
-    <string name="invalid_sign_in_password">Preencha este campo</string>
-    <string name="sign_up_button_1">Cadastrar-se</string>
-    <string name="sign_up_button_2">Cadastrar</string>
-    <string name="sign_up_title">Cadastro</string>
+    <string name="invalid_password">Senha inválida! (entre 6 e 15 caracteres)</string>
+    <string name="sign_up_button">Cadastrar</string>
     <string name="signing_up">Cadastrando…</string>
     <string name="sign_up_failure">Falha no cadastramento</string>
-    <string name="invalid_sign_up_password">Senha inválida! (entre 6 e 15 caracteres)</string>
 
     <!-- Tabs -->
     <string name="tabFragment1">Tab 1</string>
@@ -43,6 +39,9 @@
     <string name="theme_pref_sum_on">Claro</string>
     <string name="theme_pref_sum_off">Escuro</string>
     <string name="theme_pref_default">false</string>
+
+    <!-- NewPostActivity -->
+    <string name="new_post_title">Novo Post</string>
 
     <!-- CommentsActivity -->
     <string name="comments_title">Comentários</string>

@@ -19,11 +19,11 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.lucas.omnia.CommentViewHolder;
-import com.lucas.omnia.models.DataObject2;
-import com.lucas.omnia.models.DataObject3;
+import com.lucas.omnia.viewholder.CommentViewHolder;
+import com.lucas.omnia.models.Comment;
+import com.lucas.omnia.models.Reply;
 import com.lucas.omnia.R;
-import com.lucas.omnia.ReplyViewHolder;
+import com.lucas.omnia.viewholder.ReplyViewHolder;
 import com.lucas.omnia.ViewType;
 
 import org.json.JSONArray;
@@ -33,19 +33,10 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import static com.lucas.omnia.activities.MainActivity.userName;
-import static com.lucas.omnia.utils.AppConfig.GET_DOWNVOTED_COMMENTS_URL;
-import static com.lucas.omnia.utils.AppConfig.GET_UPVOTED_COMMENTS_URL;
-import static com.lucas.omnia.utils.AppConfig.DELETE_COMMENT_URL;
-import static com.lucas.omnia.utils.AppConfig.DOWNVOTE_COMMENT_URL;
-import static com.lucas.omnia.utils.AppConfig.EDIT_COMMENT_URL;
-import static com.lucas.omnia.utils.AppConfig.REMOVE_DOWNVOTE_COMMENT_URL;
-import static com.lucas.omnia.utils.AppConfig.REMOVE_UPVOTE_COMMENT_URL;
-import static com.lucas.omnia.utils.AppConfig.UPVOTE_COMMENT_URL;
 import static com.lucas.omnia.utils.AppController.getInstance;
 import static com.lucas.omnia.activities.CommentsActivity.getAllComments;
 import static com.lucas.omnia.activities.CommentsActivity.mEditText2;
 import static com.lucas.omnia.activities.CommentsActivity.reply;
-import static com.lucas.omnia.fragments.NavFragment1.mEditText;
 
 /**
  * Created by Lucas on 21/11/2017.
@@ -54,8 +45,8 @@ import static com.lucas.omnia.fragments.NavFragment1.mEditText;
 public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements
         CommentViewHolder.HeaderViewHolderCallback {
 
-    public static ArrayList<DataObject2> mDataSet2;
-    static ArrayList<DataObject3> mDataSet3;
+    public static ArrayList<Comment> mDataSet2;
+    static ArrayList<Reply> mDataSet3;
     private static ArrayList upvotesArray = new ArrayList();
     private static ArrayList downvotesArray = new ArrayList();
     private CharSequence options1[] = new CharSequence[]{"Compartilhar", "Editar", "Excluir"};
@@ -79,15 +70,15 @@ public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerView.View
         switch (viewType) {
             case COMMENT_TYPE:
                 view = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.rv_item_2, parent, false);
+                        .inflate(R.layout.item_comment, parent, false);
                 return new CommentViewHolder(view, this);
             case REPLY_TYPE:
                 view = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.rv_item_3, parent, false);
+                        .inflate(R.layout.item_reply, parent, false);
                 return new ReplyViewHolder(view);
             default:
                 view = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.rv_item_2, parent, false);
+                        .inflate(R.layout.item_comment, parent, false);
                 return new CommentViewHolder(view, this);
         }
     }
@@ -198,7 +189,7 @@ public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerView.View
                                 break;
                             case 1:
                                 mEditText2.requestFocus();
-                                DataObject2 obj = new DataObject2(headerViewHolder.getAdapterPosition(),
+                                Comment obj = new Comment(headerViewHolder.getAdapterPosition(),
                                         mEditText2.getText().toString(),mDataSet2.get(headerViewHolder.getAdapterPosition()).getChild2());
                                 editItem2(obj, headerViewHolder.getAdapterPosition());
                                 break;
@@ -314,7 +305,7 @@ public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerView.View
 
     public static void getUpvotedComments(final Context context) {
 
-        String url = GET_UPVOTED_COMMENTS_URL;
+        String url = "";
         upvotesArray.clear();
 
         JSONObject obj = new JSONObject();
@@ -365,7 +356,7 @@ public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerView.View
 
     public static void getDownvotedComments(final Context context) {
 
-        String url = GET_DOWNVOTED_COMMENTS_URL;
+        String url = "";
         downvotesArray.clear();
 
         JSONObject obj = new JSONObject();
@@ -416,7 +407,7 @@ public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerView.View
 
     public void upvoteComments(int position) {
 
-        String url = UPVOTE_COMMENT_URL;
+        String url = "";
 
         JSONObject obj = new JSONObject();
         try {
@@ -453,7 +444,7 @@ public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerView.View
 
     public void downvoteComment(int position) {
 
-        String url = DOWNVOTE_COMMENT_URL;
+        String url = "";
 
         JSONObject obj = new JSONObject();
         try {
@@ -490,7 +481,7 @@ public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerView.View
 
     public void removeUpvoteComment(int position) {
 
-        String url = REMOVE_UPVOTE_COMMENT_URL;
+        String url = "";
 
         JSONObject obj = new JSONObject();
         try {
@@ -527,7 +518,7 @@ public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerView.View
 
     public void removeDownvoteComment(int position) {
 
-        String url = REMOVE_DOWNVOTE_COMMENT_URL;
+        String url = "";
 
         JSONObject obj = new JSONObject();
         try {
@@ -564,14 +555,14 @@ public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerView.View
 
     public void editComment(final Context context, int position) {
 
-        String url = EDIT_COMMENT_URL;
-        String comment = mEditText.getText().toString();
+        String url = "";
+        //String item_comment = mEditText.getText().toString();
 
         JSONObject obj = new JSONObject();
         try {
             obj.put("pid", String.valueOf(position+1));
             obj.put("user", userName);
-            obj.put("comment", comment);
+            //obj.put("item_comment", item_comment);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -615,7 +606,7 @@ public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerView.View
 
     public void deleteComment(final Context context, int position) {
 
-        String url = DELETE_COMMENT_URL;
+        String url = "";
 
         JSONObject obj = new JSONObject();
         try {
@@ -661,7 +652,7 @@ public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerView.View
         getInstance().addToRequestQueue(jsObjRequest);
     }
 
-    public RecyclerViewAdapter2(ArrayList<DataObject2> myDataSet2, ArrayList<DataObject3> myDataSet3) {
+    public RecyclerViewAdapter2(ArrayList<Comment> myDataSet2, ArrayList<Reply> myDataSet3) {
         mDataSet2 = myDataSet2;
         mDataSet3 = myDataSet3;
         viewTypes = new SparseArray<>(mDataSet3.size() + mDataSet2.size());
@@ -669,38 +660,38 @@ public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerView.View
         notifyDataSetChanged();
     }
 
-    public void setData2(DataObject2 myDataSet2, int index) {
+    public void setData2(Comment myDataSet2, int index) {
         mDataSet2.add(myDataSet2);
         //notifyDataSetChanged();
         notifyItemInserted(index);
         notifyItemRangeChanged(index, mDataSet2.size());
     }
 
-    public void setData3(DataObject3 myDataSet3, int index) {
+    public void setData3(Reply myDataSet3, int index) {
         mDataSet3.add(myDataSet3);
         //notifyDataSetChanged();
         notifyItemInserted(index);
         notifyItemRangeChanged(index, mDataSet3.size());
     }
 
-    public final void addItem2(DataObject2 dataObj, int index) {
+    public final void addItem2(Comment dataObj, int index) {
         mDataSet2.add(dataObj);
         notifyItemInserted(index);
         notifyItemRangeChanged(index, mDataSet2.size());
     }
 
-    public final void addItem3(DataObject3 dataObj, int index) {
+    public final void addItem3(Reply dataObj, int index) {
         mDataSet3.add(dataObj);
         notifyItemInserted(index);
         notifyItemRangeChanged(index, mDataSet3.size());
     }
 
-    public final void editItem2(DataObject2 dataObj, int index) {
+    public final void editItem2(Comment dataObj, int index) {
         mDataSet2.set(index, dataObj);
         notifyDataSetChanged();
     }
 
-    public final void editItem3(DataObject3 dataObj, int index) {
+    public final void editItem3(Reply dataObj, int index) {
         mDataSet3.set(index, dataObj);
         notifyDataSetChanged();
     }

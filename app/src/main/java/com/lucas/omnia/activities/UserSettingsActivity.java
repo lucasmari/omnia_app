@@ -3,13 +3,11 @@ package com.lucas.omnia.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
-import android.view.View;
+
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.lucas.omnia.R;
-import com.lucas.omnia.authenticator.SessionManager;
-import com.lucas.omnia.data.SQLiteHandler;
 
 /**
  * Created by Lucas on 07/02/2018.

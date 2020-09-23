@@ -11,22 +11,14 @@ import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.lucas.omnia.BottomNavigationViewBehavior;
@@ -37,25 +29,15 @@ import com.lucas.omnia.fragments.NavFragment4;
 import com.lucas.omnia.fragments.NavFragment5;
 
 import static com.lucas.omnia.fragments.NavFragment1.newInstance;
-import static com.lucas.omnia.fragments.TabFragment1.visible;
 
 /**
  * Created by Lucas on 29/10/2017.
  */
 
-public class MainActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener{
+public class MainActivity extends BaseActivity implements SharedPreferences.OnSharedPreferenceChangeListener{
 
     private BottomNavigationView mBottomNavigationView;
-    private Animation mRotateBackward;
-    private Animation mFabHide1;
-    private Animation mHide;
     private boolean doubleBackToExitPressedOnce = false;
-
-    private FloatingActionButton mAddFab;
-    private FloatingActionButton mAttachFab;
-    private FloatingActionButton mCameraFab;
-    private RelativeLayout mRelativeLayout;
-    private EditText mEditText;
 
     public static String userName;
 
@@ -81,12 +63,6 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             // FirebaseUser.getIdToken() instead.
             String uid = user.getUid();
         }
-
-        mAddFab = findViewById(R.id.addFab);
-        mAttachFab = findViewById(R.id.attachFab);
-        mCameraFab = findViewById(R.id.cameraFab);
-        mRelativeLayout = findViewById(R.id.relativeLayout);
-        mEditText = findViewById(R.id.editText);
 
         mBottomNavigationView = findViewById(R.id.navigation);
 
@@ -114,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                             break;
                     }
                     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                    assert selectedFragment != null;
                     transaction.replace(R.id.coordinator_layout, selectedFragment);
                     transaction.commit();
                     return true;
@@ -122,42 +99,6 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.coordinator_layout, newInstance());
         transaction.commit();
-    }
-
-    public static void showSoftKeyboard(Context activityContext, final EditText editText){
-
-        final InputMethodManager imm = (InputMethodManager)
-                activityContext.getSystemService(Context.INPUT_METHOD_SERVICE);
-
-        if (!editText.hasFocus()) {
-            editText.requestFocus();
-        }
-
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
-            }
-        }, 300);
-    }
-
-    public static void hideSoftKeyboard(Context activityContext, final EditText editText){
-
-        final InputMethodManager imm = (InputMethodManager)
-                activityContext.getSystemService(Context.INPUT_METHOD_SERVICE);
-
-        if (editText.hasFocus()) {
-            editText.clearFocus();
-        }
-
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
-            }
-        }, 300);
     }
 
     public void setTheme(boolean b) {
@@ -224,36 +165,20 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
     @Override
     public void onBackPressed() {
-        if(mEditText.isFocused()) {
-            mRotateBackward = AnimationUtils.loadAnimation(this, R.anim.rotate_backward);
-            mFabHide1 = AnimationUtils.loadAnimation(this, R.anim.fab_hide_1);
-            mHide = AnimationUtils.loadAnimation(this, R.anim.rl_hide);
-            hideSoftKeyboard(this, mEditText);
-            mAddFab.startAnimation(mRotateBackward);
-            mAttachFab.startAnimation(mFabHide1);
-            mCameraFab.startAnimation(mFabHide1);
-            mAttachFab.setVisibility(View.GONE);
-            mCameraFab.setVisibility(View.GONE);
-            mEditText.getText().clear();
-            mRelativeLayout.startAnimation(mHide);
-            mRelativeLayout.setVisibility(View.GONE);
-            visible = !visible;
-        } else {
-            if (doubleBackToExitPressedOnce) {
-                super.onBackPressed();
-                return;
-            }
-
-            this.doubleBackToExitPressedOnce = true;
-            Toast.makeText(this, "Pressione novamente para sair", Toast.LENGTH_SHORT).show();
-
-            new Handler().postDelayed(new Runnable() {
-
-                @Override
-                public void run() {
-                    doubleBackToExitPressedOnce=false;
-                }
-            }, 2000);
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
         }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Pressione novamente para sair", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
     }
 }

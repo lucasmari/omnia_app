@@ -16,7 +16,7 @@ public class UserPageActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_page_2);
+        setContentView(R.layout.activity_user_page);
 
         mUserName = findViewById(R.id.userName2);
         mUserName.setText(userName);
