@@ -67,6 +67,7 @@ public class NavFragment1 extends Fragment{
                 return mFragmentNames[position];
             }
         };
+
         // Set up the ViewPager with the sections adapter.
         binding.pager.setAdapter(mPagerAdapter);
         binding.tabs.setupWithViewPager(binding.pager);
@@ -75,7 +76,6 @@ public class NavFragment1 extends Fragment{
         addFab.setOnClickListener(v -> {
                 startActivity(new Intent(view.getContext(), NewPostActivity.class));
         });
-
         return view;
     }
 }

@@ -12,8 +12,9 @@ import com.lucas.omnia.models.Post;
 public class PostViewHolder extends RecyclerView.ViewHolder {
 
     public TextView titleView;
-    public TextView authorView;
+    //public TextView authorView;
     public TextView bodyView;
+    public TextView editedView;
     public TextView upVotesView;
     public TextView downVotesView;
     public TextView commentsView;
@@ -29,6 +30,7 @@ public class PostViewHolder extends RecyclerView.ViewHolder {
         titleView = itemView.findViewById(R.id.titleTV);
         //authorView = itemView.findViewById(R.id.authorTv);
         bodyView = itemView.findViewById(R.id.bodyTv);
+        editedView = itemView.findViewById(R.id.editedTv);
         upVotesView = itemView.findViewById(R.id.upVotesTv);
         downVotesView = itemView.findViewById(R.id.downVotesTv);
         commentsView = itemView.findViewById(R.id.commentsTv);

@@ -32,7 +32,7 @@ public class NewPostActivity extends BaseActivity {
         binding = ActivityNewPostBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        databaseReference = FirebaseDatabase.getInstance().getReference();
+        databaseReference = getDatabaseReference();
 
         binding.fabSubmitPost.setOnClickListener(v -> submitPost());
     }
@@ -40,6 +40,7 @@ public class NewPostActivity extends BaseActivity {
     private void submitPost() {
         final String title = binding.fieldTitle.getText().toString();
         final String body = binding.fieldBody.getText().toString();
+        final boolean edited = false;
 
         // Title is required
         if (TextUtils.isEmpty(title)) {
@@ -70,7 +71,7 @@ public class NewPostActivity extends BaseActivity {
                                     "Error: could not fetch user.",
                                     Toast.LENGTH_SHORT).show();
                         } else {
-                            writeNewPost(userId, user.username, title, body);
+                            writeNewPost(userId, user.username, title, body, edited);
                         }
                         setEditingEnabled(true);
                         finish();
@@ -94,11 +95,11 @@ public class NewPostActivity extends BaseActivity {
         }
     }
 
-    private void writeNewPost(String userId, String username, String title, String body) {
+    private void writeNewPost(String userId, String username, String title, String body, boolean edited) {
         // Create new item_post at /user-posts/$userid/$postid and at
         // /posts/$postid simultaneously
         String key = databaseReference.child("posts").push().getKey();
-        Post post = new Post(userId, username, title, body);
+        Post post = new Post(userId, username, title, body, edited);
         Map<String, Object> postValues = post.toMap();
 
         Map<String, Object> childUpdates = new HashMap<>();

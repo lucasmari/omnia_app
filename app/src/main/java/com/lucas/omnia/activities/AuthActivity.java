@@ -52,7 +52,7 @@ public class AuthActivity extends BaseActivity implements View.OnClickListener {
         binding = ActivityAuthBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        databaseReference = FirebaseDatabase.getInstance().getReference();
+        databaseReference = getDatabaseReference();
         firebaseAuth = FirebaseAuth.getInstance();
 
         // Views

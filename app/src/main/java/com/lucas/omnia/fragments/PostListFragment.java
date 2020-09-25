@@ -2,23 +2,18 @@ package com.lucas.omnia.fragments;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.PorterDuff;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -33,6 +28,7 @@ import com.google.firebase.database.Transaction;
 import com.lucas.omnia.R;
 import com.lucas.omnia.VerticalSpaceItemDecoration;
 import com.lucas.omnia.activities.CommentsActivity;
+import com.lucas.omnia.activities.EditPostActivity;
 import com.lucas.omnia.models.Post;
 import com.lucas.omnia.viewholder.PostViewHolder;
 
@@ -46,8 +42,6 @@ public abstract class PostListFragment extends Fragment {
 
     private FirebaseRecyclerAdapter<Post, PostViewHolder> recyclerAdapter;
     private RecyclerView recyclerView;
-    private SwipeRefreshLayout swipeRefresh;
-    private TextView textView;
 
     public PostListFragment() {}
 
@@ -61,8 +55,6 @@ public abstract class PostListFragment extends Fragment {
 
         recyclerView = rootView.findViewById(R.id.rv_main);
         recyclerView.setHasFixedSize(true);
-        swipeRefresh = rootView.findViewById(R.id.swipeRefresh);
-        textView = rootView.findViewById(R.id.noConnection);
 
         return rootView;
     }
@@ -108,6 +100,11 @@ public abstract class PostListFragment extends Fragment {
                     }
                 });*/
 
+                // Determine if the post was edited
+                if (post.edited) {
+                    viewHolder.editedView.setVisibility(View.VISIBLE);
+                }
+
                 // Determine if the current user has upvoted this item_post and set UI accordingly
                 if (post.upVotes.containsKey(getUid())) {
                     viewHolder.upVoteButton.setColorFilter(getResources()
@@ -147,11 +144,7 @@ public abstract class PostListFragment extends Fragment {
 
                 viewHolder.commentButton.setOnClickListener(v -> v.getContext().startActivity(new Intent(v.getContext(), CommentsActivity.class)));
                 viewHolder.shareButton.setOnClickListener(v -> {
-                    Intent shareIntent = new Intent(Intent.ACTION_SEND);
-                    shareIntent.setType("text/plain");
-                    shareIntent.putExtra(Intent.EXTRA_TITLE, post.title);
-                    shareIntent.putExtra(Intent.EXTRA_TEXT, post.body);
-                    startActivity(Intent.createChooser(shareIntent, getString(R.string.share_title)));
+                    sharePost(post);
                 });
                 viewHolder.moreButton.setOnClickListener(v -> {
                     AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
@@ -159,7 +152,7 @@ public abstract class PostListFragment extends Fragment {
                         builder.setItems(getResources().getStringArray(R.array.options1), (dialog, which) -> {
                             switch (which) {
                                 case 0:
-                                    //editPost(v.getContext(), postRef, post);
+                                    editPost(postRef);
                                     break;
                                 case 1:
                                     deletePost(v.getContext(), postRef, post);
@@ -275,8 +268,19 @@ public abstract class PostListFragment extends Fragment {
         });
     }
 
-    private void editPost(Context context, DatabaseReference postRef, Post post) {
+    private void sharePost(Post post) {
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(Intent.EXTRA_TITLE, post.title);
+        shareIntent.putExtra(Intent.EXTRA_TEXT, post.body);
+        startActivity(Intent.createChooser(shareIntent, getString(R.string.share_title)));
+    }
 
+    private void editPost(DatabaseReference postRef) {
+        String postKey = postRef.getKey();
+        Intent intent = new Intent(getActivity(), EditPostActivity.class);
+        intent.putExtra(EditPostActivity.EXTRA_POST_KEY, postKey);
+        startActivity(intent);
     }
 
     private void deletePost(Context context, DatabaseReference postRef, Post post) {

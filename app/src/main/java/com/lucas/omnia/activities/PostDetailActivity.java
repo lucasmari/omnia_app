@@ -56,7 +56,6 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
 
         /*binding.buttonPostComment.setOnClickListener(this);
         binding.recyclerPostComments.setLayoutManager(new LinearLayoutManager(this));*/
-
     }
 
     @Override

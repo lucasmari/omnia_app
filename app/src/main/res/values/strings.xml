@@ -43,6 +43,9 @@
     <!-- NewPostActivity -->
     <string name="new_post_title">Novo Post</string>
 
+    <!-- EditPostActivity -->
+    <string name="edit_post_title">Editar Post</string>
+
     <!-- CommentsActivity -->
     <string name="comments_title">Comentários</string>
     <string name="comment_hint">Comente aqui…</string>

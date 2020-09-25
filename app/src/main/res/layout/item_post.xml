@@ -24,14 +24,24 @@
             android:textColor="@color/colorWhite"
             android:textSize="18sp" />
 
+        <TextView
+            android:id="@+id/editedTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_rv_item"
+            android:backgroundTint="@color/colorPrimaryDarkLight"
+            android:paddingStart="2dp"
+            android:paddingEnd="2dp"
+            android:text="editado"
+            android:visibility="gone" />
+
         <ImageButton
             android:id="@+id/moreButton"
-            android:layout_width="60dp"
+            android:layout_width="wrap_content"
             android:layout_height="24dp"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="6dp"
             android:layout_marginEnd="6dp"
-            android:layout_weight="1"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:scaleType="centerInside"
             android:src="@drawable/ic_more"
