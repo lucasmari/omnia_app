@@ -11,23 +11,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ac92bed-bd23-46bb-86d7-38e880627bec" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/../app/build/generated/ap_generated_sources/debug/out/com/lucas/omnia/databinding/ActivityEditPostBindingImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../app/build/generated/data_binding_base_class_source_out/debug/out/com/lucas/omnia/databinding/ActivityEditPostBinding.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../app/build/intermediates/data_binding_layout_info_type_merge/debug/out/activity_edit_post-layout.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/item_post.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../app/build/intermediates/javac/debug/classes/com/lucas/omnia/activities/EditPostActivity$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../app/build/intermediates/javac/debug/classes/com/lucas/omnia/activities/EditPostActivity$2.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../app/build/intermediates/javac/debug/classes/com/lucas/omnia/activities/EditPostActivity.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../app/build/intermediates/javac/debug/classes/com/lucas/omnia/databinding/ActivityEditPostBinding.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../app/build/intermediates/javac/debug/classes/com/lucas/omnia/databinding/ActivityEditPostBindingImpl.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../app/build/intermediates/project_dex_archive/debug/out/c909a77412d681b955137fdbd11bfed63b48b66fa2f59b71dbda3e43c54652b6_0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../app/build/intermediates/project_dex_archive/debug/out/c909a77412d681b955137fdbd11bfed63b48b66fa2f59b71dbda3e43c54652b6_1.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../app/build/intermediates/project_dex_archive/debug/out/com/lucas/omnia/activities/EditPostActivity$1.dex" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../app/build/intermediates/project_dex_archive/debug/out/com/lucas/omnia/activities/EditPostActivity$2.dex" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../app/build/intermediates/project_dex_archive/debug/out/com/lucas/omnia/activities/EditPostActivity.dex" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../app/build/intermediates/project_dex_archive/debug/out/com/lucas/omnia/databinding/ActivityEditPostBinding.dex" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../app/build/intermediates/project_dex_archive/debug/out/com/lucas/omnia/databinding/ActivityEditPostBindingImpl.dex" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../app/build/intermediates/res/merged/debug/layout_activity_edit_post.xml.flat" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../app/src/main/java/com/lucas/omnia/activities/EditPostActivity.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../app/src/main/res/layout/activity_edit_post.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.gradle/6.1.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../.gradle/6.1.1/executionHistory/executionHistory.bin" afterDir="false" />
