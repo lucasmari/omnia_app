@@ -49,7 +49,7 @@ public abstract class PostListFragment extends Fragment {
     public View onCreateView (LayoutInflater inflater, ViewGroup container,
                               Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        View rootView = inflater.inflate(R.layout.fragment_tab_1, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_tabs, container, false);
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
@@ -87,18 +87,6 @@ public abstract class PostListFragment extends Fragment {
             @Override
             protected void onBindViewHolder(PostViewHolder viewHolder, int position, final Post post) {
                 final DatabaseReference postRef = getRef(position);
-
-                // Set click listener for the whole item_post view
-                /*final String postKey = postRef.getKey();
-                viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        // Launch PostDetailActivity
-                        Intent intent = new Intent(getActivity(), PostDetailActivity.class);
-                        intent.putExtra(PostDetailActivity.EXTRA_POST_KEY, postKey);
-                        startActivity(intent);
-                    }
-                });*/
 
                 // Determine if the post was edited
                 if (post.edited) {
@@ -249,7 +237,7 @@ public abstract class PostListFragment extends Fragment {
                     p.downVoteCount = p.downVoteCount - 1;
                     p.downVotes.remove(getUid());
                 } else {
-                    // Downvote the item_post and add self to votes
+                    // Downvote the item_post and add self to // run some codevotes
                     p.downVoteCount = p.downVoteCount + 1;
                     p.downVotes.put(getUid(), true);
                 }

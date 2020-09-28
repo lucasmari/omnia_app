@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".fragments.NavFragment1">
 
-    <item
+    <!--<item
         android:id="@+id/action_search"
         android:icon="@drawable/ic_search"
         android:orderInCategory="1"
@@ -12,10 +12,10 @@
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:itemIconTint="@color/selector"
         app:showAsAction="collapseActionView|ifRoom"
-        tools:ignore="HardcodedText" />
+        tools:ignore="HardcodedText" />-->
     <item
         android:id="@+id/action_notification"
-        android:icon="@android:drawable/ic_menu_mapmode"
+        android:icon="@drawable/ic_notifications"
         android:orderInCategory="3"
         android:title="Item"
         app:itemIconTint="@color/selector"

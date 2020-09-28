@@ -3,11 +3,11 @@
     <string name="app_name">Omnia</string>
 
     <!-- Bottom Navigation Items -->
-    <string name="item_1">Nav 1</string>
-    <string name="item_2">Nav 2</string>
-    <string name="item_3">Nav 3</string>
-    <string name="item_4">Nav 4</string>
-    <string name="item_5">Nav 5</string>
+    <string name="item_1">Feed</string>
+    <string name="item_2">Perfil</string>
+    <string name="item_3">Discussão</string>
+    <string name="item_4">Projetos</string>
+    <string name="item_5">Eleições</string>
 
     <!-- Authentication -->
     <string name="email_hint">Email</string>
@@ -22,16 +22,16 @@
     <string name="sign_up_failure">Falha no cadastramento</string>
 
     <!-- Tabs -->
-    <string name="tabFragment1">Tab 1</string>
-    <string name="tabFragment2">Tab 2</string>
-    <string name="tabFragment3">Tab 3</string>
-    <string name="tabFragment4">Tab 4</string>
+    <string name="tabFragment1">Mais Curtidos</string>
+    <string name="tabFragment2">Mais Recentes</string>
+    <string name="tabFragment3">Meus Posts</string>
+    <string name="tabFragment4">Minhas Curtidas</string>
     <string name="tv1">Sem conexão com a internet…</string>
 
     <!-- Menu Items -->
-    <string name="menu_item_1">Item 1</string>
-    <string name="menu_item_2">Item 2</string>
-    <string name="menu_item_3">Item 3</string>
+    <string name="menu_item_1">Configurações</string>
+    <string name="menu_item_2">Leis</string>
+    <string name="menu_item_3">Aprenda!</string>
 
     <!-- App SettingsActivity -->
     <string name="theme_pref">Tema</string>

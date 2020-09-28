@@ -3,32 +3,36 @@
     <!-- Base application theme. -->
     <style name="AppThemeLight" parent="Theme.MaterialComponents.Light">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/cardview_light_background</item>
+        <item name="colorPrimary">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-
-        <!-- Action bar -->
-        <item name="actionBarTheme">@style/Theme.AppCompat.Light</item>
     </style>
 
-    <style name="AppThemeDark" parent="Theme.MaterialComponents">
+    <style name="AppThemeDark" parent="Theme.MaterialComponents.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorAccent">@color/colorAccent</item>
 
         <!-- Action bar -->
-        <item name="actionBarTheme">@style/Theme.AppCompat</item>
+       <!-- <item name="actionBarTheme">@style/ThemeOverlay.AppCompat.Dark</item>-->
     </style>
 
-    <style name="CustomCardView" parent="Widget.MaterialComponents.CardView">
-        <item name="cardBackgroundColor">?attr/colorSurface</item>
+    <style name="TextLabel" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="android:textColorHint">@color/colorPrimary</item>
+        <item name="android:textSize">20sp</item>
+        <item name="colorControlNormal">@color/colorPrimaryDark</item>
+        <item name="colorControlActivated">@color/colorPrimary</item>
     </style>
+
+    <!--<style name="CustomCardView" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">?attr/colorSurface</item>
+    </style>-->
 
     <style name="AppThemeLight.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppThemeLight.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+   <!-- <style name="AppThemeLight.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <style name="AppThemeLight.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="AppThemeLight.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />-->
 
 </resources>

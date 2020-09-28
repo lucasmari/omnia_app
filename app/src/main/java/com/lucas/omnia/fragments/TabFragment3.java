@@ -1,32 +1,23 @@
 package com.lucas.omnia.fragments;
 
-import android.os.Bundle;
-import androidx.fragment.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import com.lucas.omnia.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Query;
 
 /**
  * Created by Lucas on 10/10/2017.
  */
 
-public class TabFragment3 extends Fragment {
+public class TabFragment3 extends PostListFragment {
 
     public TabFragment3() {
         // Required empty public constructor
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
+    public Query getQuery(DatabaseReference databaseReference) {
+        // User last 100 posts
+        Query myPostsQuery = databaseReference.child("user-posts").child(getUid()).limitToFirst(100);
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tab_3, container, false);
+        return myPostsQuery;
     }
 }

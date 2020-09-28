@@ -1,34 +1,28 @@
 package com.lucas.omnia.activities;
 
-import android.app.SearchManager;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.ColorStateList;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import androidx.appcompat.widget.SearchView;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.lucas.omnia.BottomNavigationViewBehavior;
+import com.lucas.omnia.AppFragmentPageAdapter;
+import com.lucas.omnia.BottomNavItemSelectedListener;
 import com.lucas.omnia.R;
-import com.lucas.omnia.fragments.NavFragment2;
-import com.lucas.omnia.fragments.NavFragment3;
-import com.lucas.omnia.fragments.NavFragment4;
-import com.lucas.omnia.fragments.NavFragment5;
-
-import static com.lucas.omnia.fragments.NavFragment1.newInstance;
+import com.lucas.omnia.fragments.NavFragment1;
 
 /**
  * Created by Lucas on 29/10/2017.
@@ -36,16 +30,41 @@ import static com.lucas.omnia.fragments.NavFragment1.newInstance;
 
 public class MainActivity extends BaseActivity implements SharedPreferences.OnSharedPreferenceChangeListener{
 
-    private BottomNavigationView mBottomNavigationView;
+    private BottomNavigationView navigation;
+    private Toolbar toolbar;
+
+    public static final String KEY_FRAGMENT = "fragment";
     private boolean doubleBackToExitPressedOnce = false;
 
     public static String userName;
+
+    /*private SparseArray<Fragment.SavedState> savedStateSparseArray = new SparseArray();
+    private int currentSelectedItemId = R.id.action_item1;
+    private String SAVED_STATE_CONTAINER_KEY = "ContainerKey";
+    private String  SAVED_STATE_CURRENT_TAB_KEY = "CurrentTabKey";*/
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setupSharedPreferences();
+        /*setupSharedPreferences();*/
+
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ViewPager viewPager = findViewById(R.id.container);
+        AppFragmentPageAdapter adapter = new AppFragmentPageAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(adapter);
+        viewPager.setOffscreenPageLimit(adapter.getCount() - 1);
+        navigation = findViewById(R.id.navigation);
+        BottomNavItemSelectedListener listener = new BottomNavItemSelectedListener(viewPager, toolbar);
+        navigation.setOnNavigationItemSelectedListener(listener);
+
+        /*if (savedInstanceState != null) {
+            savedStateSparseArray = savedInstanceState.getSparseParcelableArray(SAVED_STATE_CONTAINER_KEY);
+            currentSelectedItemId = savedInstanceState.getInt(SAVED_STATE_CURRENT_TAB_KEY);
+        } else
+            swapFragments( new NavFragment1(), currentSelectedItemId, KEY_FRAGMENT);*/
 
         // Fetching user details
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -64,58 +83,77 @@ public class MainActivity extends BaseActivity implements SharedPreferences.OnSh
             String uid = user.getUid();
         }
 
-        mBottomNavigationView = findViewById(R.id.navigation);
+        /*CoordinatorLayout.LayoutParams layoutParams2 = (CoordinatorLayout.LayoutParams) navigation.getLayoutParams();
+        layoutParams2.setBehavior(new BottomNavigationViewBehavior());*/
 
-        CoordinatorLayout.LayoutParams layoutParams2 = (CoordinatorLayout.LayoutParams) mBottomNavigationView.getLayoutParams();
-        layoutParams2.setBehavior(new BottomNavigationViewBehavior());
-
-        mBottomNavigationView.setOnNavigationItemSelectedListener
+        /*navigation.setOnNavigationItemSelectedListener
                 (item -> {
-                    Fragment selectedFragment = null;
                     switch (item.getItemId()) {
                         case R.id.action_item1:
-                            selectedFragment = newInstance();
+                            swapFragments(new NavFragment1(), item.getItemId(), "nav 1");
                             break;
                         case R.id.action_item2:
-                            selectedFragment = NavFragment2.newInstance();
+                            swapFragments(new NavFragment2(), item.getItemId(), "nav 2");
                             break;
                         case R.id.action_item3:
-                            selectedFragment = NavFragment3.newInstance();
+                            swapFragments(new NavFragment3(), item.getItemId(), "nav 3");
                             break;
                         case R.id.action_item4:
-                            selectedFragment = NavFragment4.newInstance();
+                            swapFragments(new NavFragment4(), item.getItemId(), "nav 4");
                             break;
                         case R.id.action_item5:
-                            selectedFragment = NavFragment5.newInstance();
+                            swapFragments(new NavFragment5(), item.getItemId(), "nav 5");
                             break;
                     }
-                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                    assert selectedFragment != null;
-                    transaction.replace(R.id.coordinator_layout, selectedFragment);
-                    transaction.commit();
                     return true;
                 });
-
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.coordinator_layout, newInstance());
-        transaction.commit();
+        navigation.setSelectedItemId(R.id.action_item1);*/
     }
 
-    public void setTheme(boolean b) {
-        mBottomNavigationView = findViewById(R.id.navigation);
+    /*@Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSparseParcelableArray(SAVED_STATE_CONTAINER_KEY, savedStateSparseArray);
+        outState.putInt(SAVED_STATE_CURRENT_TAB_KEY, currentSelectedItemId);
+    }
 
-        if(b) {
+    private void initFragment(Fragment fragment) {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container, fragment)
+                .commit();
+    }
+
+
+    private void saveFragmentState(int actionId) {
+        Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.container);
+        if (currentFragment != null) {
+            savedStateSparseArray.put(currentSelectedItemId, getSupportFragmentManager().saveFragmentInstanceState(currentFragment));
+        }
+
+        currentSelectedItemId = actionId;
+    }
+
+
+    private void swapFragments(Fragment fragment, int actionId, String key) {
+        if (getSupportFragmentManager().findFragmentByTag(key) == null) {
+            saveFragmentState(actionId);
+            initFragment(fragment);
+        }
+    }*/
+
+    public void setTheme(boolean b) {
+        /*if(b) {
             this.setTheme(R.style.AppThemeLight);
-            mBottomNavigationView.setBackgroundColor(getResources().getColor(R.color.colorPrimaryLight));
-            mBottomNavigationView.setItemIconTintList(ColorStateList.valueOf(getResources().getColor(R.color.selector_light)));
-            mBottomNavigationView.setItemTextColor(ColorStateList.valueOf(getResources().getColor(R.color.selector_light)));
+            navigation.setBackgroundColor(getResources().getColor(R.color.colorPrimaryLight));
+            navigation.setItemIconTintList(ColorStateList.valueOf(getResources().getColor(R.color.selector_light)));
+            navigation.setItemTextColor(ColorStateList.valueOf(getResources().getColor(R.color.selector_light)));
         }
         else {
             this.setTheme(R.style.AppThemeDark);
-            mBottomNavigationView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-            mBottomNavigationView.setItemIconTintList(ColorStateList.valueOf(getResources().getColor(R.color.selector)));
-            mBottomNavigationView.setItemTextColor(ColorStateList.valueOf(getResources().getColor(R.color.selector)));
-        }
+            navigation.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+            navigation.setItemIconTintList(ColorStateList.valueOf(getResources().getColor(R.color.selector)));
+            navigation.setItemTextColor(ColorStateList.valueOf(getResources().getColor(R.color.selector)));
+        }*/
     }
 
     public void setupSharedPreferences() {
@@ -129,9 +167,9 @@ public class MainActivity extends BaseActivity implements SharedPreferences.OnSh
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_1, menu);
 
-        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        /*SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));*/
 
         return true;
     }

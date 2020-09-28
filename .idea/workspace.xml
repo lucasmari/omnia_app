@@ -11,7 +11,61 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ac92bed-bd23-46bb-86d7-38e880627bec" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/../.idea/assetWizardSettings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/java/com/lucas/omnia/AppFragmentPageAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/java/com/lucas/omnia/BottomNavItemSelectedListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/java/com/lucas/omnia/BottomNavigationBehavior.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/java/com/lucas/omnia/CustomViewPager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/res/drawable-anydpi/ic_home_outlined.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/res/drawable-anydpi/ic_notifications.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/res/drawable-hdpi/ic_home_outlined.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/res/drawable-hdpi/ic_notifications.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/res/drawable-mdpi/ic_home_outlined.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/res/drawable-mdpi/ic_notifications.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/res/drawable-xhdpi/ic_home_outlined.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/res/drawable-xhdpi/ic_notifications.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/res/drawable-xxhdpi/ic_home_outlined.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/res/drawable-xxhdpi/ic_notifications.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.gradle/6.1.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../.gradle/6.1.1/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.gradle/6.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../.gradle/6.1.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.gradle/6.1.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../.gradle/6.1.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.gradle/6.1.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../.gradle/6.1.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.gradle/6.1.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../.gradle/6.1.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.gradle/6.1.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../.gradle/6.1.1/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.gradle/6.1.1/javaCompile/jarAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../.gradle/6.1.1/javaCompile/jarAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.gradle/6.1.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../.gradle/6.1.1/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.gradle/6.1.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../.gradle/6.1.1/javaCompile/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../.gradle/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.gradle/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../.gradle/checksums/md5-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.gradle/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../.gradle/checksums/sha1-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/caches/build_file_checksums.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Gradle__androidx_swiperefreshlayout_swiperefreshlayout_1_1_0_aar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Gradle__com_google_firebase_firebase_common_19_3_1_aar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Gradle__com_google_firebase_firebase_database_19_4_0_aar.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/app.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/lucas/omnia/activities/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/lucas/omnia/activities/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/lucas/omnia/fragments/NavFragment1.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/lucas/omnia/fragments/NavFragment1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/lucas/omnia/fragments/PostListFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/lucas/omnia/fragments/PostListFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/lucas/omnia/fragments/TabFragment1.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/lucas/omnia/fragments/TabFragment1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/lucas/omnia/fragments/TabFragment2.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/lucas/omnia/fragments/TabFragment2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/lucas/omnia/fragments/TabFragment3.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/lucas/omnia/fragments/TabFragment3.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/lucas/omnia/fragments/TabFragment4.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/lucas/omnia/fragments/TabFragment4.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/activity_auth.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/activity_auth.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/fragment_nav_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/fragment_nav_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/fragment_tab_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/fragment_tabs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/fragment_tab_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/fragment_tab_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/fragment_tab_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/item_comment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/item_comment.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/item_post.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/item_post.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/menu/menu_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/menu/menu_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/values/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/values/styles.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,8 +98,8 @@
       <list>
         <option value="resourceFile" />
         <option value="valueResourceFile" />
-        <option value="Class" />
         <option value="layoutResourceFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -225,9 +279,10 @@
       <screen x="0" y="28" width="1366" height="740" />
     </state>
     <state x="416" y="156" width="524" height="491" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog/0.28.1366.740@0.28.1366.740" timestamp="1600200425683" />
-    <state x="491" y="110" width="374" height="582" key="#com.intellij.ide.util.MemberChooser" timestamp="1600638697456">
-      <screen x="0" y="28" width="1366" height="740" />
+    <state x="690" y="144" width="374" height="582" key="#com.intellij.ide.util.MemberChooser" timestamp="1601314274307">
+      <screen x="0" y="27" width="1920" height="1053" />
     </state>
+    <state x="690" y="144" key="#com.intellij.ide.util.MemberChooser/0.27.1920.1053@0.27.1920.1053" timestamp="1601314274307" />
     <state x="491" y="110" width="374" height="582" key="#com.intellij.ide.util.MemberChooser/0.28.1366.740@0.28.1366.740" timestamp="1600638697456" />
     <state x="366" y="137" width="624" height="529" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1599939639256">
       <screen x="0" y="28" width="1366" height="740" />
@@ -237,34 +292,39 @@
       <screen x="0" y="28" width="1366" height="740" />
     </state>
     <state x="416" y="148" width="524" height="507" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.28.1366.740@0.28.1366.740" timestamp="1600823250488" />
-    <state x="466" y="127" width="424" height="548" key="FileChooserDialogImpl" timestamp="1600019747044">
+    <state x="466" y="127" width="424" height="548" key="FileChooserDialogImpl" timestamp="1601051743834">
       <screen x="0" y="28" width="1366" height="740" />
     </state>
-    <state x="466" y="127" width="424" height="548" key="FileChooserDialogImpl/0.28.1366.740@0.28.1366.740" timestamp="1600019747044" />
-    <state width="1324" height="227" key="GridCell.Tab.0.bottom" timestamp="1600983585225">
-      <screen x="0" y="28" width="1366" height="740" />
+    <state x="466" y="127" width="424" height="548" key="FileChooserDialogImpl/0.28.1366.740@0.28.1366.740" timestamp="1601051743834" />
+    <state width="1878" height="281" key="GridCell.Tab.0.bottom" timestamp="1601319027708">
+      <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1324" height="227" key="GridCell.Tab.0.bottom/0.28.1366.740@0.28.1366.740" timestamp="1600983585225" />
-    <state width="1324" height="227" key="GridCell.Tab.0.center" timestamp="1600983585224">
-      <screen x="0" y="28" width="1366" height="740" />
+    <state width="1878" height="281" key="GridCell.Tab.0.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1601319027708" />
+    <state width="1324" height="227" key="GridCell.Tab.0.bottom/0.28.1366.740@0.28.1366.740" timestamp="1601063979586" />
+    <state width="1878" height="281" key="GridCell.Tab.0.center" timestamp="1601319027708">
+      <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1324" height="227" key="GridCell.Tab.0.center/0.28.1366.740@0.28.1366.740" timestamp="1600983585224" />
-    <state width="1324" height="227" key="GridCell.Tab.0.left" timestamp="1600983585224">
-      <screen x="0" y="28" width="1366" height="740" />
+    <state width="1878" height="281" key="GridCell.Tab.0.center/0.27.1920.1053@0.27.1920.1053" timestamp="1601319027708" />
+    <state width="1324" height="227" key="GridCell.Tab.0.center/0.28.1366.740@0.28.1366.740" timestamp="1601063979584" />
+    <state width="1878" height="281" key="GridCell.Tab.0.left" timestamp="1601319027707">
+      <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1324" height="227" key="GridCell.Tab.0.left/0.28.1366.740@0.28.1366.740" timestamp="1600983585224" />
-    <state width="1324" height="227" key="GridCell.Tab.0.right" timestamp="1600983585225">
-      <screen x="0" y="28" width="1366" height="740" />
+    <state width="1878" height="281" key="GridCell.Tab.0.left/0.27.1920.1053@0.27.1920.1053" timestamp="1601319027707" />
+    <state width="1324" height="227" key="GridCell.Tab.0.left/0.28.1366.740@0.28.1366.740" timestamp="1601063979583" />
+    <state width="1878" height="281" key="GridCell.Tab.0.right" timestamp="1601319027708">
+      <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1324" height="227" key="GridCell.Tab.0.right/0.28.1366.740@0.28.1366.740" timestamp="1600983585225" />
-    <state x="187" y="31" width="992" height="737" key="SettingsEditor" timestamp="1600201029725">
-      <screen x="0" y="28" width="1366" height="740" />
+    <state width="1878" height="281" key="GridCell.Tab.0.right/0.27.1920.1053@0.27.1920.1053" timestamp="1601319027708" />
+    <state width="1324" height="227" key="GridCell.Tab.0.right/0.28.1366.740@0.28.1366.740" timestamp="1601063979585" />
+    <state x="263" y="31" width="992" height="737" key="SettingsEditor" timestamp="1601232793169">
+      <screen x="0" y="27" width="1920" height="1053" />
     </state>
+    <state x="263" y="31" width="992" height="737" key="SettingsEditor/0.27.1920.1053@0.27.1920.1053" timestamp="1601232793169" />
     <state x="187" y="31" width="992" height="737" key="SettingsEditor/0.28.1366.740@0.28.1366.740" timestamp="1600201029725" />
-    <state x="278" y="134" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1600983937608">
+    <state x="278" y="134" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1601053926646">
       <screen x="0" y="28" width="1366" height="740" />
     </state>
-    <state x="278" y="134" width="800" height="535" key="Vcs.Push.Dialog.v2/0.28.1366.740@0.28.1366.740" timestamp="1600983937608" />
+    <state x="278" y="134" width="800" height="535" key="Vcs.Push.Dialog.v2/0.28.1366.740@0.28.1366.740" timestamp="1601053926646" />
     <state x="100" y="128" width="1166" height="540" key="com.android.tools.idea.avdmanager.AvdListDialog" timestamp="1600021862970">
       <screen x="0" y="28" width="1366" height="740" />
     </state>
@@ -273,6 +333,10 @@
       <screen x="0" y="28" width="1366" height="740" />
     </state>
     <state x="100" y="128" width="1166" height="540" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.28.1366.740@0.28.1366.740" timestamp="1600650972803" />
+    <state x="412" y="180" width="531" height="471" key="extract.method.dialog" timestamp="1601064057668">
+      <screen x="0" y="28" width="1366" height="740" />
+    </state>
+    <state x="412" y="180" width="531" height="471" key="extract.method.dialog/0.28.1366.740@0.28.1366.740" timestamp="1601064057668" />
     <state x="0" y="28" width="639" height="740" key="find.popup" timestamp="1600638508214">
       <screen x="0" y="28" width="1366" height="740" />
     </state>

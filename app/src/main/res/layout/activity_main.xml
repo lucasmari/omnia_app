@@ -3,27 +3,41 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:fitsSystemWindows="true">
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/coordinator_layout"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:elevation="0dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_scrollFlags="enterAlways|snap"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Dark" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <com.lucas.omnia.CustomViewPager
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/navigation"
-        android:animateLayoutChanges="true"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" >
+    </com.lucas.omnia.CustomViewPager>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navigation"
         android:layout_width="match_parent"
         android:layout_height="44dp"
-        android:layout_alignParentBottom="false"
         android:layout_gravity="bottom"
         android:background="@color/colorPrimary"
         android:elevation="4dp"
         app:itemIconTint="@color/selector"
         app:itemTextColor="@color/selector"
-        app:menu="@menu/bottom_navigation_items" />
+        app:menu="@menu/bottom_navigation_items"
+        app:layout_behavior=".BottomNavigationBehavior"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
