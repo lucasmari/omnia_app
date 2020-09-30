@@ -4,67 +4,51 @@
  * Created by Lucas on 21/11/2017.
  */
 
-public class Comment {
+ import com.google.firebase.database.Exclude;
+ import com.google.firebase.database.IgnoreExtraProperties;
 
-    private int id2;
-    private String user2;
-    private String comment2;
-    private String type2;
-    private int votes2;
-    private String text2;
-    private int child2;
+ import java.util.HashMap;
+ import java.util.Map;
 
-    public Comment(int p, String s, int c) {
-        id2 = p;
-        text2 = s;
-        child2 = c;
-    }
+ @IgnoreExtraProperties
+ public class Comment {
 
-    public String getText2() {
-        return text2;
-    }
+     public String uid;
+     public String author;
+     public String body;
+     public boolean edited;
+     public int upVoteCount = 0;
+     public int downVoteCount = 0;
+     public int replyCount = 0;
+     public Map<String, Boolean> upVotes = new HashMap<>();
+     public Map<String, Boolean> downVotes = new HashMap<>();
+     public Map<String, Boolean> replies = new HashMap<>();
 
-    public int getId2() {
-        return id2;
-    }
+     public Comment() {
+         // Default constructor required for calls to DataSnapshot.getValue(Comment.class)
+     }
 
-    public int getChild2() {
-        return child2;
-    }
+     public Comment(String uid, String author, String body, boolean edited) {
+         this.uid = uid;
+         this.author = author;
+         this.body = body;
+         this.edited = edited;
+     }
 
-    public void setChild2() {
-        child2++;
-    }
+     @Exclude
+     public Map<String, Object> toMap() {
+         HashMap<String, Object> result = new HashMap<>();
+         result.put("uid", uid);
+         result.put("author", author);
+         result.put("body", body);
+         result.put("edited", edited);
+         result.put("upVoteCount", upVoteCount);
+         result.put("downVoteCount", downVoteCount);
+         result.put("replyCount", replyCount);
+         result.put("upVotes", upVotes);
+         result.put("downVotes", downVotes);
+         result.put("replies", replies);
 
-    public String getUser2() {
-        return user2;
-    }
-
-    public String getComment2() {
-        return comment2;
-    }
-
-    public String getType2() {
-        return type2;
-    }
-
-    public void upVote2() {
-        votes2++;
-    }
-
-    public void downVote2() {
-        votes2--;
-    }
-
-    public void removeUpVote2() {
-        votes2--;
-    }
-
-    public void removeDownVote2() {
-        votes2++;
-    }
-
-    public int getmVotes2() {
-        return votes2;
-    }
-}
+         return result;
+     }
+ }

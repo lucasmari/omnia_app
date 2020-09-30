@@ -27,7 +27,7 @@ public class PostViewHolder extends RecyclerView.ViewHolder {
     public PostViewHolder(View itemView) {
         super(itemView);
 
-        titleView = itemView.findViewById(R.id.titleTV);
+        titleView = itemView.findViewById(R.id.authorTV);
         //authorView = itemView.findViewById(R.id.authorTv);
         bodyView = itemView.findViewById(R.id.bodyTv);
         editedView = itemView.findViewById(R.id.editedTv);
@@ -47,8 +47,7 @@ public class PostViewHolder extends RecyclerView.ViewHolder {
         bodyView.setText(post.body);
         upVotesView.setText(String.valueOf(post.upVoteCount));
         downVotesView.setText(String.valueOf(post.downVoteCount));
-        commentsView.setText(String.valueOf(post.commentsCount));
-
+        commentsView.setText(String.valueOf(post.commentCount));
         upVoteButton.setOnClickListener(upVoteClickListener);
         downVoteButton.setOnClickListener(downVoteClickListener);
     }

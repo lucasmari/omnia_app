@@ -14,8 +14,6 @@ import android.widget.Toast;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.lucas.omnia.adapters.RecyclerViewAdapter1.DataObjectHolder.mComment;
-import static com.lucas.omnia.adapters.RecyclerViewAdapter1.mDataSet;
 
 /**
  * Created by Lucas on 21/01/2018.
@@ -37,10 +35,10 @@ public class SearchResultsActivity extends AppCompatActivity {
 
     private void handleIntent(Intent intent) {
 
-        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+        /*if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
             Toast.makeText(getApplicationContext(), mDataSet.get(1).toString(), Toast.LENGTH_SHORT).show();
-            /*for(int i = 0; i < mAdapter.getItemCount(); i++) {
+            for(int i = 0; i < mAdapter.getItemCount(); i++) {
 
                 if (mDataSet.get(i).toString().contains(query)) {
                     String q = mDataSet.get(i).toString();
@@ -56,7 +54,7 @@ public class SearchResultsActivity extends AppCompatActivity {
                     }
                     mComment.setText(sb);
                 }
-            }*/
-        }
+            }
+        }*/
     }
 }

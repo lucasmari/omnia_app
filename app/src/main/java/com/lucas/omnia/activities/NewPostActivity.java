@@ -34,7 +34,7 @@ public class NewPostActivity extends BaseActivity {
 
         databaseReference = getDatabaseReference();
 
-        binding.fabSubmitPost.setOnClickListener(v -> submitPost());
+        binding.fabSubmit.setOnClickListener(v -> submitPost());
     }
 
     private void submitPost() {
@@ -89,9 +89,9 @@ public class NewPostActivity extends BaseActivity {
         binding.fieldTitle.setEnabled(enabled);
         binding.fieldBody.setEnabled(enabled);
         if (enabled) {
-            binding.fabSubmitPost.show();
+            binding.fabSubmit.show();
         } else {
-            binding.fabSubmitPost.hide();
+            binding.fabSubmit.hide();
         }
     }
 

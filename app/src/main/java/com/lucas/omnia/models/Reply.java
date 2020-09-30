@@ -1,63 +1,45 @@
 package com.lucas.omnia.models;
 
+import com.google.firebase.database.Exclude;
+import com.google.firebase.database.IgnoreExtraProperties;
+
+import java.util.HashMap;
+import java.util.Map;
+
+@IgnoreExtraProperties
 public class Reply {
-    private int id3;
-    private String user3;
-    private String comment3;
-    private String type3;
-    private int votes3;
-    String text3;
+    public String uid;
+    public String author;
+    public String body;
+    public boolean edited;
+    public int upVoteCount = 0;
+    public int downVoteCount = 0;
+    public Map<String, Boolean> upVotes = new HashMap<>();
+    public Map<String, Boolean> downVotes = new HashMap<>();
 
-    public Reply(int i1, String s1, String s2, String s3, int i2) {
-        id3 = i1;
-        user3 = s1;
-        comment3 = s2;
-        type3 = s3;
-        votes3 = i2;
+    public Reply() {
+        // Default constructor required for calls to DataSnapshot.getValue(Reply.class)
     }
 
-    public Reply(int p, String s) {
-        id3 = p;
-        text3 = s;
+    public Reply(String uid, String author, String body, boolean edited) {
+        this.uid = uid;
+        this.author = author;
+        this.body = body;
+        this.edited = edited;
     }
 
-    public String getText3() {
-        return text3;
-    }
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("uid", uid);
+        result.put("author", author);
+        result.put("body", body);
+        result.put("edited", edited);
+        result.put("upVoteCount", upVoteCount);
+        result.put("downVoteCount", downVoteCount);
+        result.put("upVotes", upVotes);
+        result.put("downVotes", downVotes);
 
-    public int getId3() {
-        return id3;
-    }
-
-    public String getUser3() {
-        return user3;
-    }
-
-    public String getComment3() {
-        return comment3;
-    }
-
-    public String getType3() {
-        return type3;
-    }
-
-    public void upVote3() {
-        votes3++;
-    }
-
-    public void downVote3() {
-        votes3--;
-    }
-
-    public void removeUpVote3() {
-        votes3--;
-    }
-
-    public void removeDownVote3() {
-        votes3++;
-    }
-
-    public int getmVotes3() {
-        return votes3;
+        return result;
     }
 }

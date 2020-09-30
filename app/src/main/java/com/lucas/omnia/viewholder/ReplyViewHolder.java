@@ -7,27 +7,40 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.lucas.omnia.R;
+import com.lucas.omnia.models.Reply;
 
 public class ReplyViewHolder extends RecyclerView.ViewHolder {
 
-    TextView mUser3;
-    public TextView mComment3;
-    public Button mReplyButton3;
-    public TextView mInfo3;
-    public ImageButton mUpVoteButton3;
-    public ImageButton mDownVoteButton3;
-    public ImageButton mMoreButton3;
-
+    public TextView authorView;
+    public TextView bodyView;
+    public TextView editedView;
+    public TextView upVotesView;
+    public TextView downVotesView;
+    public ImageButton upVoteButton;
+    public ImageButton downVoteButton;
+    public ImageButton moreButton;
+    public Button replyButton;
 
     public ReplyViewHolder(View itemView) {
         super(itemView);
 
-        mUser3 = itemView.findViewById(R.id.userTv3);
-        mComment3 = itemView.findViewById(R.id.commentTv3);
-        mReplyButton3 = itemView.findViewById(R.id.replyButton3);
-        mInfo3 = itemView.findViewById(R.id.infoTv3);
-        mUpVoteButton3 = itemView.findViewById(R.id.upVoteButton3);
-        mDownVoteButton3 = itemView.findViewById(R.id.downVoteButton3);
-        mMoreButton3 = itemView.findViewById(R.id.moreButton3);
+        authorView = itemView.findViewById(R.id.authorTV);
+        bodyView = itemView.findViewById(R.id.bodyTv);
+        editedView = itemView.findViewById(R.id.editedTv);
+        upVotesView = itemView.findViewById(R.id.upVotesTv);
+        downVotesView = itemView.findViewById(R.id.downVotesTv);
+        upVoteButton = itemView.findViewById(R.id.upVoteButton);
+        downVoteButton = itemView.findViewById(R.id.downVoteButton);
+        moreButton = itemView.findViewById(R.id.moreButton);
+        replyButton = itemView.findViewById(R.id.replyButton);
+    }
+
+    public void bindToReply(Reply reply, View.OnClickListener upVoteClickListener, View.OnClickListener downVoteClickListener) {
+        authorView.setText(reply.author);
+        bodyView.setText(reply.body);
+        upVotesView.setText(String.valueOf(reply.upVoteCount));
+        downVotesView.setText(String.valueOf(reply.downVoteCount));
+        upVoteButton.setOnClickListener(upVoteClickListener);
+        downVoteButton.setOnClickListener(downVoteClickListener);
     }
 }

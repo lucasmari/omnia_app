@@ -19,7 +19,7 @@
         android:layout_height="100dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="40dp"
         app:srcCompat="@android:drawable/ic_menu_mapmode" />
 
     <com.google.android.material.textview.MaterialTextView
@@ -29,7 +29,7 @@
         android:layout_below="@+id/imageView"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="false"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:text="@string/app_name"
         android:textSize="24sp" />
 
@@ -39,15 +39,17 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp
+"
         android:theme="@style/TextLabel">
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/emailEdit"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:hint="@string/email_hint"
-        android:inputType="textWebEmailAddress" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/emailEdit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/email_hint"
+            android:inputType="textWebEmailAddress"
+            android:textSize="14sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -65,7 +67,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="@string/password_hint"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:textSize="14sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
@@ -86,7 +89,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@id/signUp"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="48dp"
         android:layout_marginTop="320dp"
         android:layout_toEndOf="@+id/signUp"
         android:text="@string/sign_in_button"
@@ -96,19 +99,19 @@
     <View
         android:layout_width="fill_parent"
         android:layout_height="1dp"
-        android:layout_below="@id/signIn"
+        android:layout_above="@id/signInGoogle"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
         android:layout_marginEnd="10dp"
+        android:layout_marginBottom="20dp"
         android:background="@color/colorPrimaryDark" />
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/signInGoogle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/signUp"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp" />
+        android:layout_marginBottom="40dp" />
 
 </RelativeLayout>
 </layout>

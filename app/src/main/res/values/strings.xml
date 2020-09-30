@@ -48,7 +48,21 @@
 
     <!-- CommentsActivity -->
     <string name="comments_title">Comentários</string>
-    <string name="comment_hint">Comente aqui…</string>
+
+    <!-- NewCommentActivity -->
+    <string name="new_comment_title">Novo Comentário</string>
+
+    <!-- EditCommentActivity -->
+    <string name="edit_comment_title">Editar Comentário</string>
+
+    <!-- RepliesActivity -->
+    <string name="replies_title">Respostas</string>
+
+    <!-- NewReplyActivity -->
+    <string name="new_reply_title">Nova Resposta</string>
+
+    <!-- EditReplyActivity -->
+    <string name="edit_reply_title">Editar Resposta</string>
 
     <!-- ShareActivity -->
     <string name="share_title">Compartilhar</string>

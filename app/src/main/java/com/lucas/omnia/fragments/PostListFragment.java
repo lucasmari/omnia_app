@@ -87,6 +87,7 @@ public abstract class PostListFragment extends Fragment {
             @Override
             protected void onBindViewHolder(PostViewHolder viewHolder, int position, final Post post) {
                 final DatabaseReference postRef = getRef(position);
+                final String postKey = postRef.getKey();
 
                 // Determine if the post was edited
                 if (post.edited) {
@@ -130,7 +131,11 @@ public abstract class PostListFragment extends Fragment {
                     onDownVoteClicked(userPostRef);
                 });
 
-                viewHolder.commentButton.setOnClickListener(v -> v.getContext().startActivity(new Intent(v.getContext(), CommentsActivity.class)));
+                viewHolder.commentButton.setOnClickListener(v -> {
+                    Intent intent = new Intent(getActivity(), CommentsActivity.class);
+                    intent.putExtra(CommentsActivity.EXTRA_POST_KEY, postKey);
+                    startActivity(intent);
+                });
                 viewHolder.shareButton.setOnClickListener(v -> {
                     sharePost(post);
                 });

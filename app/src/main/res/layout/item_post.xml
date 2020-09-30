@@ -16,7 +16,7 @@
         android:layout_marginBottom="6dp">
 
         <TextView
-            android:id="@+id/titleTV"
+            android:id="@+id/authorTV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -67,7 +67,7 @@
         android:paddingTop="10dp"
         android:paddingEnd="12dp"
         android:paddingBottom="10dp"
-        android:text="Post aqui"
+        android:text="Post"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="16sp" />
 
@@ -138,7 +138,7 @@
 
         <ImageButton
             android:id="@+id/commentButton"
-            android:layout_width="10dp"
+            android:layout_width="20dp"
             android:layout_height="24dp"
             android:layout_gravity="center"
             android:layout_marginStart="6dp"
@@ -163,7 +163,7 @@
 
         <ImageButton
             android:id="@+id/shareButton"
-            android:layout_width="10dp"
+            android:layout_width="20dp"
             android:layout_height="24dp"
             android:layout_gravity="center"
             android:layout_marginStart="6dp"

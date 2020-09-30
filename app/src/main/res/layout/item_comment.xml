@@ -16,13 +16,13 @@
         android:layout_marginBottom="6dp">
 
         <TextView
-            android:id="@+id/titleTV"
+            android:id="@+id/authorTV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Título"
+            android:text="Autor"
             android:textColor="@color/colorWhite"
-            android:textSize="18sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/editedTv"
@@ -67,7 +67,7 @@
         android:paddingTop="10dp"
         android:paddingEnd="12dp"
         android:paddingBottom="10dp"
-        android:text="Comentário aqui"
+        android:text="Comentário"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="16sp" />
 
@@ -137,7 +137,7 @@
             android:textSize="14sp" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/replyButton"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
@@ -146,15 +146,37 @@
 
     </LinearLayout>
 
-    <ImageButton
-        android:id="@+id/moreButton2"
-        android:layout_width="wrap_content"
-        android:layout_height="24dp"
-        android:layout_gravity="center_horizontal|center_vertical"
-        android:layout_marginStart="6dp"
-        android:layout_marginEnd="6dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:scaleType="centerInside"
-        android:src="@drawable/ic_more_2"
-        android:tint="@android:color/background_light" />
+    <LinearLayout
+        android:id="@+id/repliesLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="4dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:visibility="visible">
+
+        <Button
+            android:id="@+id/repliesButton"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:text="Respostas" />
+
+        <TextView
+            android:id="@+id/repliesTv"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="6dp"
+            android:textAlignment="viewStart"
+            android:textColor="@color/colorWhite"
+            android:textSize="14sp" />
+    </LinearLayout>
+
 </LinearLayout>

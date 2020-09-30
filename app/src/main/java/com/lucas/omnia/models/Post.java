@@ -19,7 +19,7 @@ public class Post {
     public boolean edited;
     public int upVoteCount = 0;
     public int downVoteCount = 0;
-    public int commentsCount = 0;
+    public int commentCount = 0;
     public Map<String, Boolean> upVotes = new HashMap<>();
     public Map<String, Boolean> downVotes = new HashMap<>();
     public Map<String, Boolean> comments = new HashMap<>();
@@ -46,6 +46,7 @@ public class Post {
         result.put("edited", edited);
         result.put("upVoteCount", upVoteCount);
         result.put("downVoteCount", downVoteCount);
+        result.put("commentCount", commentCount);
         result.put("upVotes", upVotes);
         result.put("downVotes", downVotes);
         result.put("comments", comments);
