@@ -1,21 +1,15 @@
 package com.lucas.omnia.activities;
 
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
@@ -23,7 +17,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.lucas.omnia.R;
 import com.lucas.omnia.databinding.ActivityAuthBinding;
 import com.lucas.omnia.models.User;
@@ -56,12 +49,12 @@ public class AuthActivity extends BaseActivity implements View.OnClickListener {
         firebaseAuth = FirebaseAuth.getInstance();
 
         // Views
-        setProgressBar(R.id.progressBar);
+        setProgressBar(R.id.auth_pb);
 
         // Click listeners
-        binding.signUp.setOnClickListener(this);
-        binding.signIn.setOnClickListener(this);
-        binding.signInGoogle.setOnClickListener(this);
+        binding.authBtSignup.setOnClickListener(this);
+        binding.authBtSignin.setOnClickListener(this);
+        binding.authBtSigninGoogle.setOnClickListener(this);
     }
 
     @Override
@@ -76,8 +69,8 @@ public class AuthActivity extends BaseActivity implements View.OnClickListener {
     }
 
     private void signUp() {
-        String email = binding.emailEdit.getText().toString();
-        String password = binding.passEdit.getText().toString();
+        String email = binding.authTietEmail.getText().toString();
+        String password = binding.authTietPass.getText().toString();
 
         Log.d(TAG, "signUp");
         if (!validateForm(email, password)) {
@@ -103,8 +96,8 @@ public class AuthActivity extends BaseActivity implements View.OnClickListener {
     }
 
     private void signIn() {
-        String email = binding.emailEdit.getText().toString();
-        String password = binding.passEdit.getText().toString();
+        String email = binding.authTietEmail.getText().toString();
+        String password = binding.authTietPass.getText().toString();
 
         Log.d(TAG, "signIn");
         if (!validateForm(email, password)) {
@@ -186,11 +179,11 @@ public class AuthActivity extends BaseActivity implements View.OnClickListener {
         boolean result = true;
 
         if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            binding.emailEdit.setError(getString(R.string.invalid_email));
+            binding.authTietEmail.setError(getString(R.string.invalid_email));
             result = false;
         }
         if (password.isEmpty() || password.length() < 6 || password.length() > 15) {
-            binding.passEdit.setError(getString(R.string.invalid_password));
+            binding.authTietPass.setError(getString(R.string.invalid_password));
             result = false;
         }
         return result;
@@ -225,13 +218,13 @@ public class AuthActivity extends BaseActivity implements View.OnClickListener {
     public void onClick(View v) {
         int i = v.getId();
         switch (i) {
-            case R.id.signUp:
+            case R.id.auth_bt_signup:
                 signUp();
                 break;
-            case R.id.signIn:
+            case R.id.auth_bt_signin:
                 signIn();
                 break;
-            case R.id.signInGoogle:
+            case R.id.auth_bt_signin_google:
                 signInGoogle();
                 break;
             default:

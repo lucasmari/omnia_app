@@ -11,6 +11,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
+import com.lucas.omnia.R;
 import com.lucas.omnia.databinding.ActivityNewCommentBinding;
 import com.lucas.omnia.models.Comment;
 import com.lucas.omnia.models.Post;
@@ -40,16 +41,16 @@ public class NewCommentActivity extends BaseActivity {
 
         databaseReference = getDatabaseReference();
 
-        binding.fabSubmit.setOnClickListener(v -> submitComment());
+        binding.newCommentFabSubmit.setOnClickListener(v -> submitComment());
     }
 
     private void submitComment() {
-        final String body = binding.fieldBody.getText().toString();
+        final String body = binding.newCommentEtBody.getText().toString();
         final boolean edited = false;
 
         // Body is required
         if (TextUtils.isEmpty(body)) {
-            binding.fieldBody.setError(REQUIRED);
+            binding.newCommentEtBody.setError(REQUIRED);
             return;
         }
 
@@ -67,7 +68,7 @@ public class NewCommentActivity extends BaseActivity {
                         if (user == null) {
                             Log.e(TAG, "User " + userId + " is unexpectedly null");
                             Toast.makeText(NewCommentActivity.this,
-                                    "Error: could not fetch user.",
+                                    getString(R.string.user_fetch_error),
                                     Toast.LENGTH_SHORT).show();
                         } else {
                             writeNewComment(userId, user.username, body, edited);
@@ -86,11 +87,11 @@ public class NewCommentActivity extends BaseActivity {
     }
 
     private void setEditingEnabled(boolean enabled) {
-        binding.fieldBody.setEnabled(enabled);
+        binding.newCommentEtBody.setEnabled(enabled);
         if (enabled) {
-            binding.fabSubmit.show();
+            binding.newCommentFabSubmit.show();
         } else {
-            binding.fabSubmit.hide();
+            binding.newCommentFabSubmit.hide();
         }
     }
 

@@ -20,14 +20,13 @@ public class CommentsActivity extends BaseActivity {
     public static DatabaseReference postReference;
     public static DatabaseReference commentsReference;
     public static FloatingActionButton addFab;
-    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comments);
 
-        toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.comments_tb);
         setSupportActionBar(toolbar);
 
         // Get post key from intent
@@ -40,13 +39,13 @@ public class CommentsActivity extends BaseActivity {
         postReference = getDatabaseReference().child("posts").child(postKey);
         commentsReference = getDatabaseReference().child("post-comments").child(postKey);
 
-        Fragment mFragment = null;
-        mFragment = new CommentListFragment();
+        Fragment fragment = null;
+        fragment = new CommentListFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, mFragment).commit();
+                .replace(R.id.comments_fcv, fragment).commit();
 
-        addFab = findViewById(R.id.addFab);
+        addFab = findViewById(R.id.comments_fab_add);
         addFab.setOnClickListener(v -> startActivity(new Intent(v.getContext(), NewCommentActivity.class)));
     }
 }

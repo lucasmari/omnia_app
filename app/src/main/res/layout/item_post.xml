@@ -13,61 +13,69 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="12dp"
-        android:layout_marginBottom="6dp">
+        android:layout_marginBottom="2dp">
 
         <TextView
-            android:id="@+id/authorTV"
-            android:layout_width="match_parent"
+            android:id="@+id/post_tv_author"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Título"
-            android:textColor="@color/colorWhite"
-            android:textSize="18sp" />
+            android:layout_gravity="center"
+            android:text="@string/post_author" />
 
         <TextView
-            android:id="@+id/editedTv"
+            android:id="@+id/post_tv_edited"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/rounded_rv_item"
             android:backgroundTint="@color/colorPrimaryDarkLight"
             android:paddingStart="2dp"
             android:paddingEnd="2dp"
-            android:text="editado"
+            android:layout_gravity="center"
+            android:text="@string/post_edited"
             android:visibility="gone" />
 
         <ImageButton
-            android:id="@+id/moreButton"
+            android:id="@+id/post_ib_more"
             android:layout_width="wrap_content"
             android:layout_height="24dp"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="6dp"
             android:layout_marginEnd="6dp"
             android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/post_more_description"
             android:scaleType="centerInside"
             android:src="@drawable/ic_more"
             android:tint="@android:color/background_light" />
 
     </LinearLayout>
 
-    <!--<TextView
-        android:id="@+id/authorTv"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="10dp"
-        android:layout_weight="1"
-        android:text="Usuário" />-->
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/post_tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/post_title"
+            android:textColor="@color/colorWhite"
+            android:textSize="18sp" />
+
+    </LinearLayout>
 
     <TextView
-        android:id="@+id/bodyTv"
+        android:id="@+id/post_tv_body"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingStart="12dp"
-        android:paddingTop="10dp"
-        android:paddingEnd="12dp"
-        android:paddingBottom="10dp"
-        android:text="Post"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="10dp"
+        android:text="@string/post_body"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="16sp" />
 
@@ -89,7 +97,7 @@
         android:orientation="horizontal">
 
         <ImageButton
-            android:id="@+id/upVoteButton"
+            android:id="@+id/post_ib_upvote"
             android:layout_width="20dp"
             android:layout_height="36dp"
             android:layout_gravity="center"
@@ -97,11 +105,12 @@
             android:layout_marginEnd="6dp"
             android:layout_weight="1"
             android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/post_upvote_description"
             android:src="@drawable/ic_upvote"
             android:tint="@android:color/background_light" />
 
         <TextView
-            android:id="@+id/upVotesTv"
+            android:id="@+id/post_tv_upvote_count"
             android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -113,7 +122,7 @@
             android:textSize="14sp" />
 
         <ImageButton
-            android:id="@+id/downVoteButton"
+            android:id="@+id/post_ib_downvote"
             android:layout_width="20dp"
             android:layout_height="36dp"
             android:layout_gravity="center"
@@ -121,11 +130,12 @@
             android:layout_marginEnd="6dp"
             android:layout_weight="1"
             android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/post_downvote_description"
             android:src="@drawable/ic_downvote"
             android:tint="@android:color/background_light" />
 
         <TextView
-            android:id="@+id/downVotesTv"
+            android:id="@+id/post_tv_downvote_count"
             android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -137,7 +147,7 @@
             android:textSize="14sp" />
 
         <ImageButton
-            android:id="@+id/commentButton"
+            android:id="@+id/post_ib_comment"
             android:layout_width="20dp"
             android:layout_height="24dp"
             android:layout_gravity="center"
@@ -145,12 +155,13 @@
             android:layout_marginEnd="6dp"
             android:layout_weight="1"
             android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/post_comment_description"
             android:scaleType="centerInside"
             android:src="@drawable/ic_comment"
             android:tint="@android:color/background_light" />
 
         <TextView
-            android:id="@+id/commentsTv"
+            android:id="@+id/post_tv_comment_count"
             android:layout_width="10dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -162,7 +173,7 @@
             android:textSize="14sp" />
 
         <ImageButton
-            android:id="@+id/shareButton"
+            android:id="@+id/post_ib_share"
             android:layout_width="20dp"
             android:layout_height="24dp"
             android:layout_gravity="center"
@@ -170,6 +181,7 @@
             android:layout_marginEnd="6dp"
             android:layout_weight="1"
             android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/post_share_description"
             android:scaleType="centerInside"
             android:src="@drawable/ic_share"
             android:tint="@android:color/background_light" />

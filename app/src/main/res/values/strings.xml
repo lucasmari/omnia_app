@@ -1,83 +1,114 @@
 <resources>
+
     <!-- App Name -->
-    <string name="app_name">Omnia</string>
+    <string name="app_name" translatable="false">Omnia</string>
+
+    <!-- AuthActivity -->
+    <string name="email_hint" translatable="false">Email</string>
+    <string name="password_hint">Password</string>
+    <string name="sign_in_button">Sign In</string>
+    <string name="signing_in">Authenticating…</string>
+    <string name="sign_in_failure">Authentication failed</string>
+    <string name="invalid_email">Invalid email!</string>
+    <string name="invalid_password">Invalid password! (from 6 to 15 characters)</string>
+    <string name="sign_up_button">Sign Up</string>
+    <string name="signing_up">Signing up…</string>
+    <string name="sign_up_failure">Sign up failed</string>
+
+    <!-- MainActivity -->
+    <string name="press_back_to_leave">Press again to leave</string>
 
     <!-- Bottom Navigation Items -->
-    <string name="item_1">Feed</string>
-    <string name="item_2">Perfil</string>
-    <string name="item_3">Discussão</string>
-    <string name="item_4">Projetos</string>
-    <string name="item_5">Eleições</string>
-
-    <!-- Authentication -->
-    <string name="email_hint">Email</string>
-    <string name="password_hint">Senha</string>
-    <string name="sign_in_button">Entrar</string>
-    <string name="signing_in">Autenticando…</string>
-    <string name="sign_in_failure">Falha ao autenticar</string>
-    <string name="invalid_email">Email inválido!</string>
-    <string name="invalid_password">Senha inválida! (entre 6 e 15 caracteres)</string>
-    <string name="sign_up_button">Cadastrar</string>
-    <string name="signing_up">Cadastrando…</string>
-    <string name="sign_up_failure">Falha no cadastramento</string>
+    <string name="nav_item_1">Feed</string>
+    <string name="nav_item_2">Profile</string>
+    <string name="nav_item_3">Discussion</string>
+    <string name="nav_item_4">Projects</string>
+    <string name="nav_item_5">Elections</string>
 
     <!-- Tabs -->
-    <string name="tabFragment1">Mais Curtidos</string>
-    <string name="tabFragment2">Mais Recentes</string>
-    <string name="tabFragment3">Meus Posts</string>
-    <string name="tabFragment4">Minhas Curtidas</string>
-    <string name="tv1">Sem conexão com a internet…</string>
+    <string name="fragment_tab_1">Hot</string>
+    <string name="fragment_tab_2">Recent</string>
+    <string name="fragment_tab_3">My Posts</string>
+    <string name="fragment_tab_4">Upvoted Posts</string>
+    <string name="fragment_tab_tv">No internet connection…</string>
 
     <!-- Menu Items -->
-    <string name="menu_item_1">Configurações</string>
-    <string name="menu_item_2">Leis</string>
-    <string name="menu_item_3">Aprenda!</string>
+    <string name="menu_item_1">Settings</string>
+    <string name="menu_item_2">Laws</string>
+    <string name="menu_item_3">Learn!</string>
 
     <!-- App SettingsActivity -->
-    <string name="theme_pref">Tema</string>
+    <string name="theme_pref">Theme</string>
     <string name="theme_pref_key">theme</string>
-    <string name="theme_pref_sum_on">Claro</string>
-    <string name="theme_pref_sum_off">Escuro</string>
+    <string name="theme_pref_sum_on">Light</string>
+    <string name="theme_pref_sum_off">Dark</string>
     <string name="theme_pref_default">false</string>
 
     <!-- NewPostActivity -->
-    <string name="new_post_title">Novo Post</string>
+    <string name="new_post_title">New Post</string>
+    <string name="new_post_hint_title">Title</string>
+    <string name="new_post_hint_body">Write your post…</string>
+    <string name="user_fetch_error">Could not fetch user"</string>
 
     <!-- EditPostActivity -->
-    <string name="edit_post_title">Editar Post</string>
+    <string name="edit_post_title">Edit Post</string>
 
     <!-- CommentsActivity -->
-    <string name="comments_title">Comentários</string>
+    <string name="comments_title">Comments</string>
 
     <!-- NewCommentActivity -->
-    <string name="new_comment_title">Novo Comentário</string>
+    <string name="new_comment_title">New Comment</string>
+    <string name="new_comment_hint_body">Write your comment…</string>
 
     <!-- EditCommentActivity -->
-    <string name="edit_comment_title">Editar Comentário</string>
+    <string name="edit_comment_title">Edit Comment</string>
 
     <!-- RepliesActivity -->
-    <string name="replies_title">Respostas</string>
+    <string name="replies_title">Replies</string>
 
     <!-- NewReplyActivity -->
-    <string name="new_reply_title">Nova Resposta</string>
+    <string name="new_reply_title">New Reply</string>
+    <string name="new_reply_hint_body">Write your reply…</string>
 
     <!-- EditReplyActivity -->
-    <string name="edit_reply_title">Editar Resposta</string>
+    <string name="edit_reply_title">Edit Reply</string>
 
     <!-- ShareActivity -->
-    <string name="share_title">Compartilhar</string>
-    <string name="share_with">Compartilhar com…</string>
+    <string name="share_title">Share</string>
+    <string name="share_with">Share with…</string>
 
-    <!-- Profile -->
-    <string name="user_name">Nome de Usuário</string>
-    <string name="user_subscriptions">Inscritos</string>
-    <string name="user_level">Nível 0</string>
-    <string name="description_hint">Adicione uma descrição! ---> </string>
+    <!-- ProfileActivity -->
+    <string name="profile_name">Username</string>
+    <string name="profile_subs">Subs</string>
+    <string name="profile_sub_count">Sub count</string>
+    <string name="profile_level">Level 0</string>
+    <string name="profile_description_title">Description</string>
+    <string name="profile_image_description">Profile image</string>
+    <string name="profile_settings_description">Profile settings</string>
+    <string name="profile_description">Profile description</string>
+    <string name="profile_description_hint">Write about you…</string>
 
-    <!-- User SettingsActivity -->
-    <string name="user_settings_title">Configurações</string>
-    <string name="logout">Sair</string>
+    <!-- ProfileSettingsActivity -->
+    <string name="profile_settings_title">Profile Settings</string>
+    <string name="signout">Sign Out</string>
 
-    <!-- Recycler View Items -->
-    <string name="reply_button">Responder</string>
+    <!-- Post Item -->
+    <string name="post_author">Author</string>
+    <string name="post_title">Title</string>
+    <string name="post_edited">edited</string>
+    <string name="post_body">Post</string>
+    <string name="post_more_description">More</string>
+    <string name="post_upvote_description">Upvote</string>
+    <string name="post_downvote_description">Downvote</string>
+    <string name="post_comment_description">Comment</string>
+    <string name="post_share_description">Share</string>
+
+    <!-- Comment Item -->
+    <string name="comment_body">Comment</string>
+    <string name="reply_button">Reply</string>
+    <string name="replies_button">Replies</string>
+
+    <!-- Reply Item -->
+    <string name="reply_body">Reply</string>
+
 </resources>

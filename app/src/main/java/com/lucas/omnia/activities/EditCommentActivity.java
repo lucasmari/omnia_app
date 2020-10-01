@@ -8,7 +8,6 @@ import android.widget.Toast;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.lucas.omnia.databinding.ActivityEditCommentBinding;
 import com.lucas.omnia.models.Comment;
@@ -53,7 +52,7 @@ public class EditCommentActivity extends BaseActivity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         Comment comment = dataSnapshot.getValue(Comment.class);
 
-                        binding.fieldBody.setText(comment.body);
+                        binding.editCommentEtBody.setText(comment.body);
                     }
 
                     @Override
@@ -63,16 +62,16 @@ public class EditCommentActivity extends BaseActivity {
                     }
                 });
 
-        binding.fabSubmit.setOnClickListener(v -> submitComment());
+        binding.editCommentFabSubmit.setOnClickListener(v -> submitComment());
     }
 
     private void submitComment() {
-        final String body = binding.fieldBody.getText().toString();
+        final String body = binding.editCommentEtBody.getText().toString();
         final boolean edited = true;
 
         // Body is required
         if (TextUtils.isEmpty(body)) {
-            binding.fieldBody.setError(REQUIRED);
+            binding.editCommentEtBody.setError(REQUIRED);
             return;
         }
 
@@ -108,11 +107,11 @@ public class EditCommentActivity extends BaseActivity {
     }
 
     private void setEditingEnabled(boolean enabled) {
-        binding.fieldBody.setEnabled(enabled);
+        binding.editCommentEtBody.setEnabled(enabled);
         if (enabled) {
-            binding.fabSubmit.show();
+            binding.editCommentFabSubmit.show();
         } else {
-            binding.fabSubmit.hide();
+            binding.editCommentFabSubmit.hide();
         }
     }
 

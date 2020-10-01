@@ -16,58 +16,50 @@
         android:layout_marginBottom="6dp">
 
         <TextView
-            android:id="@+id/authorTV"
-            android:layout_width="match_parent"
+            android:id="@+id/comment_tv_author"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Autor"
-            android:textColor="@color/colorWhite"
-            android:textSize="14sp" />
+            android:layout_gravity="center"
+            android:text="@string/post_author"
+            android:textColor="@color/colorWhite" />
 
         <TextView
-            android:id="@+id/editedTv"
+            android:id="@+id/comment_tv_edited"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/rounded_rv_item"
             android:backgroundTint="@color/colorPrimaryDarkLight"
             android:paddingStart="2dp"
             android:paddingEnd="2dp"
-            android:text="editado"
+            android:layout_gravity="center"
+            android:text="@string/post_edited"
             android:visibility="gone" />
 
         <ImageButton
-            android:id="@+id/moreButton"
+            android:id="@+id/comment_ib_more"
             android:layout_width="wrap_content"
             android:layout_height="24dp"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="6dp"
             android:layout_marginEnd="6dp"
             android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/post_more_description"
             android:scaleType="centerInside"
             android:src="@drawable/ic_more"
             android:tint="@android:color/background_light" />
 
     </LinearLayout>
 
-    <!--<TextView
-        android:id="@+id/authorTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="10dp"
-        android:layout_weight="1"
-        android:text="Usuário" />-->
-
     <TextView
-        android:id="@+id/bodyTv"
+        android:id="@+id/comment_tv_body"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingStart="12dp"
-        android:paddingTop="10dp"
-        android:paddingEnd="12dp"
-        android:paddingBottom="10dp"
-        android:text="Comentário"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="10dp"
+        android:text="@string/comment_body"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="16sp" />
 
@@ -89,7 +81,7 @@
         android:orientation="horizontal">
 
         <ImageButton
-            android:id="@+id/upVoteButton"
+            android:id="@+id/comment_ib_upvote"
             android:layout_width="20dp"
             android:layout_height="36dp"
             android:layout_gravity="center"
@@ -97,11 +89,12 @@
             android:layout_marginEnd="6dp"
             android:layout_weight="1"
             android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/post_upvote_description"
             android:src="@drawable/ic_upvote"
             android:tint="@android:color/background_light" />
 
         <TextView
-            android:id="@+id/upVotesTv"
+            android:id="@+id/comment_tv_upvote_count"
             android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -113,7 +106,7 @@
             android:textSize="14sp" />
 
         <ImageButton
-            android:id="@+id/downVoteButton"
+            android:id="@+id/comment_ib_downvote"
             android:layout_width="20dp"
             android:layout_height="36dp"
             android:layout_gravity="center"
@@ -121,11 +114,12 @@
             android:layout_marginEnd="6dp"
             android:layout_weight="1"
             android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/post_downvote_description"
             android:src="@drawable/ic_downvote"
             android:tint="@android:color/background_light" />
 
         <TextView
-            android:id="@+id/downVotesTv"
+            android:id="@+id/comment_tv_downvote_count"
             android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -137,17 +131,17 @@
             android:textSize="14sp" />
 
         <Button
-            android:id="@+id/replyButton"
+            android:id="@+id/comment_bt_reply"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:text="Responder" />
+            android:text="@string/reply_button" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/repliesLayout"
+        android:id="@+id/comment_ll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
@@ -157,17 +151,17 @@
         android:layout_marginBottom="4dp"
         android:gravity="center"
         android:orientation="horizontal"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <Button
-            android:id="@+id/repliesButton"
+            android:id="@+id/comment_bt_replies"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="wrap_content"
             android:layout_height="36dp"
-            android:text="Respostas" />
+            android:text="@string/replies_button" />
 
         <TextView
-            android:id="@+id/repliesTv"
+            android:id="@+id/comment_tv_reply_count"
             android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

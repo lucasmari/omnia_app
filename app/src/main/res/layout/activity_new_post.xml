@@ -6,37 +6,39 @@
         android:layout_height="match_parent">
 
         <EditText
-            android:id="@+id/fieldTitle"
+            android:id="@+id/new_post_et_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginBottom="5dp"
-            android:hint="Title"
+            android:hint="@string/new_post_hint_title"
+            android:importantForAutofill="no"
             android:inputType="textCapSentences"
             android:maxLines="2" />
 
         <EditText
-            android:id="@+id/fieldBody"
+            android:id="@+id/new_post_et_body"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/fieldTitle"
+            android:layout_below="@+id/new_post_et_title"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="5dp"
             android:layout_marginRight="16dp"
             android:layout_marginBottom="5dp"
-            android:hint="Write your post..."
+            android:hint="@string/new_post_hint_body"
+            android:importantForAutofill="no"
             android:inputType="textMultiLine|textCapSentences"
             android:maxLines="10"
             android:scrollHorizontally="false" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fabSubmit"
+            android:id="@+id/new_post_fab_submit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_margin="16dp"
             android:src="@drawable/ic_send"/>
 

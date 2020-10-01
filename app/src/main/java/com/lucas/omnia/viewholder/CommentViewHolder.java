@@ -29,18 +29,18 @@ public class CommentViewHolder extends RecyclerView.ViewHolder {
     public CommentViewHolder(View itemView) {
         super(itemView);
 
-        authorView = itemView.findViewById(R.id.authorTV);
-        bodyView = itemView.findViewById(R.id.bodyTv);
-        editedView = itemView.findViewById(R.id.editedTv);
-        upVotesView = itemView.findViewById(R.id.upVotesTv);
-        downVotesView = itemView.findViewById(R.id.downVotesTv);
-        repliesView = itemView.findViewById(R.id.repliesTv);
-        upVoteButton = itemView.findViewById(R.id.upVoteButton);
-        downVoteButton = itemView.findViewById(R.id.downVoteButton);
-        moreButton = itemView.findViewById(R.id.moreButton);
-        replyButton = itemView.findViewById(R.id.replyButton);
-        repliesButton = itemView.findViewById(R.id.repliesButton);
-        repliesLayout = itemView.findViewById(R.id.repliesLayout);
+        authorView = itemView.findViewById(R.id.comment_tv_author);
+        bodyView = itemView.findViewById(R.id.comment_tv_body);
+        editedView = itemView.findViewById(R.id.comment_tv_edited);
+        upVotesView = itemView.findViewById(R.id.comment_tv_upvote_count);
+        downVotesView = itemView.findViewById(R.id.comment_tv_downvote_count);
+        repliesView = itemView.findViewById(R.id.comment_tv_reply_count);
+        upVoteButton = itemView.findViewById(R.id.comment_ib_upvote);
+        downVoteButton = itemView.findViewById(R.id.comment_ib_downvote);
+        moreButton = itemView.findViewById(R.id.comment_ib_more);
+        replyButton = itemView.findViewById(R.id.comment_bt_reply);
+        repliesButton = itemView.findViewById(R.id.comment_bt_replies);
+        repliesLayout = itemView.findViewById(R.id.comment_ll);
     }
 
     public void bindToComment(Comment comment, View.OnClickListener upVoteClickListener, View.OnClickListener downVoteClickListener) {

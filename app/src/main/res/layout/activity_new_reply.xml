@@ -6,20 +6,21 @@
         android:layout_height="match_parent">
 
         <EditText
-            android:id="@+id/fieldBody"
+            android:id="@+id/new_reply_et_body"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="5dp"
             android:layout_marginRight="16dp"
             android:layout_marginBottom="5dp"
-            android:hint="Write your reply..."
+            android:hint="@string/new_reply_hint_body"
             android:inputType="textMultiLine|textCapSentences"
             android:maxLines="10"
-            android:scrollHorizontally="false" />
+            android:scrollHorizontally="false"
+            android:importantForAutofill="no" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fabSubmit"
+            android:id="@+id/new_reply_fab_submit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"

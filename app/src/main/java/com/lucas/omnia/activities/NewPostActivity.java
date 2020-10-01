@@ -8,8 +8,8 @@ import android.widget.Toast;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.lucas.omnia.R;
 import com.lucas.omnia.databinding.ActivityNewPostBinding;
 import com.lucas.omnia.models.Post;
 import com.lucas.omnia.models.User;
@@ -34,23 +34,23 @@ public class NewPostActivity extends BaseActivity {
 
         databaseReference = getDatabaseReference();
 
-        binding.fabSubmit.setOnClickListener(v -> submitPost());
+        binding.newPostFabSubmit.setOnClickListener(v -> submitPost());
     }
 
     private void submitPost() {
-        final String title = binding.fieldTitle.getText().toString();
-        final String body = binding.fieldBody.getText().toString();
+        final String title = binding.newPostEtTitle.getText().toString();
+        final String body = binding.newPostEtBody.getText().toString();
         final boolean edited = false;
 
         // Title is required
         if (TextUtils.isEmpty(title)) {
-            binding.fieldTitle.setError(REQUIRED);
+            binding.newPostEtTitle.setError(REQUIRED);
             return;
         }
 
         // Body is required
         if (TextUtils.isEmpty(body)) {
-            binding.fieldBody.setError(REQUIRED);
+            binding.newPostEtBody.setError(REQUIRED);
             return;
         }
 
@@ -68,7 +68,7 @@ public class NewPostActivity extends BaseActivity {
                         if (user == null) {
                             Log.e(TAG, "User " + userId + " is unexpectedly null");
                             Toast.makeText(NewPostActivity.this,
-                                    "Error: could not fetch user.",
+                                    getString(R.string.user_fetch_error),
                                     Toast.LENGTH_SHORT).show();
                         } else {
                             writeNewPost(userId, user.username, title, body, edited);
@@ -86,12 +86,12 @@ public class NewPostActivity extends BaseActivity {
     }
 
     private void setEditingEnabled(boolean enabled) {
-        binding.fieldTitle.setEnabled(enabled);
-        binding.fieldBody.setEnabled(enabled);
+        binding.newPostEtTitle.setEnabled(enabled);
+        binding.newPostEtBody.setEnabled(enabled);
         if (enabled) {
-            binding.fabSubmit.show();
+            binding.newPostFabSubmit.show();
         } else {
-            binding.fabSubmit.hide();
+            binding.newPostFabSubmit.hide();
         }
     }
 

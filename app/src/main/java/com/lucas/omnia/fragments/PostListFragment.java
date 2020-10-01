@@ -26,13 +26,13 @@ import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.Transaction;
 import com.lucas.omnia.R;
-import com.lucas.omnia.VerticalSpaceItemDecoration;
 import com.lucas.omnia.activities.CommentsActivity;
 import com.lucas.omnia.activities.EditPostActivity;
 import com.lucas.omnia.models.Post;
+import com.lucas.omnia.utils.VerticalSpaceItemDecoration;
 import com.lucas.omnia.viewholder.PostViewHolder;
 
-import static com.lucas.omnia.fragments.NavFragment1.addFab;
+import static com.lucas.omnia.fragments.FeedNavFragment.addFab;
 
 public abstract class PostListFragment extends Fragment {
 
@@ -49,11 +49,11 @@ public abstract class PostListFragment extends Fragment {
     public View onCreateView (LayoutInflater inflater, ViewGroup container,
                               Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        View rootView = inflater.inflate(R.layout.fragment_tabs, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_posts, container, false);
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
-        recyclerView = rootView.findViewById(R.id.rv_main);
+        recyclerView = rootView.findViewById(R.id.posts_rv);
         recyclerView.setHasFixedSize(true);
 
         return rootView;

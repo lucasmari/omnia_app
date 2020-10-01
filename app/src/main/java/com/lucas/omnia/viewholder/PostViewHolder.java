@@ -12,7 +12,7 @@ import com.lucas.omnia.models.Post;
 public class PostViewHolder extends RecyclerView.ViewHolder {
 
     public TextView titleView;
-    //public TextView authorView;
+    public TextView authorView;
     public TextView bodyView;
     public TextView editedView;
     public TextView upVotesView;
@@ -27,23 +27,23 @@ public class PostViewHolder extends RecyclerView.ViewHolder {
     public PostViewHolder(View itemView) {
         super(itemView);
 
-        titleView = itemView.findViewById(R.id.authorTV);
-        //authorView = itemView.findViewById(R.id.authorTv);
-        bodyView = itemView.findViewById(R.id.bodyTv);
-        editedView = itemView.findViewById(R.id.editedTv);
-        upVotesView = itemView.findViewById(R.id.upVotesTv);
-        downVotesView = itemView.findViewById(R.id.downVotesTv);
-        commentsView = itemView.findViewById(R.id.commentsTv);
-        upVoteButton = itemView.findViewById(R.id.upVoteButton);
-        downVoteButton = itemView.findViewById(R.id.downVoteButton);
-        commentButton = itemView.findViewById(R.id.commentButton);
-        shareButton = itemView.findViewById(R.id.shareButton);
-        moreButton = itemView.findViewById(R.id.moreButton);
+        titleView = itemView.findViewById(R.id.post_tv_title);
+        authorView = itemView.findViewById(R.id.post_tv_author);
+        bodyView = itemView.findViewById(R.id.post_tv_body);
+        editedView = itemView.findViewById(R.id.post_tv_edited);
+        upVotesView = itemView.findViewById(R.id.post_tv_upvote_count);
+        downVotesView = itemView.findViewById(R.id.post_tv_downvote_count);
+        commentsView = itemView.findViewById(R.id.post_tv_comment_count);
+        upVoteButton = itemView.findViewById(R.id.post_ib_upvote);
+        downVoteButton = itemView.findViewById(R.id.post_ib_downvote);
+        commentButton = itemView.findViewById(R.id.post_ib_comment);
+        shareButton = itemView.findViewById(R.id.post_ib_share);
+        moreButton = itemView.findViewById(R.id.post_ib_more);
     }
 
     public void bindToPost(Post post, View.OnClickListener upVoteClickListener, View.OnClickListener downVoteClickListener) {
         titleView.setText(post.title);
-        //authorView.setText(post.author);
+        authorView.setText(post.author);
         bodyView.setText(post.body);
         upVotesView.setText(String.valueOf(post.upVoteCount));
         downVotesView.setText(String.valueOf(post.downVoteCount));

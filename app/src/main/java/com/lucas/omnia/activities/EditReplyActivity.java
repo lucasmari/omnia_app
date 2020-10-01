@@ -52,7 +52,7 @@ public class EditReplyActivity extends BaseActivity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         Reply reply = dataSnapshot.getValue(Reply.class);
 
-                        binding.fieldBody.setText(reply.body);
+                        binding.editReplyEtBody.setText(reply.body);
                     }
 
                     @Override
@@ -62,16 +62,16 @@ public class EditReplyActivity extends BaseActivity {
                     }
                 });
 
-        binding.fabSubmit.setOnClickListener(v -> submitReply());
+        binding.editReplyFabSubmit.setOnClickListener(v -> submitReply());
     }
 
     private void submitReply() {
-        final String body = binding.fieldBody.getText().toString();
+        final String body = binding.editReplyEtBody.getText().toString();
         final boolean edited = true;
 
         // Body is required
         if (TextUtils.isEmpty(body)) {
-            binding.fieldBody.setError(REQUIRED);
+            binding.editReplyEtBody.setError(REQUIRED);
             return;
         }
 
@@ -107,11 +107,11 @@ public class EditReplyActivity extends BaseActivity {
     }
 
     private void setEditingEnabled(boolean enabled) {
-        binding.fieldBody.setEnabled(enabled);
+        binding.editReplyEtBody.setEnabled(enabled);
         if (enabled) {
-            binding.fabSubmit.show();
+            binding.editReplyFabSubmit.show();
         } else {
-            binding.fabSubmit.hide();
+            binding.editReplyFabSubmit.hide();
         }
     }
 

@@ -1,10 +1,11 @@
 package com.lucas.omnia.viewholder;
 
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.lucas.omnia.R;
 import com.lucas.omnia.models.Reply;
@@ -24,15 +25,15 @@ public class ReplyViewHolder extends RecyclerView.ViewHolder {
     public ReplyViewHolder(View itemView) {
         super(itemView);
 
-        authorView = itemView.findViewById(R.id.authorTV);
-        bodyView = itemView.findViewById(R.id.bodyTv);
-        editedView = itemView.findViewById(R.id.editedTv);
-        upVotesView = itemView.findViewById(R.id.upVotesTv);
-        downVotesView = itemView.findViewById(R.id.downVotesTv);
-        upVoteButton = itemView.findViewById(R.id.upVoteButton);
-        downVoteButton = itemView.findViewById(R.id.downVoteButton);
-        moreButton = itemView.findViewById(R.id.moreButton);
-        replyButton = itemView.findViewById(R.id.replyButton);
+        authorView = itemView.findViewById(R.id.reply_tv_author);
+        bodyView = itemView.findViewById(R.id.reply_tv_body);
+        editedView = itemView.findViewById(R.id.reply_tv_edited);
+        upVotesView = itemView.findViewById(R.id.reply_tv_upvote_count);
+        downVotesView = itemView.findViewById(R.id.reply_tv_downvote_count);
+        upVoteButton = itemView.findViewById(R.id.reply_ib_upvote);
+        downVoteButton = itemView.findViewById(R.id.reply_ib_downvote);
+        moreButton = itemView.findViewById(R.id.reply_ib_more);
+        replyButton = itemView.findViewById(R.id.reply_bt_reply);
     }
 
     public void bindToReply(Reply reply, View.OnClickListener upVoteClickListener, View.OnClickListener downVoteClickListener) {

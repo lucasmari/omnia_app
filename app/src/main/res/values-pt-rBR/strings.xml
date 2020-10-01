@@ -1,0 +1,111 @@
+<resources>
+    <!-- App Name -->
+
+    <!-- AuthAcivity -->
+    <string name="password_hint">Senha</string>
+    <string name="sign_in_button">Entrar</string>
+    <string name="signing_in">Autenticando…</string>
+    <string name="sign_in_failure">Falha ao autenticar</string>
+    <string name="invalid_email">Email inválido!</string>
+    <string name="invalid_password">Senha inválida! (entre 6 e 15 caracteres)</string>
+    <string name="sign_up_button">Cadastrar</string>
+    <string name="signing_up">Cadastrando…</string>
+    <string name="sign_up_failure">Falha no cadastramento</string>
+
+    <!-- MainActivity -->
+    <string name="press_back_to_leave">Pressione novamente para sair</string>
+
+    <!-- Bottom Navigation Items -->
+    <string name="nav_item_1">Feed</string>
+    <string name="nav_item_2">Perfil</string>
+    <string name="nav_item_3">Discussão</string>
+    <string name="nav_item_4">Projetos</string>
+    <string name="nav_item_5">Eleições</string>
+
+    <!-- Tabs -->
+    <string name="fragment_tab_1">Mais Curtidos</string>
+    <string name="fragment_tab_2">Mais Recentes</string>
+    <string name="fragment_tab_3">Meus Posts</string>
+    <string name="fragment_tab_4">Minhas Curtidas</string>
+    <string name="fragment_tab_tv">Sem conexão com a internet…</string>
+
+    <!-- Menu Items -->
+    <string name="menu_item_1">Configurações</string>
+    <string name="menu_item_2">Leis</string>
+    <string name="menu_item_3">Aprenda!</string>
+
+    <!-- App SettingsActivity -->
+    <string name="theme_pref">Tema</string>
+    <string name="theme_pref_key">theme</string>
+    <string name="theme_pref_sum_on">Claro</string>
+    <string name="theme_pref_sum_off">Escuro</string>
+    <string name="theme_pref_default">false</string>
+
+    <!-- NewPostActivity -->
+    <string name="new_post_title">Novo Post</string>
+    <string name="new_post_hint_title">Título</string>
+    <string name="new_post_hint_body">Escreva seu post</string>
+    <string name="user_fetch_error">Não foi possível acessar usuário"</string>
+
+    <!-- EditPostActivity -->
+    <string name="edit_post_title">Editar Post</string>
+
+    <!-- CommentsActivity -->
+    <string name="comments_title">Comentários</string>
+
+    <!-- NewCommentActivity -->
+    <string name="new_comment_title">Novo Comentário</string>
+    <string name="new_comment_hint_body">Escreva seu comentário…</string>
+
+    <!-- EditCommentActivity -->
+    <string name="edit_comment_title">Editar Comentário</string>
+
+    <!-- RepliesActivity -->
+    <string name="replies_title">Respostas</string>
+
+    <!-- NewReplyActivity -->
+    <string name="new_reply_title">Nova Resposta</string>
+    <string name="new_reply_hint_body">Escreva sua resposta…</string>
+
+    <!-- EditReplyActivity -->
+    <string name="edit_reply_title">Editar Resposta</string>
+
+    <!-- ShareActivity -->
+    <string name="share_title">Compartilhar</string>
+    <string name="share_with">Compartilhar com…</string>
+
+    <!-- ProfileActivity -->
+    <string name="profile_name">Nome de Usuário</string>
+    <string name="profile_subs">Inscritos</string>
+    <string name="profile_sub_count">Nº de inscritos</string>
+    <string name="profile_level">Nível 0</string>
+    <string name="profile_description_title">Descrição</string>
+    <string name="profile_image_description">Imagem de perfil</string>
+    <string name="profile_settings_description">Configurações de perfil</string>
+    <string name="profile_description">Descrição de perfil</string>
+    <string name="profile_description_hint">Escreva sobre você…</string>
+
+    <!-- ProfileSettingsActivity -->
+    <string name="profile_settings_title">Configurações de perfil</string>
+    <string name="signout">Sair</string>
+
+    <!-- Post Item -->
+    <string name="post_author">Autor</string>
+    <string name="post_title">Título</string>
+    <string name="post_edited">editado</string>
+    <string name="post_body">Post</string>
+    <string name="post_more_description">Mais</string>
+    <string name="post_upvote_description">Voto positivo</string>
+    <string name="post_downvote_description">Voto negativo</string>
+    <string name="post_comment_description">Comentar</string>
+    <string name="post_share_description">Compartilhar</string>
+
+    <!-- Comment Item -->
+    <string name="comment_body">Comentário</string>
+    <string name="reply_button">Responder</string>
+    <string name="replies_button">Respostas</string>
+
+    <!-- Reply Item -->
+    <string name="reply_body">Resposta</string>
+
+</resources>

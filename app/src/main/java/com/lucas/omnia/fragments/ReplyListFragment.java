@@ -26,15 +26,13 @@ import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.Transaction;
 import com.lucas.omnia.R;
-import com.lucas.omnia.VerticalSpaceItemDecoration;
 import com.lucas.omnia.activities.EditReplyActivity;
 import com.lucas.omnia.activities.NewReplyActivity;
 import com.lucas.omnia.models.Comment;
 import com.lucas.omnia.models.Reply;
-import com.lucas.omnia.models.Post;
+import com.lucas.omnia.utils.VerticalSpaceItemDecoration;
 import com.lucas.omnia.viewholder.ReplyViewHolder;
 
-import static com.lucas.omnia.activities.CommentsActivity.postKey;
 import static com.lucas.omnia.activities.RepliesActivity.commentKey;
 import static com.lucas.omnia.activities.RepliesActivity.commentReference;
 
@@ -51,11 +49,11 @@ public class ReplyListFragment extends Fragment {
     public View onCreateView (LayoutInflater inflater, ViewGroup container,
                               Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        View rootView = inflater.inflate(R.layout.fragment_comments, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_posts, container, false);
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
-        recyclerView = rootView.findViewById(R.id.rv_comments);
+        recyclerView = rootView.findViewById(R.id.posts_rv);
         recyclerView.setHasFixedSize(true);
 
         return rootView;

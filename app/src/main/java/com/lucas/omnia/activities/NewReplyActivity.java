@@ -11,6 +11,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
+import com.lucas.omnia.R;
 import com.lucas.omnia.databinding.ActivityNewReplyBinding;
 import com.lucas.omnia.models.Comment;
 import com.lucas.omnia.models.Reply;
@@ -65,16 +66,16 @@ public class NewReplyActivity extends BaseActivity {
                     }
                 });
 
-        binding.fabSubmit.setOnClickListener(v -> submitReply());
+        binding.newReplyFabSubmit.setOnClickListener(v -> submitReply());
     }
 
     private void submitReply() {
-        final String body = "@" + author + " " + binding.fieldBody.getText().toString();
+        final String body = "@" + author + " " + binding.newReplyEtBody.getText().toString();
         final boolean edited = false;
 
         // Body is required
         if (TextUtils.isEmpty(body)) {
-            binding.fieldBody.setError(REQUIRED);
+            binding.newReplyEtBody.setError(REQUIRED);
             return;
         }
 
@@ -92,7 +93,7 @@ public class NewReplyActivity extends BaseActivity {
                         if (user == null) {
                             Log.e(TAG, "User " + userId + " is unexpectedly null");
                             Toast.makeText(NewReplyActivity.this,
-                                    "Error: could not fetch user.",
+                                    getString(R.string.user_fetch_error),
                                     Toast.LENGTH_SHORT).show();
                         } else {
                             writeNewReply(userId, user.username, body, edited);
@@ -111,11 +112,11 @@ public class NewReplyActivity extends BaseActivity {
     }
 
     private void setEditingEnabled(boolean enabled) {
-        binding.fieldBody.setEnabled(enabled);
+        binding.newReplyEtBody.setEnabled(enabled);
         if (enabled) {
-            binding.fabSubmit.show();
+            binding.newReplyFabSubmit.show();
         } else {
-            binding.fabSubmit.hide();
+            binding.newReplyFabSubmit.hide();
         }
     }
 

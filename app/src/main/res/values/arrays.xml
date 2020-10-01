@@ -2,11 +2,11 @@
 <resources>
     <!-- Post More Button -->
     <string-array name="options1">
-        <item>Editar</item>
-        <item>Apagar</item>
+        <item>Edit</item>
+        <item>Delete</item>
     </string-array>
 
     <string-array name="options2">
-        <item>Reportar</item>
+        <item>Report</item>
     </string-array>
 </resources>

@@ -1,10 +1,7 @@
 package com.lucas.omnia.activities;
 
-import android.graphics.Color;
 import android.os.Bundle;
-import android.text.SpannableString;
 import android.text.TextUtils;
-import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -55,8 +52,8 @@ public class EditPostActivity extends BaseActivity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         Post post = dataSnapshot.getValue(Post.class);
 
-                        binding.fieldTitle2.setText(post.title);
-                        binding.fieldBody2.setText(post.body);
+                        binding.editPostEtTitle.setText(post.title);
+                        binding.editPostEtBody.setText(post.body);
                     }
 
                     @Override
@@ -66,23 +63,23 @@ public class EditPostActivity extends BaseActivity {
                     }
                 });
 
-        binding.fabSubmitPost2.setOnClickListener(v -> submitPost());
+        binding.editPostFabSubmit.setOnClickListener(v -> submitPost());
     }
 
     private void submitPost() {
-        final String title = binding.fieldTitle2.getText().toString();
-        final String body = binding.fieldBody2.getText().toString();
+        final String title = binding.editPostEtTitle.getText().toString();
+        final String body = binding.editPostEtBody.getText().toString();
         final boolean edited = true;
 
         // Title is required
         if (TextUtils.isEmpty(title)) {
-            binding.fieldTitle2.setError(REQUIRED);
+            binding.editPostEtTitle.setError(REQUIRED);
             return;
         }
 
         // Body is required
         if (TextUtils.isEmpty(body)) {
-            binding.fieldBody2.setError(REQUIRED);
+            binding.editPostEtBody.setError(REQUIRED);
             return;
         }
 
@@ -118,12 +115,12 @@ public class EditPostActivity extends BaseActivity {
     }
 
     private void setEditingEnabled(boolean enabled) {
-        binding.fieldTitle2.setEnabled(enabled);
-        binding.fieldBody2.setEnabled(enabled);
+        binding.editPostEtTitle.setEnabled(enabled);
+        binding.editPostEtBody.setEnabled(enabled);
         if (enabled) {
-            binding.fabSubmitPost2.show();
+            binding.editPostFabSubmit.show();
         } else {
-            binding.fabSubmitPost2.hide();
+            binding.editPostFabSubmit.hide();
         }
     }
 

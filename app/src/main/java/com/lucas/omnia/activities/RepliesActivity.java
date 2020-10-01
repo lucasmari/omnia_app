@@ -19,14 +19,13 @@ public class RepliesActivity extends BaseActivity {
     public static String commentKey;
     public static DatabaseReference commentReference;
     public static DatabaseReference repliesReference;
-    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_replies);
 
-        toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.comments_tb);
         setSupportActionBar(toolbar);
 
         // Get comment key from intent
@@ -39,10 +38,10 @@ public class RepliesActivity extends BaseActivity {
         commentReference = getDatabaseReference().child("post-comments").child(postKey).child(commentKey);
         repliesReference = getDatabaseReference().child("comment-replies").child(commentKey);
 
-        Fragment mFragment = null;
-        mFragment = new ReplyListFragment();
+        Fragment fragment = null;
+        fragment = new ReplyListFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, mFragment).commit();
+                .replace(R.id.replies_fcv, fragment).commit();
     }
 }

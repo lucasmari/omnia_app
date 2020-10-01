@@ -1,18 +1,9 @@
 package com.lucas.omnia.activities;
 
-import android.app.SearchManager;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
-import android.text.Spannable;
-import android.text.SpannableStringBuilder;
-import android.text.style.BackgroundColorSpan;
-import android.text.style.ForegroundColorSpan;
-import android.widget.Toast;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import androidx.appcompat.app.AppCompatActivity;
 
 
 /**

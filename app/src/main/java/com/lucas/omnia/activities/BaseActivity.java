@@ -16,21 +16,21 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class BaseActivity extends AppCompatActivity {
 
-    private ProgressBar mProgressBar;
+    private ProgressBar progressBar;
 
     public void setProgressBar(int resId) {
-        mProgressBar = findViewById(resId);
+        progressBar = findViewById(resId);
     }
 
     public void showProgressBar() {
-        if (mProgressBar != null) {
-            mProgressBar.setVisibility(View.VISIBLE);
+        if (progressBar != null) {
+            progressBar.setVisibility(View.VISIBLE);
         }
     }
 
     public void hideProgressBar() {
-        if (mProgressBar != null) {
-            mProgressBar.setVisibility(View.INVISIBLE);
+        if (progressBar != null) {
+            progressBar.setVisibility(View.INVISIBLE);
         }
     }
 

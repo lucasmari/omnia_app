@@ -6,23 +6,19 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
-import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.lucas.omnia.AppFragmentPageAdapter;
-import com.lucas.omnia.BottomNavItemSelectedListener;
 import com.lucas.omnia.R;
-import com.lucas.omnia.fragments.NavFragment1;
+import com.lucas.omnia.adapters.AppFragmentPageAdapter;
+import com.lucas.omnia.utils.BottomNavItemSelectedListener;
 
 /**
  * Created by Lucas on 29/10/2017.
@@ -30,19 +26,9 @@ import com.lucas.omnia.fragments.NavFragment1;
 
 public class MainActivity extends BaseActivity implements SharedPreferences.OnSharedPreferenceChangeListener{
 
-    private BottomNavigationView navigation;
-    private Toolbar toolbar;
-
-    public static final String KEY_FRAGMENT = "fragment";
     private boolean doubleBackToExitPressedOnce = false;
 
     public static String userName;
-
-    /*private SparseArray<Fragment.SavedState> savedStateSparseArray = new SparseArray();
-    private int currentSelectedItemId = R.id.action_item1;
-    private String SAVED_STATE_CONTAINER_KEY = "ContainerKey";
-    private String  SAVED_STATE_CURRENT_TAB_KEY = "CurrentTabKey";*/
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,21 +36,15 @@ public class MainActivity extends BaseActivity implements SharedPreferences.OnSh
         setContentView(R.layout.activity_main);
         /*setupSharedPreferences();*/
 
-        toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.main_tb);
         setSupportActionBar(toolbar);
-        ViewPager viewPager = findViewById(R.id.container);
+        ViewPager viewPager = findViewById(R.id.main_cvp);
         AppFragmentPageAdapter adapter = new AppFragmentPageAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(adapter.getCount() - 1);
-        navigation = findViewById(R.id.navigation);
+        BottomNavigationView navigation = findViewById(R.id.main_bnv);
         BottomNavItemSelectedListener listener = new BottomNavItemSelectedListener(viewPager, toolbar);
         navigation.setOnNavigationItemSelectedListener(listener);
-
-        /*if (savedInstanceState != null) {
-            savedStateSparseArray = savedInstanceState.getSparseParcelableArray(SAVED_STATE_CONTAINER_KEY);
-            currentSelectedItemId = savedInstanceState.getInt(SAVED_STATE_CURRENT_TAB_KEY);
-        } else
-            swapFragments( new NavFragment1(), currentSelectedItemId, KEY_FRAGMENT);*/
 
         // Fetching user details
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -82,64 +62,7 @@ public class MainActivity extends BaseActivity implements SharedPreferences.OnSh
             // FirebaseUser.getIdToken() instead.
             String uid = user.getUid();
         }
-
-        /*CoordinatorLayout.LayoutParams layoutParams2 = (CoordinatorLayout.LayoutParams) navigation.getLayoutParams();
-        layoutParams2.setBehavior(new BottomNavigationViewBehavior());*/
-
-        /*navigation.setOnNavigationItemSelectedListener
-                (item -> {
-                    switch (item.getItemId()) {
-                        case R.id.action_item1:
-                            swapFragments(new NavFragment1(), item.getItemId(), "nav 1");
-                            break;
-                        case R.id.action_item2:
-                            swapFragments(new NavFragment2(), item.getItemId(), "nav 2");
-                            break;
-                        case R.id.action_item3:
-                            swapFragments(new NavFragment3(), item.getItemId(), "nav 3");
-                            break;
-                        case R.id.action_item4:
-                            swapFragments(new NavFragment4(), item.getItemId(), "nav 4");
-                            break;
-                        case R.id.action_item5:
-                            swapFragments(new NavFragment5(), item.getItemId(), "nav 5");
-                            break;
-                    }
-                    return true;
-                });
-        navigation.setSelectedItemId(R.id.action_item1);*/
     }
-
-    /*@Override
-    protected void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putSparseParcelableArray(SAVED_STATE_CONTAINER_KEY, savedStateSparseArray);
-        outState.putInt(SAVED_STATE_CURRENT_TAB_KEY, currentSelectedItemId);
-    }
-
-    private void initFragment(Fragment fragment) {
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.container, fragment)
-                .commit();
-    }
-
-
-    private void saveFragmentState(int actionId) {
-        Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.container);
-        if (currentFragment != null) {
-            savedStateSparseArray.put(currentSelectedItemId, getSupportFragmentManager().saveFragmentInstanceState(currentFragment));
-        }
-
-        currentSelectedItemId = actionId;
-    }
-
-
-    private void swapFragments(Fragment fragment, int actionId, String key) {
-        if (getSupportFragmentManager().findFragmentByTag(key) == null) {
-            saveFragmentState(actionId);
-            initFragment(fragment);
-        }
-    }*/
 
     public void setTheme(boolean b) {
         /*if(b) {
@@ -209,7 +132,7 @@ public class MainActivity extends BaseActivity implements SharedPreferences.OnSh
         }
 
         this.doubleBackToExitPressedOnce = true;
-        Toast.makeText(this, "Pressione novamente para sair", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getString(R.string.press_back_to_leave), Toast.LENGTH_SHORT).show();
 
         new Handler().postDelayed(new Runnable() {
 
