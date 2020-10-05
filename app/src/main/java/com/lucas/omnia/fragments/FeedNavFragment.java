@@ -41,6 +41,8 @@ public class FeedNavFragment extends Fragment{
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        getActivity().setTitle("Feed");
+
         ViewPager viewPager = view.findViewById(R.id.feed_vp);
         GooglePlusFragmentPageAdapter adapter =
                 new GooglePlusFragmentPageAdapter(

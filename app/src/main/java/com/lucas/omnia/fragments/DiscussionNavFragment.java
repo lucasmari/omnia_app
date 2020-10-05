@@ -14,10 +14,6 @@ import com.lucas.omnia.R;
  */
 
 public class DiscussionNavFragment extends Fragment {
-    public static DiscussionNavFragment newInstance() {
-        DiscussionNavFragment fragment = new DiscussionNavFragment();
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

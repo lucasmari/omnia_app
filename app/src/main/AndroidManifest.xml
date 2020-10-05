@@ -124,5 +124,8 @@
         <activity
             android:name=".activities.ProfileSettingsActivity"></activity>
 
+        <activity
+            android:name=".activities.UserPageActivity"></activity>
+
     </application>
 </manifest>

@@ -14,10 +14,6 @@ import com.lucas.omnia.R;
  */
 
 public class ElectionsNavFragment extends Fragment {
-    public static ElectionsNavFragment newInstance() {
-        ElectionsNavFragment fragment = new ElectionsNavFragment();
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

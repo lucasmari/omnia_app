@@ -28,6 +28,7 @@ import com.google.firebase.database.Transaction;
 import com.lucas.omnia.R;
 import com.lucas.omnia.activities.EditReplyActivity;
 import com.lucas.omnia.activities.NewReplyActivity;
+import com.lucas.omnia.activities.UserPageActivity;
 import com.lucas.omnia.models.Comment;
 import com.lucas.omnia.models.Reply;
 import com.lucas.omnia.utils.VerticalSpaceItemDecoration;
@@ -111,24 +112,24 @@ public class ReplyListFragment extends Fragment {
                             .getColor(R.color.colorWhite), PorterDuff.Mode.SRC_ATOP);
                 }
 
-                // Bind Reply to ViewHolder, setting OnClickListener for the star button
-                viewHolder.bindToReply(reply, upVoteButton -> {
-                    // Need to write to both places the item_Reply is stored
-                    DatabaseReference globalReplyRef = databaseReference.child("comment-replies").child(commentKey).child(replyRef.getKey());
+                if (!getUid().equals(reply.uid)) {
+                    viewHolder.authorView.setOnClickListener(v -> {
+                        Intent intent = new Intent(getActivity(), UserPageActivity.class);
+                        intent.putExtra(UserPageActivity.EXTRA_USER_KEY, reply.uid);
+                        startActivity(intent);
+                    });
+                }
 
-                    // Run two transactions
+                DatabaseReference globalReplyRef = databaseReference.child("comment-replies").child(commentKey).child(replyRef.getKey());
+                viewHolder.bindToReply(reply, upVoteButton -> {
                     onUpVoteClicked(globalReplyRef);
                 }, downVoteButton -> {
-                    // Need to write to both places the item_Reply is stored
-                    DatabaseReference globalReplyRef = databaseReference.child("comment-replies").child(commentKey).child(replyRef.getKey());
-
-                    // Run two transactions
                     onDownVoteClicked(globalReplyRef);
                 });
 
                 viewHolder.moreButton.setOnClickListener(v -> {
                     AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-                    if(getUid().equals(reply.uid)) {
+                    if (getUid().equals(reply.uid)) {
                         builder.setItems(getResources().getStringArray(R.array.options1), (dialog, which) -> {
                             switch (which) {
                                 case 0:
@@ -159,6 +160,7 @@ public class ReplyListFragment extends Fragment {
                 });
             }
         };
+
         recyclerView.setAdapter(recyclerAdapter);
         int VERTICAL_ITEM_SPACE = 48;
         recyclerView.addItemDecoration(new VerticalSpaceItemDecoration(VERTICAL_ITEM_SPACE));

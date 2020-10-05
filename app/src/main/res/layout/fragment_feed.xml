@@ -10,10 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="36dp"
         android:elevation="4dp"
-        android:foregroundGravity="fill"
         app:tabMinWidth="128dp"
         app:tabMode="scrollable"
-        app:layout_scrollFlags="scroll|enterAlways|snap"
+        app:layout_scrollFlags="scroll|enterAlways"
         app:tabTextAppearance="@style/TextAppearance.AppCompat.Small"
         tools:ignore="UnusedAttribute" />
 

@@ -7,6 +7,7 @@ public class User {
 
     public String username;
     public String email;
+    public String photoUrl;
     public String city;
     public String description;
 
@@ -17,5 +18,21 @@ public class User {
     public User(String username, String email) {
         this.username = username;
         this.email = email;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

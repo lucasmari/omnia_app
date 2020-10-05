@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +29,7 @@ import com.google.firebase.database.Transaction;
 import com.lucas.omnia.R;
 import com.lucas.omnia.activities.CommentsActivity;
 import com.lucas.omnia.activities.EditPostActivity;
+import com.lucas.omnia.activities.UserPageActivity;
 import com.lucas.omnia.models.Post;
 import com.lucas.omnia.utils.VerticalSpaceItemDecoration;
 import com.lucas.omnia.viewholder.PostViewHolder;
@@ -112,20 +114,21 @@ public abstract class PostListFragment extends Fragment {
                             .getColor(R.color.colorWhite), PorterDuff.Mode.SRC_ATOP);
                 }
 
-                // Bind Post to ViewHolder, setting OnClickListener for the star button
-                viewHolder.bindToPost(post, upVoteButton -> {
-                    // Need to write to both places the item_post is stored
-                    DatabaseReference globalPostRef = databaseReference.child("posts").child(postRef.getKey());
-                    DatabaseReference userPostRef = databaseReference.child("user-posts").child(post.uid).child(postRef.getKey());
+                if (!getUid().equals(post.uid)) {
+                    viewHolder.authorView.setOnClickListener(v -> {
+                        Intent intent = new Intent(getActivity(), UserPageActivity.class);
+                        intent.putExtra(UserPageActivity.EXTRA_USER_KEY, post.uid);
+                        startActivity(intent);
+                    });
+                }
 
+                DatabaseReference globalPostRef = databaseReference.child("posts").child(postRef.getKey());
+                DatabaseReference userPostRef = databaseReference.child("user-posts").child(post.uid).child(postRef.getKey());
+                viewHolder.bindToPost(post, upVoteButton -> {
                     // Run two transactions
                     onUpVoteClicked(globalPostRef);
                     onUpVoteClicked(userPostRef);
                 }, downVoteButton -> {
-                    // Need to write to both places the item_post is stored
-                    DatabaseReference globalPostRef = databaseReference.child("posts").child(postRef.getKey());
-                    DatabaseReference userPostRef = databaseReference.child("user-posts").child(post.uid).child(postRef.getKey());
-
                     // Run two transactions
                     onDownVoteClicked(globalPostRef);
                     onDownVoteClicked(userPostRef);
@@ -136,12 +139,14 @@ public abstract class PostListFragment extends Fragment {
                     intent.putExtra(CommentsActivity.EXTRA_POST_KEY, postKey);
                     startActivity(intent);
                 });
+
                 viewHolder.shareButton.setOnClickListener(v -> {
                     sharePost(post);
                 });
+
                 viewHolder.moreButton.setOnClickListener(v -> {
                     AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-                    if(getUid().equals(post.uid)) {
+                    if (getUid().equals(post.uid)) {
                         builder.setItems(getResources().getStringArray(R.array.options1), (dialog, which) -> {
                             switch (which) {
                                 case 0:
@@ -165,6 +170,7 @@ public abstract class PostListFragment extends Fragment {
                 });
             }
         };
+
         recyclerView.setAdapter(recyclerAdapter);
         int VERTICAL_ITEM_SPACE = 48;
         recyclerView.addItemDecoration(new VerticalSpaceItemDecoration(VERTICAL_ITEM_SPACE));

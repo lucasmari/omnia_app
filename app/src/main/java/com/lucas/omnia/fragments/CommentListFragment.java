@@ -29,6 +29,7 @@ import com.lucas.omnia.R;
 import com.lucas.omnia.activities.EditCommentActivity;
 import com.lucas.omnia.activities.NewReplyActivity;
 import com.lucas.omnia.activities.RepliesActivity;
+import com.lucas.omnia.activities.UserPageActivity;
 import com.lucas.omnia.models.Comment;
 import com.lucas.omnia.models.Post;
 import com.lucas.omnia.utils.VerticalSpaceItemDecoration;
@@ -114,24 +115,24 @@ public class CommentListFragment extends Fragment {
                             .getColor(R.color.colorWhite), PorterDuff.Mode.SRC_ATOP);
                 }
 
-                // Bind Comment to ViewHolder, setting OnClickListener for the star button
-                viewHolder.bindToComment(comment, upVoteButton -> {
-                    // Need to write to both places the item_Comment is stored
-                    DatabaseReference globalCommentRef = databaseReference.child("post-comments").child(postKey).child(commentRef.getKey());
+                if (!getUid().equals(comment.uid)) {
+                    viewHolder.authorView.setOnClickListener(v -> {
+                        Intent intent = new Intent(getActivity(), UserPageActivity.class);
+                        intent.putExtra(UserPageActivity.EXTRA_USER_KEY, comment.uid);
+                        startActivity(intent);
+                    });
+                }
 
-                    // Run two transactions
+                DatabaseReference globalCommentRef = databaseReference.child("post-comments").child(postKey).child(commentRef.getKey());
+                viewHolder.bindToComment(comment, upVoteButton -> {
                     onUpVoteClicked(globalCommentRef);
                 }, downVoteButton -> {
-                    // Need to write to both places the item_Comment is stored
-                    DatabaseReference globalCommentRef = databaseReference.child("post-comments").child(postKey).child(commentRef.getKey());
-
-                    // Run two transactions
                     onDownVoteClicked(globalCommentRef);
                 });
 
                 viewHolder.moreButton.setOnClickListener(v -> {
                     AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-                    if(getUid().equals(comment.uid)) {
+                    if (getUid().equals(comment.uid)) {
                         builder.setItems(getResources().getStringArray(R.array.options1), (dialog, which) -> {
                             switch (which) {
                                 case 0:
@@ -171,6 +172,7 @@ public class CommentListFragment extends Fragment {
                 }
             }
         };
+
         recyclerView.setAdapter(recyclerAdapter);
         int VERTICAL_ITEM_SPACE = 48;
         recyclerView.addItemDecoration(new VerticalSpaceItemDecoration(VERTICAL_ITEM_SPACE));

@@ -52,12 +52,7 @@ public class BaseActivity extends AppCompatActivity {
         }
 
         final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
-            }
-        }, 300);
+        handler.postDelayed(() -> imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT), 300);
     }
 
     public static void hideSoftKeyboard(Context activityContext, final EditText editText){

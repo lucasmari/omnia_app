@@ -2,7 +2,6 @@ package com.lucas.omnia.activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -14,10 +13,9 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.lucas.omnia.R;
 import com.lucas.omnia.adapters.AppFragmentPageAdapter;
+import com.lucas.omnia.models.User;
 import com.lucas.omnia.utils.BottomNavItemSelectedListener;
 
 /**
@@ -28,7 +26,7 @@ public class MainActivity extends BaseActivity implements SharedPreferences.OnSh
 
     private boolean doubleBackToExitPressedOnce = false;
 
-    public static String userName;
+    public static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,23 +43,6 @@ public class MainActivity extends BaseActivity implements SharedPreferences.OnSh
         BottomNavigationView navigation = findViewById(R.id.main_bnv);
         BottomNavItemSelectedListener listener = new BottomNavItemSelectedListener(viewPager, toolbar);
         navigation.setOnNavigationItemSelectedListener(listener);
-
-        // Fetching user details
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            // Name, email address, and profile photo Url
-            userName = user.getDisplayName();
-            String email = user.getEmail();
-            Uri photoUrl = user.getPhotoUrl();
-
-            // Check if user's email is verified
-            boolean emailVerified = user.isEmailVerified();
-
-            // The user's ID, unique to the Firebase project. Do NOT use this value to
-            // authenticate with your backend server, if you have one. Use
-            // FirebaseUser.getIdToken() instead.
-            String uid = user.getUid();
-        }
     }
 
     public void setTheme(boolean b) {

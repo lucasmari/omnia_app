@@ -76,18 +76,23 @@
 
     <!-- ProfileActivity -->
     <string name="profile_name">Nome de Usuário</string>
-    <string name="profile_subs">Inscritos</string>
+    <string name="profile_subs">inscritos</string>
     <string name="profile_sub_count">Nº de inscritos</string>
     <string name="profile_level">Nível 0</string>
     <string name="profile_description_title">Descrição</string>
     <string name="profile_image_description">Imagem de perfil</string>
     <string name="profile_settings_description">Configurações de perfil</string>
     <string name="profile_description">Descrição de perfil</string>
-    <string name="profile_description_hint">Escreva sobre você…</string>
+    <string name="profile_description_hint">…</string>
 
     <!-- ProfileSettingsActivity -->
     <string name="profile_settings_title">Configurações de perfil</string>
-    <string name="signout">Sair</string>
+    <string name="profile_settings_bt_save">Salvar</string>
+    <string name="profile_settings_bt_signout">Sair</string>
+    <string name="profile_settings_toast_description">Descrição adicionada</string>
+
+    <!-- UserPageActivity -->
+    <string name="user_page_bt_sub">Inscrever</string>
 
     <!-- Post Item -->
     <string name="post_author">Autor</string>

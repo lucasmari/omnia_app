@@ -64,7 +64,8 @@ public class AuthActivity extends BaseActivity implements View.OnClickListener {
         // Check if user is signed in (non-null) and update UI accordingly.
         // Check auth on Activity start
         if (firebaseAuth.getCurrentUser() != null) {
-            onAuthSuccess(firebaseAuth.getCurrentUser());
+            startActivity(new Intent(AuthActivity.this,MainActivity.class));
+            finish();
         }
     }
 
