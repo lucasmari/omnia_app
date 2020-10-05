@@ -29,6 +29,7 @@ public class UserPageActivity extends BaseActivity {
     private URL userImgUrl;
     private ImageView userImgView;
     private TextView usernameTv;
+    private TextView subCountTv;
     private TextView descriptionTv;
 
     @Override
@@ -38,6 +39,7 @@ public class UserPageActivity extends BaseActivity {
 
         userImgView = findViewById(R.id.user_page_iv);
         usernameTv = findViewById(R.id.user_page_tv_name);
+        subCountTv = findViewById(R.id.user_page_tv_sub_count);
         descriptionTv = findViewById(R.id.user_page_tv_description);
 
         // Get user key from intent
@@ -64,6 +66,7 @@ public class UserPageActivity extends BaseActivity {
                                     Toast.LENGTH_SHORT).show();
                         } else {
                             usernameTv.setText(u.username);
+                            subCountTv.setText(String.valueOf(u.subCount));
                             if (u.photoUrl != null) fetchProfileImage();
                             if (u.description != null) descriptionTv.setText(u.description);
                         }

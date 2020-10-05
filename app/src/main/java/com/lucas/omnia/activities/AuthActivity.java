@@ -210,7 +210,7 @@ public class AuthActivity extends BaseActivity implements View.OnClickListener {
     }
 
     private void writeNewUser(String userId, String name, String email) {
-        User user = new User(name, email);
+        User user = new User(name, email, 0);
 
         databaseReference.child("users").child(userId).setValue(user);
     }

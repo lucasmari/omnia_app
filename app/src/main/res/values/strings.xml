@@ -82,7 +82,7 @@
     <string name="profile_subs">subs</string>
     <string name="profile_sub_count">Sub count</string>
     <string name="profile_level">Level 0</string>
-    <string name="profile_description_title">Description</string>
+    <string name="profile_about_title">About</string>
     <string name="profile_image_description">Profile image</string>
     <string name="profile_settings_description">Profile settings</string>
     <string name="profile_description">Profile description</string>
@@ -92,7 +92,8 @@
     <string name="profile_settings_title">Profile Settings</string>
     <string name="profile_settings_bt_save">Save</string>
     <string name="profile_settings_bt_signout">Sign Out</string>
-    <string name="profile_settings_toast_description">Description added</string>
+    <string name="profile_settings_toast_about">About added</string>
+    <string name="profile_settings_about_hint">Write something about you…</string>
 
     <!-- UserPageActivity -->
     <string name="user_page_bt_sub">Subscribe</string>

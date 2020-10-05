@@ -48,7 +48,7 @@ public class ProfileSettingsActivity extends BaseActivity {
         DatabaseReference databaseReference = getDatabaseReference();
         databaseReference.child("users").child(getUid()).child("description").setValue(descriptionEt.getText().toString());
         hideSoftKeyboard(this, descriptionEt);
-        Toast.makeText(this, getString(R.string.profile_settings_toast_description),
+        Toast.makeText(this, getString(R.string.profile_settings_toast_about),
                 Toast.LENGTH_SHORT).show();
     }
 }

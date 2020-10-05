@@ -11,6 +11,8 @@ import android.graphics.Paint;
 import android.graphics.Shader;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,6 +43,8 @@ import com.lucas.omnia.activities.ProfileSettingsActivity;
 import com.lucas.omnia.models.User;
 import com.lucas.omnia.utils.ImageLoadAsyncTask;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -55,6 +59,8 @@ public class ProfileNavFragment extends Fragment {
     private String userId;
     private URL profileImgUrl;
     private ImageView profileImgView;
+    private TextView usernameTv;
+    private TextView subCountTv;
     private TextView descriptionTv;
 
     private StorageReference storageRef;
@@ -83,27 +89,27 @@ public class ProfileNavFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        databaseReference = FirebaseDatabase.getInstance().getReference();
-
-        fetchUser();
-
-        TextView userTv = view.findViewById(R.id.profile_tv_name);
-        userTv.setText(user.username);
+        usernameTv = view.findViewById(R.id.profile_tv_name);
+        subCountTv = view.findViewById(R.id.profile_tv_sub_count);
+        descriptionTv = view.findViewById(R.id.profile_tv_description);
 
         profileImgView = view.findViewById(R.id.profile_iv);
         profileImgView.setOnClickListener(v -> {
             verifyStoragePermissions();
         });
 
-        ImageButton userSettingsButton = view.findViewById(R.id.profile_ib_settings);
-        userSettingsButton.setOnClickListener(v -> startActivity(new Intent(v.getContext(), ProfileSettingsActivity.class)));
+        ImageButton settingsIb = view.findViewById(R.id.profile_ib_settings);
+        settingsIb.setOnClickListener(v -> startActivity(new Intent(v.getContext(),
+                ProfileSettingsActivity.class)));
 
-        descriptionTv = view.findViewById(R.id.profile_tv_description);
+        userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+
+        fetchUser();
     }
 
     public void fetchUser() {
-        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        /*FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         if (firebaseUser != null) {
             String username = usernameFromEmail(firebaseUser.getEmail());
 
@@ -111,7 +117,7 @@ public class ProfileNavFragment extends Fragment {
 
             // Check if user's email is verified
             boolean emailVerified = firebaseUser.isEmailVerified();
-        }
+        }*/
 
         databaseReference.child("users").child(userId).addListenerForSingleValueEvent(
                 new ValueEventListener() {
@@ -125,6 +131,8 @@ public class ProfileNavFragment extends Fragment {
                                     getString(R.string.user_fetch_error),
                                     Toast.LENGTH_SHORT).show();
                         } else {
+                            usernameTv.setText(u.username);
+                            subCountTv.setText(String.valueOf(u.subCount));
                             if (u.photoUrl != null) fetchProfileImage();
                             if (u.description != null) descriptionTv.setText(u.description);
                         }
@@ -170,8 +178,7 @@ public class ProfileNavFragment extends Fragment {
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
-            ImageLoadAsyncTask imageLoadAsyncTask = new ImageLoadAsyncTask(profileImgUrl,
-                    profileImgView);
+            ImageLoadAsyncTask imageLoadAsyncTask = new ImageLoadAsyncTask(profileImgUrl, profileImgView);
             imageLoadAsyncTask.execute();
         }).addOnFailureListener(exception -> {
             Toast.makeText(getContext(), "Error: could not fetch image", Toast.LENGTH_SHORT).show();
@@ -187,44 +194,42 @@ public class ProfileNavFragment extends Fragment {
         chooserIntent.putExtra(Intent.EXTRA_INTENT, contentSelectionIntent);
         chooserIntent.putExtra(Intent.EXTRA_TITLE, "Image Chooser");
 
-        int RESULT_LOAD_IMG = 1;
+        final int RESULT_LOAD_IMG = 1;
         startActivityForResult(chooserIntent, RESULT_LOAD_IMG);
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+    public void onActivityResult(int requestCode, int bitmapCode, Intent data) {
+        super.onActivityResult(requestCode, bitmapCode, data);
         try {
-            // When an Image is picked
-            if (resultCode == MainActivity.RESULT_OK) {
-                // If it returns multiple item from storage
-                if (data.getClipData() == null && data.getDataString() != null) {
-                    String dataString = data.getDataString();
-                    if (dataString != null) {
-                        StorageReference profileImgRef = storageRef.child(userId + "/profile" +
-                                "-picture/profile.jpg");
-                        profileImgRef.putFile(Uri.parse(dataString));
+            if (bitmapCode == MainActivity.RESULT_OK) {
+                Uri dataUri = data.getData();
+                if (dataUri != null) {
+                    StorageReference profileImgRef = storageRef.child(userId + "/profile" +
+                            "-picture/profile.jpg");
+                    profileImgRef.putFile(dataUri);
 
-                        setProfileImage(dataString);
-                        databaseReference.child("users").child(userId).child("photoUrl").setValue(profileImgRef);
-                    }
+                    setProfileImage(dataUri);
+                    databaseReference.child("users").child(userId).child("photoUrl").setValue(profileImgRef.toString());
                 }
             }
-        } catch (Exception e) {
+        } catch (IOException e) {
+            Log.e(TAG, "Exception: " + e.getMessage());
             Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_LONG).show();
         }
     }
 
-    private void setProfileImage(String dataString) {
-        Bitmap result = BitmapFactory.decodeFile(dataString);
-        Bitmap circleBitmap = Bitmap.createBitmap(result.getWidth(), result.getHeight(), Bitmap.Config.ARGB_8888);
+    private void setProfileImage(Uri dataUri) throws IOException {
+        Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), dataUri);
+        Bitmap circleBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(),
+                Bitmap.Config.ARGB_8888);
 
-        BitmapShader shader = new BitmapShader(result,  Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
+        BitmapShader shader = new BitmapShader(bitmap,  Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
         Paint paint = new Paint();
         paint.setShader(shader);
         paint.setAntiAlias(true);
         Canvas c = new Canvas(circleBitmap);
-        c.drawCircle(result.getWidth()/2, result.getHeight()/2, result.getWidth()/2, paint);
+        c.drawCircle(bitmap.getWidth()/2, bitmap.getHeight()/2, bitmap.getWidth()/2, paint);
 
         profileImgView.setImageBitmap(circleBitmap);
     }

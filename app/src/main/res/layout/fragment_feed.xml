@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="36dp"
         android:elevation="4dp"
-        app:tabMinWidth="128dp"
+        app:tabMinWidth="100dp"
         app:tabMode="scrollable"
         app:layout_scrollFlags="scroll|enterAlways"
         app:tabTextAppearance="@style/TextAppearance.AppCompat.Small"

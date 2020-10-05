@@ -10,14 +10,16 @@ public class User {
     public String photoUrl;
     public String city;
     public String description;
+    public int subCount = 0;
 
     public User() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
 
-    public User(String username, String email) {
+    public User(String username, String email, int subCount) {
         this.username = username;
         this.email = email;
+        this.subCount = subCount;
     }
 
     public void setUsername(String username) {
@@ -35,4 +37,6 @@ public class User {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public void setSubCount(int subCount) { this.subCount = subCount; }
 }

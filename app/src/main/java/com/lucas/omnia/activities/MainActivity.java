@@ -15,7 +15,6 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.lucas.omnia.R;
 import com.lucas.omnia.adapters.AppFragmentPageAdapter;
-import com.lucas.omnia.models.User;
 import com.lucas.omnia.utils.BottomNavItemSelectedListener;
 
 /**
