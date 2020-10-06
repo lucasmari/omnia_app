@@ -2,15 +2,19 @@ package com.lucas.omnia.models;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @IgnoreExtraProperties
 public class User {
 
     public String username;
     public String email;
-    public String photoUrl;
+    public boolean hasPhoto;
     public String city;
-    public String description;
+    public String about;
     public int subCount = 0;
+    public Map<String, Boolean> subs = new HashMap<>();
 
     public User() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
@@ -26,16 +30,16 @@ public class User {
         this.username = username;
     }
 
-    public void setPhotoUrl(String photoUrl) {
-        this.photoUrl = photoUrl;
+    public void setHasPhoto(boolean hasPhoto) {
+        this.hasPhoto = hasPhoto;
     }
 
     public void setCity(String city) {
         this.city = city;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setAbout(String about) {
+        this.about = about;
     }
 
     public void setSubCount(int subCount) { this.subCount = subCount; }

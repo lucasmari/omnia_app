@@ -61,7 +61,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/user_page_tv_sub_count"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="4dp"
         android:layout_toEndOf="@+id/user_page_tv_sub_count"
         android:text="@string/profile_subs" />
 
@@ -85,7 +85,7 @@
         android:background="@color/colorPrimaryDark" />
 
     <TextView
-        android:id="@+id/user_page_tv_description_title"
+        android:id="@+id/user_page_tv_about_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/user_page_vw_separator"
@@ -95,13 +95,15 @@
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/user_page_tv_description"
+        android:id="@+id/user_page_tv_about_body"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/user_page_tv_description_title"
-        android:layout_alignStart="@id/user_page_tv_description_title"
+        android:layout_below="@+id/user_page_tv_about_title"
+        android:layout_alignStart="@id/user_page_tv_about_title"
         android:layout_marginTop="10dp"
-        android:text="@string/profile_description_hint" />
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="@string/user_page_about_hint" />
 
     <Button
         android:id="@+id/user_page_bt_sub"

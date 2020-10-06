@@ -74,7 +74,7 @@
     <string name="share_title">Compartilhar</string>
     <string name="share_with">Compartilhar com…</string>
 
-    <!-- ProfileActivity -->
+    <!-- ProfileNavFragment -->
     <string name="profile_name">Nome de Usuário</string>
     <string name="profile_subs">inscritos</string>
     <string name="profile_sub_count">Nº de inscritos</string>
@@ -83,17 +83,21 @@
     <string name="profile_image_description">Imagem de perfil</string>
     <string name="profile_settings_description">Configurações de perfil</string>
     <string name="profile_description">Descrição de perfil</string>
-    <string name="profile_description_hint">…</string>
+    <string name="profile_about_hint">Escreva algo sobre você…</string>
+    <string name="profile_bt_save">Salvar</string>
+    <string name="profile_toast_about">Sobre adicionado</string>
+    <string name="profile_toast_fetch_error">Error: could not fetch image</string>
 
     <!-- ProfileSettingsActivity -->
     <string name="profile_settings_title">Configurações de Perfil</string>
-    <string name="profile_settings_bt_save">Salvar</string>
     <string name="profile_settings_bt_signout">Sair</string>
-    <string name="profile_settings_toast_about">Sobre adicionado</string>
-    <string name="profile_settings_about_hint">Escreva algo sobre você…</string>
 
     <!-- UserPageActivity -->
     <string name="user_page_bt_sub">Inscrever</string>
+    <string name="user_page_bt_unsub">Desinscrever</string>
+    <string name="user_page_about_hint">…</string>
+    <string name="user_page_sub">Inscrito!</string>
+    <string name="user_page_unsub">Desinscrito</string>
 
     <!-- Post Item -->
     <string name="post_author">Autor</string>

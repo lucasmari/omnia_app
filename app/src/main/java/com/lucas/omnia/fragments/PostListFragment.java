@@ -114,13 +114,11 @@ public abstract class PostListFragment extends Fragment {
                             .getColor(R.color.colorWhite), PorterDuff.Mode.SRC_ATOP);
                 }
 
-                if (!getUid().equals(post.uid)) {
-                    viewHolder.authorView.setOnClickListener(v -> {
-                        Intent intent = new Intent(getActivity(), UserPageActivity.class);
-                        intent.putExtra(UserPageActivity.EXTRA_USER_KEY, post.uid);
-                        startActivity(intent);
-                    });
-                }
+                viewHolder.authorView.setOnClickListener(v -> {
+                    Intent intent = new Intent(getActivity(), UserPageActivity.class);
+                    intent.putExtra(UserPageActivity.EXTRA_USER_KEY, post.uid);
+                    startActivity(intent);
+                });
 
                 DatabaseReference globalPostRef = databaseReference.child("posts").child(postRef.getKey());
                 DatabaseReference userPostRef = databaseReference.child("user-posts").child(post.uid).child(postRef.getKey());

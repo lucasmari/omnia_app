@@ -25,7 +25,6 @@ public class EditPostActivity extends BaseActivity {
 
     private ActivityEditPostBinding binding;
     private String postKey;
-    private DatabaseReference postReference;
     private DatabaseReference databaseReference;
 
     @Override
@@ -43,7 +42,7 @@ public class EditPostActivity extends BaseActivity {
         }
 
         // Initialize Database
-        postReference = FirebaseDatabase.getInstance().getReference()
+        DatabaseReference postReference = FirebaseDatabase.getInstance().getReference()
                 .child("posts").child(postKey);
 
         postReference.addListenerForSingleValueEvent(

@@ -18,7 +18,7 @@ import com.lucas.omnia.R;
 
 public class ProfileSettingsActivity extends BaseActivity {
 
-    EditText descriptionEt;
+    EditText aboutEt;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -27,11 +27,6 @@ public class ProfileSettingsActivity extends BaseActivity {
 
         Toolbar toolbar = findViewById(R.id.profile_settings_tb);
         setSupportActionBar(toolbar);
-
-        descriptionEt = findViewById(R.id.profile_settings_et_description);
-
-        Button saveBt = findViewById(R.id.profile_settings_bt_save);
-        saveBt.setOnClickListener(v -> writeDescription());
 
         Button signOutBt = findViewById(R.id.profile_settings_bt_signout);
         signOutBt.setOnClickListener(v -> {
@@ -42,13 +37,5 @@ public class ProfileSettingsActivity extends BaseActivity {
             startActivity(intent);
             finish();
         });
-    }
-
-    public void writeDescription() {
-        DatabaseReference databaseReference = getDatabaseReference();
-        databaseReference.child("users").child(getUid()).child("description").setValue(descriptionEt.getText().toString());
-        hideSoftKeyboard(this, descriptionEt);
-        Toast.makeText(this, getString(R.string.profile_settings_toast_about),
-                Toast.LENGTH_SHORT).show();
     }
 }
