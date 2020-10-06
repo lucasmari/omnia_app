@@ -3,17 +3,22 @@
 
     <!-- AuthAcivity -->
     <string name="password_hint">Senha</string>
+    <string name="sign_up_button">Cadastrar</string>
     <string name="sign_in_button">Entrar</string>
+    <string name="forgot_pass_button">Esqueceu sua senha?</string>
     <string name="signing_in">Autenticando…</string>
     <string name="sign_in_failure">Falha ao autenticar</string>
     <string name="invalid_email">Email inválido!</string>
     <string name="invalid_password">Senha inválida! (entre 6 e 15 caracteres)</string>
-    <string name="sign_up_button">Cadastrar</string>
     <string name="signing_up">Cadastrando…</string>
     <string name="sign_up_failure">Falha no cadastramento</string>
+    <string name="forgot_pass_alert">Preencha com seu email</string>
+    <string name="reset_pass_success_toast">Email enviado</string>
+    <string name="reset_pass_failure_toast">Algo deu errado</string>
 
     <!-- MainActivity -->
     <string name="press_back_to_leave">Pressione novamente para sair</string>
+    <string name="main_email_verification_toast">Email não verificado</string>
 
     <!-- Bottom Navigation Items -->
     <string name="nav_item_1">Feed</string>
@@ -76,7 +81,7 @@
 
     <!-- ProfileNavFragment -->
     <string name="profile_name">Nome de Usuário</string>
-    <string name="profile_subs">inscritos</string>
+    <string name="profile_subs">Inscritos</string>
     <string name="profile_sub_count">Nº de inscritos</string>
     <string name="profile_level">Nível 0</string>
     <string name="profile_about_title">Sobre</string>
@@ -91,6 +96,7 @@
     <!-- ProfileSettingsActivity -->
     <string name="profile_settings_title">Configurações de Perfil</string>
     <string name="profile_settings_bt_signout">Sair</string>
+    <string name="profile_settings_bt_delete_account">Remover conta</string>
 
     <!-- UserPageActivity -->
     <string name="user_page_bt_sub">Inscrever</string>

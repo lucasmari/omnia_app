@@ -54,6 +54,7 @@ public class AuthActivity extends BaseActivity implements View.OnClickListener {
         // Click listeners
         binding.authBtSignup.setOnClickListener(this);
         binding.authBtSignin.setOnClickListener(this);
+        binding.authBtForgotPass.setOnClickListener(this);
         binding.authBtSigninGoogle.setOnClickListener(this);
     }
 
@@ -85,7 +86,7 @@ public class AuthActivity extends BaseActivity implements View.OnClickListener {
                     if (task.isSuccessful()) {
                         // Sign in success, update UI with the signed-in user's information
                         Log.d(TAG_SUCCESS, "createUserWithEmail:success");
-                        onAuthSuccess(task.getResult().getUser());
+                        onSignUpSuccess(task.getResult().getUser());
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w(TAG_FAILURE, "createUserWithEmail:failure", task.getException());
@@ -112,7 +113,7 @@ public class AuthActivity extends BaseActivity implements View.OnClickListener {
                     if (task.isSuccessful()) {
                         // Sign in success, update UI with the signed-in user's information
                         Log.d(TAG_SUCCESS, "signInWithEmail:success");
-                        onAuthSuccess(task.getResult().getUser());
+                        onSignInSuccess(task.getResult().getUser());
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w(TAG_FAILURE, "signInWithEmail:failure", task.getException());
@@ -165,7 +166,7 @@ public class AuthActivity extends BaseActivity implements View.OnClickListener {
                     if (task.isSuccessful()) {
                         // Sign in success, update UI with the signed-in user's information
                         Log.d(TAG_SUCCESS, "signInWithCredential:success");
-                        onAuthSuccess(task.getResult().getUser());
+                        onSignInSuccess(task.getResult().getUser());
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w(TAG_FAILURE, "signInWithCredential:failure", task.getException());
@@ -190,12 +191,21 @@ public class AuthActivity extends BaseActivity implements View.OnClickListener {
         return result;
     }
 
-    private void onAuthSuccess(FirebaseUser user) {
+    private void onSignUpSuccess(FirebaseUser user) {
         String username = usernameFromEmail(user.getEmail());
+
+        // Send email verification
+        sendEmailVerification(user);
 
         // Write new user
         writeNewUser(user.getUid(), username, user.getEmail());
 
+        // Go to MainActivity
+        startActivity(new Intent(AuthActivity.this,MainActivity.class));
+        finish();
+    }
+
+    private void onSignInSuccess(FirebaseUser user) {
         // Go to MainActivity
         startActivity(new Intent(AuthActivity.this,MainActivity.class));
         finish();
@@ -209,10 +219,39 @@ public class AuthActivity extends BaseActivity implements View.OnClickListener {
         }
     }
 
+    private void sendEmailVerification(FirebaseUser user) {
+        user.sendEmailVerification()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Log.d(TAG, "Email sent");
+                    }
+                });
+    }
+
     private void writeNewUser(String userId, String name, String email) {
         User user = new User(name, email, 0);
 
         databaseReference.child("users").child(userId).setValue(user);
+    }
+
+    private void forgotPass() {
+        String email = binding.authTietEmail.getText().toString();
+
+        if (email.isEmpty()) binding.authTietEmail.setError(getString(R.string.forgot_pass_alert));
+        else resetPass(email);
+    }
+
+    private void resetPass(String email) {
+        firebaseAuth.sendPasswordResetEmail(email)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Log.d(TAG, "Email sent.");
+                        Toast.makeText(this, getString(R.string.reset_pass_success_toast), Toast.LENGTH_LONG).show();
+                    } else {
+                        Log.e(TAG, task.getException().toString());
+                        Toast.makeText(this, getString(R.string.reset_pass_failure_toast), Toast.LENGTH_LONG).show();
+                    }
+                });
     }
 
     @Override
@@ -224,6 +263,9 @@ public class AuthActivity extends BaseActivity implements View.OnClickListener {
                 break;
             case R.id.auth_bt_signin:
                 signIn();
+                break;
+            case R.id.auth_bt_forgot_pass:
+                forgotPass();
                 break;
             case R.id.auth_bt_signin_google:
                 signInGoogle();

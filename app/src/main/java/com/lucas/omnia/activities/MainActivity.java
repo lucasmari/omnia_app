@@ -2,6 +2,7 @@ package com.lucas.omnia.activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -13,6 +14,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.lucas.omnia.R;
 import com.lucas.omnia.adapters.AppFragmentPageAdapter;
 import com.lucas.omnia.utils.BottomNavItemSelectedListener;
@@ -42,6 +45,18 @@ public class MainActivity extends BaseActivity implements SharedPreferences.OnSh
         BottomNavigationView navigation = findViewById(R.id.main_bnv);
         BottomNavItemSelectedListener listener = new BottomNavItemSelectedListener(viewPager, toolbar);
         navigation.setOnNavigationItemSelectedListener(listener);
+
+        fetchUser();
+    }
+
+    private void fetchUser() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            // Check if user's email is verified
+            boolean emailVerified = user.isEmailVerified();
+            if (!emailVerified) Toast.makeText(this,
+                    getString(R.string.main_email_verification_toast), Toast.LENGTH_LONG).show();
+        }
     }
 
     public void setTheme(boolean b) {
