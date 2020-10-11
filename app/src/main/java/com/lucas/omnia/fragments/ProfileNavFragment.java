@@ -2,6 +2,7 @@ package com.lucas.omnia.fragments;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
@@ -35,6 +36,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.gson.Gson;
 import com.lucas.omnia.R;
 import com.lucas.omnia.activities.MainActivity;
 import com.lucas.omnia.activities.ProfileSettingsActivity;
@@ -45,6 +47,8 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import static android.content.Context.MODE_PRIVATE;
+
 
 /**
  * Created by Lucas on 29/10/2017.
@@ -52,7 +56,6 @@ import java.net.URL;
 
 public class ProfileNavFragment extends Fragment {
 
-    private User user;
     private String userId;
     private URL profileImgUrl;
     private ImageView profileImgView;
@@ -62,6 +65,7 @@ public class ProfileNavFragment extends Fragment {
 
     private StorageReference storageRef;
     private DatabaseReference databaseReference;
+    private SharedPreferences sharedPreferences;
 
     private static final String TAG = "ProfileNavFragment";
     private static final String STORAGE_PATH = "/profile-picture/profile.jpg";
@@ -108,19 +112,13 @@ public class ProfileNavFragment extends Fragment {
         userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
-        fetchUser();
+        sharedPreferences = getActivity().getPreferences(MODE_PRIVATE);
+        if (!sharedPreferences.contains("User")) fetchUser();
+        else setUser(getUserLocal());
     }
 
     public void fetchUser() {
-        /*FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (firebaseUser != null) {
-            String username = usernameFromEmail(firebaseUser.getEmail());
-
-            user = new User(username, firebaseUser.getEmail());
-
-            // Check if user's email is verified
-            boolean emailVerified = firebaseUser.isEmailVerified();
-        }*/
+        Log.i(TAG, "fetchUser");
 
         databaseReference.child("users").child(userId).addListenerForSingleValueEvent(
                 new ValueEventListener() {
@@ -134,10 +132,8 @@ public class ProfileNavFragment extends Fragment {
                                     getString(R.string.new_post_toast_user_fetch_error),
                                     Toast.LENGTH_SHORT).show();
                         } else {
-                            usernameTv.setText(u.username);
-                            subCountTv.setText(String.valueOf(u.subCount));
-                            if (u.hasPhoto) fetchProfileImage();
-                            if (u.about != null) aboutEt.setText(u.about);
+                            setUser(u);
+                            saveUser(u);
                         }
                     }
 
@@ -148,13 +144,21 @@ public class ProfileNavFragment extends Fragment {
                 });
     }
 
-    /*private String usernameFromEmail(String email) {
-        if (email.contains("@")) {
-            return email.split("@")[0];
-        } else {
-            return email;
-        }
-    }*/
+    private void addAbout() {
+        aboutEt.clearFocus();
+
+        // Save about in database
+        databaseReference.child("users").child(userId).child("about").setValue(aboutEt.getText().toString());
+
+        // Save about in SharedPreferences
+        User u = getUserLocal();
+        u.setAbout(aboutEt.getText().toString());
+        saveUser(u);
+
+        Toast.makeText(getContext(), getString(R.string.profile_toast_about),
+                Toast.LENGTH_SHORT).show();
+
+    }
 
     public void verifyStoragePermissions() {
         int readPermission = ActivityCompat.checkSelfPermission(getContext(),
@@ -169,21 +173,6 @@ public class ProfileNavFragment extends Fragment {
         } else {
             openChooser();
         }
-    }
-
-    private void fetchProfileImage() {
-        StorageReference profileImgRef = storageRef.child(userId + STORAGE_PATH);
-        profileImgRef.getDownloadUrl().addOnSuccessListener(uri -> {
-            try {
-                profileImgUrl = new URL(uri.toString());
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            }
-            ImageLoadAsyncTask imageLoadAsyncTask = new ImageLoadAsyncTask(profileImgUrl, profileImgView);
-            imageLoadAsyncTask.execute();
-        }).addOnFailureListener(exception -> {
-            Toast.makeText(getContext(), getString(R.string.profile_toast_fetch_error), Toast.LENGTH_SHORT).show();
-        });
     }
 
     private void openChooser() {
@@ -209,7 +198,14 @@ public class ProfileNavFragment extends Fragment {
                     StorageReference profileImgRef = storageRef.child(userId + STORAGE_PATH);
                     profileImgRef.putFile(dataUri);
                     setProfileImage(dataUri);
+
+                    // Save hasPhoto in database
                     databaseReference.child("users").child(userId).child("hasPhoto").setValue(true);
+
+                    // Save hasPhoto in SharedPreferences
+                    User u = getUserLocal();
+                    u.setHasPhoto(true);
+                    saveUser(u);
                 }
             }
         } catch (IOException e) {
@@ -233,11 +229,41 @@ public class ProfileNavFragment extends Fragment {
         profileImgView.setImageBitmap(circleBitmap);
     }
 
-    private void addAbout() {
-        aboutEt.clearFocus();
-        databaseReference.child("users").child(userId).child("about").setValue(aboutEt.getText().toString());
-        Toast.makeText(getContext(), getString(R.string.profile_toast_about),
-                Toast.LENGTH_SHORT).show();
+    private void setUser(User u) {
+        usernameTv.setText(u.username);
+        subCountTv.setText(String.valueOf(u.subCount));
+        if (u.hasPhoto) fetchProfileImage();
+        if (u.about != null) aboutEt.setText(u.about);
+    }
 
+    private void fetchProfileImage() {
+        StorageReference profileImgRef = storageRef.child(userId + STORAGE_PATH);
+        profileImgRef.getDownloadUrl().addOnSuccessListener(uri -> {
+            try {
+                profileImgUrl = new URL(uri.toString());
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+            ImageLoadAsyncTask imageLoadAsyncTask = new ImageLoadAsyncTask(profileImgUrl, profileImgView);
+            imageLoadAsyncTask.execute();
+        }).addOnFailureListener(exception -> {
+            Toast.makeText(getContext(), getString(R.string.profile_toast_fetch_error), Toast.LENGTH_SHORT).show();
+        });
+    }
+
+    private void saveUser(User u) {
+        SharedPreferences.Editor prefsEditor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(u);
+        prefsEditor.putString("User", json);
+        prefsEditor.apply();
+    }
+
+    private User getUserLocal() {
+        Log.i(TAG, "getUserLocal");
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString("User", "");
+
+        return gson.fromJson(json, User.class);
     }
 }

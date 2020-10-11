@@ -72,10 +72,10 @@ public class FeedNavFragment extends Fragment{
         };
 
         private final String[] fragmentNames = new String[]{
-                getString(R.string.fragment_tab_1),
-                getString(R.string.fragment_tab_2),
-                getString(R.string.fragment_tab_3),
-                getString(R.string.fragment_tab_4)
+                getString(R.string.feed_tab_1),
+                getString(R.string.feed_tab_2),
+                getString(R.string.feed_tab_3),
+                getString(R.string.feed_tab_4)
         };
 
         @Override
