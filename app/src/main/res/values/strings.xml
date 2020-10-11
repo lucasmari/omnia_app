@@ -1,86 +1,108 @@
 <resources>
 
+    <!-- ___________________________________ General _____________________________________ -->
+
     <!-- App Name -->
     <string name="app_name" translatable="false">Omnia</string>
 
+    <!-- AlertDialog -->
+    <string name="alert_dialog_bt_positive">Yes</string>
+    <string name="alert_dialog_bt_negative">No</string>
+
+    <!-- ___________________________________ Activities _____________________________________ -->
+
     <!-- AuthActivity -->
-    <string name="email_hint" translatable="false">Email</string>
-    <string name="password_hint">Password</string>
-    <string name="sign_up_button">Sign Up</string>
-    <string name="sign_in_button">Sign In</string>
-    <string name="forgot_pass_button">Forgot your password?</string>
-    <string name="signing_in">Authenticating…</string>
-    <string name="sign_in_failure">Authentication failed</string>
-    <string name="invalid_email">Invalid email!</string>
-    <string name="invalid_password">Invalid password! (from 6 to 15 characters)</string>
-    <string name="signing_up">Signing up…</string>
-    <string name="sign_up_failure">Sign up failed</string>
-    <string name="forgot_pass_alert">Fill in your email</string>
-    <string name="reset_pass_success_toast">Email sent</string>
-    <string name="reset_pass_failure_toast">Something went wrong</string>
-
-    <!-- MainActivity -->
-    <string name="press_back_to_leave">Press again to leave</string>
-    <string name="main_email_verification_toast">Email not verified</string>
-
-    <!-- Bottom Navigation Items -->
-    <string name="nav_item_1">Feed</string>
-    <string name="nav_item_2">Profile</string>
-    <string name="nav_item_3">Discussion</string>
-    <string name="nav_item_4">Projects</string>
-    <string name="nav_item_5">Elections</string>
-
-    <!-- Tabs -->
-    <string name="fragment_tab_1">Hot</string>
-    <string name="fragment_tab_2">Recent</string>
-    <string name="fragment_tab_3">My Posts</string>
-    <string name="fragment_tab_4">Upvoted Posts</string>
-    <string name="fragment_tab_tv">No internet connection…</string>
-
-    <!-- Menu Items -->
-    <string name="menu_item_1">Settings</string>
-    <string name="menu_item_2">Laws</string>
-    <string name="menu_item_3">Learn!</string>
-
-    <!-- App SettingsActivity -->
-    <string name="theme_pref">Theme</string>
-    <string name="theme_pref_key">theme</string>
-    <string name="theme_pref_sum_on">Light</string>
-    <string name="theme_pref_sum_off">Dark</string>
-    <string name="theme_pref_default">false</string>
-
-    <!-- NewPostActivity -->
-    <string name="new_post_title">New Post</string>
-    <string name="new_post_hint_title">Title</string>
-    <string name="new_post_hint_body">Write your post…</string>
-    <string name="user_fetch_error">Could not fetch user"</string>
-
-    <!-- EditPostActivity -->
-    <string name="edit_post_title">Edit Post</string>
+    <string name="auth_et_email_hint" translatable="false">Email</string>
+    <string name="auth_et_password_hint">Password</string>
+    <string name="auth_bt_sign_up">Sign Up</string>
+    <string name="auth_bt_sign_in">Sign In</string>
+    <string name="auth_bt_forgot_pass">Forgot your password?</string>
+    <string name="auth_toast_signing_in">Authenticating…</string>
+    <string name="auth_toast_sign_in_failure">Authentication failed</string>
+    <string name="auth_invalid_email">Invalid email!</string>
+    <string name="auth_invalid_password">Invalid password! (from 6 to 15 characters)</string>
+    <string name="auth_toast_signing_up">Signing up…</string>
+    <string name="auth_toast_sign_up_failure">Sign up failed</string>
+    <string name="auth_forgot_pass">Fill in your email</string>
+    <string name="auth_toast_reset_pass_success">Email sent</string>
+    <string name="auth_toast_reset_pass_failure">Something went wrong</string>
 
     <!-- CommentsActivity -->
     <string name="comments_title">Comments</string>
 
-    <!-- NewCommentActivity -->
-    <string name="new_comment_title">New Comment</string>
-    <string name="new_comment_hint_body">Write your comment…</string>
-
     <!-- EditCommentActivity -->
     <string name="edit_comment_title">Edit Comment</string>
 
-    <!-- RepliesActivity -->
-    <string name="replies_title">Replies</string>
-
-    <!-- NewReplyActivity -->
-    <string name="new_reply_title">New Reply</string>
-    <string name="new_reply_hint_body">Write your reply…</string>
+    <!-- EditPostActivity -->
+    <string name="edit_post_title">Edit Post</string>
 
     <!-- EditReplyActivity -->
     <string name="edit_reply_title">Edit Reply</string>
 
+    <!-- MainActivity -->
+    <string name="main_toast_press_back">Press again to leave</string>
+    <string name="main_email_toast_verification">Email not verified</string>
+
+    <!-- NewCommentActivity -->
+    <string name="new_comment_title">New Comment</string>
+    <string name="new_comment_body_hint">Write your comment…</string>
+
+    <!-- NewPostActivity -->
+    <string name="new_post_title">New Post</string>
+    <string name="new_post_title_hint">Title</string>
+    <string name="new_post_body_hint">Write your post…</string>
+    <string name="new_post_toast_user_fetch_error">Could not fetch user"</string>
+
+    <!-- NewReplyActivity -->
+    <string name="new_reply_title">New Reply</string>
+    <string name="new_reply_body_hint">Write your reply…</string>
+
+    <!-- ProfileSettingsActivity -->
+    <string name="profile_settings_title">Profile Settings</string>
+    <string name="profile_settings_bt_sign_out">Sign out</string>
+    <string name="profile_settings_bt_delete_account">Delete account</string>
+    <string name="profile_settings_ad_delete_account">Do you really want to delete your
+        account?</string>
+    <string name="profile_settings_toast_delete_account">Deleting account…</string>
+
+    <!-- RepliesActivity -->
+    <string name="replies_title">Replies</string>
+
+    <!-- SettingsActivity -->
+    <string name="settings_theme_pref">Theme</string>
+    <string name="settings_theme_pref_key">theme</string>
+    <string name="settings_theme_pref_sum_on">Light</string>
+    <string name="settings_theme_pref_sum_off">Dark</string>
+    <string name="settings_theme_pref_default">false</string>
+
     <!-- ShareActivity -->
     <string name="share_title">Share</string>
     <string name="share_with">Share with…</string>
+
+    <!-- UserPageActivity -->
+    <string name="user_page_bt_sub">Subscribe</string>
+    <string name="user_page_bt_unsub">Unsubscribe</string>
+    <string name="user_page_about_hint">…</string>
+    <string name="user_page_sub">Subscribed</string>
+    <string name="user_page_unsub">Unsubscribed</string>
+
+    <!-- ___________________________________ Fragments _____________________________________ -->
+
+    <!-- CommentListFragment -->
+    <string name="comment_list_ad_delete">Do you really want to delete this
+        comment?</string>
+    <string name="comment_list_toast_delete">Deleting comment…</string>
+
+    <!-- FeedNavFragment -->
+    <string name="feed_tab_1">Hot</string>
+    <string name="feed_tab_2">Recent</string>
+    <string name="feed_tab_3">My Posts</string>
+    <string name="feed_tab_4">Upvoted</string>
+
+    <!-- PostListFragment -->
+    <string name="post_list_ad_delete">Do you really want to delete this
+        post?</string>
+    <string name="post_list_toast_delete">Deleting post…</string>
 
     <!-- ProfileNavFragment -->
     <string name="profile_name">Username</string>
@@ -96,17 +118,29 @@
     <string name="profile_toast_about">About added</string>
     <string name="profile_toast_fetch_error">Error: could not fetch image</string>
 
-    <!-- ProfileSettingsActivity -->
-    <string name="profile_settings_title">Profile Settings</string>
-    <string name="profile_settings_bt_signout">Sign out</string>
-    <string name="profile_settings_bt_delete_account">Delete account</string>
+    <!-- ReplyListFragment -->
+    <string name="reply_list_ad_delete">Do you really want to delete this
+        reply?</string>
+    <string name="reply_list_toast_delete">Deleting reply…</string>
 
-    <!-- UserPageActivity -->
-    <string name="user_page_bt_sub">Subscribe</string>
-    <string name="user_page_bt_unsub">Unsubscribe</string>
-    <string name="user_page_about_hint">…</string>
-    <string name="user_page_sub">Subscribed</string>
-    <string name="user_page_unsub">Unsubscribed</string>
+    <!-- ___________________________________ Menu _____________________________________ -->
+
+    <!-- BottomNavigation Items -->
+    <string name="nav_item_1">Feed</string>
+    <string name="nav_item_2">Profile</string>
+    <string name="nav_item_3">Discussion</string>
+    <string name="nav_item_4">Projects</string>
+    <string name="nav_item_5">Elections</string>
+
+    <!-- Menu Items -->
+    <string name="menu_item_1">Settings</string>
+    <string name="menu_item_2">Laws</string>
+    <string name="menu_item_3">Learn!</string>
+
+    <!-- ___________________________________ Layout _____________________________________ -->
+
+    <!-- Posts Fragment -->
+    <string name="posts_tv_no_connection">No internet connection…</string>
 
     <!-- Post Item -->
     <string name="post_author">Author</string>

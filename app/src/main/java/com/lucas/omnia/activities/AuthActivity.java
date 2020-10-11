@@ -90,7 +90,7 @@ public class AuthActivity extends BaseActivity implements View.OnClickListener {
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w(TAG_FAILURE, "createUserWithEmail:failure", task.getException());
-                        Toast.makeText(AuthActivity.this, getString(R.string.sign_up_failure),
+                        Toast.makeText(AuthActivity.this, getString(R.string.auth_toast_sign_up_failure),
                                 Toast.LENGTH_LONG).show();
                     }
                     hideProgressBar();
@@ -117,7 +117,7 @@ public class AuthActivity extends BaseActivity implements View.OnClickListener {
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w(TAG_FAILURE, "signInWithEmail:failure", task.getException());
-                        Toast.makeText(AuthActivity.this, getString(R.string.sign_in_failure),
+                        Toast.makeText(AuthActivity.this, getString(R.string.auth_toast_sign_in_failure),
                                 Toast.LENGTH_LONG).show();
                     }
                     hideProgressBar();
@@ -151,7 +151,7 @@ public class AuthActivity extends BaseActivity implements View.OnClickListener {
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
                 Log.w(TAG_FAILURE, "Google sign in failed", e);
-                Toast.makeText(AuthActivity.this, getString(R.string.sign_up_failure),
+                Toast.makeText(AuthActivity.this, getString(R.string.auth_toast_sign_up_failure),
                         Toast.LENGTH_LONG).show();
             }
         }
@@ -170,7 +170,7 @@ public class AuthActivity extends BaseActivity implements View.OnClickListener {
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w(TAG_FAILURE, "signInWithCredential:failure", task.getException());
-                        Toast.makeText(AuthActivity.this, getString(R.string.sign_up_failure),
+                        Toast.makeText(AuthActivity.this, getString(R.string.auth_toast_sign_up_failure),
                                 Toast.LENGTH_LONG).show();
                     }
                     hideProgressBar();
@@ -181,11 +181,11 @@ public class AuthActivity extends BaseActivity implements View.OnClickListener {
         boolean result = true;
 
         if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            binding.authTietEmail.setError(getString(R.string.invalid_email));
+            binding.authTietEmail.setError(getString(R.string.auth_invalid_email));
             result = false;
         }
         if (password.isEmpty() || password.length() < 6 || password.length() > 15) {
-            binding.authTietPass.setError(getString(R.string.invalid_password));
+            binding.authTietPass.setError(getString(R.string.auth_invalid_password));
             result = false;
         }
         return result;
@@ -237,7 +237,7 @@ public class AuthActivity extends BaseActivity implements View.OnClickListener {
     private void forgotPass() {
         String email = binding.authTietEmail.getText().toString();
 
-        if (email.isEmpty()) binding.authTietEmail.setError(getString(R.string.forgot_pass_alert));
+        if (email.isEmpty()) binding.authTietEmail.setError(getString(R.string.auth_forgot_pass));
         else resetPass(email);
     }
 
@@ -246,10 +246,10 @@ public class AuthActivity extends BaseActivity implements View.OnClickListener {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         Log.d(TAG, "Email sent.");
-                        Toast.makeText(this, getString(R.string.reset_pass_success_toast), Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, getString(R.string.auth_toast_reset_pass_success), Toast.LENGTH_LONG).show();
                     } else {
                         Log.e(TAG, task.getException().toString());
-                        Toast.makeText(this, getString(R.string.reset_pass_failure_toast), Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, getString(R.string.auth_toast_reset_pass_failure), Toast.LENGTH_LONG).show();
                     }
                 });
     }

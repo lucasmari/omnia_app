@@ -26,20 +26,30 @@
       <change beforePath="$PROJECT_DIR$/../.gradle/6.1.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../.gradle/6.1.1/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.gradle/6.1.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../.gradle/6.1.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/lucas/omnia/activities/AuthActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/lucas/omnia/activities/AuthActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/lucas/omnia/activities/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/lucas/omnia/activities/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/lucas/omnia/activities/NewCommentActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/lucas/omnia/activities/NewCommentActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/lucas/omnia/activities/NewPostActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/lucas/omnia/activities/NewPostActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/lucas/omnia/activities/NewReplyActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/lucas/omnia/activities/NewReplyActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/lucas/omnia/activities/ProfileSettingsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/lucas/omnia/activities/ProfileSettingsActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/lucas/omnia/activities/UserPageActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/lucas/omnia/activities/UserPageActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/lucas/omnia/fragments/CommentListFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/lucas/omnia/fragments/CommentListFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/lucas/omnia/fragments/PostListFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/lucas/omnia/fragments/PostListFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/lucas/omnia/fragments/ProfileNavFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/lucas/omnia/fragments/ProfileNavFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/lucas/omnia/fragments/ReplyListFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/lucas/omnia/fragments/ReplyListFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/activity_auth.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/activity_auth.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/activity_edit_comment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/activity_edit_comment.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/activity_edit_post.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/activity_edit_post.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/activity_edit_reply.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/activity_edit_reply.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/activity_new_comment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/activity_new_comment.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/activity_new_post.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/activity_new_post.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/activity_new_reply.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/activity_new_reply.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/activity_profile_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/activity_profile_settings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/activity_user_page.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/activity_user_page.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/fragment_profile.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/fragment_profile.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/item_comment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/item_comment.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/item_post.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/item_post.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/item_reply.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/item_reply.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../app/src/main/res/values-pt-rBR/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/values-pt-rBR/strings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/xml/preference.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/xml/preference.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -284,28 +294,28 @@
     </state>
     <state x="466" y="127" width="424" height="548" key="FileChooserDialogImpl/0.28.1366.740@0.28.1366.740" timestamp="1601051743834" />
     <state x="655" y="169" width="424" height="491" key="FileChooserDialogImpl/0.28.1920.1052@0.28.1920.1052" timestamp="1601678075907" />
-    <state width="1878" height="280" key="GridCell.Tab.0.bottom" timestamp="1602022575000">
-      <screen x="0" y="28" width="1920" height="1052" />
+    <state width="1878" height="280" key="GridCell.Tab.0.bottom" timestamp="1602372243290">
+      <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1878" height="281" key="GridCell.Tab.0.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1601567508238" />
+    <state width="1878" height="280" key="GridCell.Tab.0.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1602372243290" />
     <state width="1324" height="227" key="GridCell.Tab.0.bottom/0.28.1366.740@0.28.1366.740" timestamp="1601063979586" />
     <state width="1878" height="280" key="GridCell.Tab.0.bottom/0.28.1920.1052@0.28.1920.1052" timestamp="1602022575000" />
-    <state width="1878" height="280" key="GridCell.Tab.0.center" timestamp="1602022575000">
-      <screen x="0" y="28" width="1920" height="1052" />
+    <state width="1878" height="280" key="GridCell.Tab.0.center" timestamp="1602372243290">
+      <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1878" height="281" key="GridCell.Tab.0.center/0.27.1920.1053@0.27.1920.1053" timestamp="1601567508237" />
+    <state width="1878" height="280" key="GridCell.Tab.0.center/0.27.1920.1053@0.27.1920.1053" timestamp="1602372243290" />
     <state width="1324" height="227" key="GridCell.Tab.0.center/0.28.1366.740@0.28.1366.740" timestamp="1601063979584" />
     <state width="1878" height="280" key="GridCell.Tab.0.center/0.28.1920.1052@0.28.1920.1052" timestamp="1602022575000" />
-    <state width="1878" height="280" key="GridCell.Tab.0.left" timestamp="1602022575000">
-      <screen x="0" y="28" width="1920" height="1052" />
+    <state width="1878" height="280" key="GridCell.Tab.0.left" timestamp="1602372243289">
+      <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1878" height="281" key="GridCell.Tab.0.left/0.27.1920.1053@0.27.1920.1053" timestamp="1601567508237" />
+    <state width="1878" height="280" key="GridCell.Tab.0.left/0.27.1920.1053@0.27.1920.1053" timestamp="1602372243289" />
     <state width="1324" height="227" key="GridCell.Tab.0.left/0.28.1366.740@0.28.1366.740" timestamp="1601063979583" />
     <state width="1878" height="280" key="GridCell.Tab.0.left/0.28.1920.1052@0.28.1920.1052" timestamp="1602022575000" />
-    <state width="1878" height="280" key="GridCell.Tab.0.right" timestamp="1602022575000">
-      <screen x="0" y="28" width="1920" height="1052" />
+    <state width="1878" height="280" key="GridCell.Tab.0.right" timestamp="1602372243290">
+      <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1878" height="281" key="GridCell.Tab.0.right/0.27.1920.1053@0.27.1920.1053" timestamp="1601567508238" />
+    <state width="1878" height="280" key="GridCell.Tab.0.right/0.27.1920.1053@0.27.1920.1053" timestamp="1602372243290" />
     <state width="1324" height="227" key="GridCell.Tab.0.right/0.28.1366.740@0.28.1366.740" timestamp="1601063979585" />
     <state width="1878" height="280" key="GridCell.Tab.0.right/0.28.1920.1052@0.28.1920.1052" timestamp="1602022575000" />
     <state width="1878" height="332" key="GridCell.Tab.1.bottom" timestamp="1601830045451">
@@ -373,9 +383,10 @@
     <state x="488" y="235" key="run.anything.popup/0.27.1920.1053@0.27.1920.1053" timestamp="1601416515498" />
     <state x="347" y="174" key="run.anything.popup/0.28.1366.740@0.28.1366.740" timestamp="1600107453775" />
     <state x="488" y="236" key="run.anything.popup/0.28.1920.1052@0.28.1920.1052" timestamp="1602015600697" />
-    <state x="486" y="113" width="945" height="964" key="search.everywhere.popup" timestamp="1601855323742">
-      <screen x="0" y="28" width="1920" height="1052" />
+    <state x="486" y="112" width="945" height="965" key="search.everywhere.popup" timestamp="1602370433185">
+      <screen x="0" y="27" width="1920" height="1053" />
     </state>
+    <state x="486" y="112" width="945" height="965" key="search.everywhere.popup/0.27.1920.1053@0.27.1920.1053" timestamp="1602370433185" />
     <state x="346" y="88" width="672" height="678" key="search.everywhere.popup/0.28.1366.740@0.28.1366.740" timestamp="1600725024175" />
     <state x="486" y="113" width="945" height="964" key="search.everywhere.popup/0.28.1920.1052@0.28.1920.1052" timestamp="1601855323742" />
   </component>

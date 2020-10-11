@@ -128,29 +128,7 @@ public class ReplyListFragment extends Fragment {
                 });
 
                 viewHolder.moreButton.setOnClickListener(v -> {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-                    if (getUid().equals(reply.uid)) {
-                        builder.setItems(getResources().getStringArray(R.array.options1), (dialog, which) -> {
-                            switch (which) {
-                                case 0:
-                                    editReply(replyRef);
-                                    break;
-                                case 1:
-                                    deleteReply(v.getContext(), replyRef);
-                                    decrementRepliesCount();
-                                    break;
-                            }
-                        });
-                        builder.show();
-                    }
-                    else {
-                        builder.setItems(getResources().getStringArray(R.array.options2), (dialog, which) -> {
-                            if (which == 0) {
-                                //reportReply();
-                            }
-                        });
-                        builder.show();
-                    }
+                    moreOptions(reply, replyRef);
                 });
 
                 viewHolder.replyButton.setOnClickListener(v -> {
@@ -244,6 +222,32 @@ public class ReplyListFragment extends Fragment {
         });
     }
 
+    private void moreOptions(Reply reply, DatabaseReference replyRef) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        if (getUid().equals(reply.uid)) {
+            builder.setItems(getResources().getStringArray(R.array.options1), (dialog, which) -> {
+                switch (which) {
+                    case 0:
+                        editReply(replyRef);
+                        break;
+                    case 1:
+                        deleteReply(getContext(), replyRef);
+                        decrementRepliesCount();
+                        break;
+                }
+            });
+            builder.show();
+        }
+        else {
+            builder.setItems(getResources().getStringArray(R.array.options2), (dialog, which) -> {
+                if (which == 0) {
+                    //reportReply();
+                }
+            });
+            builder.show();
+        }
+    }
+
     private void editReply(DatabaseReference replyRef) {
         String replyKey = replyRef.getKey();
         Intent intent = new Intent(getActivity(), EditReplyActivity.class);
@@ -254,12 +258,12 @@ public class ReplyListFragment extends Fragment {
     private void deleteReply(Context context, DatabaseReference replyRef) {
         new AlertDialog.Builder(context)
                 .setIcon(android.R.drawable.ic_dialog_alert)
-                .setMessage("Deseja realmente apagar essa resposta?")
-                .setPositiveButton("Sim", (dialog1, which1) -> {
-                    Toast.makeText(context, "Apagando...", Toast.LENGTH_SHORT).show();
+                .setMessage(getString(R.string.reply_list_ad_delete))
+                .setPositiveButton(getString(R.string.alert_dialog_bt_positive), (dialog1, which1) -> {
+                    Toast.makeText(context, getString(R.string.reply_list_toast_delete), Toast.LENGTH_SHORT).show();
                     databaseReference.child("comment-replies").child(commentKey).child(replyRef.getKey()).removeValue();
                 })
-                .setNegativeButton("Não", null)
+                .setNegativeButton(getString(R.string.alert_dialog_bt_negative), null)
                 .show();
     }
 

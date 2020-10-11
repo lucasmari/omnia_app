@@ -1,83 +1,105 @@
 <resources>
+
+    <!-- ___________________________________ General _____________________________________ -->
+
     <!-- App Name -->
+    <string name="app_name" translatable="false">Omnia</string>
 
-    <!-- AuthAcivity -->
-    <string name="password_hint">Senha</string>
-    <string name="sign_up_button">Cadastrar</string>
-    <string name="sign_in_button">Entrar</string>
-    <string name="forgot_pass_button">Esqueceu sua senha?</string>
-    <string name="signing_in">Autenticando…</string>
-    <string name="sign_in_failure">Falha ao autenticar</string>
-    <string name="invalid_email">Email inválido!</string>
-    <string name="invalid_password">Senha inválida! (entre 6 e 15 caracteres)</string>
-    <string name="signing_up">Cadastrando…</string>
-    <string name="sign_up_failure">Falha no cadastramento</string>
-    <string name="forgot_pass_alert">Preencha com seu email</string>
-    <string name="reset_pass_success_toast">Email enviado</string>
-    <string name="reset_pass_failure_toast">Algo deu errado</string>
+    <!-- AlertDialog -->
+    <string name="alert_dialog_bt_positive">Sim</string>
+    <string name="alert_dialog_bt_negative">Não</string>
 
-    <!-- MainActivity -->
-    <string name="press_back_to_leave">Pressione novamente para sair</string>
-    <string name="main_email_verification_toast">Email não verificado</string>
+    <!-- ___________________________________ Activities _____________________________________ -->
 
-    <!-- Bottom Navigation Items -->
-    <string name="nav_item_1">Feed</string>
-    <string name="nav_item_2">Perfil</string>
-    <string name="nav_item_3">Discussão</string>
-    <string name="nav_item_4">Projetos</string>
-    <string name="nav_item_5">Eleições</string>
-
-    <!-- Tabs -->
-    <string name="fragment_tab_1">Mais Curtidos</string>
-    <string name="fragment_tab_2">Mais Recentes</string>
-    <string name="fragment_tab_3">Meus Posts</string>
-    <string name="fragment_tab_4">Minhas Curtidas</string>
-    <string name="fragment_tab_tv">Sem conexão com a internet…</string>
-
-    <!-- Menu Items -->
-    <string name="menu_item_1">Configurações</string>
-    <string name="menu_item_2">Leis</string>
-    <string name="menu_item_3">Aprenda!</string>
-
-    <!-- App SettingsActivity -->
-    <string name="theme_pref">Tema</string>
-    <string name="theme_pref_key">theme</string>
-    <string name="theme_pref_sum_on">Claro</string>
-    <string name="theme_pref_sum_off">Escuro</string>
-    <string name="theme_pref_default">false</string>
-
-    <!-- NewPostActivity -->
-    <string name="new_post_title">Novo Post</string>
-    <string name="new_post_hint_title">Título</string>
-    <string name="new_post_hint_body">Escreva seu post</string>
-    <string name="user_fetch_error">Não foi possível acessar usuário"</string>
-
-    <!-- EditPostActivity -->
-    <string name="edit_post_title">Editar Post</string>
+    <!-- AuthActivity -->
+    <string name="auth_et_password_hint">Senha</string>
+    <string name="auth_bt_sign_up">Cadastrar</string>
+    <string name="auth_bt_sign_in">Entrar</string>
+    <string name="auth_bt_forgot_pass">Esqueceu sua senha?</string>
+    <string name="auth_toast_signing_in">Autenticando…</string>
+    <string name="auth_toast_sign_in_failure">Falha ao autenticar</string>
+    <string name="auth_invalid_email">Email inválido!</string>
+    <string name="auth_invalid_password">Senha inválida! (entre 6 e 15 caracteres)</string>
+    <string name="auth_toast_signing_up">Cadastrando…</string>
+    <string name="auth_toast_sign_up_failure">Falha no cadastramento</string>
+    <string name="auth_forgot_pass">Preencha com seu email</string>
+    <string name="auth_toast_reset_pass_success">Email enviado</string>
+    <string name="auth_toast_reset_pass_failure">Algo deu errado</string>
 
     <!-- CommentsActivity -->
     <string name="comments_title">Comentários</string>
 
-    <!-- NewCommentActivity -->
-    <string name="new_comment_title">Novo Comentário</string>
-    <string name="new_comment_hint_body">Escreva seu comentário…</string>
-
     <!-- EditCommentActivity -->
     <string name="edit_comment_title">Editar Comentário</string>
 
-    <!-- RepliesActivity -->
-    <string name="replies_title">Respostas</string>
-
-    <!-- NewReplyActivity -->
-    <string name="new_reply_title">Nova Resposta</string>
-    <string name="new_reply_hint_body">Escreva sua resposta…</string>
+    <!-- EditPostActivity -->
+    <string name="edit_post_title">Editar Post</string>
 
     <!-- EditReplyActivity -->
     <string name="edit_reply_title">Editar Resposta</string>
 
+    <!-- MainActivity -->
+    <string name="main_toast_press_back">Pressione novamente para sair</string>
+    <string name="main_email_toast_verification">Email não verificado</string>
+
+    <!-- NewCommentActivity -->
+    <string name="new_comment_title">Novo Comentário</string>
+    <string name="new_comment_body_hint">Escreva seu comentário…</string>
+
+    <!-- NewPostActivity -->
+    <string name="new_post_title">Novo Post</string>
+    <string name="new_post_title_hint">Título</string>
+    <string name="new_post_body_hint">Escreva seu post</string>
+    <string name="new_post_toast_user_fetch_error">Não foi possível acessar usuário"</string>
+
+    <!-- NewReplyActivity -->
+    <string name="new_reply_title">Nova Resposta</string>
+    <string name="new_reply_body_hint">Escreva sua resposta…</string>
+
+    <!-- ProfileSettingsActivity -->
+    <string name="profile_settings_title">Configurações de Perfil</string>
+    <string name="profile_settings_bt_sign_out">Sair</string>
+    <string name="profile_settings_bt_delete_account">Remover conta</string>
+    <string name="profile_settings_ad_delete_account">Você realmente deseja apagar sua
+        conta?</string>
+    <string name="profile_settings_toast_delete_account">Apagando conta…</string>
+
+    <!-- RepliesActivity -->
+    <string name="replies_title">Respostas</string>
+
+    <!-- SettingsActivity -->
+    <string name="settings_theme_pref">Tema</string>
+    <string name="settings_theme_pref_key">theme</string>
+    <string name="settings_theme_pref_sum_on">Claro</string>
+    <string name="settings_theme_pref_sum_off">Escuro</string>
+    <string name="settings_theme_pref_default">false</string>
+
     <!-- ShareActivity -->
     <string name="share_title">Compartilhar</string>
     <string name="share_with">Compartilhar com…</string>
+
+    <!-- UserPageActivity -->
+    <string name="user_page_bt_sub">Inscrever</string>
+    <string name="user_page_bt_unsub">Desinscrever</string>
+    <string name="user_page_about_hint">…</string>
+    <string name="user_page_sub">Inscrito!</string>
+    <string name="user_page_unsub">Desinscrito</string>
+
+    <!-- ___________________________________ Fragments _____________________________________ -->
+
+    <!-- CommentListFragment -->
+    <string name="comment_list_ad_delete">Você realmente deseja apagar esse comentário?</string>
+    <string name="comment_list_toast_delete">Apagando comentário…</string>
+
+    <!-- FeedNavFragment -->
+    <string name="feed_tab_1">Mais Curtidos</string>
+    <string name="feed_tab_2">Mais Recentes</string>
+    <string name="feed_tab_3">Meus Posts</string>
+    <string name="feed_tab_4">Minhas Curtidas</string>
+
+    <!-- PostListFragment -->
+    <string name="post_list_ad_delete">Você realmente deseja apagar esse post?</string>
+    <string name="post_list_toast_delete">Apagando post…</string>
 
     <!-- ProfileNavFragment -->
     <string name="profile_name">Nome de Usuário</string>
@@ -93,17 +115,28 @@
     <string name="profile_toast_about">Sobre adicionado</string>
     <string name="profile_toast_fetch_error">Error: could not fetch image</string>
 
-    <!-- ProfileSettingsActivity -->
-    <string name="profile_settings_title">Configurações de Perfil</string>
-    <string name="profile_settings_bt_signout">Sair</string>
-    <string name="profile_settings_bt_delete_account">Remover conta</string>
+    <!-- ReplyListFragment -->
+    <string name="reply_list_ad_delete">Você realmente deseja apagar essa resposta?</string>
+    <string name="reply_list_toast_delete">Apagando resposta…</string>
 
-    <!-- UserPageActivity -->
-    <string name="user_page_bt_sub">Inscrever</string>
-    <string name="user_page_bt_unsub">Desinscrever</string>
-    <string name="user_page_about_hint">…</string>
-    <string name="user_page_sub">Inscrito!</string>
-    <string name="user_page_unsub">Desinscrito</string>
+    <!-- ___________________________________ Menu _____________________________________ -->
+
+    <!-- BottomNavigation Items -->
+    <string name="nav_item_1">Feed</string>
+    <string name="nav_item_2">Perfil</string>
+    <string name="nav_item_3">Discussão</string>
+    <string name="nav_item_4">Projetos</string>
+    <string name="nav_item_5">Eleições</string>
+
+    <!-- Menu Items -->
+    <string name="menu_item_1">Configurações</string>
+    <string name="menu_item_2">Leis</string>
+    <string name="menu_item_3">Aprenda!</string>
+
+    <!-- ___________________________________ Layout _____________________________________ -->
+
+    <!-- Posts Fragment -->
+    <string name="posts_tv_no_connection">Sem conexão com a internet…</string>
 
     <!-- Post Item -->
     <string name="post_author">Autor</string>

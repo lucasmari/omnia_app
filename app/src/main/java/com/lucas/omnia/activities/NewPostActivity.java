@@ -68,7 +68,7 @@ public class NewPostActivity extends BaseActivity {
                         if (user == null) {
                             Log.e(TAG, "User " + userId + " is unexpectedly null");
                             Toast.makeText(NewPostActivity.this,
-                                    getString(R.string.user_fetch_error),
+                                    getString(R.string.new_post_toast_user_fetch_error),
                                     Toast.LENGTH_SHORT).show();
                         } else {
                             writeNewPost(userId, user.username, title, body, edited);

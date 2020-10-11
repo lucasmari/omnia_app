@@ -1,5 +1,6 @@
 package com.lucas.omnia.activities;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,6 +34,7 @@ public class ProfileSettingsActivity extends BaseActivity implements View.OnClic
         user = FirebaseAuth.getInstance().getCurrentUser();
 
         binding.profileSettingsBtSignout.setOnClickListener(this);
+        binding.profileSettingsBtDeleteAccount.setOnClickListener(this);
     }
 
     private void signOut() {
@@ -45,14 +47,23 @@ public class ProfileSettingsActivity extends BaseActivity implements View.OnClic
     }
 
     private void deleteAccount() {
-        user.delete()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        Log.d(TAG, "User account deleted.");
-                    } /*else {
+        new AlertDialog.Builder(this)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setMessage(getString(R.string.profile_settings_ad_delete_account))
+                .setPositiveButton(getString(R.string.alert_dialog_bt_positive), (dialog1, which1) -> {
+                    Toast.makeText(this, getString(R.string.profile_settings_toast_delete_account), Toast.LENGTH_SHORT).show();
+                    user.delete()
+                            .addOnCompleteListener(task -> {
+                                if (task.isSuccessful()) {
+                                    Log.d(TAG, "User account deleted.");
+                                } /*else {
                         reauthenticate();
                     }*/
-                });
+                            });
+                })
+                .setNegativeButton(getString(R.string.alert_dialog_bt_negative), null)
+                .show();
+
     }
 
     /*private void reauthenticate() {

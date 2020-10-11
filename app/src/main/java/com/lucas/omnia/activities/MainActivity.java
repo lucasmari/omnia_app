@@ -2,7 +2,6 @@ package com.lucas.omnia.activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -55,7 +54,7 @@ public class MainActivity extends BaseActivity implements SharedPreferences.OnSh
             // Check if user's email is verified
             boolean emailVerified = user.isEmailVerified();
             if (!emailVerified) Toast.makeText(this,
-                    getString(R.string.main_email_verification_toast), Toast.LENGTH_LONG).show();
+                    getString(R.string.main_email_toast_verification), Toast.LENGTH_LONG).show();
         }
     }
 
@@ -78,7 +77,7 @@ public class MainActivity extends BaseActivity implements SharedPreferences.OnSh
         SharedPreferences sharedPreferences =
                 PreferenceManager.getDefaultSharedPreferences(this);
         sharedPreferences.registerOnSharedPreferenceChangeListener(this);
-        setTheme(sharedPreferences.getBoolean(getString(R.string.theme_pref_key), false));
+        setTheme(sharedPreferences.getBoolean(getString(R.string.settings_theme_pref_key), false));
     }
 
     @Override
@@ -113,7 +112,7 @@ public class MainActivity extends BaseActivity implements SharedPreferences.OnSh
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        if(key.equals(getString(R.string.theme_pref_key))) {
+        if(key.equals(getString(R.string.settings_theme_pref_key))) {
             setTheme(sharedPreferences.getBoolean(key, false));
             recreate();
         }
@@ -127,7 +126,7 @@ public class MainActivity extends BaseActivity implements SharedPreferences.OnSh
         }
 
         this.doubleBackToExitPressedOnce = true;
-        Toast.makeText(this, getString(R.string.press_back_to_leave), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getString(R.string.main_toast_press_back), Toast.LENGTH_SHORT).show();
 
         new Handler().postDelayed(new Runnable() {
 

@@ -93,7 +93,7 @@ public class NewReplyActivity extends BaseActivity {
                         if (user == null) {
                             Log.e(TAG, "User " + userId + " is unexpectedly null");
                             Toast.makeText(NewReplyActivity.this,
-                                    getString(R.string.user_fetch_error),
+                                    getString(R.string.new_post_toast_user_fetch_error),
                                     Toast.LENGTH_SHORT).show();
                         } else {
                             writeNewReply(userId, user.username, body, edited);

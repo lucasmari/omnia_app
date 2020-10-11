@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,7 +17,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.lucas.omnia.R;
-import com.lucas.omnia.models.Post;
 import com.lucas.omnia.models.User;
 import com.lucas.omnia.utils.ImageLoadAsyncTask;
 
@@ -79,7 +77,7 @@ public class UserPageActivity extends BaseActivity {
                         if (u == null) {
                             Log.e(TAG, "User " + userKey + " is unexpectedly null");
                             Toast.makeText(UserPageActivity.this,
-                                    getString(R.string.user_fetch_error),
+                                    getString(R.string.new_post_toast_user_fetch_error),
                                     Toast.LENGTH_SHORT).show();
                         } else {
                             usernameTv.setText(u.username);
@@ -104,7 +102,7 @@ public class UserPageActivity extends BaseActivity {
                         if (u == null) {
                             Log.e(TAG, "User " + userKey + " is unexpectedly null");
                             Toast.makeText(UserPageActivity.this,
-                                    getString(R.string.user_fetch_error),
+                                    getString(R.string.new_post_toast_user_fetch_error),
                                     Toast.LENGTH_SHORT).show();
                         } else {
                             if (u.subs.containsKey(userKey))
@@ -147,7 +145,7 @@ public class UserPageActivity extends BaseActivity {
                         if (u == null) {
                             Log.e(TAG, "User " + userKey + " is unexpectedly null");
                             Toast.makeText(UserPageActivity.this,
-                                    getString(R.string.user_fetch_error),
+                                    getString(R.string.new_post_toast_user_fetch_error),
                                     Toast.LENGTH_SHORT).show();
                         } else {
                             if (u.subs.containsKey(userKey)) {

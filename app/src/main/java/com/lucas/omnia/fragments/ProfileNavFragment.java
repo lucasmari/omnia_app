@@ -4,14 +4,12 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Shader;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -30,7 +28,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -40,12 +37,10 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.lucas.omnia.R;
 import com.lucas.omnia.activities.MainActivity;
-import com.lucas.omnia.activities.NewPostActivity;
 import com.lucas.omnia.activities.ProfileSettingsActivity;
 import com.lucas.omnia.models.User;
 import com.lucas.omnia.utils.ImageLoadAsyncTask;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -136,7 +131,7 @@ public class ProfileNavFragment extends Fragment {
                         if (u == null) {
                             Log.e(TAG, "User " + userId + " is unexpectedly null");
                             Toast.makeText(getContext(),
-                                    getString(R.string.user_fetch_error),
+                                    getString(R.string.new_post_toast_user_fetch_error),
                                     Toast.LENGTH_SHORT).show();
                         } else {
                             usernameTv.setText(u.username);

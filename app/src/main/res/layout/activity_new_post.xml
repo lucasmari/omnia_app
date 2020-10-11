@@ -13,7 +13,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginBottom="5dp"
-            android:hint="@string/new_post_hint_title"
+            android:hint="@string/new_post_title_hint"
             android:importantForAutofill="no"
             android:inputType="textCapSentences"
             android:maxLines="2" />
@@ -27,7 +27,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginRight="16dp"
             android:layout_marginBottom="5dp"
-            android:hint="@string/new_post_hint_body"
+            android:hint="@string/new_post_body_hint"
             android:importantForAutofill="no"
             android:inputType="textMultiLine|textCapSentences"
             android:maxLines="10"

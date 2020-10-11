@@ -131,29 +131,7 @@ public class CommentListFragment extends Fragment {
                 });
 
                 viewHolder.moreButton.setOnClickListener(v -> {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-                    if (getUid().equals(comment.uid)) {
-                        builder.setItems(getResources().getStringArray(R.array.options1), (dialog, which) -> {
-                            switch (which) {
-                                case 0:
-                                    editComment(commentRef);
-                                    break;
-                                case 1:
-                                    deleteComment(v.getContext(), commentRef);
-                                    decrementCommentsCount();
-                                    break;
-                            }
-                        });
-                        builder.show();
-                    }
-                    else {
-                        builder.setItems(getResources().getStringArray(R.array.options2), (dialog, which) -> {
-                            if (which == 0) {
-                                //reportComment();
-                            }
-                        });
-                        builder.show();
-                    }
+                    moreOptions(comment, commentRef);
                 });
 
                 viewHolder.replyButton.setOnClickListener(v -> {
@@ -269,6 +247,32 @@ public class CommentListFragment extends Fragment {
         });
     }
 
+    private void moreOptions(Comment comment, DatabaseReference commentRef) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        if (getUid().equals(comment.uid)) {
+            builder.setItems(getResources().getStringArray(R.array.options1), (dialog, which) -> {
+                switch (which) {
+                    case 0:
+                        editComment(commentRef);
+                        break;
+                    case 1:
+                        deleteComment(getContext(), commentRef);
+                        decrementCommentsCount();
+                        break;
+                }
+            });
+            builder.show();
+        }
+        else {
+            builder.setItems(getResources().getStringArray(R.array.options2), (dialog, which) -> {
+                if (which == 0) {
+                    //reportComment();
+                }
+            });
+            builder.show();
+        }
+    }
+
     private void editComment(DatabaseReference commentRef) {
         String CommentKey = commentRef.getKey();
         Intent intent = new Intent(getActivity(), EditCommentActivity.class);
@@ -279,12 +283,12 @@ public class CommentListFragment extends Fragment {
     private void deleteComment(Context context, DatabaseReference commentRef) {
         new AlertDialog.Builder(context)
                 .setIcon(android.R.drawable.ic_dialog_alert)
-                .setMessage("Deseja realmente apagar esse comentário?")
-                .setPositiveButton("Sim", (dialog1, which1) -> {
-                    Toast.makeText(context, "Apagando...", Toast.LENGTH_SHORT).show();
+                .setMessage(getString(R.string.comment_list_ad_delete))
+                .setPositiveButton(getString(R.string.alert_dialog_bt_positive), (dialog1, which1) -> {
+                    Toast.makeText(context, getString(R.string.comment_list_toast_delete), Toast.LENGTH_SHORT).show();
                     databaseReference.child("post-comments").child(postKey).child(commentRef.getKey()).removeValue();
                 })
-                .setNegativeButton("Não", null)
+                .setNegativeButton(getString(R.string.alert_dialog_bt_negative), null)
                 .show();
     }
 

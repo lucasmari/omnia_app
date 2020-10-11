@@ -45,7 +45,7 @@
             android:id="@+id/auth_tiet_email"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="@string/email_hint"
+            android:hint="@string/auth_et_email_hint"
             android:inputType="textWebEmailAddress"
             android:textSize="14sp" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -64,7 +64,7 @@
             android:id="@+id/auth_tiet_pass"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="@string/password_hint"
+            android:hint="@string/auth_et_password_hint"
             android:inputType="textPassword"
             android:textSize="14sp" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -78,7 +78,7 @@
         android:layout_alignParentEnd="false"
         android:layout_marginStart="5dp"
         android:layout_marginTop="10dp"
-        android:text="@string/sign_up_button" />
+        android:text="@string/auth_bt_sign_up" />
 
     <Button
         android:id="@+id/auth_bt_signin"
@@ -88,7 +88,7 @@
         android:layout_marginStart="48dp"
         android:layout_marginTop="320dp"
         android:layout_toEndOf="@+id/auth_bt_signup"
-        android:text="@string/sign_in_button" />
+        android:text="@string/auth_bt_sign_in" />
 
     <Button
         android:id="@+id/auth_bt_forgot_pass"
@@ -97,7 +97,7 @@
         android:layout_below="@id/auth_bt_signup"
         android:layout_alignParentEnd="true"
         android:layout_margin="10dp"
-        android:text="@string/forgot_pass_button"
+        android:text="@string/auth_bt_forgot_pass"
         android:textAllCaps="false"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
 
