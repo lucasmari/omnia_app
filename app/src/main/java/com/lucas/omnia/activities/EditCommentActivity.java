@@ -9,6 +9,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+import com.lucas.omnia.R;
 import com.lucas.omnia.databinding.ActivityEditCommentBinding;
 import com.lucas.omnia.models.Comment;
 import com.lucas.omnia.models.User;
@@ -67,7 +68,6 @@ public class EditCommentActivity extends BaseActivity {
 
     private void submitComment() {
         final String body = binding.editCommentEtBody.getText().toString();
-        final boolean edited = true;
 
         // Body is required
         if (TextUtils.isEmpty(body)) {
@@ -77,7 +77,7 @@ public class EditCommentActivity extends BaseActivity {
 
         // Disable button so there are no multi-Comments
         setEditingEnabled(false);
-        Toast.makeText(this, "Commenting...", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getString(R.string.new_comment_toast_commenting), Toast.LENGTH_SHORT).show();
 
         final String userId = getUid();
         databaseReference.child("users").child(userId).addListenerForSingleValueEvent(
@@ -92,7 +92,7 @@ public class EditCommentActivity extends BaseActivity {
                                     "Error: could not fetch user.",
                                     Toast.LENGTH_SHORT).show();
                         } else {
-                            updateComment(userId, user.username, body, edited);
+                            updateComment(userId, user.username, body);
                         }
                         setEditingEnabled(true);
                         finish();
@@ -115,14 +115,16 @@ public class EditCommentActivity extends BaseActivity {
         }
     }
 
-    private void updateComment(String userId, String username, String body, boolean edited) {
+    private void updateComment(String userId, String username, String body) {
         // Update item_Comment at /post-comments/postId/commentId
-        Comment comment = new Comment(userId, username, body, edited);
+        Comment comment = new Comment(userId, username, body);
         Map<String, Object> commentValues = comment.toMap();
 
         Map<String, Object> childUpdates = new HashMap<>();
         childUpdates.put("/post-comments/" + postKey + "/" + commentKey, commentValues);
 
         databaseReference.updateChildren(childUpdates);
+
+        databaseReference.child("post-comments").child(postKey).child(commentKey).child("edited").setValue(true);
     }
 }

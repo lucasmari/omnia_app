@@ -16,9 +16,7 @@ public class HotPostsTabFragment extends PostListFragment {
     @Override
     public Query getQuery(DatabaseReference databaseReference) {
         // Top 100 posts
-        Query topPostsQuery = databaseReference.child("posts")
+        return databaseReference.child("posts")
                 .orderByChild("upVoteCount").limitToFirst(100);
-
-        return topPostsQuery;
     }
 }

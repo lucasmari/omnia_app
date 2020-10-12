@@ -40,7 +40,6 @@ public class NewPostActivity extends BaseActivity {
     private void submitPost() {
         final String title = binding.newPostEtTitle.getText().toString();
         final String body = binding.newPostEtBody.getText().toString();
-        final boolean edited = false;
 
         // Title is required
         if (TextUtils.isEmpty(title)) {
@@ -56,7 +55,7 @@ public class NewPostActivity extends BaseActivity {
 
         // Disable button so there are no multi-posts
         setEditingEnabled(false);
-        Toast.makeText(this, "Posting...", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getString(R.string.new_post_toast_posting), Toast.LENGTH_SHORT).show();
 
         final String userId = getUid();
         databaseReference.child("users").child(userId).addListenerForSingleValueEvent(
@@ -71,7 +70,7 @@ public class NewPostActivity extends BaseActivity {
                                     getString(R.string.new_post_toast_user_fetch_error),
                                     Toast.LENGTH_SHORT).show();
                         } else {
-                            writeNewPost(userId, user.username, title, body, edited);
+                            writeNewPost(userId, user.username, title, body);
                         }
                         setEditingEnabled(true);
                         finish();
@@ -95,11 +94,11 @@ public class NewPostActivity extends BaseActivity {
         }
     }
 
-    private void writeNewPost(String userId, String username, String title, String body, boolean edited) {
+    private void writeNewPost(String userId, String username, String title, String body) {
         // Create new item_post at /user-posts/$userid/$postid and at
         // /posts/$postid simultaneously
         String key = databaseReference.child("posts").push().getKey();
-        Post post = new Post(userId, username, title, body, edited);
+        Post post = new Post(userId, username, title, body);
         Map<String, Object> postValues = post.toMap();
 
         Map<String, Object> childUpdates = new HashMap<>();

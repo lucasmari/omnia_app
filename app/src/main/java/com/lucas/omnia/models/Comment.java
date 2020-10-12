@@ -28,11 +28,10 @@
          // Default constructor required for calls to DataSnapshot.getValue(Comment.class)
      }
 
-     public Comment(String uid, String author, String body, boolean edited) {
+     public Comment(String uid, String author, String body) {
          this.uid = uid;
          this.author = author;
          this.body = body;
-         this.edited = edited;
      }
 
      @Exclude

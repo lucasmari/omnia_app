@@ -118,8 +118,6 @@ public class ProfileNavFragment extends Fragment {
     }
 
     public void fetchUser() {
-        Log.i(TAG, "fetchUser");
-
         databaseReference.child("users").child(userId).addListenerForSingleValueEvent(
                 new ValueEventListener() {
                     @Override
@@ -260,7 +258,6 @@ public class ProfileNavFragment extends Fragment {
     }
 
     private User getUserLocal() {
-        Log.i(TAG, "getUserLocal");
         Gson gson = new Gson();
         String json = sharedPreferences.getString("User", "");
 

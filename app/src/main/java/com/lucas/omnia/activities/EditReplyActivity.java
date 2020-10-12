@@ -9,6 +9,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+import com.lucas.omnia.R;
 import com.lucas.omnia.databinding.ActivityEditReplyBinding;
 import com.lucas.omnia.models.Reply;
 import com.lucas.omnia.models.User;
@@ -16,6 +17,7 @@ import com.lucas.omnia.models.User;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.lucas.omnia.activities.CommentsActivity.postKey;
 import static com.lucas.omnia.activities.RepliesActivity.commentKey;
 
 public class EditReplyActivity extends BaseActivity {
@@ -67,7 +69,6 @@ public class EditReplyActivity extends BaseActivity {
 
     private void submitReply() {
         final String body = binding.editReplyEtBody.getText().toString();
-        final boolean edited = true;
 
         // Body is required
         if (TextUtils.isEmpty(body)) {
@@ -77,7 +78,7 @@ public class EditReplyActivity extends BaseActivity {
 
         // Disable button so there are no multi-Replies
         setEditingEnabled(false);
-        Toast.makeText(this, "Replying...", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getString(R.string.new_reply_toast_replying), Toast.LENGTH_SHORT).show();
 
         final String userId = getUid();
         databaseReference.child("users").child(userId).addListenerForSingleValueEvent(
@@ -92,7 +93,7 @@ public class EditReplyActivity extends BaseActivity {
                                     "Error: could not fetch user.",
                                     Toast.LENGTH_SHORT).show();
                         } else {
-                            updateReply(userId, user.username, body, edited);
+                            updateReply(userId, user.username, body);
                         }
                         setEditingEnabled(true);
                         finish();
@@ -115,14 +116,16 @@ public class EditReplyActivity extends BaseActivity {
         }
     }
 
-    private void updateReply(String userId, String username, String body, boolean edited) {
+    private void updateReply(String userId, String username, String body) {
         // Update item_Reply at /comment-replies/commentId/replyId
-        Reply reply = new Reply(userId, username, body, edited);
+        Reply reply = new Reply(userId, username, body);
         Map<String, Object> replyValues = reply.toMap();
 
         Map<String, Object> childUpdates = new HashMap<>();
         childUpdates.put("/comment-replies/" + commentKey + "/" + replyKey, replyValues);
 
         databaseReference.updateChildren(childUpdates);
+
+        databaseReference.child("comment-replies").child(commentKey).child(replyKey).child("edited").setValue(true);
     }
 }

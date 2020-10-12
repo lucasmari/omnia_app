@@ -30,10 +30,6 @@ public class User {
         this.username = username;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public void setHasPhoto(boolean hasPhoto) {
         this.hasPhoto = hasPhoto;
     }
@@ -45,4 +41,6 @@ public class User {
     public void setAbout(String about) {
         this.about = about;
     }
+
+    public void setSubCount(int subCount) { this.subCount = subCount; }
 }

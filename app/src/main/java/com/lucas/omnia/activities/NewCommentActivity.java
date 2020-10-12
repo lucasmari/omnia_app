@@ -46,7 +46,6 @@ public class NewCommentActivity extends BaseActivity {
 
     private void submitComment() {
         final String body = binding.newCommentEtBody.getText().toString();
-        final boolean edited = false;
 
         // Body is required
         if (TextUtils.isEmpty(body)) {
@@ -56,7 +55,7 @@ public class NewCommentActivity extends BaseActivity {
 
         // Disable button so there are no multi-posts
         setEditingEnabled(false);
-        Toast.makeText(this, "Commenting...", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getString(R.string.new_comment_toast_commenting), Toast.LENGTH_SHORT).show();
 
         final String userId = getUid();
         databaseReference.child("users").child(userId).addListenerForSingleValueEvent(
@@ -71,7 +70,7 @@ public class NewCommentActivity extends BaseActivity {
                                     getString(R.string.new_post_toast_user_fetch_error),
                                     Toast.LENGTH_SHORT).show();
                         } else {
-                            writeNewComment(userId, user.username, body, edited);
+                            writeNewComment(userId, user.username, body);
                             incrementCommentsCount();
                         }
                         setEditingEnabled(true);
@@ -95,10 +94,10 @@ public class NewCommentActivity extends BaseActivity {
         }
     }
 
-    private void writeNewComment(String userId, String username, String body, boolean edited) {
+    private void writeNewComment(String userId, String username, String body) {
         // Create new item_comment at /post-comments
         String key = commentsReference.push().getKey();
-        Comment comment = new Comment(userId, username, body, edited);
+        Comment comment = new Comment(userId, username, body);
         Map<String, Object> commentValues = comment.toMap();
 
         Map<String, Object> childUpdates = new HashMap<>();

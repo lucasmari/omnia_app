@@ -46,16 +46,19 @@
     <!-- NewCommentActivity -->
     <string name="new_comment_title">New Comment</string>
     <string name="new_comment_body_hint">Write your comment…</string>
+    <string name="new_comment_toast_commenting">Sending comment…</string>
 
     <!-- NewPostActivity -->
     <string name="new_post_title">New Post</string>
     <string name="new_post_title_hint">Title</string>
     <string name="new_post_body_hint">Write your post…</string>
     <string name="new_post_toast_user_fetch_error">Could not fetch user"</string>
+    <string name="new_post_toast_posting">Sending post…</string>
 
     <!-- NewReplyActivity -->
     <string name="new_reply_title">New Reply</string>
     <string name="new_reply_body_hint">Write your reply…</string>
+    <string name="new_reply_toast_replying">Sending reply…</string>
 
     <!-- ProfileSettingsActivity -->
     <string name="profile_settings_title">Profile Settings</string>

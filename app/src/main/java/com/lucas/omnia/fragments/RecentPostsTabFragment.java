@@ -16,8 +16,6 @@ public class RecentPostsTabFragment extends PostListFragment {
     @Override
     public Query getQuery(DatabaseReference databaseReference) {
         // Last 100 posts
-        Query recentPostsQuery = databaseReference.child("posts").limitToFirst(100);
-
-        return recentPostsQuery;
+        return databaseReference.child("posts").limitToFirst(100);
     }
 }

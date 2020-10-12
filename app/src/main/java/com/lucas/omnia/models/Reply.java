@@ -21,11 +21,10 @@ public class Reply {
         // Default constructor required for calls to DataSnapshot.getValue(Reply.class)
     }
 
-    public Reply(String uid, String author, String body, boolean edited) {
+    public Reply(String uid, String author, String body) {
         this.uid = uid;
         this.author = author;
         this.body = body;
-        this.edited = edited;
     }
 
     @Exclude

@@ -29,6 +29,7 @@ import com.google.firebase.database.Transaction;
 import com.lucas.omnia.R;
 import com.lucas.omnia.activities.CommentsActivity;
 import com.lucas.omnia.activities.EditPostActivity;
+import com.lucas.omnia.activities.MainActivity;
 import com.lucas.omnia.activities.UserPageActivity;
 import com.lucas.omnia.models.Post;
 import com.lucas.omnia.utils.VerticalSpaceItemDecoration;
@@ -120,8 +121,9 @@ public abstract class PostListFragment extends Fragment {
                     startActivity(intent);
                 });
 
-                DatabaseReference globalPostRef = databaseReference.child("posts").child(postRef.getKey());
-                DatabaseReference userPostRef = databaseReference.child("user-posts").child(post.uid).child(postRef.getKey());
+                DatabaseReference globalPostRef = databaseReference.child("posts").child(postKey);
+                DatabaseReference userPostRef =
+                        databaseReference.child("user-posts").child(post.uid).child(postKey);
                 viewHolder.bindToPost(post, upVoteButton -> {
                     // Run two transactions
                     onUpVoteClicked(globalPostRef);
@@ -143,7 +145,7 @@ public abstract class PostListFragment extends Fragment {
                 });
 
                 viewHolder.moreButton.setOnClickListener(v -> {
-                    moreOptions(post, postRef);
+                    moreOptions(post, postKey);
                 });
             }
         };
@@ -252,16 +254,16 @@ public abstract class PostListFragment extends Fragment {
         startActivity(Intent.createChooser(shareIntent, getString(R.string.share_title)));
     }
 
-    private void moreOptions(Post post, DatabaseReference postRef) {
+    private void moreOptions(Post post, String postKey) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         if (getUid().equals(post.uid)) {
             builder.setItems(getResources().getStringArray(R.array.options1), (dialog, which) -> {
                 switch (which) {
                     case 0:
-                        editPost(postRef);
+                        editPost(postKey);
                         break;
                     case 1:
-                        deletePost(getContext(), postRef, post);
+                        deletePost(getContext(), postKey, post);
                         break;
                 }
             });
@@ -277,21 +279,20 @@ public abstract class PostListFragment extends Fragment {
         }
     }
 
-    private void editPost(DatabaseReference postRef) {
-        String postKey = postRef.getKey();
+    private void editPost(String postKey) {
         Intent intent = new Intent(getActivity(), EditPostActivity.class);
         intent.putExtra(EditPostActivity.EXTRA_POST_KEY, postKey);
         startActivity(intent);
     }
 
-    private void deletePost(Context context, DatabaseReference postRef, Post post) {
+    private void deletePost(Context context, String postKey, Post post) {
         new AlertDialog.Builder(context)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setMessage(getString(R.string.post_list_ad_delete))
                 .setPositiveButton(getString(R.string.alert_dialog_bt_positive), (dialog1, which1) -> {
                     Toast.makeText(context, getString(R.string.post_list_toast_delete), Toast.LENGTH_SHORT).show();
-                    databaseReference.child("posts").child(postRef.getKey()).removeValue();
-                    databaseReference.child("user-posts").child(post.uid).child(postRef.getKey()).removeValue();
+                    databaseReference.child("posts").child(postKey).removeValue();
+                    databaseReference.child("user-posts").child(post.uid).child(postKey).removeValue();
                 })
                 .setNegativeButton(getString(R.string.alert_dialog_bt_negative), null)
                 .show();

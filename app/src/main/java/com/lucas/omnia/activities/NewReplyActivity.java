@@ -71,7 +71,6 @@ public class NewReplyActivity extends BaseActivity {
 
     private void submitReply() {
         final String body = "@" + author + " " + binding.newReplyEtBody.getText().toString();
-        final boolean edited = false;
 
         // Body is required
         if (TextUtils.isEmpty(body)) {
@@ -81,7 +80,7 @@ public class NewReplyActivity extends BaseActivity {
 
         // Disable button so there are no multi-posts
         setEditingEnabled(false);
-        Toast.makeText(this, "Replying...", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getString(R.string.new_reply_toast_replying), Toast.LENGTH_SHORT).show();
 
         final String userId = getUid();
         databaseReference.child("users").child(userId).addListenerForSingleValueEvent(
@@ -96,7 +95,7 @@ public class NewReplyActivity extends BaseActivity {
                                     getString(R.string.new_post_toast_user_fetch_error),
                                     Toast.LENGTH_SHORT).show();
                         } else {
-                            writeNewReply(userId, user.username, body, edited);
+                            writeNewReply(userId, user.username, body);
                             incrementRepliesCount();
                         }
                         setEditingEnabled(true);
@@ -120,10 +119,10 @@ public class NewReplyActivity extends BaseActivity {
         }
     }
 
-    private void writeNewReply(String userId, String username, String body, boolean edited) {
+    private void writeNewReply(String userId, String username, String body) {
         // Create new item_reply at /comment-replies
         String key = databaseReference.child("comment-replies").child(commentKey).push().getKey();
-        Reply reply = new Reply(userId, username, body, edited);
+        Reply reply = new Reply(userId, username, body);
         Map<String, Object> replyValues = reply.toMap();
 
         Map<String, Object> childUpdates = new HashMap<>();

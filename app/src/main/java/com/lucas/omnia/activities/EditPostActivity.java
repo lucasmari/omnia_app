@@ -10,6 +10,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.lucas.omnia.R;
 import com.lucas.omnia.databinding.ActivityEditPostBinding;
 import com.lucas.omnia.models.Post;
 import com.lucas.omnia.models.User;
@@ -68,7 +69,6 @@ public class EditPostActivity extends BaseActivity {
     private void submitPost() {
         final String title = binding.editPostEtTitle.getText().toString();
         final String body = binding.editPostEtBody.getText().toString();
-        final boolean edited = true;
 
         // Title is required
         if (TextUtils.isEmpty(title)) {
@@ -84,7 +84,7 @@ public class EditPostActivity extends BaseActivity {
 
         // Disable button so there are no multi-posts
         setEditingEnabled(false);
-        Toast.makeText(this, "Posting...", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getString(R.string.new_post_toast_posting), Toast.LENGTH_SHORT).show();
 
         final String userId = getUid();
         databaseReference.child("users").child(userId).addListenerForSingleValueEvent(
@@ -99,7 +99,7 @@ public class EditPostActivity extends BaseActivity {
                                     "Error: could not fetch user.",
                                     Toast.LENGTH_SHORT).show();
                         } else {
-                            updatePost(userId, user.username, title, body, edited);
+                            updatePost(userId, user.username, title, body);
                         }
                         setEditingEnabled(true);
                         finish();
@@ -123,10 +123,10 @@ public class EditPostActivity extends BaseActivity {
         }
     }
 
-    private void updatePost(String userId, String username, String title, String body, boolean edited) {
+    private void updatePost(String userId, String username, String title, String body) {
         // Update item_post at /user-posts/$userid/$postid and at
         // /posts/$postid simultaneously
-        Post post = new Post(userId, username, title, body, edited);
+        Post post = new Post(userId, username, title, body);
         Map<String, Object> postValues = post.toMap();
 
         Map<String, Object> childUpdates = new HashMap<>();
@@ -134,5 +134,8 @@ public class EditPostActivity extends BaseActivity {
         childUpdates.put("/user-posts/" + userId + "/" + postKey, postValues);
 
         databaseReference.updateChildren(childUpdates);
+
+        databaseReference.child("posts").child(postKey).child("edited").setValue(true);
+        databaseReference.child("user-posts").child(userId).child(postKey).child("edited").setValue(true);
     }
 }

@@ -57,7 +57,6 @@ public class UserPageActivity extends BaseActivity {
         }
 
         subButton = findViewById(R.id.user_page_bt_sub);
-
         if (userKey.equals(getUid())) subButton.setVisibility(View.GONE);
         else subButton.setOnClickListener(v -> verifySub());
 
@@ -80,10 +79,7 @@ public class UserPageActivity extends BaseActivity {
                                     getString(R.string.new_post_toast_user_fetch_error),
                                     Toast.LENGTH_SHORT).show();
                         } else {
-                            usernameTv.setText(u.username);
-                            subCountTv.setText(String.valueOf(u.subCount));
-                            if (u.hasPhoto) fetchProfileImage();
-                            if (u.about != null) aboutTv.setText(u.about);
+                            setUser(u);
                         }
                     }
 
@@ -115,6 +111,13 @@ public class UserPageActivity extends BaseActivity {
                         Log.e(TAG, "getUser:onCancelled", databaseError.toException());
                     }
                 });
+    }
+
+    private void setUser(User u) {
+        usernameTv.setText(u.username);
+        subCountTv.setText(String.valueOf(u.subCount));
+        if (u.hasPhoto) fetchProfileImage();
+        if (u.about != null) aboutTv.setText(u.about);
     }
 
     private void fetchProfileImage() {

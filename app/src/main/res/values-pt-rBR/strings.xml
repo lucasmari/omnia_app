@@ -45,16 +45,19 @@
     <!-- NewCommentActivity -->
     <string name="new_comment_title">Novo Comentário</string>
     <string name="new_comment_body_hint">Escreva seu comentário…</string>
+    <string name="new_comment_toast_commenting">Enviando comentário…</string>
 
     <!-- NewPostActivity -->
     <string name="new_post_title">Novo Post</string>
     <string name="new_post_title_hint">Título</string>
     <string name="new_post_body_hint">Escreva seu post</string>
     <string name="new_post_toast_user_fetch_error">Não foi possível acessar usuário"</string>
+    <string name="new_post_toast_posting">Enviando post…</string>
 
     <!-- NewReplyActivity -->
     <string name="new_reply_title">Nova Resposta</string>
     <string name="new_reply_body_hint">Escreva sua resposta…</string>
+    <string name="new_reply_toast_replying">Enviando resposta…</string>
 
     <!-- ProfileSettingsActivity -->
     <string name="profile_settings_title">Configurações de Perfil</string>

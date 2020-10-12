@@ -68,7 +68,7 @@ public class FeedNavFragment extends Fragment{
                 new HotPostsTabFragment(),
                 new RecentPostsTabFragment(),
                 new MyPostsTabFragment(),
-                new UpvotedPostsTabFragment()
+                new UpVotedPostsTabFragment()
         };
 
         private final String[] fragmentNames = new String[]{
