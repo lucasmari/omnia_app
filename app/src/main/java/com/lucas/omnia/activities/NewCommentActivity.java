@@ -9,6 +9,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.MutableData;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 import com.lucas.omnia.R;
@@ -103,6 +104,8 @@ public class NewCommentActivity extends BaseActivity {
         Map<String, Object> childUpdates = new HashMap<>();
         childUpdates.put("/post-comments/" + postKey + "/" + key, commentValues);
         databaseReference.updateChildren(childUpdates);
+
+        databaseReference.child("post-comments").child(postKey).child(key).child("timestamp").setValue(ServerValue.TIMESTAMP);
     }
 
     private void incrementCommentsCount() {

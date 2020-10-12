@@ -147,6 +147,7 @@
 
     <!-- Post Item -->
     <string name="post_author">Author</string>
+    <string name="post_timestamp" translatable="false">Timestamp</string>
     <string name="post_title">Title</string>
     <string name="post_edited">edited</string>
     <string name="post_body">Post</string>

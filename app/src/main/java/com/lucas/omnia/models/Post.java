@@ -14,6 +14,7 @@ public class Post {
 
     public String uid;
     public String author;
+    public long timestamp;
     public String title;
     public String body;
     public boolean edited;
@@ -40,6 +41,7 @@ public class Post {
         HashMap<String, Object> result = new HashMap<>();
         result.put("uid", uid);
         result.put("author", author);
+        result.put("timestamp", timestamp);
         result.put("title", title);
         result.put("body", body);
         result.put("edited", edited);

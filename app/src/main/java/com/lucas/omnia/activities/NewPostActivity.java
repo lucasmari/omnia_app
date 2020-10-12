@@ -8,6 +8,7 @@ import android.widget.Toast;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 import com.lucas.omnia.R;
 import com.lucas.omnia.databinding.ActivityNewPostBinding;
@@ -106,5 +107,8 @@ public class NewPostActivity extends BaseActivity {
         childUpdates.put("/user-posts/" + userId + "/" + key, postValues);
 
         databaseReference.updateChildren(childUpdates);
+
+        databaseReference.child("posts").child(key).child("timestamp").setValue(ServerValue.TIMESTAMP);
+        databaseReference.child("user-posts").child(userId).child(key).child("timestamp").setValue(ServerValue.TIMESTAMP);
     }
 }

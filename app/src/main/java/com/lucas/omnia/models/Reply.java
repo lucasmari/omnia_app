@@ -10,6 +10,7 @@ import java.util.Map;
 public class Reply {
     public String uid;
     public String author;
+    public long timestamp;
     public String body;
     public boolean edited;
     public int upVoteCount = 0;
@@ -32,6 +33,7 @@ public class Reply {
         HashMap<String, Object> result = new HashMap<>();
         result.put("uid", uid);
         result.put("author", author);
+        result.put("timestamp", timestamp);
         result.put("body", body);
         result.put("edited", edited);
         result.put("upVoteCount", upVoteCount);

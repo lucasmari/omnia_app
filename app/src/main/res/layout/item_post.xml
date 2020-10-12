@@ -17,11 +17,26 @@
 
         <TextView
             android:id="@+id/post_tv_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/post_author" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_gravity="center"
+            android:background="@color/colorAccent" />
+
+        <TextView
+            android:id="@+id/post_tv_timestamp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_gravity="center"
-            android:text="@string/post_author" />
+            android:text="@string/post_timestamp" />
 
         <TextView
             android:id="@+id/post_tv_edited"
@@ -81,7 +96,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="0.8dp"
         android:layout_marginStart="6dp"
         android:layout_marginEnd="6dp"
         android:background="@color/colorPrimaryDark" />
