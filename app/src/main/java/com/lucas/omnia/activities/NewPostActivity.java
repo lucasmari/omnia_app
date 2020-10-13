@@ -108,6 +108,7 @@ public class NewPostActivity extends BaseActivity {
 
         databaseReference.updateChildren(childUpdates);
 
+        // Set timestamp
         databaseReference.child("posts").child(key).child("timestamp").setValue(ServerValue.TIMESTAMP);
         databaseReference.child("user-posts").child(userId).child(key).child("timestamp").setValue(ServerValue.TIMESTAMP);
     }

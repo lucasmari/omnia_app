@@ -79,31 +79,11 @@ public class EditCommentActivity extends BaseActivity {
         setEditingEnabled(false);
         Toast.makeText(this, getString(R.string.new_comment_toast_commenting), Toast.LENGTH_SHORT).show();
 
-        final String userId = getUid();
-        databaseReference.child("users").child(userId).addListenerForSingleValueEvent(
-                new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        User user = dataSnapshot.getValue(User.class);
+        databaseReference.child("post-comments").child(postKey).child(commentKey).child("body").setValue(body);
+        databaseReference.child("post-comments").child(postKey).child(commentKey).child("edited").setValue(true);
 
-                        if (user == null) {
-                            Log.e(TAG, "User " + userId + " is unexpectedly null");
-                            Toast.makeText(EditCommentActivity.this,
-                                    "Error: could not fetch user.",
-                                    Toast.LENGTH_SHORT).show();
-                        } else {
-                            updateComment(userId, user.username, body);
-                        }
-                        setEditingEnabled(true);
-                        finish();
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        Log.e(TAG, "getUser:onCancelled", databaseError.toException());
-                        setEditingEnabled(true);
-                    }
-                });
+        setEditingEnabled(true);
+        finish();
     }
 
     private void setEditingEnabled(boolean enabled) {
@@ -113,18 +93,5 @@ public class EditCommentActivity extends BaseActivity {
         } else {
             binding.editCommentFabSubmit.hide();
         }
-    }
-
-    private void updateComment(String userId, String username, String body) {
-        // Update item_Comment at /post-comments/postId/commentId
-        Comment comment = new Comment(userId, username, body);
-        Map<String, Object> commentValues = comment.toMap();
-
-        Map<String, Object> childUpdates = new HashMap<>();
-        childUpdates.put("/post-comments/" + postKey + "/" + commentKey, commentValues);
-
-        databaseReference.updateChildren(childUpdates);
-
-        databaseReference.child("post-comments").child(postKey).child(commentKey).child("edited").setValue(true);
     }
 }

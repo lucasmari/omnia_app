@@ -35,11 +35,8 @@ public class Reply {
         result.put("author", author);
         result.put("timestamp", timestamp);
         result.put("body", body);
-        result.put("edited", edited);
         result.put("upVoteCount", upVoteCount);
         result.put("downVoteCount", downVoteCount);
-        result.put("upVotes", upVotes);
-        result.put("downVotes", downVotes);
 
         return result;
     }

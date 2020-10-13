@@ -80,31 +80,11 @@ public class EditReplyActivity extends BaseActivity {
         setEditingEnabled(false);
         Toast.makeText(this, getString(R.string.new_reply_toast_replying), Toast.LENGTH_SHORT).show();
 
-        final String userId = getUid();
-        databaseReference.child("users").child(userId).addListenerForSingleValueEvent(
-                new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        User user = dataSnapshot.getValue(User.class);
+        databaseReference.child("comment-replies").child(commentKey).child(replyKey).child("body").setValue(body);
+        databaseReference.child("comment-replies").child(commentKey).child(replyKey).child("edited").setValue(true);
 
-                        if (user == null) {
-                            Log.e(TAG, "User " + userId + " is unexpectedly null");
-                            Toast.makeText(EditReplyActivity.this,
-                                    "Error: could not fetch user.",
-                                    Toast.LENGTH_SHORT).show();
-                        } else {
-                            updateReply(userId, user.username, body);
-                        }
-                        setEditingEnabled(true);
-                        finish();
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        Log.e(TAG, "getUser:onCancelled", databaseError.toException());
-                        setEditingEnabled(true);
-                    }
-                });
+        setEditingEnabled(true);
+        finish();
     }
 
     private void setEditingEnabled(boolean enabled) {
@@ -114,18 +94,5 @@ public class EditReplyActivity extends BaseActivity {
         } else {
             binding.editReplyFabSubmit.hide();
         }
-    }
-
-    private void updateReply(String userId, String username, String body) {
-        // Update item_Reply at /comment-replies/commentId/replyId
-        Reply reply = new Reply(userId, username, body);
-        Map<String, Object> replyValues = reply.toMap();
-
-        Map<String, Object> childUpdates = new HashMap<>();
-        childUpdates.put("/comment-replies/" + commentKey + "/" + replyKey, replyValues);
-
-        databaseReference.updateChildren(childUpdates);
-
-        databaseReference.child("comment-replies").child(commentKey).child(replyKey).child("edited").setValue(true);
     }
 }

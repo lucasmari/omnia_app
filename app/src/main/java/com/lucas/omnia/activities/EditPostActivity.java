@@ -99,7 +99,7 @@ public class EditPostActivity extends BaseActivity {
                                     "Error: could not fetch user.",
                                     Toast.LENGTH_SHORT).show();
                         } else {
-                            updatePost(userId, user.username, title, body);
+                            updatePost(userId, title, body);
                         }
                         setEditingEnabled(true);
                         finish();
@@ -123,19 +123,14 @@ public class EditPostActivity extends BaseActivity {
         }
     }
 
-    private void updatePost(String userId, String username, String title, String body) {
+    private void updatePost(String userId, String title, String body) {
         // Update item_post at /user-posts/$userid/$postid and at
         // /posts/$postid simultaneously
-        Post post = new Post(userId, username, title, body);
-        Map<String, Object> postValues = post.toMap();
-
-        Map<String, Object> childUpdates = new HashMap<>();
-        childUpdates.put("/posts/" + postKey, postValues);
-        childUpdates.put("/user-posts/" + userId + "/" + postKey, postValues);
-
-        databaseReference.updateChildren(childUpdates);
-
+        databaseReference.child("posts").child(postKey).child("title").setValue(title);
+        databaseReference.child("posts").child(postKey).child("body").setValue(body);
         databaseReference.child("posts").child(postKey).child("edited").setValue(true);
+        databaseReference.child("user-posts").child(userId).child(postKey).child("title").setValue(title);
+        databaseReference.child("user-posts").child(userId).child(postKey).child("body").setValue(body);
         databaseReference.child("user-posts").child(userId).child(postKey).child("edited").setValue(true);
     }
 }

@@ -23,7 +23,6 @@
      public int replyCount = 0;
      public Map<String, Boolean> upVotes = new HashMap<>();
      public Map<String, Boolean> downVotes = new HashMap<>();
-     public Map<String, Boolean> replies = new HashMap<>();
 
      public Comment() {
          // Default constructor required for calls to DataSnapshot.getValue(Comment.class)
@@ -42,13 +41,9 @@
          result.put("author", author);
          result.put("timestamp", timestamp);
          result.put("body", body);
-         result.put("edited", edited);
          result.put("upVoteCount", upVoteCount);
          result.put("downVoteCount", downVoteCount);
          result.put("replyCount", replyCount);
-         result.put("upVotes", upVotes);
-         result.put("downVotes", downVotes);
-         result.put("replies", replies);
 
          return result;
      }

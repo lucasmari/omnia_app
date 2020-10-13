@@ -105,6 +105,7 @@ public class NewCommentActivity extends BaseActivity {
         childUpdates.put("/post-comments/" + postKey + "/" + key, commentValues);
         databaseReference.updateChildren(childUpdates);
 
+        // Set timestamp
         databaseReference.child("post-comments").child(postKey).child(key).child("timestamp").setValue(ServerValue.TIMESTAMP);
     }
 

@@ -130,6 +130,7 @@ public class NewReplyActivity extends BaseActivity {
         childUpdates.put("/comment-replies/" + commentKey + "/" + key, replyValues);
         databaseReference.updateChildren(childUpdates);
 
+        // Set timestamp
         databaseReference.child("comment-replies").child(commentKey).child(key).child("timestamp").setValue(ServerValue.TIMESTAMP);
     }
 

@@ -23,7 +23,6 @@ public class Post {
     public int commentCount = 0;
     public Map<String, Boolean> upVotes = new HashMap<>();
     public Map<String, Boolean> downVotes = new HashMap<>();
-    public Map<String, Boolean> comments = new HashMap<>();
 
     public Post() {
         // Default constructor required for calls to DataSnapshot.getValue(Post.class)
@@ -44,13 +43,9 @@ public class Post {
         result.put("timestamp", timestamp);
         result.put("title", title);
         result.put("body", body);
-        result.put("edited", edited);
         result.put("upVoteCount", upVoteCount);
         result.put("downVoteCount", downVoteCount);
         result.put("commentCount", commentCount);
-        result.put("upVotes", upVotes);
-        result.put("downVotes", downVotes);
-        result.put("comments", comments);
 
         return result;
     }
