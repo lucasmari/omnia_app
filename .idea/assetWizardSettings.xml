@@ -24,7 +24,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="imagePath" value="/tmp/outline_home_24.xml" />
+                                                <entry key="imagePath" value="/tmp/baseline_image_24.xml" />
                                                 <entry key="opacityPercent" value="80" />
                                               </map>
                                             </option>
@@ -36,7 +36,19 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="url" value="jar:file:/home/lucasmari/snap/android-studio/plugins/android/lib/android.jar!/images/material/icons/materialiconsoutlined/home/outline_home_24.xml" />
+                                                <entry key="url" value="jar:file:/home/lucasmari/snap/android-studio/plugins/android/lib/android.jar!/images/material/icons/materialicons/image/baseline_image_24.xml" />
+                                              </map>
+                                            </option>
+                                          </PersistentState>
+                                        </value>
+                                      </entry>
+                                      <entry key="image">
+                                        <value>
+                                          <PersistentState>
+                                            <option name="values">
+                                              <map>
+                                                <entry key="color" value="000000" />
+                                                <entry key="opacityPercent" value="80" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -48,6 +60,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
+                                                <entry key="opacityPercent" value="80" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -59,6 +72,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
+                                                <entry key="opacityPercent" value="80" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -68,7 +82,7 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="outputName" value="ic_home_outlined" />
+                                      <entry key="outputName" value="ic_gallery_dark" />
                                       <entry key="theme" value="HOLO_DARK" />
                                     </map>
                                   </option>

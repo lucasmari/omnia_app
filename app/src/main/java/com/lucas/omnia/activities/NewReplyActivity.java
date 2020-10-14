@@ -26,12 +26,15 @@ import static com.lucas.omnia.activities.CommentsActivity.postKey;
 public class NewReplyActivity extends BaseActivity {
 
     public static final String EXTRA_COMMENT_KEY = "comment_key";
+    public static final String EXTRA_REPLY_KEY = "reply_key";
     private static final String TAG = "NewReplyActivity";
     private static final String REQUIRED = "Required";
 
     private String commentKey;
+    private String replyKey;
     private DatabaseReference databaseReference;
     private DatabaseReference commentReference;
+    private DatabaseReference replyReference;
     private String author;
 
     private ActivityNewReplyBinding binding;
@@ -51,21 +54,48 @@ public class NewReplyActivity extends BaseActivity {
         }
 
         commentReference = databaseReference.child("post-comments").child(postKey).child(commentKey);
-        commentReference.addListenerForSingleValueEvent(
-                new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        Comment comment = dataSnapshot.getValue(Comment.class);
 
-                        author = comment.author;
-                    }
+        if (getIntent().hasExtra(EXTRA_REPLY_KEY)) {
+            // Get reply key from intent
+            replyKey = getIntent().getStringExtra(EXTRA_REPLY_KEY);
+            if (replyKey == null) {
+                throw new IllegalArgumentException("Must pass EXTRA_REPLY_KEY");
+            }
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        Log.e(TAG, "loadReply:onCancelled", databaseError.toException());
-                        setEditingEnabled(true);
-                    }
-                });
+            replyReference =
+                    databaseReference.child("comment-replies").child(commentKey).child(replyKey);
+            replyReference.addListenerForSingleValueEvent(
+                    new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            Reply reply = dataSnapshot.getValue(Reply.class);
+
+                            author = reply.author;
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                            Log.e(TAG, "loadReply:onCancelled", databaseError.toException());
+                            setEditingEnabled(true);
+                        }
+                    });
+        } else {
+            commentReference.addListenerForSingleValueEvent(
+                    new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            Comment comment = dataSnapshot.getValue(Comment.class);
+
+                            author = comment.author;
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                            Log.e(TAG, "loadReply:onCancelled", databaseError.toException());
+                            setEditingEnabled(true);
+                        }
+                    });
+        }
 
         binding.newReplyFabSubmit.setOnClickListener(v -> submitReply());
     }

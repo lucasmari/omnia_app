@@ -5,11 +5,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -26,14 +26,19 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.Transaction;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.lucas.omnia.R;
 import com.lucas.omnia.activities.CommentsActivity;
 import com.lucas.omnia.activities.EditPostActivity;
-import com.lucas.omnia.activities.MainActivity;
 import com.lucas.omnia.activities.UserPageActivity;
 import com.lucas.omnia.models.Post;
+import com.lucas.omnia.utils.ImageLoadAsyncTask;
 import com.lucas.omnia.utils.VerticalSpaceItemDecoration;
 import com.lucas.omnia.viewholder.PostViewHolder;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import static com.lucas.omnia.fragments.FeedNavFragment.addFab;
 
@@ -42,7 +47,9 @@ public abstract class PostListFragment extends Fragment {
     private static final String TAG = "PostListFragment";
 
     private DatabaseReference databaseReference;
+    private StorageReference storageRef;
 
+    private URL postImgUrl;
     private FirebaseRecyclerAdapter<Post, PostViewHolder> recyclerAdapter;
     private RecyclerView recyclerView;
 
@@ -55,6 +62,8 @@ public abstract class PostListFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_posts, container, false);
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        storageRef = storage.getReference();
 
         recyclerView = rootView.findViewById(R.id.posts_rv);
         recyclerView.setHasFixedSize(true);
@@ -92,9 +101,20 @@ public abstract class PostListFragment extends Fragment {
                 final DatabaseReference postRef = getRef(position);
                 final String postKey = postRef.getKey();
 
+                // Determine if the post has image/video
+                if (post.hasImage) {
+                    viewHolder.bodyView.setVisibility(View.GONE);
+                    fetchProfileImage(post.uid, postKey, viewHolder.bodyImageView);
+                } else {
+                    viewHolder.bodyView.setVisibility(View.VISIBLE);
+                    viewHolder.bodyImageView.setVisibility(View.GONE);
+                }
+
                 // Determine if the post was edited
                 if (post.edited) {
                     viewHolder.editedView.setVisibility(View.VISIBLE);
+                } else {
+                    viewHolder.editedView.setVisibility(View.GONE);
                 }
 
                 // Determine if the current user has upvoted this item_post and set UI accordingly
@@ -165,6 +185,23 @@ public abstract class PostListFragment extends Fragment {
                     addFab.show();
                 }
             }
+        });
+    }
+
+    private void fetchProfileImage(String userId, String postKey, ImageView postImgView) {
+        StorageReference postImgRef = storageRef.child(userId + "/posts/" + postKey);
+        postImgRef.getDownloadUrl().addOnSuccessListener(uri -> {
+            try {
+                postImgUrl = new URL(uri.toString());
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+            ImageLoadAsyncTask imageLoadAsyncTask = new ImageLoadAsyncTask(postImgUrl,
+                    postImgView, false);
+            imageLoadAsyncTask.execute();
+            postImgView.setVisibility(View.VISIBLE);
+        }).addOnFailureListener(exception -> {
+            Toast.makeText(getContext(), getString(R.string.profile_toast_fetch_error), Toast.LENGTH_SHORT).show();
         });
     }
 
@@ -256,7 +293,20 @@ public abstract class PostListFragment extends Fragment {
 
     private void moreOptions(Post post, String postKey) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        if (getUid().equals(post.uid)) {
+        if (!getUid().equals(post.uid)) {
+            builder.setItems(getResources().getStringArray(R.array.options3), (dialog, which) -> {
+                if (which == 0) {
+                    //reportPost();
+                }
+            });
+            builder.show();
+        }
+        else if (post.hasImage) {
+            builder.setItems(getResources().getStringArray(R.array.options2), (dialog, which) -> {
+                if (which == 0) deletePost(getContext(), postKey, post);
+            });
+            builder.show();
+        } else {
             builder.setItems(getResources().getStringArray(R.array.options1), (dialog, which) -> {
                 switch (which) {
                     case 0:
@@ -265,14 +315,6 @@ public abstract class PostListFragment extends Fragment {
                     case 1:
                         deletePost(getContext(), postKey, post);
                         break;
-                }
-            });
-            builder.show();
-        }
-        else {
-            builder.setItems(getResources().getStringArray(R.array.options2), (dialog, which) -> {
-                if (which == 0) {
-                    //reportPost();
                 }
             });
             builder.show();
@@ -290,9 +332,19 @@ public abstract class PostListFragment extends Fragment {
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setMessage(getString(R.string.post_list_ad_delete))
                 .setPositiveButton(getString(R.string.alert_dialog_bt_positive), (dialog1, which1) -> {
-                    Toast.makeText(context, getString(R.string.post_list_toast_delete), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, getString(R.string.post_list_toast_deleting), Toast.LENGTH_SHORT).show();
+
                     databaseReference.child("posts").child(postKey).removeValue();
                     databaseReference.child("user-posts").child(post.uid).child(postKey).removeValue();
+
+                    StorageReference postImgRef = storageRef.child(post.uid + "/posts/" + postKey);
+
+                    postImgRef.delete().addOnSuccessListener(aVoid -> {
+                        Toast.makeText(context, getString(R.string.post_list_toast_success),
+                                Toast.LENGTH_SHORT).show();
+                    }).addOnFailureListener(exception -> {
+                        Toast.makeText(context, getString(R.string.post_list_toast_failure), Toast.LENGTH_SHORT).show();
+                    });
                 })
                 .setNegativeButton(getString(R.string.alert_dialog_bt_negative), null)
                 .show();

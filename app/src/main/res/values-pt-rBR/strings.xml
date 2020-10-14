@@ -2,9 +2,6 @@
 
     <!-- ___________________________________ General _____________________________________ -->
 
-    <!-- App Name -->
-    <string name="app_name" translatable="false">Omnia</string>
-
     <!-- AlertDialog -->
     <string name="alert_dialog_bt_positive">Sim</string>
     <string name="alert_dialog_bt_negative">Não</string>
@@ -92,7 +89,7 @@
 
     <!-- CommentListFragment -->
     <string name="comment_list_ad_delete">Você realmente deseja apagar esse comentário?</string>
-    <string name="comment_list_toast_delete">Apagando comentário…</string>
+    <string name="comment_list_toast_deleting">Apagando comentário…</string>
 
     <!-- FeedNavFragment -->
     <string name="feed_tab_1">Mais Curtidos</string>
@@ -102,7 +99,9 @@
 
     <!-- PostListFragment -->
     <string name="post_list_ad_delete">Você realmente deseja apagar esse post?</string>
-    <string name="post_list_toast_delete">Apagando post…</string>
+    <string name="post_list_toast_deleting">Apagando post…</string>
+    <string name="post_list_toast_success">Pronto</string>
+    <string name="post_list_toast_failure">Algo deu errado</string>
 
     <!-- ProfileNavFragment -->
     <string name="profile_name">Nome de Usuário</string>
@@ -120,7 +119,7 @@
 
     <!-- ReplyListFragment -->
     <string name="reply_list_ad_delete">Você realmente deseja apagar essa resposta?</string>
-    <string name="reply_list_toast_delete">Apagando resposta…</string>
+    <string name="reply_list_toast_deleting">Apagando resposta…</string>
 
     <!-- ___________________________________ Menu _____________________________________ -->
 
@@ -137,6 +136,15 @@
     <string name="menu_item_3">Aprenda!</string>
 
     <!-- ___________________________________ Layout _____________________________________ -->
+
+    <!-- NewImagePost Activity -->
+    <string name="new_image_post_iv_description">imagem post</string>
+
+
+    <!-- BottomSheetDialog Fragment -->
+    <string name="sheet_title">Criar post</string>
+    <string name="sheet_item_1">Imagem/Vídeo</string>
+    <string name="sheet_item_2">Texto</string>
 
     <!-- Posts Fragment -->
     <string name="posts_tv_no_connection">Sem conexão com a internet…</string>

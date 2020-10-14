@@ -95,6 +95,8 @@ public class CommentListFragment extends Fragment {
                 // Determine if the Comment was edited
                 if (comment.edited) {
                     viewHolder.editedView.setVisibility(View.VISIBLE);
+                } else {
+                    viewHolder.editedView.setVisibility(View.GONE);
                 }
 
                 // Determine if the current user has upvoted this item_comment and set UI accordingly
@@ -123,7 +125,8 @@ public class CommentListFragment extends Fragment {
                     });
                 }
 
-                DatabaseReference globalCommentRef = databaseReference.child("post-comments").child(postKey).child(commentRef.getKey());
+                DatabaseReference globalCommentRef =
+                        databaseReference.child("post-comments").child(postKey).child(commentKey);
                 viewHolder.bindToComment(comment, upVoteButton -> {
                     onUpVoteClicked(globalCommentRef);
                 }, downVoteButton -> {
@@ -131,7 +134,7 @@ public class CommentListFragment extends Fragment {
                 });
 
                 viewHolder.moreButton.setOnClickListener(v -> {
-                    moreOptions(comment, commentRef);
+                    moreOptions(comment, commentKey);
                 });
 
                 viewHolder.replyButton.setOnClickListener(v -> {
@@ -247,16 +250,16 @@ public class CommentListFragment extends Fragment {
         });
     }
 
-    private void moreOptions(Comment comment, DatabaseReference commentRef) {
+    private void moreOptions(Comment comment, String commentKey) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         if (getUid().equals(comment.uid)) {
             builder.setItems(getResources().getStringArray(R.array.options1), (dialog, which) -> {
                 switch (which) {
                     case 0:
-                        editComment(commentRef);
+                        editComment(commentKey);
                         break;
                     case 1:
-                        deleteComment(getContext(), commentRef);
+                        deleteComment(getContext(), commentKey);
                         decrementCommentsCount();
                         break;
                 }
@@ -273,20 +276,19 @@ public class CommentListFragment extends Fragment {
         }
     }
 
-    private void editComment(DatabaseReference commentRef) {
-        String CommentKey = commentRef.getKey();
+    private void editComment(String commentKey) {
         Intent intent = new Intent(getActivity(), EditCommentActivity.class);
-        intent.putExtra(EditCommentActivity.EXTRA_COMMENT_KEY, CommentKey);
+        intent.putExtra(EditCommentActivity.EXTRA_COMMENT_KEY, commentKey);
         startActivity(intent);
     }
 
-    private void deleteComment(Context context, DatabaseReference commentRef) {
+    private void deleteComment(Context context, String commentKey) {
         new AlertDialog.Builder(context)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setMessage(getString(R.string.comment_list_ad_delete))
                 .setPositiveButton(getString(R.string.alert_dialog_bt_positive), (dialog1, which1) -> {
-                    Toast.makeText(context, getString(R.string.comment_list_toast_delete), Toast.LENGTH_SHORT).show();
-                    databaseReference.child("post-comments").child(postKey).child(commentRef.getKey()).removeValue();
+                    Toast.makeText(context, getString(R.string.comment_list_toast_deleting), Toast.LENGTH_SHORT).show();
+                    databaseReference.child("post-comments").child(postKey).child(commentKey).removeValue();
                 })
                 .setNegativeButton(getString(R.string.alert_dialog_bt_negative), null)
                 .show();

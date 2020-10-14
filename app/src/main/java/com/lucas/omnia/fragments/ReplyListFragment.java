@@ -88,10 +88,13 @@ public class ReplyListFragment extends Fragment {
             @Override
             protected void onBindViewHolder(ReplyViewHolder viewHolder, int position, final Reply reply) {
                 final DatabaseReference replyRef = getRef(position);
+                final String replyKey = replyRef.getKey();
 
                 // Determine if the Reply was edited
                 if (reply.edited) {
                     viewHolder.editedView.setVisibility(View.VISIBLE);
+                } else {
+                    viewHolder.editedView.setVisibility(View.GONE);
                 }
 
                 // Determine if the current user has upvoted this item_reply and set UI accordingly
@@ -120,7 +123,8 @@ public class ReplyListFragment extends Fragment {
                     });
                 }
 
-                DatabaseReference globalReplyRef = databaseReference.child("comment-replies").child(commentKey).child(replyRef.getKey());
+                DatabaseReference globalReplyRef =
+                        databaseReference.child("comment-replies").child(commentKey).child(replyKey);
                 viewHolder.bindToReply(reply, upVoteButton -> {
                     onUpVoteClicked(globalReplyRef);
                 }, downVoteButton -> {
@@ -128,12 +132,13 @@ public class ReplyListFragment extends Fragment {
                 });
 
                 viewHolder.moreButton.setOnClickListener(v -> {
-                    moreOptions(reply, replyRef);
+                    moreOptions(reply, replyKey);
                 });
 
                 viewHolder.replyButton.setOnClickListener(v -> {
                     Intent intent = new Intent(getActivity(), NewReplyActivity.class);
                     intent.putExtra(NewReplyActivity.EXTRA_COMMENT_KEY, commentKey);
+                    intent.putExtra(NewReplyActivity.EXTRA_REPLY_KEY, replyKey);
                     startActivity(intent);
                 });
             }
@@ -222,16 +227,16 @@ public class ReplyListFragment extends Fragment {
         });
     }
 
-    private void moreOptions(Reply reply, DatabaseReference replyRef) {
+    private void moreOptions(Reply reply, String replyKey) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         if (getUid().equals(reply.uid)) {
             builder.setItems(getResources().getStringArray(R.array.options1), (dialog, which) -> {
                 switch (which) {
                     case 0:
-                        editReply(replyRef);
+                        editReply(replyKey);
                         break;
                     case 1:
-                        deleteReply(getContext(), replyRef);
+                        deleteReply(getContext(), replyKey);
                         decrementRepliesCount();
                         break;
                 }
@@ -248,20 +253,19 @@ public class ReplyListFragment extends Fragment {
         }
     }
 
-    private void editReply(DatabaseReference replyRef) {
-        String replyKey = replyRef.getKey();
+    private void editReply(String replyKey) {
         Intent intent = new Intent(getActivity(), EditReplyActivity.class);
         intent.putExtra(EditReplyActivity.EXTRA_REPLY_KEY, replyKey);
         startActivity(intent);
     }
 
-    private void deleteReply(Context context, DatabaseReference replyRef) {
+    private void deleteReply(Context context, String replyKey) {
         new AlertDialog.Builder(context)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setMessage(getString(R.string.reply_list_ad_delete))
                 .setPositiveButton(getString(R.string.alert_dialog_bt_positive), (dialog1, which1) -> {
-                    Toast.makeText(context, getString(R.string.reply_list_toast_delete), Toast.LENGTH_SHORT).show();
-                    databaseReference.child("comment-replies").child(commentKey).child(replyRef.getKey()).removeValue();
+                    Toast.makeText(context, getString(R.string.reply_list_toast_deleting), Toast.LENGTH_SHORT).show();
+                    databaseReference.child("comment-replies").child(commentKey).child(replyKey).removeValue();
                 })
                 .setNegativeButton(getString(R.string.alert_dialog_bt_negative), null)
                 .show();

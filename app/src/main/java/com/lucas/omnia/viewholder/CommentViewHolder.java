@@ -18,8 +18,8 @@ public class CommentViewHolder extends RecyclerView.ViewHolder {
 
     public TextView authorView;
     public TextView timestampView;
-    public TextView bodyView;
     public TextView editedView;
+    public TextView bodyView;
     public TextView upVotesView;
     public TextView downVotesView;
     public TextView repliesView;
@@ -36,8 +36,8 @@ public class CommentViewHolder extends RecyclerView.ViewHolder {
 
         authorView = itemView.findViewById(R.id.comment_tv_author);
         timestampView = itemView.findViewById(R.id.comment_tv_timestamp);
-        bodyView = itemView.findViewById(R.id.comment_tv_body);
         editedView = itemView.findViewById(R.id.comment_tv_edited);
+        bodyView = itemView.findViewById(R.id.comment_tv_body);
         upVotesView = itemView.findViewById(R.id.comment_tv_upvote_count);
         downVotesView = itemView.findViewById(R.id.comment_tv_downvote_count);
         repliesView = itemView.findViewById(R.id.comment_tv_reply_count);

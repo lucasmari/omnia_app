@@ -197,7 +197,7 @@ public class ProfileNavFragment extends Fragment {
                     profileImgRef.putFile(dataUri);
                     setProfileImage(dataUri);
 
-                    // Save hasPhoto in database
+                    // Set hasPhoto in database
                     databaseReference.child("users").child(userId).child("hasPhoto").setValue(true);
 
                     // Save hasPhoto in SharedPreferences
@@ -242,7 +242,8 @@ public class ProfileNavFragment extends Fragment {
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
-            ImageLoadAsyncTask imageLoadAsyncTask = new ImageLoadAsyncTask(profileImgUrl, profileImgView);
+            ImageLoadAsyncTask imageLoadAsyncTask = new ImageLoadAsyncTask(profileImgUrl,
+                    profileImgView, true);
             imageLoadAsyncTask.execute();
         }).addOnFailureListener(exception -> {
             Toast.makeText(getContext(), getString(R.string.profile_toast_fetch_error), Toast.LENGTH_SHORT).show();

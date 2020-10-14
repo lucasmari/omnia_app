@@ -18,6 +18,7 @@ public class Post {
     public String title;
     public String body;
     public boolean edited;
+    public boolean hasImage;
     public int upVoteCount = 0;
     public int downVoteCount = 0;
     public int commentCount = 0;

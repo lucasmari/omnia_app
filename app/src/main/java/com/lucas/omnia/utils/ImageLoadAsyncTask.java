@@ -7,10 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Shader;
 import android.os.AsyncTask;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-
-import com.lucas.omnia.R;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -20,10 +17,12 @@ public class ImageLoadAsyncTask extends AsyncTask<Void, Void, Bitmap> {
 
     private URL url;
     private ImageView imageView;
+    private boolean circular;
 
-    public ImageLoadAsyncTask(URL url, ImageView imageView) {
+    public ImageLoadAsyncTask(URL url, ImageView imageView, boolean circular) {
         this.url = url;
         this.imageView = imageView;
+        this.circular = circular;
     }
 
     @Override
@@ -41,8 +40,15 @@ public class ImageLoadAsyncTask extends AsyncTask<Void, Void, Bitmap> {
     }
 
     @Override
-    protected void onPostExecute(Bitmap result) {
-        super.onPostExecute(result);
+    protected void onPostExecute(Bitmap bitmap) {
+        super.onPostExecute(bitmap);
+
+        if (circular) bitmap = createCircularBitmap(bitmap);
+
+        imageView.setImageBitmap(bitmap);
+    }
+
+    private Bitmap createCircularBitmap(Bitmap result) {
         Bitmap circleBitmap = Bitmap.createBitmap(result.getWidth(), result.getHeight(), Bitmap.Config.ARGB_8888);
 
         BitmapShader shader = new BitmapShader(result,  Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
@@ -52,6 +58,6 @@ public class ImageLoadAsyncTask extends AsyncTask<Void, Void, Bitmap> {
         Canvas c = new Canvas(circleBitmap);
         c.drawCircle(result.getWidth()/2, result.getHeight()/2, result.getWidth()/2, paint);
 
-        imageView.setImageBitmap(circleBitmap);
+        return circleBitmap;
     }
 }

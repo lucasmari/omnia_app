@@ -24,7 +24,8 @@ import com.lucas.omnia.activities.NewPostActivity;
 
 public class FeedNavFragment extends Fragment{
 
-    static public FloatingActionButton addFab;
+    public static FloatingActionButton addFab;
+    private static String POST_TAG = "add_post_dialog_fragment";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,7 +55,10 @@ public class FeedNavFragment extends Fragment{
 
         addFab = view.findViewById(R.id.feed_fab_add);
         addFab.setOnClickListener(v -> {
-            startActivity(new Intent(view.getContext(), NewPostActivity.class));
+            PostBottomSheetDialogFragment addPostBottomDialogFragment =
+                    PostBottomSheetDialogFragment.newInstance();
+            addPostBottomDialogFragment.show(getParentFragmentManager(),
+                    POST_TAG);
         });
     }
 

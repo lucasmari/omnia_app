@@ -130,7 +130,8 @@ public class UserPageActivity extends BaseActivity {
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
-            ImageLoadAsyncTask imageLoadAsyncTask = new ImageLoadAsyncTask(userImgUrl, userImgView);
+            ImageLoadAsyncTask imageLoadAsyncTask = new ImageLoadAsyncTask(userImgUrl,
+                    userImgView, true);
             imageLoadAsyncTask.execute();
         }).addOnFailureListener(exception -> {
             Toast.makeText(UserPageActivity.this, getString(R.string.profile_toast_fetch_error),

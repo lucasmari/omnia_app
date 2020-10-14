@@ -17,8 +17,8 @@ public class ReplyViewHolder extends RecyclerView.ViewHolder {
 
     public TextView authorView;
     public TextView timestampView;
-    public TextView bodyView;
     public TextView editedView;
+    public TextView bodyView;
     public TextView upVotesView;
     public TextView downVotesView;
     public ImageButton upVoteButton;
@@ -32,8 +32,8 @@ public class ReplyViewHolder extends RecyclerView.ViewHolder {
 
         authorView = itemView.findViewById(R.id.reply_tv_author);
         timestampView = itemView.findViewById(R.id.reply_tv_timestamp);
-        bodyView = itemView.findViewById(R.id.reply_tv_body);
         editedView = itemView.findViewById(R.id.reply_tv_edited);
+        bodyView = itemView.findViewById(R.id.reply_tv_body);
         upVotesView = itemView.findViewById(R.id.reply_tv_upvote_count);
         downVotesView = itemView.findViewById(R.id.reply_tv_downvote_count);
         upVoteButton = itemView.findViewById(R.id.reply_ib_upvote);

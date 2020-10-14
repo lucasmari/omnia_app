@@ -19,7 +19,7 @@
         android:orderInCategory="3"
         android:title="Item"
         app:itemIconTint="@color/selector"
-        app:showAsAction="always"
+        app:showAsAction="ifRoom"
         tools:ignore="HardcodedText" />
     <item
         android:id="@+id/action_settings"

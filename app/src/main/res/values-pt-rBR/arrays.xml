@@ -5,7 +5,12 @@
         <item>Editar</item>
         <item>Apagar</item>
     </string-array>
+
     <string-array name="options2">
+        <item>Apagar</item>
+    </string-array>
+
+    <string-array name="options3">
         <item>Reportar</item>
     </string-array>
 </resources>

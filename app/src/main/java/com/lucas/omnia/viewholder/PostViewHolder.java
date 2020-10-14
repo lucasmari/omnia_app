@@ -2,6 +2,7 @@ package com.lucas.omnia.viewholder;
 
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,8 +18,9 @@ public class PostViewHolder extends RecyclerView.ViewHolder {
     public TextView titleView;
     public TextView authorView;
     public TextView timestampView;
-    public TextView bodyView;
     public TextView editedView;
+    public TextView bodyView;
+    public ImageView bodyImageView;
     public TextView upVotesView;
     public TextView downVotesView;
     public TextView commentsView;
@@ -35,8 +37,9 @@ public class PostViewHolder extends RecyclerView.ViewHolder {
         titleView = itemView.findViewById(R.id.post_tv_title);
         authorView = itemView.findViewById(R.id.post_tv_author);
         timestampView = itemView.findViewById(R.id.post_tv_timestamp);
-        bodyView = itemView.findViewById(R.id.post_tv_body);
         editedView = itemView.findViewById(R.id.post_tv_edited);
+        bodyView = itemView.findViewById(R.id.post_tv_body);
+        bodyImageView = itemView.findViewById(R.id.post_iv_body_image);
         upVotesView = itemView.findViewById(R.id.post_tv_upvote_count);
         downVotesView = itemView.findViewById(R.id.post_tv_downvote_count);
         commentsView = itemView.findViewById(R.id.post_tv_comment_count);

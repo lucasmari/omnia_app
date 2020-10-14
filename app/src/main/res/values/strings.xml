@@ -94,7 +94,7 @@
     <!-- CommentListFragment -->
     <string name="comment_list_ad_delete">Do you really want to delete this
         comment?</string>
-    <string name="comment_list_toast_delete">Deleting comment…</string>
+    <string name="comment_list_toast_deleting">Deleting comment…</string>
 
     <!-- FeedNavFragment -->
     <string name="feed_tab_1">Hot</string>
@@ -105,7 +105,9 @@
     <!-- PostListFragment -->
     <string name="post_list_ad_delete">Do you really want to delete this
         post?</string>
-    <string name="post_list_toast_delete">Deleting post…</string>
+    <string name="post_list_toast_deleting">Deleting post…</string>
+    <string name="post_list_toast_success">Done</string>
+    <string name="post_list_toast_failure">Something went wrong</string>
 
     <!-- ProfileNavFragment -->
     <string name="profile_name">Username</string>
@@ -124,7 +126,7 @@
     <!-- ReplyListFragment -->
     <string name="reply_list_ad_delete">Do you really want to delete this
         reply?</string>
-    <string name="reply_list_toast_delete">Deleting reply…</string>
+    <string name="reply_list_toast_deleting">Deleting reply…</string>
 
     <!-- ___________________________________ Menu _____________________________________ -->
 
@@ -141,6 +143,14 @@
     <string name="menu_item_3">Learn!</string>
 
     <!-- ___________________________________ Layout _____________________________________ -->
+
+    <!-- NewImagePost Activity -->
+    <string name="new_image_post_iv_description">post image</string>
+
+    <!-- BottomSheetDialog Fragment -->
+    <string name="sheet_title">Create post</string>
+    <string name="sheet_item_1">Image/Video</string>
+    <string name="sheet_item_2">Text</string>
 
     <!-- Posts Fragment -->
     <string name="posts_tv_no_connection">No internet connection…</string>
