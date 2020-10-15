@@ -9,7 +9,6 @@
         android:id="@+id/feed_tl"
         android:layout_width="match_parent"
         android:layout_height="36dp"
-        android:elevation="4dp"
         app:tabMinWidth="100dp"
         app:tabMode="scrollable"
         app:layout_scrollFlags="scroll|enterAlways"
@@ -20,8 +19,7 @@
         android:id="@+id/feed_vp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:background="@color/colorPrimary" />
+        android:layout_marginTop="36dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/feed_fab_add"
@@ -32,10 +30,8 @@
         android:layout_marginBottom="60dp"
         android:scaleType="center"
         android:src="@drawable/ic_add"
-        app:backgroundTint="@color/colorAccent"
         app:fabSize="normal"
-        app:rippleColor="@color/colorPrimary"
         app:useCompatPadding="true"
-        tools:ignore="RtlHardcoded" />
+        android:contentDescription="@string/feed_fab_description" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

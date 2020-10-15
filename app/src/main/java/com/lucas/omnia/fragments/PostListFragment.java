@@ -34,7 +34,6 @@ import com.lucas.omnia.activities.EditPostActivity;
 import com.lucas.omnia.activities.UserPageActivity;
 import com.lucas.omnia.models.Post;
 import com.lucas.omnia.utils.ImageLoadAsyncTask;
-import com.lucas.omnia.utils.VerticalSpaceItemDecoration;
 import com.lucas.omnia.viewholder.PostViewHolder;
 
 import java.net.MalformedURLException;
@@ -120,19 +119,17 @@ public abstract class PostListFragment extends Fragment {
                 // Determine if the current user has upvoted this item_post and set UI accordingly
                 if (post.upVotes.containsKey(getUid())) {
                     viewHolder.upVoteButton.setColorFilter(getResources()
-                            .getColor(R.color.colorAccent), PorterDuff.Mode.SRC_ATOP);
+                            .getColor(R.color.colorAccentBlue), PorterDuff.Mode.SRC_ATOP);
                 } else {
-                    viewHolder.upVoteButton.setColorFilter(getResources()
-                            .getColor(R.color.colorWhite), PorterDuff.Mode.SRC_ATOP);
+                    viewHolder.upVoteButton.setColorFilter(viewHolder.upVoteButton.getSolidColor());
                 }
 
                 // Determine if the current user has downvoted this item_post and set UI accordingly
                 if (post.downVotes.containsKey(getUid())) {
                     viewHolder.downVoteButton.setColorFilter(getResources()
-                            .getColor(R.color.colorAccent), PorterDuff.Mode.SRC_ATOP);
+                            .getColor(R.color.colorAccentRed), PorterDuff.Mode.SRC_ATOP);
                 } else {
-                    viewHolder.downVoteButton.setColorFilter(getResources()
-                            .getColor(R.color.colorWhite), PorterDuff.Mode.SRC_ATOP);
+                    viewHolder.downVoteButton.setColorFilter(viewHolder.downVoteButton.getSolidColor());
                 }
 
                 viewHolder.authorView.setOnClickListener(v -> {
@@ -171,9 +168,6 @@ public abstract class PostListFragment extends Fragment {
         };
 
         recyclerView.setAdapter(recyclerAdapter);
-        int VERTICAL_ITEM_SPACE = 48;
-        recyclerView.addItemDecoration(new VerticalSpaceItemDecoration(VERTICAL_ITEM_SPACE));
-
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {

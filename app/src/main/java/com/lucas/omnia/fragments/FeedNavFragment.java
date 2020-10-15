@@ -25,7 +25,7 @@ import com.lucas.omnia.activities.NewPostActivity;
 public class FeedNavFragment extends Fragment{
 
     public static FloatingActionButton addFab;
-    private static String POST_TAG = "add_post_dialog_fragment";
+    private static final String POST_TAG = "add_post_dialog_fragment";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,7 +42,7 @@ public class FeedNavFragment extends Fragment{
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        getActivity().setTitle("Feed");
+        getActivity().setTitle(R.string.feed_title);
 
         ViewPager viewPager = view.findViewById(R.id.feed_vp);
         GooglePlusFragmentPageAdapter adapter =

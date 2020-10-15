@@ -47,7 +47,7 @@
     <!-- NewPostActivity -->
     <string name="new_post_title">Novo Post</string>
     <string name="new_post_title_hint">Título</string>
-    <string name="new_post_body_hint">Escreva seu post</string>
+    <string name="new_post_body_hint">Escreva seu post…</string>
     <string name="new_post_toast_user_fetch_error">Não foi possível acessar usuário"</string>
     <string name="new_post_toast_posting">Enviando post…</string>
 
@@ -68,6 +68,8 @@
     <string name="replies_title">Respostas</string>
 
     <!-- SettingsActivity -->
+    <string name="settings_title">Configurações</string>
+    <string name="settings_customization_title">Customização</string>
     <string name="settings_theme_pref">Tema</string>
     <string name="settings_theme_pref_key">theme</string>
     <string name="settings_theme_pref_sum_on">Claro</string>
@@ -92,10 +94,12 @@
     <string name="comment_list_toast_deleting">Apagando comentário…</string>
 
     <!-- FeedNavFragment -->
+    <string name="feed_title">Feed</string>
     <string name="feed_tab_1">Mais Curtidos</string>
     <string name="feed_tab_2">Mais Recentes</string>
     <string name="feed_tab_3">Meus Posts</string>
     <string name="feed_tab_4">Minhas Curtidas</string>
+    <string name="feed_fab_description">fab</string>
 
     <!-- PostListFragment -->
     <string name="post_list_ad_delete">Você realmente deseja apagar esse post?</string>

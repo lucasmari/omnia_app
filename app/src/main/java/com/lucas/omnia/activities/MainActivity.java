@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -33,7 +32,7 @@ public class MainActivity extends BaseActivity implements SharedPreferences.OnSh
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        /*setupSharedPreferences();*/
+        setupSharedPreferences();
 
         Toolbar toolbar = findViewById(R.id.main_tb);
         setSupportActionBar(toolbar);
@@ -58,31 +57,9 @@ public class MainActivity extends BaseActivity implements SharedPreferences.OnSh
         }
     }
 
-    public void setTheme(boolean b) {
-        /*if(b) {
-            this.setTheme(R.style.AppThemeLight);
-            navigation.setBackgroundColor(getResources().getColor(R.color.colorPrimaryLight));
-            navigation.setItemIconTintList(ColorStateList.valueOf(getResources().getColor(R.color.selector_light)));
-            navigation.setItemTextColor(ColorStateList.valueOf(getResources().getColor(R.color.selector_light)));
-        }
-        else {
-            this.setTheme(R.style.AppThemeDark);
-            navigation.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-            navigation.setItemIconTintList(ColorStateList.valueOf(getResources().getColor(R.color.selector)));
-            navigation.setItemTextColor(ColorStateList.valueOf(getResources().getColor(R.color.selector)));
-        }*/
-    }
-
-    public void setupSharedPreferences() {
-        SharedPreferences sharedPreferences =
-                PreferenceManager.getDefaultSharedPreferences(this);
-        sharedPreferences.registerOnSharedPreferenceChangeListener(this);
-        setTheme(sharedPreferences.getBoolean(getString(R.string.settings_theme_pref_key), false));
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_1, menu);
+        getMenuInflater().inflate(R.menu.menu_items, menu);
 
         /*SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
@@ -100,21 +77,6 @@ public class MainActivity extends BaseActivity implements SharedPreferences.OnSh
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
-        }
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        PreferenceManager.getDefaultSharedPreferences(this)
-                .unregisterOnSharedPreferenceChangeListener(this);
-    }
-
-    @Override
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        if(key.equals(getString(R.string.settings_theme_pref_key))) {
-            setTheme(sharedPreferences.getBoolean(key, false));
-            recreate();
         }
     }
 

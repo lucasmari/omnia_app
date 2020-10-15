@@ -43,6 +43,7 @@
         android:layout_marginStart="24dp"
         android:layout_toEndOf="@+id/user_page_iv"
         android:background="@drawable/rounded_rv_item"
+        android:backgroundTint="@color/colorAccent"
         android:paddingStart="6dp"
         android:paddingEnd="6dp">
 
@@ -50,14 +51,16 @@
             android:id="@+id/user_page_tv_subs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/profile_subs" />
+            android:text="@string/profile_subs"
+            android:textColor="@color/colorPrimaryDark" />
 
         <TextView
             android:id="@+id/user_page_tv_sub_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAlignment="textEnd"
-            android:layout_marginStart="8dp" />
+            android:layout_marginStart="8dp"
+            android:textColor="@color/colorPrimaryDark" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <View
@@ -68,7 +71,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="10dp"
-        android:background="@color/colorPrimaryDark" />
+        android:background="@drawable/line_separator" />
 
     <TextView
         android:id="@+id/user_page_tv_about_title"

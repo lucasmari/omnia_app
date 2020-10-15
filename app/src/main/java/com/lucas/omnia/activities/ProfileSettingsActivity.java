@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.appcompat.widget.Toolbar;
+
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,6 +32,9 @@ public class ProfileSettingsActivity extends BaseActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         binding = ActivityProfileSettingsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        Toolbar toolbar = findViewById(R.id.profile_settings_tb);
+        setSupportActionBar(toolbar);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
 

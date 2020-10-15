@@ -29,8 +29,6 @@
         <activity
             android:name=".activities.MainActivity"
             android:launchMode="singleTop">
-            <meta-data android:name="android.app.searchable"
-                android:resource="@xml/searchable" />
         </activity>
 
         <activity
@@ -114,8 +112,7 @@
 
         <activity
             android:name=".activities.NewReplyActivity"
-            android:label="@string/new_reply_title">
-        </activity>
+            android:label="@string/new_reply_title" />
 
         <activity
             android:name=".activities.EditReplyActivity"
@@ -126,15 +123,25 @@
                 android:value=".activities.RepliesActivity" />
         </activity>
 
+        <activity
+            android:name=".activities.SettingsActivity"
+            android:label="@string/settings_title"
+            android:parentActivityName=".activities.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.MainActivity" />
+        </activity>
 
         <activity
-            android:name=".activities.SettingsActivity"></activity>
+            android:name=".activities.ProfileSettingsActivity"
+            android:label="@string/profile_settings_title"
+            android:parentActivityName=".activities.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.MainActivity" />
+        </activity>
 
-        <activity
-            android:name=".activities.ProfileSettingsActivity"></activity>
-
-        <activity
-            android:name=".activities.UserPageActivity"></activity>
+        <activity android:name=".activities.UserPageActivity" />
 
     </application>
 </manifest>

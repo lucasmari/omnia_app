@@ -101,8 +101,9 @@ public class UserPageActivity extends BaseActivity {
                                     getString(R.string.new_post_toast_user_fetch_error),
                                     Toast.LENGTH_SHORT).show();
                         } else {
-                            if (u.subs.containsKey(userKey))
+                            if (u.subs.containsKey(userKey)) {
                                 subButton.setText(getString(R.string.user_page_bt_unsub));
+                            }
                         }
                     }
 
@@ -179,7 +180,9 @@ public class UserPageActivity extends BaseActivity {
                 }
 
                 u.subCount = u.subCount - 1;
-                subCountTv.setText(String.valueOf(u.subCount));
+                runOnUiThread(() -> {
+                    subCountTv.setText(String.valueOf(u.subCount));
+                });
 
                 // Set value and report transaction success
                 mutableData.setValue(u);
@@ -213,7 +216,9 @@ public class UserPageActivity extends BaseActivity {
                 }
 
                 u.subCount = u.subCount + 1;
-                subCountTv.setText(String.valueOf(u.subCount));
+                runOnUiThread(() -> {
+                    subCountTv.setText(String.valueOf(u.subCount));
+                });
 
                 // Set value and report transaction success
                 mutableData.setValue(u);

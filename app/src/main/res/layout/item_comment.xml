@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="4dp"
+    app:cardElevation="4dp">
+
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginEnd="5dp"
     android:layout_marginStart="5dp"
-    android:background="@drawable/rounded_rv_item"
-    android:elevation="2dp"
     android:orientation="vertical">
 
     <LinearLayout
@@ -28,7 +33,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:layout_gravity="center"
-            android:background="@color/colorAccent" />
+            android:background="@color/colorPrimaryDarkLight" />
 
         <TextView
             android:id="@+id/comment_tv_timestamp"
@@ -43,11 +48,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/rounded_rv_item"
-            android:backgroundTint="@color/colorPrimaryDarkLight"
+            android:backgroundTint="@color/colorAccent"
             android:paddingStart="4dp"
             android:paddingEnd="4dp"
             android:layout_gravity="center"
             android:text="@string/post_edited"
+            android:textColor="@color/colorPrimaryDark"
             android:visibility="gone" />
 
         <ImageButton
@@ -60,8 +66,7 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/post_more_description"
             android:scaleType="centerInside"
-            android:src="@drawable/ic_more"
-            android:tint="@android:color/background_light" />
+            android:src="@drawable/ic_more_vertical" />
 
     </LinearLayout>
 
@@ -82,7 +87,7 @@
         android:layout_height="1dp"
         android:layout_marginStart="6dp"
         android:layout_marginEnd="6dp"
-        android:background="@color/colorPrimaryDark" />
+        android:background="@drawable/line_separator" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -104,8 +109,7 @@
             android:layout_weight="1"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/post_upvote_description"
-            android:src="@drawable/ic_upvote"
-            android:tint="@android:color/background_light" />
+            android:src="@drawable/ic_upvote" />
 
         <TextView
             android:id="@+id/comment_tv_upvote_count"
@@ -116,7 +120,6 @@
             android:layout_marginEnd="6dp"
             android:layout_weight="1"
             android:textAlignment="viewStart"
-            android:textColor="@color/colorWhite"
             android:textSize="14sp" />
 
         <ImageButton
@@ -129,8 +132,7 @@
             android:layout_weight="1"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/post_downvote_description"
-            android:src="@drawable/ic_downvote"
-            android:tint="@android:color/background_light" />
+            android:src="@drawable/ic_downvote" />
 
         <TextView
             android:id="@+id/comment_tv_downvote_count"
@@ -141,7 +143,6 @@
             android:layout_marginEnd="6dp"
             android:layout_weight="1"
             android:textAlignment="viewStart"
-            android:textColor="@color/colorWhite"
             android:textSize="14sp" />
 
         <Button
@@ -150,7 +151,8 @@
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:text="@string/reply_button" />
+            android:text="@string/reply_button"
+            android:textColor="?attr/colorOnBackground" />
 
     </LinearLayout>
 
@@ -172,7 +174,8 @@
             style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="wrap_content"
             android:layout_height="36dp"
-            android:text="@string/replies_button" />
+            android:text="@string/replies_button"
+            android:textColor="?attr/colorOnBackground" />
 
         <TextView
             android:id="@+id/comment_tv_reply_count"
@@ -183,8 +186,7 @@
             android:layout_marginTop="2dp"
             android:layout_marginEnd="6dp"
             android:textAlignment="viewStart"
-            android:textColor="@color/colorWhite"
             android:textSize="14sp" />
     </LinearLayout>
-
 </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

@@ -28,7 +28,7 @@ public class PostBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
     // Permissions
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
-    private static String[] PERMISSIONS_STORAGE = {
+    private static final String[] PERMISSIONS_STORAGE = {
             Manifest.permission.READ_EXTERNAL_STORAGE
     };
 
@@ -49,7 +49,10 @@ public class PostBottomSheetDialogFragment extends BottomSheetDialogFragment {
         imagePost.setOnClickListener(v -> verifyStoragePermissions());
 
         TextView textPost = view.findViewById(R.id.sheet_tv_add_text);
-        textPost.setOnClickListener(v -> startActivity(new Intent(view.getContext(), NewPostActivity.class)));
+        textPost.setOnClickListener(v -> {
+            startActivity(new Intent(view.getContext(), NewPostActivity.class));
+            dismiss();
+        });
 
         return view;
     }
@@ -91,6 +94,7 @@ public class PostBottomSheetDialogFragment extends BottomSheetDialogFragment {
                 Intent intent = new Intent(getActivity(), NewImagePostActivity.class);
                 intent.putExtra(NewImagePostActivity.EXTRA_DATA, dataUri.toString());
                 startActivity(intent);
+                dismiss();
             }
         }
     }

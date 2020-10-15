@@ -1,157 +1,159 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="wrap_content"
-    android:layout_marginEnd="5dp"
-    android:layout_marginStart="5dp"
-    android:background="@drawable/rounded_rv_item"
-    android:elevation="2dp"
-    android:orientation="vertical">
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="4dp"
+    app:cardElevation="4dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginBottom="6dp">
+        android:layout_marginEnd="5dp"
+        android:layout_marginStart="5dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="6dp">
+
+            <TextView
+                android:id="@+id/reply_tv_author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/post_author" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="1dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_gravity="center"
+                android:background="@color/colorPrimaryDarkLight" />
+
+            <TextView
+                android:id="@+id/reply_tv_timestamp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:text="@string/post_timestamp" />
+
+            <TextView
+                android:id="@+id/reply_tv_edited"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_rv_item"
+                android:backgroundTint="@color/colorAccent"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
+                android:layout_gravity="center"
+                android:text="@string/post_edited"
+                android:visibility="gone" />
+
+            <ImageButton
+                android:id="@+id/reply_ib_more"
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="6dp"
+                android:layout_marginEnd="6dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/post_more_description"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_more_vertical" />
+
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/reply_tv_author"
+            android:id="@+id/reply_tv_body"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/post_author" />
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="10dp"
+            android:text="@string/reply_body"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="16sp" />
 
         <View
-            android:layout_width="1dp"
+            android:layout_width="match_parent"
             android:layout_height="1dp"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="6dp"
+            android:background="@drawable/line_separator" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="8dp"
-            android:layout_gravity="center"
-            android:background="@color/colorAccent" />
+            android:layout_marginBottom="4dp"
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/reply_tv_timestamp"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:text="@string/post_timestamp" />
+            <ImageButton
+                android:id="@+id/reply_ib_upvote"
+                android:layout_width="20dp"
+                android:layout_height="36dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="6dp"
+                android:layout_marginEnd="6dp"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/post_upvote_description"
+                android:src="@drawable/ic_upvote" />
 
-        <TextView
-            android:id="@+id/reply_tv_edited"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/rounded_rv_item"
-            android:backgroundTint="@color/colorPrimaryDarkLight"
-            android:paddingStart="4dp"
-            android:paddingEnd="4dp"
-            android:layout_gravity="center"
-            android:text="@string/post_edited"
-            android:visibility="gone" />
+            <TextView
+                android:id="@+id/reply_tv_upvote_count"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="6dp"
+                android:layout_marginEnd="6dp"
+                android:layout_weight="1"
+                android:textAlignment="viewStart"
+                android:textSize="14sp" />
 
-        <ImageButton
-            android:id="@+id/reply_ib_more"
-            android:layout_width="wrap_content"
-            android:layout_height="24dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="6dp"
-            android:layout_marginEnd="6dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="@string/post_more_description"
-            android:scaleType="centerInside"
-            android:src="@drawable/ic_more"
-            android:tint="@android:color/background_light" />
+            <ImageButton
+                android:id="@+id/reply_ib_downvote"
+                android:layout_width="20dp"
+                android:layout_height="36dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="6dp"
+                android:layout_marginEnd="6dp"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/post_downvote_description"
+                android:src="@drawable/ic_downvote" />
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/reply_tv_downvote_count"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="6dp"
+                android:layout_marginEnd="6dp"
+                android:layout_weight="1"
+                android:textAlignment="viewStart"
+                android:textSize="14sp" />
 
-    <TextView
-        android:id="@+id/reply_tv_body"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="12dp"
-        android:layout_marginBottom="10dp"
-        android:text="@string/reply_body"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="16sp" />
+            <Button
+                android:id="@+id/reply_bt_reply"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:text="@string/reply_button"
+                android:textColor="?attr/colorOnBackground" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginStart="6dp"
-        android:layout_marginEnd="6dp"
-        android:background="@color/colorPrimaryDark" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="4dp"
-        android:orientation="horizontal">
-
-        <ImageButton
-            android:id="@+id/reply_ib_upvote"
-            android:layout_width="20dp"
-            android:layout_height="36dp"
-            android:layout_gravity="center"
-            android:layout_marginStart="6dp"
-            android:layout_marginEnd="6dp"
-            android:layout_weight="1"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="@string/post_upvote_description"
-            android:src="@drawable/ic_upvote"
-            android:tint="@android:color/background_light" />
-
-        <TextView
-            android:id="@+id/reply_tv_upvote_count"
-            android:layout_width="30dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="6dp"
-            android:layout_marginEnd="6dp"
-            android:layout_weight="1"
-            android:textAlignment="viewStart"
-            android:textColor="@color/colorWhite"
-            android:textSize="14sp" />
-
-        <ImageButton
-            android:id="@+id/reply_ib_downvote"
-            android:layout_width="20dp"
-            android:layout_height="36dp"
-            android:layout_gravity="center"
-            android:layout_marginStart="6dp"
-            android:layout_marginEnd="6dp"
-            android:layout_weight="1"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="@string/post_downvote_description"
-            android:src="@drawable/ic_downvote"
-            android:tint="@android:color/background_light" />
-
-        <TextView
-            android:id="@+id/reply_tv_downvote_count"
-            android:layout_width="30dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="6dp"
-            android:layout_marginEnd="6dp"
-            android:layout_weight="1"
-            android:textAlignment="viewStart"
-            android:textColor="@color/colorWhite"
-            android:textSize="14sp" />
-
-        <Button
-            android:id="@+id/reply_bt_reply"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:text="@string/reply_button" />
+        </LinearLayout>
 
     </LinearLayout>
-
-</LinearLayout>
+</com.google.android.material.card.MaterialCardView>

@@ -32,7 +32,6 @@ import com.lucas.omnia.activities.RepliesActivity;
 import com.lucas.omnia.activities.UserPageActivity;
 import com.lucas.omnia.models.Comment;
 import com.lucas.omnia.models.Post;
-import com.lucas.omnia.utils.VerticalSpaceItemDecoration;
 import com.lucas.omnia.viewholder.CommentViewHolder;
 
 import static com.lucas.omnia.activities.CommentsActivity.addFab;
@@ -102,19 +101,17 @@ public class CommentListFragment extends Fragment {
                 // Determine if the current user has upvoted this item_comment and set UI accordingly
                 if (comment.upVotes.containsKey(getUid())) {
                     viewHolder.upVoteButton.setColorFilter(getResources()
-                            .getColor(R.color.colorAccent), PorterDuff.Mode.SRC_ATOP);
+                            .getColor(R.color.colorAccentBlue), PorterDuff.Mode.SRC_ATOP);
                 } else {
-                    viewHolder.upVoteButton.setColorFilter(getResources()
-                            .getColor(R.color.colorWhite), PorterDuff.Mode.SRC_ATOP);
+                    viewHolder.upVoteButton.setColorFilter(viewHolder.upVoteButton.getSolidColor());
                 }
 
                 // Determine if the current user has downvoted this item_comment and set UI accordingly
                 if (comment.downVotes.containsKey(getUid())) {
                     viewHolder.downVoteButton.setColorFilter(getResources()
-                            .getColor(R.color.colorAccent), PorterDuff.Mode.SRC_ATOP);
+                            .getColor(R.color.colorAccentRed), PorterDuff.Mode.SRC_ATOP);
                 } else {
-                    viewHolder.downVoteButton.setColorFilter(getResources()
-                            .getColor(R.color.colorWhite), PorterDuff.Mode.SRC_ATOP);
+                    viewHolder.downVoteButton.setColorFilter(viewHolder.downVoteButton.getSolidColor());
                 }
 
                 if (!getUid().equals(comment.uid)) {
@@ -155,9 +152,6 @@ public class CommentListFragment extends Fragment {
         };
 
         recyclerView.setAdapter(recyclerAdapter);
-        int VERTICAL_ITEM_SPACE = 48;
-        recyclerView.addItemDecoration(new VerticalSpaceItemDecoration(VERTICAL_ITEM_SPACE));
-
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -267,7 +261,7 @@ public class CommentListFragment extends Fragment {
             builder.show();
         }
         else {
-            builder.setItems(getResources().getStringArray(R.array.options2), (dialog, which) -> {
+            builder.setItems(getResources().getStringArray(R.array.options3), (dialog, which) -> {
                 if (which == 0) {
                     //reportComment();
                 }

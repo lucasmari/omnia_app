@@ -72,6 +72,8 @@
     <string name="replies_title">Replies</string>
 
     <!-- SettingsActivity -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_customization_title">Customization</string>
     <string name="settings_theme_pref">Theme</string>
     <string name="settings_theme_pref_key">theme</string>
     <string name="settings_theme_pref_sum_on">Light</string>
@@ -97,10 +99,12 @@
     <string name="comment_list_toast_deleting">Deleting comment…</string>
 
     <!-- FeedNavFragment -->
+    <string name="feed_title">Feed</string>
     <string name="feed_tab_1">Hot</string>
     <string name="feed_tab_2">Recent</string>
     <string name="feed_tab_3">My Posts</string>
     <string name="feed_tab_4">Upvoted</string>
+    <string name="feed_fab_description">fab</string>
 
     <!-- PostListFragment -->
     <string name="post_list_ad_delete">Do you really want to delete this

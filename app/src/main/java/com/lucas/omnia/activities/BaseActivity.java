@@ -1,10 +1,8 @@
 package com.lucas.omnia.activities;
 
-import android.content.Context;
-import android.os.Handler;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
 import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,9 +10,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.lucas.omnia.R;
 
 
-public class BaseActivity extends AppCompatActivity {
+public class BaseActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener{
 
     private ProgressBar progressBar;
 
@@ -42,34 +41,44 @@ public class BaseActivity extends AppCompatActivity {
         return FirebaseAuth.getInstance().getCurrentUser().getUid();
     }
 
-    public static void showSoftKeyboard(Context activityContext, final EditText editText){
-
-        final InputMethodManager imm = (InputMethodManager)
-                activityContext.getSystemService(Context.INPUT_METHOD_SERVICE);
-
-        if (!editText.hasFocus()) {
-            editText.requestFocus();
-        }
-
-        final Handler handler = new Handler();
-        handler.postDelayed(() -> imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT), 300);
+    public void setupSharedPreferences() {
+        SharedPreferences sharedPreferences =
+                PreferenceManager.getDefaultSharedPreferences(this);
+        sharedPreferences.registerOnSharedPreferenceChangeListener(this);
     }
 
-    public static void hideSoftKeyboard(Context activityContext, final EditText editText){
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        PreferenceManager.getDefaultSharedPreferences(this)
+                .unregisterOnSharedPreferenceChangeListener(this);
+    }
 
-        final InputMethodManager imm = (InputMethodManager)
-                activityContext.getSystemService(Context.INPUT_METHOD_SERVICE);
-
-        if (editText.hasFocus()) {
-            editText.clearFocus();
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        if(key.equals(getString(R.string.settings_theme_pref_key))) {
+            switchTheme(sharedPreferences.getBoolean(key, false));
+            recreate();
         }
+    }
 
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
-            }
-        }, 300);
+    @Override
+    public final void setTheme(final int resid) {
+        SharedPreferences sharedPreferences = androidx.preference.PreferenceManager.getDefaultSharedPreferences(this);
+        boolean theme = sharedPreferences.getBoolean(getString(R.string.settings_theme_pref_key), false);
+
+        if (theme) {
+            super.setTheme(R.style.AppThemeLight);
+        } else {
+            super.setTheme(R.style.AppThemeDark);
+        }
+    }
+
+    private void switchTheme(boolean b) {
+        if (b) {
+            this.setTheme(R.style.AppThemeLight);
+        } else {
+            this.setTheme(R.style.AppThemeDark);
+        }
     }
 }

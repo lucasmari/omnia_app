@@ -10,19 +10,13 @@
         android:id="@+id/profile_settings_ab"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:elevation="0dp">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/profile_settings_tb"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
-            app:layout_scrollFlags="enterAlways"
-            app:title="@string/profile_settings_title"
-            app:titleTextAppearance="@android:style/TextAppearance.Medium"
-            tools:ignore="UnusedAttribute" />
-
+            app:layout_scrollFlags="enterAlways" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <Button
@@ -33,17 +27,18 @@
         android:layout_below="@id/profile_settings_ab"
         android:layout_marginTop="60dp"
         android:text="@string/profile_settings_bt_sign_out"
+        android:textColor="@color/colorAccentBlue"
         style="@style/Widget.MaterialComponents.Button.TextButton" />
 
     <Button
         android:id="@+id/profile_settings_bt_delete_account"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/profile_settings_bt_signout"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:text="@string/profile_settings_bt_delete_account"
-        android:textColor="#F44336" />
+        android:textColor="@color/colorAccentRed"
+        style="@style/Widget.MaterialComponents.Button.TextButton" />
 </RelativeLayout>
 </layout>
