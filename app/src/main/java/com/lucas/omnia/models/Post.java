@@ -21,6 +21,7 @@ public class Post {
     public boolean hasImage;
     public int upVoteCount = 0;
     public int downVoteCount = 0;
+    public int votesBalance = 0;
     public int commentCount = 0;
     public Map<String, Boolean> upVotes = new HashMap<>();
     public Map<String, Boolean> downVotes = new HashMap<>();
@@ -46,6 +47,7 @@ public class Post {
         result.put("body", body);
         result.put("upVoteCount", upVoteCount);
         result.put("downVoteCount", downVoteCount);
+        result.put("votesBalance", votesBalance);
         result.put("commentCount", commentCount);
 
         return result;

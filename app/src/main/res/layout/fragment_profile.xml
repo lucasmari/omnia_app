@@ -69,9 +69,10 @@
 
         <TextView
             android:id="@+id/profile_tv_sub_count"
-            android:layout_width="30dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAlignment="textEnd"
+            android:layout_marginStart="8dp"
             android:textColor="@color/colorPrimaryDark" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 

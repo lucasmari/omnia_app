@@ -212,16 +212,19 @@ public abstract class PostListFragment extends Fragment {
                     // Remove downvote from item_post
                     p.downVoteCount = p.downVoteCount - 1;
                     p.downVotes.remove(getUid());
+                    p.votesBalance = p.votesBalance - 1;
                 }
 
                 if (p.upVotes.containsKey(getUid())) {
                     // Unvote the item_post and remove self from votes
                     p.upVoteCount = p.upVoteCount - 1;
                     p.upVotes.remove(getUid());
+                    p.votesBalance = p.votesBalance - 1;
                 } else {
                     // Upvote the item_post and add self to votes
                     p.upVoteCount = p.upVoteCount + 1;
                     p.upVotes.put(getUid(), true);
+                    p.votesBalance = p.votesBalance + 1;
                 }
 
                 // Set value and report transaction success
@@ -251,16 +254,19 @@ public abstract class PostListFragment extends Fragment {
                     // Remove upvote from item_post
                     p.upVoteCount = p.upVoteCount - 1;
                     p.upVotes.remove(getUid());
+                    p.votesBalance = p.votesBalance - 1;
                 }
 
                 if (p.downVotes.containsKey(getUid())) {
                     // Unvote the item_post and remove self from votes
                     p.downVoteCount = p.downVoteCount - 1;
                     p.downVotes.remove(getUid());
+                    p.votesBalance = p.votesBalance + 1;
                 } else {
-                    // Downvote the item_post and add self to // run some codevotes
+                    // Downvote the item_post and add self to votes
                     p.downVoteCount = p.downVoteCount + 1;
                     p.downVotes.put(getUid(), true);
+                    p.votesBalance = p.votesBalance - 1;
                 }
 
                 // Set value and report transaction success

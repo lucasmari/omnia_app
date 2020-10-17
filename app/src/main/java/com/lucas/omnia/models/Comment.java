@@ -20,6 +20,7 @@
      public boolean edited;
      public int upVoteCount = 0;
      public int downVoteCount = 0;
+     public int votesBalance = 0;
      public int replyCount = 0;
      public Map<String, Boolean> upVotes = new HashMap<>();
      public Map<String, Boolean> downVotes = new HashMap<>();
@@ -43,6 +44,7 @@
          result.put("body", body);
          result.put("upVoteCount", upVoteCount);
          result.put("downVoteCount", downVoteCount);
+         result.put("votesBalance", votesBalance);
          result.put("replyCount", replyCount);
 
          return result;

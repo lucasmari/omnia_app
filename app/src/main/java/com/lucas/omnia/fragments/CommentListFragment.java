@@ -179,16 +179,19 @@ public class CommentListFragment extends Fragment {
                     // Remove downvote from item_Comment
                     c.downVoteCount = c.downVoteCount - 1;
                     c.downVotes.remove(getUid());
+                    c.votesBalance = c.votesBalance - 1;
                 }
 
                 if (c.upVotes.containsKey(getUid())) {
                     // Unvote the item_Comment and remove self from votes
                     c.upVoteCount = c.upVoteCount - 1;
                     c.upVotes.remove(getUid());
+                    c.votesBalance = c.votesBalance - 1;
                 } else {
                     // Upvote the item_Comment and add self to votes
                     c.upVoteCount = c.upVoteCount + 1;
                     c.upVotes.put(getUid(), true);
+                    c.votesBalance = c.votesBalance + 1;
                 }
 
                 // Set value and report transaction success
@@ -218,16 +221,19 @@ public class CommentListFragment extends Fragment {
                     // Remove upvote from item_Comment
                     c.upVoteCount = c.upVoteCount - 1;
                     c.upVotes.remove(getUid());
+                    c.votesBalance = c.votesBalance - 1;
                 }
 
                 if (c.downVotes.containsKey(getUid())) {
                     // Unvote the item_Comment and remove self from votes
                     c.downVoteCount = c.downVoteCount - 1;
                     c.downVotes.remove(getUid());
+                    c.votesBalance = c.votesBalance + 1;
                 } else {
-                    // Downvote the item_Comment and add self to // run some codevotes
+                    // Downvote the item_Comment and add self to votes
                     c.downVoteCount = c.downVoteCount + 1;
                     c.downVotes.put(getUid(), true);
+                    c.votesBalance = c.votesBalance - 1;
                 }
 
                 // Set value and report transaction success
@@ -336,7 +342,7 @@ public class CommentListFragment extends Fragment {
 
     public Query getQuery(DatabaseReference databaseReference) {
         Query topCommentsQuery = databaseReference.child("post-comments")
-                .child(postKey).orderByChild("upVoteCount").limitToFirst(100);
+                .child(postKey).orderByChild("votesBalance").limitToFirst(100);
 
         return topCommentsQuery;
     };

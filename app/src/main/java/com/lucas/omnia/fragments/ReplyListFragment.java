@@ -157,16 +157,19 @@ public class ReplyListFragment extends Fragment {
                     // Remove downvote from item_Reply
                     r.downVoteCount = r.downVoteCount - 1;
                     r.downVotes.remove(getUid());
+                    r.votesBalance = r.votesBalance - 1;
                 }
 
                 if (r.upVotes.containsKey(getUid())) {
                     // Unvote the item_Reply and remove self from votes
                     r.upVoteCount = r.upVoteCount - 1;
                     r.upVotes.remove(getUid());
+                    r.votesBalance = r.votesBalance - 1;
                 } else {
                     // Upvote the item_Reply and add self to votes
                     r.upVoteCount = r.upVoteCount + 1;
                     r.upVotes.put(getUid(), true);
+                    r.votesBalance = r.votesBalance + 1;
                 }
 
                 // Set value and report transaction success
@@ -196,16 +199,19 @@ public class ReplyListFragment extends Fragment {
                     // Remove upvote from item_Reply
                     r.upVoteCount = r.upVoteCount - 1;
                     r.upVotes.remove(getUid());
+                    r.votesBalance = r.votesBalance - 1;
                 }
 
                 if (r.downVotes.containsKey(getUid())) {
                     // Unvote the item_Reply and remove self from votes
                     r.downVoteCount = r.downVoteCount - 1;
                     r.downVotes.remove(getUid());
+                    r.votesBalance = r.votesBalance + 1;
                 } else {
-                    // Downvote the item_Reply and add self to // run some codevotes
+                    // Downvote the item_Reply and add self to votes
                     r.downVoteCount = r.downVoteCount + 1;
                     r.downVotes.put(getUid(), true);
+                    r.votesBalance = r.votesBalance - 1;
                 }
 
                 // Set value and report transaction success
@@ -314,7 +320,7 @@ public class ReplyListFragment extends Fragment {
 
     public Query getQuery(DatabaseReference databaseReference) {
         Query topRepliesQuery = databaseReference.child("comment-replies")
-                .child(commentKey).orderByChild("upVoteCount").limitToFirst(100);
+                .child(commentKey).orderByChild("votesBalance").limitToFirst(100);
 
         return topRepliesQuery;
     };
