@@ -23,6 +23,9 @@
     <string name="auth_toast_reset_pass_success">Email enviado</string>
     <string name="auth_toast_reset_pass_failure">Algo deu errado</string>
 
+    <!-- BlocksActivity -->
+    <string name="blocks_title">Blocos</string>
+
     <!-- CommentsActivity -->
     <string name="comments_title">Comentários</string>
 
@@ -125,6 +128,19 @@
     <string name="reply_list_ad_delete">Você realmente deseja apagar essa resposta?</string>
     <string name="reply_list_toast_deleting">Apagando resposta…</string>
 
+    <!-- ___________________________________ Models _____________________________________ -->
+
+    <!-- Inspection -->
+    <string name="inspection_item_1">Blocos</string>
+    <string name="inspection_item_2">Deputados</string>
+    <string name="inspection_item_3">Eventos</string>
+    <string name="inspection_item_4">Frentes</string>
+    <string name="inspection_item_5">Legislaturas</string>
+    <string name="inspection_item_6">Partidos</string>
+    <string name="inspection_item_7">Proposições</string>
+    <string name="inspection_item_8">Votações</string>
+    <string name="inspection_item_9">Órgãos</string>
+
     <!-- ___________________________________ Menu _____________________________________ -->
 
     <!-- BottomNavigation Items -->
@@ -153,6 +169,14 @@
     <!-- Posts Fragment -->
     <string name="posts_tv_no_connection">Sem conexão com a internet…</string>
 
+    <!-- Block Item -->
+    <string name="block_name">Nome:</string>
+
+    <!-- Comment Item -->
+    <string name="comment_body">Comentário</string>
+    <string name="reply_button">Responder</string>
+    <string name="replies_button">Respostas</string>
+
     <!-- Post Item -->
     <string name="post_author">Autor</string>
     <string name="post_title">Título</string>
@@ -163,11 +187,6 @@
     <string name="post_downvote_description">Voto negativo</string>
     <string name="post_comment_description">Comentar</string>
     <string name="post_share_description">Compartilhar</string>
-
-    <!-- Comment Item -->
-    <string name="comment_body">Comentário</string>
-    <string name="reply_button">Responder</string>
-    <string name="replies_button">Respostas</string>
 
     <!-- Reply Item -->
     <string name="reply_body">Resposta</string>

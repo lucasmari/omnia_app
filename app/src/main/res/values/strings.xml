@@ -27,8 +27,17 @@
     <string name="auth_toast_reset_pass_success">Email sent</string>
     <string name="auth_toast_reset_pass_failure">Something went wrong</string>
 
+    <!-- BlocksActivity -->
+    <string name="blocks_title">Blocks</string>
+
+    <!-- BodiesActivity -->
+    <string name="bodies_title">Bodies</string>
+
     <!-- CommentsActivity -->
     <string name="comments_title">Comments</string>
+
+    <!-- DeputiesActivity -->
+    <string name="deputies_title">Deputies</string>
 
     <!-- EditCommentActivity -->
     <string name="edit_comment_title">Edit Comment</string>
@@ -38,6 +47,12 @@
 
     <!-- EditReplyActivity -->
     <string name="edit_reply_title">Edit Reply</string>
+
+    <!-- EventsActivity -->
+    <string name="events_title">Events</string>
+
+    <!-- FrontsActivity -->
+    <string name="fronts_title">Fronts</string>
 
     <!-- MainActivity -->
     <string name="main_toast_press_back">Press again to leave</string>
@@ -60,6 +75,12 @@
     <string name="new_reply_body_hint">Write your reply…</string>
     <string name="new_reply_toast_replying">Sending reply…</string>
 
+    <!-- PartiesActivity -->
+    <string name="parties_title">Parties</string>
+
+    <!-- PollsActivity -->
+    <string name="polls_title">Polls</string>
+
     <!-- ProfileSettingsActivity -->
     <string name="profile_settings_title">Profile Settings</string>
     <string name="profile_settings_bt_sign_out">Sign out</string>
@@ -67,6 +88,9 @@
     <string name="profile_settings_ad_delete_account">Do you really want to delete your
         account?</string>
     <string name="profile_settings_toast_delete_account">Deleting account…</string>
+
+    <!-- PropositionsActivity -->
+    <string name="propositions_title">Propositions</string>
 
     <!-- RepliesActivity -->
     <string name="replies_title">Replies</string>
@@ -132,13 +156,26 @@
         reply?</string>
     <string name="reply_list_toast_deleting">Deleting reply…</string>
 
+    <!-- ___________________________________ Models _____________________________________ -->
+
+    <!-- Inspection -->
+    <string name="inspection_item_1">Blocks</string>
+    <string name="inspection_item_2">Deputies</string>
+    <string name="inspection_item_3">Events</string>
+    <string name="inspection_item_4">Fronts</string>
+    <string name="inspection_item_5">Legislatures</string>
+    <string name="inspection_item_6">Parties</string>
+    <string name="inspection_item_7">Propositions</string>
+    <string name="inspection_item_8">Polls</string>
+    <string name="inspection_item_9">Bodies</string>
+
     <!-- ___________________________________ Menu _____________________________________ -->
 
     <!-- BottomNavigation Items -->
     <string name="nav_item_1">Feed</string>
     <string name="nav_item_2">Profile</string>
     <string name="nav_item_3">Discussion</string>
-    <string name="nav_item_4">Projects</string>
+    <string name="nav_item_4">Inspection</string>
     <string name="nav_item_5">Elections</string>
 
     <!-- Menu Items -->
@@ -159,6 +196,49 @@
     <!-- Posts Fragment -->
     <string name="posts_tv_no_connection">No internet connection…</string>
 
+    <!-- Block Item -->
+    <string name="block_name">Name:</string>
+
+    <!-- Body Item -->
+    <string name="body_label">Label:</string>
+    <string name="body_name">Name:</string>
+    <string name="body_alias">Alias:</string>
+    <string name="body_type">Type:</string>
+
+    <!-- Comment Item -->
+    <string name="comment_body">Comment</string>
+    <string name="reply_button">Reply</string>
+    <string name="replies_button">Replies</string>
+
+    <!-- Deputy Item -->
+    <string name="deputy_name">Name:</string>
+    <string name="deputy_party">Party:</string>
+    <string name="deputy_state">State:</string>
+    <string name="deputy_email">Email:</string>
+
+    <!-- Event Item -->
+    <string name="event_date">Date:</string>
+    <string name="event_status">Status:</string>
+    <string name="event_type">Type:</string>
+    <string name="event_description">Description:</string>
+    <string name="event_local">Local:</string>
+    <string name="event_name">Name:</string>
+    <string name="event_building">Building:</string>
+    <string name="event_room">Room:</string>
+    <string name="event_floor">Floor:</string>
+
+    <!-- Front Item -->
+    <string name="front_name">Name:</string>
+
+    <!-- Party Item -->
+    <string name="party_label">Label:</string>
+    <string name="party_name">Name:</string>
+
+    <!-- Poll Item -->
+    <string name="poll_date">Date:</string>
+    <string name="poll_body">Body:</string>
+    <string name="poll_description">Description:</string>
+
     <!-- Post Item -->
     <string name="post_author">Author</string>
     <string name="post_timestamp" translatable="false">Timestamp</string>
@@ -171,10 +251,10 @@
     <string name="post_comment_description">Comment</string>
     <string name="post_share_description">Share</string>
 
-    <!-- Comment Item -->
-    <string name="comment_body">Comment</string>
-    <string name="reply_button">Reply</string>
-    <string name="replies_button">Replies</string>
+    <!-- Proposition Item -->
+    <string name="proposition_label">Label:</string>
+    <string name="proposition_year">Year:</string>
+    <string name="proposition_summary">Summary:</string>
 
     <!-- Reply Item -->
     <string name="reply_body">Reply</string>

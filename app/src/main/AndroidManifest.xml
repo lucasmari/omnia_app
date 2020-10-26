@@ -143,5 +143,21 @@
 
         <activity android:name=".activities.UserPageActivity" />
 
+        <activity android:name=".activities.BodiesActivity" />
+
+        <activity android:name=".activities.BlocksActivity" />
+
+        <activity android:name=".activities.DeputiesActivity" />
+
+        <activity android:name=".activities.EventsActivity" />
+
+        <activity android:name=".activities.FrontsActivity" />
+
+        <activity android:name=".activities.PartiesActivity" />
+
+        <activity android:name=".activities.PollsActivity" />
+
+        <activity android:name=".activities.PropositionsActivity" />
+
     </application>
 </manifest>

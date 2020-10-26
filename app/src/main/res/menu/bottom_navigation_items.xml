@@ -14,7 +14,7 @@
         android:title="@string/nav_item_3" />
     <item
         android:id="@+id/action_item4"
-        android:icon="@drawable/ic_projects"
+        android:icon="@drawable/ic_inspection"
         android:title="@string/nav_item_4" />
     <item
         android:id="@+id/action_item5"

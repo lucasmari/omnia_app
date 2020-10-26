@@ -8,8 +8,8 @@
     <!-- Accent -->
     <color name="colorAccent">@color/accent_material_dark</color>
     <color name="colorAccentLight">@color/accent_material_light</color>
-    <color name="colorAccentBlue">#0000ff</color>
-    <color name="colorAccentRed">#FF0000</color>
+    <color name="colorAccentBlue">#2979ff</color>
+    <color name="colorAccentRed">#ff1744</color>
 
     <!-- Light -->
     <color name="colorPrimaryLight">@color/primary_material_light</color>

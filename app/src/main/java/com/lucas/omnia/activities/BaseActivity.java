@@ -29,7 +29,7 @@ public class BaseActivity extends AppCompatActivity implements SharedPreferences
 
     public void hideProgressBar() {
         if (progressBar != null) {
-            progressBar.setVisibility(View.INVISIBLE);
+            progressBar.setVisibility(View.GONE);
         }
     }
 

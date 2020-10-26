@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <!-- Post More Button -->
     <string-array name="options1">
         <item>Edit</item>
@@ -13,4 +14,5 @@
     <string-array name="options3">
         <item>Report</item>
     </string-array>
+
 </resources>

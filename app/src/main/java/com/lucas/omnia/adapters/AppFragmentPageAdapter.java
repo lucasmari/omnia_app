@@ -9,7 +9,7 @@ import com.lucas.omnia.fragments.DiscussionNavFragment;
 import com.lucas.omnia.fragments.ElectionsNavFragment;
 import com.lucas.omnia.fragments.FeedNavFragment;
 import com.lucas.omnia.fragments.ProfileNavFragment;
-import com.lucas.omnia.fragments.ProjectsNavFragment;
+import com.lucas.omnia.fragments.InspectionNavFragment;
 
 public class AppFragmentPageAdapter extends FragmentPagerAdapter {
 
@@ -28,7 +28,7 @@ public class AppFragmentPageAdapter extends FragmentPagerAdapter {
             case 2:
                 return new DiscussionNavFragment();
             case 3:
-                return new ProjectsNavFragment();
+                return new InspectionNavFragment();
             case 4:
                 return new ElectionsNavFragment();
             default:
