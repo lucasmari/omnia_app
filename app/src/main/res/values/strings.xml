@@ -214,7 +214,7 @@
     <string name="deputy_name">Name:</string>
     <string name="deputy_party">Party:</string>
     <string name="deputy_state">State:</string>
-    <string name="deputy_email">Email:</string>
+    <string name="deputy_email" translatable="false">Email:</string>
 
     <!-- Event Item -->
     <string name="event_date">Date:</string>

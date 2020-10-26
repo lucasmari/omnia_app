@@ -26,8 +26,14 @@
     <!-- BlocksActivity -->
     <string name="blocks_title">Blocos</string>
 
+    <!-- BodiesActivity -->
+    <string name="bodies_title">Órgãos</string>
+
     <!-- CommentsActivity -->
     <string name="comments_title">Comentários</string>
+
+    <!-- DeputiesActivity -->
+    <string name="deputies_title">Deputados</string>
 
     <!-- EditCommentActivity -->
     <string name="edit_comment_title">Editar Comentário</string>
@@ -37,6 +43,12 @@
 
     <!-- EditReplyActivity -->
     <string name="edit_reply_title">Editar Resposta</string>
+
+    <!-- EventsActivity -->
+    <string name="events_title">Eventos</string>
+
+    <!-- FrontsActivity -->
+    <string name="fronts_title">Frentes</string>
 
     <!-- MainActivity -->
     <string name="main_toast_press_back">Pressione novamente para sair</string>
@@ -59,6 +71,12 @@
     <string name="new_reply_body_hint">Escreva sua resposta…</string>
     <string name="new_reply_toast_replying">Enviando resposta…</string>
 
+    <!-- PartiesActivity -->
+    <string name="parties_title">Partidos</string>
+
+    <!-- PollsActivity -->
+    <string name="polls_title">Votações</string>
+
     <!-- ProfileSettingsActivity -->
     <string name="profile_settings_title">Configurações de Perfil</string>
     <string name="profile_settings_bt_sign_out">Sair</string>
@@ -66,6 +84,9 @@
     <string name="profile_settings_ad_delete_account">Você realmente deseja apagar sua
         conta?</string>
     <string name="profile_settings_toast_delete_account">Apagando conta…</string>
+
+    <!-- PropositionsActivity -->
+    <string name="propositions_title">Proposições</string>
 
     <!-- RepliesActivity -->
     <string name="replies_title">Respostas</string>
@@ -172,10 +193,44 @@
     <!-- Block Item -->
     <string name="block_name">Nome:</string>
 
+    <!-- Body Item -->
+    <string name="body_label">Sigla:</string>
+    <string name="body_name">Nome:</string>
+    <string name="body_alias">Apelido:</string>
+    <string name="body_type">Tipo:</string>
+
     <!-- Comment Item -->
     <string name="comment_body">Comentário</string>
     <string name="reply_button">Responder</string>
     <string name="replies_button">Respostas</string>
+
+    <!-- Deputy Item -->
+    <string name="deputy_name">Nome:</string>
+    <string name="deputy_party">Partido:</string>
+    <string name="deputy_state">Estado:</string>
+
+    <!-- Event Item -->
+    <string name="event_date">Data:</string>
+    <string name="event_status">Situação:</string>
+    <string name="event_type">Tipo:</string>
+    <string name="event_description">Descrição:</string>
+    <string name="event_local">Local:</string>
+    <string name="event_name">Nome:</string>
+    <string name="event_building">Prédio:</string>
+    <string name="event_room">Sala:</string>
+    <string name="event_floor">Andar:</string>
+
+    <!-- Front Item -->
+    <string name="front_name">Nome:</string>
+
+    <!-- Party Item -->
+    <string name="party_label">Sigla:</string>
+    <string name="party_name">Nome:</string>
+
+    <!-- Poll Item -->
+    <string name="poll_date">Data:</string>
+    <string name="poll_body">Órgão:</string>
+    <string name="poll_description">Descrição:</string>
 
     <!-- Post Item -->
     <string name="post_author">Autor</string>
@@ -187,6 +242,11 @@
     <string name="post_downvote_description">Voto negativo</string>
     <string name="post_comment_description">Comentar</string>
     <string name="post_share_description">Compartilhar</string>
+
+    <!-- Proposition Item -->
+    <string name="proposition_label">Sigla:</string>
+    <string name="proposition_year">Ano:</string>
+    <string name="proposition_summary">Ementa:</string>
 
     <!-- Reply Item -->
     <string name="reply_body">Resposta</string>
