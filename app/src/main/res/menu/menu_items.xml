@@ -5,6 +5,15 @@
     tools:context=".fragments.FeedNavFragment">
 
     <item
+        android:id="@+id/action_search"
+        android:icon="@drawable/ic_search"
+        android:orderInCategory="1"
+        android:title="Search"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        app:showAsAction="collapseActionView|ifRoom"
+        tools:ignore="HardcodedText" />
+
+    <item
         android:id="@+id/action_notification"
         android:icon="@drawable/ic_notifications"
         android:orderInCategory="3"

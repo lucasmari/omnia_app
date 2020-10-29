@@ -11,27 +11,28 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lucas.omnia.R;
-import com.lucas.omnia.models.Inspection;
+import com.lucas.omnia.activities.UserPageActivity;
+import com.lucas.omnia.models.User;
 
 import java.util.List;
 
-public class InspectionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class SubscriptionsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private final List<Inspection> inspectionList;
+    private final List<User> userList;
     private final Context context;
 
-    public InspectionAdapter(Context context, List<Inspection> inspectionList) {
+    public SubscriptionsAdapter(Context context, List<User> userList) {
         this.context = context;
-        this.inspectionList = inspectionList;
+        this.userList = userList;
     }
 
-    public class InspectionViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public TextView inspectionTextView;
+    public class UserViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        public TextView userTextView;
 
-        InspectionViewHolder(View itemView) {
+        UserViewHolder(View itemView) {
             super(itemView);
 
-            inspectionTextView = itemView.findViewById(R.id.inspection_tv_title);
+            userTextView = itemView.findViewById(R.id.user_tv_name);
 
             itemView.setOnClickListener(this);
         }
@@ -40,9 +41,10 @@ public class InspectionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         public void onClick(View view) {
             int position = getAdapterPosition();
             if (position != RecyclerView.NO_POSITION) {
-                Inspection inspection = inspectionList.get(position);
+                User user = userList.get(position);
 
-                Intent intent = new Intent(context, inspection.getActivityClass());
+                Intent intent = new Intent(context, UserPageActivity.class);
+                intent.putExtra(UserPageActivity.EXTRA_USER_KEY, user.uid);
                 context.startActivity(intent);
             }
         }
@@ -52,18 +54,20 @@ public class InspectionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        return new InspectionViewHolder(inflater.inflate(R.layout.item_inspection, parent, false));
+        return new UserViewHolder(inflater.inflate(R.layout.item_user, parent,
+                false));
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
-        TextView inspectionTextView = ((InspectionViewHolder) viewHolder).inspectionTextView;
-        Inspection inspection = inspectionList.get(position);
-        inspectionTextView.setText(inspection.getName());
+        TextView userTextView =
+                ((UserViewHolder) viewHolder).userTextView;
+        User user = userList.get(position);
+        userTextView.setText(user.username);
     }
 
     @Override
     public int getItemCount() {
-        return inspectionList.size();
+        return userList.size();
     }
 }

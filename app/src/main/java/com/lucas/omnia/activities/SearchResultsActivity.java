@@ -1,51 +1,104 @@
 package com.lucas.omnia.activities;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+import com.lucas.omnia.R;
+import com.lucas.omnia.adapters.SearchResultsAdapter;
+import com.lucas.omnia.adapters.SubscriptionsAdapter;
+import com.lucas.omnia.models.User;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
  * Created by Lucas on 21/01/2018.
  */
 
-public class SearchResultsActivity extends AppCompatActivity {
+public class SearchResultsActivity extends BaseActivity {
+
+    private static final String TAG = "SearchResultsActivity";
+    private final Context context = this;
+    private DatabaseReference usersReference;
+    private RecyclerView recyclerView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_search_results);
+
+        recyclerView = findViewById(R.id.search_results_rv);
+        recyclerView.setHasFixedSize(true);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
+        usersReference = getDatabaseReference().child("users");
+
         handleIntent(getIntent());
     }
 
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
+        setIntent(intent);
         handleIntent(intent);
     }
 
     private void handleIntent(Intent intent) {
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            String queryString = intent.getStringExtra(SearchManager.QUERY);
+            search(queryString);
+        }
+    }
 
-        /*if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-            String query = intent.getStringExtra(SearchManager.QUERY);
-            Toast.makeText(getApplicationContext(), mDataSet.get(1).toString(), Toast.LENGTH_SHORT).show();
-            for(int i = 0; i < mAdapter.getItemCount(); i++) {
+    private void search(String queryString) {
+        String queryStringLower = queryString.toLowerCase();
+        String queryStringUpper = queryString.toUpperCase();
 
-                if (mDataSet.get(i).toString().contains(query)) {
-                    String q = mDataSet.get(i).toString();
-                    SpannableStringBuilder sb = new SpannableStringBuilder(q);
-                    Pattern p = Pattern.compile(query, Pattern.CASE_INSENSITIVE);
-                    Matcher m = p.matcher(q);
-                    while (m.find()) {
-                        //String word = m.group();
-                        //String word1 = notes.substring(m.start(), m.end());
+        // Set up FirebaseRecyclerAdapter with the Query
+        Query usersQuery =
+                usersReference.orderByChild("username").startAt(queryStringUpper).endAt(queryStringLower +
+                        "\uf8ff");
 
-                        sb.setSpan(new ForegroundColorSpan(Color.RED), m.start(), m.end(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-                        sb.setSpan(new BackgroundColorSpan(Color.YELLOW), m.start(), m.end(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-                    }
-                    mComment.setText(sb);
+        List<User> userList = new ArrayList<>();
+        usersQuery.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot userSnapshot: dataSnapshot.getChildren()) {
+                    Toast.makeText(context, userSnapshot.getValue().toString(), Toast.LENGTH_LONG).show();
+                    User user = new User(userSnapshot.getKey(), userSnapshot.getValue().toString());
+                    userList.add(user);
                 }
+
+                final SearchResultsAdapter recyclerAdapter = new SearchResultsAdapter(context,
+                        userList);
+                recyclerView.setAdapter(recyclerAdapter);
             }
-        }*/
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e(TAG, "getUsersByUsername:onCancelled", error.toException());
+            }
+        });
     }
 }

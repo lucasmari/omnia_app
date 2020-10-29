@@ -57,6 +57,7 @@
     <!-- MainActivity -->
     <string name="main_toast_press_back">Press again to leave</string>
     <string name="main_email_toast_verification">Email not verified</string>
+    <string name="main_tv_connection">No internet connection…</string>
 
     <!-- NewCommentActivity -->
     <string name="new_comment_title">New Comment</string>
@@ -95,6 +96,9 @@
     <!-- RepliesActivity -->
     <string name="replies_title">Replies</string>
 
+    <!-- SearchResultsActivity -->
+    <string name="search_results_title">Search Results</string>
+
     <!-- SettingsActivity -->
     <string name="settings_title">Settings</string>
     <string name="settings_customization_title">Customization</string>
@@ -107,13 +111,20 @@
     <!-- ShareActivity -->
     <string name="share_title">Share</string>
     <string name="share_with">Share with…</string>
+    
+    <!-- SubscriptionsActivity -->
+    <string name="subs_title">Subscriptions</string>
 
     <!-- UserPageActivity -->
+    <string name="user_page_bt_posts">Posts</string>
     <string name="user_page_bt_sub">Subscribe</string>
     <string name="user_page_bt_unsub">Unsubscribe</string>
     <string name="user_page_about_hint">…</string>
     <string name="user_page_sub">Subscribed</string>
     <string name="user_page_unsub">Unsubscribed</string>
+
+    <!-- UserPostsActivity -->
+    <string name="user_posts_title">Posts</string>
 
     <!-- ___________________________________ Fragments _____________________________________ -->
 
@@ -131,8 +142,7 @@
     <string name="feed_fab_description">fab</string>
 
     <!-- PostListFragment -->
-    <string name="post_list_ad_delete">Do you really want to delete this
-        post?</string>
+    <string name="post_list_ad_delete">Do you really want to delete this post?</string>
     <string name="post_list_toast_deleting">Deleting post…</string>
     <string name="post_list_toast_success">Done</string>
     <string name="post_list_toast_failure">Something went wrong</string>
@@ -148,12 +158,12 @@
     <string name="profile_description">Profile description</string>
     <string name="profile_about_hint">Write something about you…</string>
     <string name="profile_bt_save">Save</string>
+    <string name="profile_bt_subs">Subscriptions</string>
     <string name="profile_toast_about">About added</string>
     <string name="profile_toast_fetch_error">Error: could not fetch image</string>
 
     <!-- ReplyListFragment -->
-    <string name="reply_list_ad_delete">Do you really want to delete this
-        reply?</string>
+    <string name="reply_list_ad_delete">Do you really want to delete this reply?</string>
     <string name="reply_list_toast_deleting">Deleting reply…</string>
 
     <!-- ___________________________________ Models _____________________________________ -->
@@ -192,9 +202,6 @@
     <string name="sheet_title">Create post</string>
     <string name="sheet_item_1">Image/Video</string>
     <string name="sheet_item_2">Text</string>
-
-    <!-- Posts Fragment -->
-    <string name="posts_tv_no_connection">No internet connection…</string>
 
     <!-- Block Item -->
     <string name="block_name">Name:</string>
@@ -258,5 +265,10 @@
 
     <!-- Reply Item -->
     <string name="reply_body">Reply</string>
+
+    <!-- ___________________________________ XML _____________________________________ -->
+
+    <!-- Searchable -->
+    <string name="search_hint">Search for a user…</string>
 
 </resources>

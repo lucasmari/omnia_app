@@ -174,12 +174,11 @@ public abstract class PostListFragment extends Fragment {
                 super.onScrolled(recyclerView, dx, dy);
                 if (dy > 0 && addFab.getVisibility() == View.VISIBLE) {
                     addFab.hide();
-                }
-                else if (dy < 0 && addFab.getVisibility() != View.VISIBLE) {
+                } else if (dy < 0 && addFab.getVisibility() != View.VISIBLE) {
                     addFab.show();
                 }
             }
-        });
+            });
     }
 
     private void fetchProfileImage(String userId, String postKey, ImageView postImgView) {

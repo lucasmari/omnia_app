@@ -39,11 +39,10 @@ public class CommentsActivity extends BaseActivity {
         postReference = getDatabaseReference().child("posts").child(postKey);
         commentsReference = getDatabaseReference().child("post-comments").child(postKey);
 
-        Fragment fragment = null;
-        fragment = new CommentListFragment();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.comments_fcv, fragment).commit();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.comments_fcv, new CommentListFragment())
+                .commit();
 
         addFab = findViewById(R.id.comments_fab_add);
         addFab.setOnClickListener(v -> startActivity(new Intent(v.getContext(), NewCommentActivity.class)));

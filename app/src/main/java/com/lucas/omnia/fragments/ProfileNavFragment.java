@@ -40,6 +40,9 @@ import com.google.gson.Gson;
 import com.lucas.omnia.R;
 import com.lucas.omnia.activities.MainActivity;
 import com.lucas.omnia.activities.ProfileSettingsActivity;
+import com.lucas.omnia.activities.SubscriptionsActivity;
+import com.lucas.omnia.activities.UserPageActivity;
+import com.lucas.omnia.activities.UserPostsActivity;
 import com.lucas.omnia.models.User;
 import com.lucas.omnia.utils.ImageLoadAsyncTask;
 
@@ -97,6 +100,10 @@ public class ProfileNavFragment extends Fragment {
 
         Button saveBt = view.findViewById(R.id.profile_bt_save);
         saveBt.setOnClickListener(v -> addAbout());
+
+        Button subsBt = view.findViewById(R.id.profile_bt_subs);
+        subsBt.setOnClickListener(v -> startActivity(new Intent(v.getContext(),
+                SubscriptionsActivity.class)));
 
         profileImgView = view.findViewById(R.id.profile_iv);
         profileImgView.setOnClickListener(v -> {

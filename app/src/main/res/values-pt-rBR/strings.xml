@@ -53,6 +53,7 @@
     <!-- MainActivity -->
     <string name="main_toast_press_back">Pressione novamente para sair</string>
     <string name="main_email_toast_verification">Email não verificado</string>
+    <string name="main_tv_connection">Sem conexão com a internet…</string>
 
     <!-- NewCommentActivity -->
     <string name="new_comment_title">Novo Comentário</string>
@@ -91,6 +92,9 @@
     <!-- RepliesActivity -->
     <string name="replies_title">Respostas</string>
 
+    <!-- SearchResultsActivity -->
+    <string name="search_results_title">Resultados da Pesquisa</string>
+
     <!-- SettingsActivity -->
     <string name="settings_title">Configurações</string>
     <string name="settings_customization_title">Customização</string>
@@ -110,6 +114,9 @@
     <string name="user_page_about_hint">…</string>
     <string name="user_page_sub">Inscrito!</string>
     <string name="user_page_unsub">Desinscrito</string>
+
+    <!-- UserPostsActivity -->
+    <string name="user_posts_title">Posts</string>
 
     <!-- ___________________________________ Fragments _____________________________________ -->
 
@@ -142,6 +149,7 @@
     <string name="profile_description">Descrição de perfil</string>
     <string name="profile_about_hint">Escreva algo sobre você…</string>
     <string name="profile_bt_save">Salvar</string>
+    <string name="profile_bt_subs">Inscrições</string>
     <string name="profile_toast_about">Sobre adicionado</string>
     <string name="profile_toast_fetch_error">Error: could not fetch image</string>
 
@@ -186,9 +194,6 @@
     <string name="sheet_title">Criar post</string>
     <string name="sheet_item_1">Imagem/Vídeo</string>
     <string name="sheet_item_2">Texto</string>
-
-    <!-- Posts Fragment -->
-    <string name="posts_tv_no_connection">Sem conexão com a internet…</string>
 
     <!-- Block Item -->
     <string name="block_name">Nome:</string>
@@ -250,5 +255,10 @@
 
     <!-- Reply Item -->
     <string name="reply_body">Resposta</string>
+
+    <!-- ___________________________________ XML _____________________________________ -->
+
+    <!-- Searchable -->
+    <string name="search_hint">Pesquise por um usuário…</string>
 
 </resources>

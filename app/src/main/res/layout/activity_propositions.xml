@@ -28,7 +28,7 @@
             android:indeterminate="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="invisible"
+            android:visibility="gone"
             style="?android:attr/progressBarStyleHorizontal"/>
 
     </com.google.android.material.appbar.AppBarLayout>

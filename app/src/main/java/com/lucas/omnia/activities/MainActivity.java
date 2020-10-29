@@ -1,5 +1,8 @@
 package com.lucas.omnia.activities;
 
+import android.app.SearchManager;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -8,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
@@ -22,7 +26,7 @@ import com.lucas.omnia.utils.BottomNavItemSelectedListener;
  * Created by Lucas on 29/10/2017.
  */
 
-public class MainActivity extends BaseActivity implements SharedPreferences.OnSharedPreferenceChangeListener{
+public class MainActivity extends BaseActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     private boolean doubleBackToExitPressedOnce = false;
 
@@ -36,16 +40,25 @@ public class MainActivity extends BaseActivity implements SharedPreferences.OnSh
 
         Toolbar toolbar = findViewById(R.id.main_tb);
         setSupportActionBar(toolbar);
+
         ViewPager viewPager = findViewById(R.id.main_cvp);
+
         AppFragmentPageAdapter adapter = new AppFragmentPageAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(adapter.getCount() - 1);
+
         BottomNavigationView navigation = findViewById(R.id.main_bnv);
         BottomNavItemSelectedListener listener = new BottomNavItemSelectedListener(viewPager, toolbar);
         navigation.setOnNavigationItemSelectedListener(listener);
 
         fetchUser();
     }
+
+    /*private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        return cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected();
+    }*/
 
     private void fetchUser() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -61,9 +74,10 @@ public class MainActivity extends BaseActivity implements SharedPreferences.OnSh
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_items, menu);
 
-        /*SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));*/
+        searchView.setSearchableInfo( searchManager.getSearchableInfo(new
+                ComponentName(this, SearchResultsActivity.class)));
 
         return true;
     }

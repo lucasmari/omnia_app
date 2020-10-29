@@ -1,10 +1,10 @@
 package com.lucas.omnia.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,7 +16,6 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.lucas.omnia.R;
-import com.lucas.omnia.activities.NewPostActivity;
 
 /**
  * Created by Lucas on 10/10/2017.
@@ -45,9 +44,7 @@ public class FeedNavFragment extends Fragment{
         getActivity().setTitle(R.string.feed_title);
 
         ViewPager viewPager = view.findViewById(R.id.feed_vp);
-        GooglePlusFragmentPageAdapter adapter =
-                new GooglePlusFragmentPageAdapter(
-                        getChildFragmentManager());
+        GooglePlusFragmentPageAdapter adapter = new GooglePlusFragmentPageAdapter(getChildFragmentManager());
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(adapter.getCount() - 1);
         TabLayout tabLayout = view.findViewById(R.id.feed_tl);
@@ -57,8 +54,7 @@ public class FeedNavFragment extends Fragment{
         addFab.setOnClickListener(v -> {
             PostBottomSheetDialogFragment addPostBottomDialogFragment =
                     PostBottomSheetDialogFragment.newInstance();
-            addPostBottomDialogFragment.show(getParentFragmentManager(),
-                    POST_TAG);
+            addPostBottomDialogFragment.show(getParentFragmentManager(), POST_TAG);
         });
     }
 

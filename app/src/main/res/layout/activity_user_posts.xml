@@ -1,41 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/blocks_ab"
+        android:id="@+id/user_posts_ab"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:elevation="0dp">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/blocks_tb"
+            android:id="@+id/user_posts_tb"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
             app:layout_scrollFlags="enterAlways"
-            app:title="@string/blocks_title"
+            app:title="@string/user_posts_title"
             app:titleTextAppearance="@android:style/TextAppearance.Medium"
             tools:ignore="UnusedAttribute" />
 
-        <ProgressBar
-            android:id="@+id/blocks_pb"
-            android:indeterminate="true"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            style="?android:attr/progressBarStyleHorizontal"/>
-
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/blocks_rv"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/user_posts_fcv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/blocks_ab"/>
-</RelativeLayout>
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -112,13 +112,11 @@ public class ReplyListFragment extends Fragment {
                     viewHolder.downVoteButton.setColorFilter(viewHolder.downVoteButton.getSolidColor());
                 }
 
-                if (!getUid().equals(reply.uid)) {
-                    viewHolder.authorView.setOnClickListener(v -> {
-                        Intent intent = new Intent(getActivity(), UserPageActivity.class);
-                        intent.putExtra(UserPageActivity.EXTRA_USER_KEY, reply.uid);
-                        startActivity(intent);
-                    });
-                }
+                viewHolder.authorView.setOnClickListener(v -> {
+                    Intent intent = new Intent(getActivity(), UserPageActivity.class);
+                    intent.putExtra(UserPageActivity.EXTRA_USER_KEY, reply.uid);
+                    startActivity(intent);
+                });
 
                 DatabaseReference globalReplyRef =
                         databaseReference.child("comment-replies").child(commentKey).child(replyKey);

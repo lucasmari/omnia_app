@@ -38,10 +38,9 @@ public class RepliesActivity extends BaseActivity {
         commentReference = getDatabaseReference().child("post-comments").child(postKey).child(commentKey);
         repliesReference = getDatabaseReference().child("comment-replies").child(commentKey);
 
-        Fragment fragment = null;
-        fragment = new ReplyListFragment();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.replies_fcv, fragment).commit();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.replies_fcv, new ReplyListFragment())
+                .commit();
     }
 }

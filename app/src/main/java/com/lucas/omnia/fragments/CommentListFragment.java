@@ -114,13 +114,11 @@ public class CommentListFragment extends Fragment {
                     viewHolder.downVoteButton.setColorFilter(viewHolder.downVoteButton.getSolidColor());
                 }
 
-                if (!getUid().equals(comment.uid)) {
-                    viewHolder.authorView.setOnClickListener(v -> {
-                        Intent intent = new Intent(getActivity(), UserPageActivity.class);
-                        intent.putExtra(UserPageActivity.EXTRA_USER_KEY, comment.uid);
-                        startActivity(intent);
-                    });
-                }
+                viewHolder.authorView.setOnClickListener(v -> {
+                    Intent intent = new Intent(getActivity(), UserPageActivity.class);
+                    intent.putExtra(UserPageActivity.EXTRA_USER_KEY, comment.uid);
+                    startActivity(intent);
+                });
 
                 DatabaseReference globalCommentRef =
                         databaseReference.child("post-comments").child(postKey).child(commentKey);
@@ -142,12 +140,15 @@ public class CommentListFragment extends Fragment {
 
                 if (comment.replyCount > 0) {
                     viewHolder.repliesLayout.setVisibility(View.VISIBLE);
-                    viewHolder.repliesButton.setOnClickListener(v -> {
-                        Intent intent = new Intent(getActivity(), RepliesActivity.class);
-                        intent.putExtra(RepliesActivity.EXTRA_COMMENT_KEY, commentKey);
-                        startActivity(intent);
-                    });
+                } else {
+                    viewHolder.repliesLayout.setVisibility(View.GONE);
                 }
+
+                viewHolder.repliesButton.setOnClickListener(v -> {
+                    Intent intent = new Intent(getActivity(), RepliesActivity.class);
+                    intent.putExtra(RepliesActivity.EXTRA_COMMENT_KEY, commentKey);
+                    startActivity(intent);
+                });
             }
         };
 

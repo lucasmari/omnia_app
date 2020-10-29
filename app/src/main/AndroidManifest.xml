@@ -23,29 +23,11 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".activities.BaseActivity"></activity>
+        <activity android:name=".activities.BaseActivity" />
 
-        <activity
-            android:name=".activities.MainActivity"
-            android:launchMode="singleTop">
-        </activity>
+        <activity android:name=".activities.BlocksActivity" />
 
-        <activity
-            android:name=".activities.SearchResultsActivity">
-        <intent-filter>
-            <action android:name="android.intent.action.SEARCH" />
-        </intent-filter>
-        </activity>
-
-        <activity
-            android:name=".activities.ShareActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.SEND" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:mimeType="text/plain" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".activities.BodiesActivity" />
 
         <activity
             android:name=".activities.CommentsActivity"
@@ -56,13 +38,53 @@
                 android:value=".activities.MainActivity" />
         </activity>
 
+        <activity android:name=".activities.DeputiesActivity" />
+
         <activity
-            android:name=".activities.RepliesActivity"
-            android:label="@string/replies_title"
+            android:name=".activities.EditCommentActivity"
+            android:label="@string/edit_comment_title"
             android:parentActivityName=".activities.CommentsActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.CommentsActivity" />
+        </activity>
+
+        <activity
+            android:name=".activities.EditPostActivity"
+            android:label="@string/edit_post_title"
+            android:parentActivityName=".activities.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.MainActivity" />
+        </activity>
+
+        <activity
+            android:name=".activities.EditReplyActivity"
+            android:label="@string/edit_reply_title"
+            android:parentActivityName=".activities.RepliesActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.RepliesActivity" />
+        </activity>
+
+        <activity android:name=".activities.EventsActivity" />
+
+        <activity android:name=".activities.FrontsActivity" />
+
+        <activity
+            android:name=".activities.MainActivity">
+            <meta-data
+                android:name="android.app.default_searchable"
+                android:value=".SearchResultsActivity" />
+        </activity>
+
+        <activity
+            android:name=".activities.NewCommentActivity"
+            android:label="@string/new_comment_title"
+            android:parentActivityName=".activities.CommentsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.CommentsActivity" />
         </activity>
 
         <activity
@@ -84,43 +106,40 @@
         </activity>
 
         <activity
-            android:name=".activities.EditPostActivity"
-            android:label="@string/edit_post_title"
+            android:name=".activities.NewReplyActivity"
+            android:label="@string/new_reply_title" />
+
+        <activity android:name=".activities.PartiesActivity" />
+
+        <activity android:name=".activities.PollsActivity" />
+
+        <activity
+            android:name=".activities.ProfileSettingsActivity"
+            android:label="@string/profile_settings_title"
             android:parentActivityName=".activities.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.MainActivity" />
         </activity>
 
+        <activity android:name=".activities.PropositionsActivity" />
+
         <activity
-            android:name=".activities.NewCommentActivity"
-            android:label="@string/new_comment_title"
+            android:name=".activities.RepliesActivity"
+            android:label="@string/replies_title"
             android:parentActivityName=".activities.CommentsActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activities.CommentsActivity" />
+                android:value=".activities.MainActivity" />
         </activity>
 
         <activity
-            android:name=".activities.EditCommentActivity"
-            android:label="@string/edit_comment_title"
-            android:parentActivityName=".activities.CommentsActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activities.CommentsActivity" />
-        </activity>
-
-        <activity
-            android:name=".activities.NewReplyActivity"
-            android:label="@string/new_reply_title" />
-
-        <activity
-            android:name=".activities.EditReplyActivity"
-            android:label="@string/edit_reply_title"
-            android:parentActivityName=".activities.RepliesActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activities.RepliesActivity" />
+            android:name=".activities.SearchResultsActivity"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+            <meta-data android:name="android.app.searchable" android:resource="@xml/searchable" />
         </activity>
 
         <activity
@@ -133,31 +152,19 @@
         </activity>
 
         <activity
-            android:name=".activities.ProfileSettingsActivity"
-            android:label="@string/profile_settings_title"
-            android:parentActivityName=".activities.MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activities.MainActivity" />
+            android:name=".activities.ShareActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
         </activity>
+
+        <activity android:name=".activities.SubscriptionsActivity" />
 
         <activity android:name=".activities.UserPageActivity" />
 
-        <activity android:name=".activities.BodiesActivity" />
-
-        <activity android:name=".activities.BlocksActivity" />
-
-        <activity android:name=".activities.DeputiesActivity" />
-
-        <activity android:name=".activities.EventsActivity" />
-
-        <activity android:name=".activities.FrontsActivity" />
-
-        <activity android:name=".activities.PartiesActivity" />
-
-        <activity android:name=".activities.PollsActivity" />
-
-        <activity android:name=".activities.PropositionsActivity" />
+        <activity android:name=".activities.UserPostsActivity" />
 
     </application>
 </manifest>

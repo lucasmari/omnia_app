@@ -1,5 +1,6 @@
 package com.lucas.omnia.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -7,6 +8,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -17,6 +21,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.lucas.omnia.R;
+import com.lucas.omnia.fragments.CommentListFragment;
+import com.lucas.omnia.fragments.UserPostsTabFragment;
 import com.lucas.omnia.models.User;
 import com.lucas.omnia.utils.ImageLoadAsyncTask;
 
@@ -35,6 +41,7 @@ public class UserPageActivity extends BaseActivity {
     private TextView usernameTv;
     private TextView subCountTv;
     private TextView aboutTv;
+    private Button postsButton;
     private Button subButton;
 
     DatabaseReference userRef;
@@ -56,6 +63,10 @@ public class UserPageActivity extends BaseActivity {
             throw new IllegalArgumentException("Must pass EXTRA_USER_KEY");
         }
 
+        postsButton = findViewById(R.id.user_page_bt_posts);
+        if (userKey.equals(getUid())) postsButton.setVisibility(View.GONE);
+        else postsButton.setOnClickListener(v -> openUserPosts());
+
         subButton = findViewById(R.id.user_page_bt_sub);
         if (userKey.equals(getUid())) subButton.setVisibility(View.GONE);
         else subButton.setOnClickListener(v -> verifySub());
@@ -64,6 +75,12 @@ public class UserPageActivity extends BaseActivity {
         currentUserRef = getDatabaseReference().child("users").child(getUid());
 
         setupUserPage();
+    }
+
+    private void openUserPosts() {
+        Intent intent = new Intent(this, UserPostsActivity.class);
+        intent.putExtra(UserPageActivity.EXTRA_USER_KEY, userKey);
+        startActivity(intent);
     }
 
     private void setupUserPage() {
@@ -237,7 +254,7 @@ public class UserPageActivity extends BaseActivity {
     }
 
     private void setSub(User u) {
-        u.subs.put(userKey, true);
+        u.subs.put(userKey, u.username);
         currentUserRef.child("subs").setValue(u.subs);
         subButton.setText(getString(R.string.user_page_bt_unsub));
     }
