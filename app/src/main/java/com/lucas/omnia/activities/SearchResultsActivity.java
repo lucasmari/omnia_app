@@ -72,21 +72,18 @@ public class SearchResultsActivity extends BaseActivity {
     }
 
     private void search(String queryString) {
-        String queryStringLower = queryString.toLowerCase();
-        String queryStringUpper = queryString.toUpperCase();
-
         // Set up FirebaseRecyclerAdapter with the Query
         Query usersQuery =
-                usersReference.orderByChild("username").startAt(queryStringUpper).endAt(queryStringLower +
+                usersReference.orderByChild("username").startAt(queryString).endAt(queryString +
                         "\uf8ff");
 
         List<User> userList = new ArrayList<>();
         usersQuery.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot userSnapshot: dataSnapshot.getChildren()) {
-                    Toast.makeText(context, userSnapshot.getValue().toString(), Toast.LENGTH_LONG).show();
-                    User user = new User(userSnapshot.getKey(), userSnapshot.getValue().toString());
+                for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                    User user = new User(userSnapshot.getKey(),
+                            userSnapshot.child("username").getValue().toString());
                     userList.add(user);
                 }
 

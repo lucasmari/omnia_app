@@ -3,6 +3,8 @@ package com.lucas.omnia.activities;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
@@ -35,6 +37,7 @@ public class SubscriptionsActivity extends BaseActivity {
 
         Toolbar toolbar = findViewById(R.id.subs_tb);
         setSupportActionBar(toolbar);
+        TextView noneTv = findViewById(R.id.subs_tv_none);
 
         DatabaseReference subsQuery = getDatabaseReference().child("users").child(getUid()).child("subs");
 
@@ -51,6 +54,9 @@ public class SubscriptionsActivity extends BaseActivity {
                     User user = new User(userSnapshot.getKey(), userSnapshot.getValue().toString());
                     userList.add(user);
                 }
+
+                if (userList.isEmpty()) noneTv.setVisibility(View.VISIBLE);
+                else noneTv.setVisibility(View.GONE);
 
                 final SubscriptionsAdapter recyclerAdapter = new SubscriptionsAdapter(context,
                         userList);

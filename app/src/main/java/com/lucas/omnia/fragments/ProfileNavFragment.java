@@ -1,6 +1,7 @@
 package com.lucas.omnia.fragments;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -26,13 +27,17 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -49,6 +54,7 @@ import com.lucas.omnia.utils.ImageLoadAsyncTask;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -59,7 +65,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class ProfileNavFragment extends Fragment {
 
-    private String userId;
+    private static String userId;
     private URL profileImgUrl;
     private ImageView profileImgView;
     private TextView usernameTv;
@@ -67,10 +73,12 @@ public class ProfileNavFragment extends Fragment {
     private EditText aboutEt;
 
     private StorageReference storageRef;
-    private DatabaseReference databaseReference;
     private SharedPreferences sharedPreferences;
+    private DatabaseReference databaseReference;
+    private static DatabaseReference usersReference;
 
     private static final String TAG = "ProfileNavFragment";
+    private static final String FRAGMENT_TAG = "EditDialogFragment";
     private static final String STORAGE_PATH = "/profile-picture/profile.jpg";
 
     // Permissions
@@ -110,14 +118,18 @@ public class ProfileNavFragment extends Fragment {
             verifyStoragePermissions();
         });
 
+        ImageButton editIb = view.findViewById(R.id.profile_ib_edit);
+        editIb.setOnClickListener(v -> editUsername());
+
         ImageButton settingsIb = view.findViewById(R.id.profile_ib);
         settingsIb.setOnClickListener(v -> startActivity(new Intent(v.getContext(),
                 ProfileSettingsActivity.class)));
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
         storageRef = storage.getReference();
-        userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         databaseReference = FirebaseDatabase.getInstance().getReference();
+        userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        usersReference = databaseReference.child("users");
 
         sharedPreferences = getActivity().getPreferences(MODE_PRIVATE);
         if (!sharedPreferences.contains("User")) fetchUser();
@@ -153,7 +165,7 @@ public class ProfileNavFragment extends Fragment {
         aboutEt.clearFocus();
 
         // Save about in database
-        databaseReference.child("users").child(userId).child("about").setValue(aboutEt.getText().toString());
+        usersReference.child(userId).child("about").setValue(aboutEt.getText().toString());
 
         // Save about in SharedPreferences
         User u = getUserLocal();
@@ -178,6 +190,97 @@ public class ProfileNavFragment extends Fragment {
         } else {
             openChooser();
         }
+    }
+
+    private void editUsername() {
+        final EditText editText = new EditText(getContext());
+
+        new AlertDialog.Builder(getContext())
+                .setTitle(getString(R.string.profile_ad_username))
+                .setView(editText)
+                .setPositiveButton(getString(R.string.alert_dialog_bt_save),
+                        (dialog1, which1) -> {
+                            String username = editText.getText().toString();
+                            updateUser(username);
+                        })
+                .setNegativeButton(getString(R.string.alert_dialog_bt_cancel), null)
+                .show();
+    }
+
+    private void updateUser(String username) {
+        usersReference.orderByChild("username").equalTo(username).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()) {
+                    Toast.makeText(getContext(),
+                            getString(R.string.profile_toast_username_exists),
+                            Toast.LENGTH_SHORT).show();
+                } else if (username.length() < 16) {
+                    Toast.makeText(getContext(), getString(R.string.profile_toast_saving), Toast.LENGTH_SHORT).show();
+                    usernameTv.setText(username);
+
+                    // Save username in database
+                    usersReference.child(userId).child("username").setValue(username);
+
+                    // Save username in SharedPreferences
+                    User u = getUserLocal();
+                    u.setUsername(username);
+                    saveUser(u);
+
+                    updatePosts(username);
+                } else {
+                    Toast.makeText(getContext(),
+                            getString(R.string.profile_toast_validation), Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e(TAG, "updateUser:onCancelled", databaseError.toException());
+            }
+        });
+    }
+
+    private void updatePosts(String username) {
+        DatabaseReference postsReference = databaseReference.child("posts");
+        postsReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for(DataSnapshot d : dataSnapshot.getChildren()) {
+                        if (d.child("uid").getValue().toString().equals(userId)) {
+                            HashMap<String, Object> result = new HashMap<>();
+                            result.put("author", username);
+                            postsReference.child(String.valueOf(d.getKey())).updateChildren(result);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e(TAG, "updatePosts:onCancelled", databaseError.toException());
+            }
+        });
+
+        DatabaseReference userPostsReference = databaseReference.child("user-posts").child(userId);
+        userPostsReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for(DataSnapshot d : dataSnapshot.getChildren()) {
+                        HashMap<String, Object> result = new HashMap<>();
+                        result.put("author", username);
+                        userPostsReference.child(String.valueOf(d.getKey())).updateChildren(result);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e(TAG, "updatePosts:onCancelled", databaseError.toException());
+            }
+        });
     }
 
     private void openChooser() {
@@ -205,7 +308,7 @@ public class ProfileNavFragment extends Fragment {
                     setProfileImage(dataUri);
 
                     // Set hasPhoto in database
-                    databaseReference.child("users").child(userId).child("hasPhoto").setValue(true);
+                    usersReference.child(userId).child("hasPhoto").setValue(true);
 
                     // Save hasPhoto in SharedPreferences
                     User u = getUserLocal();

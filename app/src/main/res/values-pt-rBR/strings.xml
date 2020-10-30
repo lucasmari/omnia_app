@@ -5,6 +5,8 @@
     <!-- AlertDialog -->
     <string name="alert_dialog_bt_positive">Sim</string>
     <string name="alert_dialog_bt_negative">Não</string>
+    <string name="alert_dialog_bt_save">Salvar</string>
+    <string name="alert_dialog_bt_cancel">Cancelar</string>
 
     <!-- ___________________________________ Activities _____________________________________ -->
 
@@ -108,7 +110,12 @@
     <string name="share_title">Compartilhar</string>
     <string name="share_with">Compartilhar com…</string>
 
+    <!-- SubscriptionsActivity -->
+    <string name="subs_title">Inscrições</string>
+    <string name="subs_tv_none">Nenhum inscrito ainda…</string>
+
     <!-- UserPageActivity -->
+    <string name="user_page_bt_posts">Posts</string>
     <string name="user_page_bt_sub">Inscrever</string>
     <string name="user_page_bt_unsub">Desinscrever</string>
     <string name="user_page_about_hint">…</string>
@@ -140,12 +147,15 @@
 
     <!-- ProfileNavFragment -->
     <string name="profile_name">Nome de Usuário</string>
+    <string name="profile_ad_username">Editar nome</string>
+    <string name="profile_toast_validation">Não pode ter mais que 15 caracteres…</string>
+    <string name="profile_toast_saving">Salvando…</string>
+    <string name="profile_toast_username_exists">Nome já utilizado</string>
     <string name="profile_subs">Inscritos</string>
     <string name="profile_sub_count">Nº de inscritos</string>
-    <string name="profile_level">Nível 0</string>
-    <string name="profile_about_title">Sobre</string>
     <string name="profile_image_description">Imagem de perfil</string>
     <string name="profile_settings_description">Configurações de perfil</string>
+    <string name="profile_about_title">Sobre</string>
     <string name="profile_description">Descrição de perfil</string>
     <string name="profile_about_hint">Escreva algo sobre você…</string>
     <string name="profile_bt_save">Salvar</string>
@@ -194,6 +204,12 @@
     <string name="sheet_title">Criar post</string>
     <string name="sheet_item_1">Imagem/Vídeo</string>
     <string name="sheet_item_2">Texto</string>
+
+    <!-- EditDialog Fragment -->
+    <string name="edit_dialog_tv_title">Editar nome</string>
+    <string name="edit_dialog_et_hint">Nome</string>
+    <string name="edit_dialog_bt_save">Salvar</string>
+    <string name="edit_dialog_bt_cancel">Cancelar</string>
 
     <!-- Block Item -->
     <string name="block_name">Nome:</string>

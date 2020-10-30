@@ -8,6 +8,8 @@
     <!-- AlertDialog -->
     <string name="alert_dialog_bt_positive">Yes</string>
     <string name="alert_dialog_bt_negative">No</string>
+    <string name="alert_dialog_bt_save">Save</string>
+    <string name="alert_dialog_bt_cancel">Cancel</string>
 
     <!-- ___________________________________ Activities _____________________________________ -->
 
@@ -114,6 +116,7 @@
     
     <!-- SubscriptionsActivity -->
     <string name="subs_title">Subscriptions</string>
+    <string name="subs_tv_none">No subs yet…</string>
 
     <!-- UserPageActivity -->
     <string name="user_page_bt_posts">Posts</string>
@@ -149,12 +152,15 @@
 
     <!-- ProfileNavFragment -->
     <string name="profile_name">Username</string>
+    <string name="profile_ad_username">Edit username</string>
+    <string name="profile_toast_validation">It can\'t be more than 15 characters…</string>
+    <string name="profile_toast_saving">Saving…</string>
+    <string name="profile_toast_username_exists">Username already taken</string>
     <string name="profile_subs">Subs</string>
     <string name="profile_sub_count">Sub count</string>
-    <string name="profile_level">Level 0</string>
-    <string name="profile_about_title">About</string>
     <string name="profile_image_description">Profile image</string>
     <string name="profile_settings_description">Profile settings</string>
+    <string name="profile_about_title">About</string>
     <string name="profile_description">Profile description</string>
     <string name="profile_about_hint">Write something about you…</string>
     <string name="profile_bt_save">Save</string>
@@ -202,6 +208,12 @@
     <string name="sheet_title">Create post</string>
     <string name="sheet_item_1">Image/Video</string>
     <string name="sheet_item_2">Text</string>
+
+    <!-- EditDialog Fragment -->
+    <string name="edit_dialog_tv_title">Edit Username</string>
+    <string name="edit_dialog_et_hint">Name</string>
+    <string name="edit_dialog_bt_save">Save</string>
+    <string name="edit_dialog_bt_cancel">Cancel</string>
 
     <!-- Block Item -->
     <string name="block_name">Name:</string>

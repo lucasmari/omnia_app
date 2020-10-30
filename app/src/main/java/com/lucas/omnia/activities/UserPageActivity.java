@@ -63,6 +63,11 @@ public class UserPageActivity extends BaseActivity {
             throw new IllegalArgumentException("Must pass EXTRA_USER_KEY");
         }
 
+        userRef = getDatabaseReference().child("users").child(userKey);
+        currentUserRef = getDatabaseReference().child("users").child(getUid());
+
+        setupUserPage();
+
         postsButton = findViewById(R.id.user_page_bt_posts);
         if (userKey.equals(getUid())) postsButton.setVisibility(View.GONE);
         else postsButton.setOnClickListener(v -> openUserPosts());
@@ -70,11 +75,6 @@ public class UserPageActivity extends BaseActivity {
         subButton = findViewById(R.id.user_page_bt_sub);
         if (userKey.equals(getUid())) subButton.setVisibility(View.GONE);
         else subButton.setOnClickListener(v -> verifySub());
-
-        userRef = getDatabaseReference().child("users").child(userKey);
-        currentUserRef = getDatabaseReference().child("users").child(getUid());
-
-        setupUserPage();
     }
 
     private void openUserPosts() {
@@ -171,10 +171,8 @@ public class UserPageActivity extends BaseActivity {
                                     Toast.LENGTH_SHORT).show();
                         } else {
                             if (u.subs.containsKey(userKey)) {
-                                decrementSubCount();
                                 unsetSub(u);
                             } else {
-                                incrementSubCount();
                                 setSub(u);
                             }
                         }
@@ -187,7 +185,7 @@ public class UserPageActivity extends BaseActivity {
                 });
     }
 
-    private void decrementSubCount() {
+    private void unsetSub(User current) {
         userRef.runTransaction(new Transaction.Handler() {
             @Override
             public Transaction.Result doTransaction(MutableData mutableData) {
@@ -198,6 +196,9 @@ public class UserPageActivity extends BaseActivity {
 
                 u.subCount = u.subCount - 1;
                 runOnUiThread(() -> {
+                    current.subs.remove(userKey);
+                    currentUserRef.child("subs").setValue(current.subs);
+                    subButton.setText(getString(R.string.user_page_bt_sub));
                     subCountTv.setText(String.valueOf(u.subCount));
                 });
 
@@ -213,17 +214,10 @@ public class UserPageActivity extends BaseActivity {
                 Log.d(TAG, "postTransaction:onComplete:" + databaseError);
             }
         });
-        Toast.makeText(this, getString(R.string.user_page_unsub),
-                Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getString(R.string.user_page_unsub), Toast.LENGTH_SHORT).show();
     }
 
-    private void unsetSub(User u) {
-        u.subs.remove(userKey);
-        currentUserRef.child("subs").setValue(u.subs);
-        subButton.setText(getString(R.string.user_page_bt_sub));
-    }
-
-    private void incrementSubCount() {
+    private void setSub(User current) {
         userRef.runTransaction(new Transaction.Handler() {
             @Override
             public Transaction.Result doTransaction(MutableData mutableData) {
@@ -234,6 +228,9 @@ public class UserPageActivity extends BaseActivity {
 
                 u.subCount = u.subCount + 1;
                 runOnUiThread(() -> {
+                    current.subs.put(userKey, u.username);
+                    currentUserRef.child("subs").setValue(current.subs);
+                    subButton.setText(getString(R.string.user_page_bt_unsub));
                     subCountTv.setText(String.valueOf(u.subCount));
                 });
 
@@ -249,13 +246,6 @@ public class UserPageActivity extends BaseActivity {
                 Log.d(TAG, "postTransaction:onComplete:" + databaseError);
             }
         });
-        Toast.makeText(this, getString(R.string.user_page_sub),
-                Toast.LENGTH_SHORT).show();
-    }
-
-    private void setSub(User u) {
-        u.subs.put(userKey, u.username);
-        currentUserRef.child("subs").setValue(u.subs);
-        subButton.setText(getString(R.string.user_page_bt_unsub));
+        Toast.makeText(this, getString(R.string.user_page_sub), Toast.LENGTH_SHORT).show();
     }
 }

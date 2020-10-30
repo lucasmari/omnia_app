@@ -19,6 +19,15 @@
             app:elevation="16dp"/>
     </com.google.android.material.appbar.AppBarLayout>
 
+    <!--<TextView
+        android:id="@+id/main_tv_connection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/main_tv_connection"
+        android:textSize="20sp"
+        android:visibility="gone"
+        android:layout_gravity="center"/>-->
+
     <com.lucas.omnia.utils.CustomViewPager
         android:id="@+id/main_cvp"
         android:layout_width="match_parent"

@@ -33,7 +33,20 @@
         android:layout_marginStart="16dp"
         android:layout_toEndOf="@+id/profile_iv"
         android:text="@string/profile_name"
+        android:textColor="?attr/colorOnBackground"
         android:textSize="18sp" />
+
+    <ImageButton
+        android:id="@+id/profile_ib_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:layout_toEndOf="@id/profile_tv_name"
+        android:layout_alignBottom="@id/profile_tv_name"
+        android:layout_marginStart="10dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/profile_description"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_edit" />
 
     <ImageButton
         android:id="@+id/profile_ib"
@@ -43,7 +56,6 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
         android:background="@android:color/transparent"
         android:contentDescription="@string/profile_description"
         android:scaleType="centerInside"
@@ -94,6 +106,7 @@
         android:layout_marginStart="30dp"
         android:layout_marginTop="20dp"
         android:text="@string/profile_about_title"
+        android:textColor="?attr/colorOnBackground"
         android:textSize="18sp" />
 
     <EditText
