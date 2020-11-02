@@ -60,21 +60,21 @@ public class DeputiesActivity extends BaseActivity {
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, URL, null, response -> {
-                    List<Deputy> blockList = new ArrayList<>();
+                    List<Deputy> deputyList = new ArrayList<>();
                     try {
                         JSONArray jsonArray = response.getJSONArray("dados");
 
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
-                            Deputy block = new Deputy(jsonObject.getString("nome"),
+                            Deputy deputy = new Deputy(jsonObject.getString("nome"),
                                     jsonObject.getString("siglaPartido"), jsonObject.getString(
                                             "siglaUf"),
                                     jsonObject.getString("email"));
-                            blockList.add(block);
+                            deputyList.add(deputy);
                         }
 
-                        final DeputyAdapter blockAdapter = new DeputyAdapter(blockList);
-                        recyclerView.setAdapter(blockAdapter);
+                        final DeputyAdapter deputyAdapter = new DeputyAdapter(deputyList);
+                        recyclerView.setAdapter(deputyAdapter);
                         hideProgressBar();
                     } catch (JSONException e) {
                         e.printStackTrace();

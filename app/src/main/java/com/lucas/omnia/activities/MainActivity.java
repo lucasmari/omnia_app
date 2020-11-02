@@ -89,6 +89,10 @@ public class MainActivity extends BaseActivity implements SharedPreferences.OnSh
                 Intent intent = new Intent(this, SettingsActivity.class);
                 startActivity(intent);
                 return true;
+            case R.id.action_laws:
+                intent = new Intent(this, LawsActivity.class);
+                startActivity(intent);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

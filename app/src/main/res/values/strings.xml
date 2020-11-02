@@ -56,6 +56,12 @@
     <!-- FrontsActivity -->
     <string name="fronts_title">Fronts</string>
 
+    <!-- LawsActivity -->
+    <string name="laws_title">Laws</string>
+    <string name="laws_et_hint">Search for a law</string>
+    <string name="laws_search_description">search</string>
+    <string name="laws_tv_none">No results…</string>
+
     <!-- MainActivity -->
     <string name="main_toast_press_back">Press again to leave</string>
     <string name="main_email_toast_verification">Email not verified</string>
@@ -248,6 +254,13 @@
 
     <!-- Front Item -->
     <string name="front_name">Name:</string>
+
+    <!-- Law Item -->
+    <string name="law_type">Type</string>
+    <string name="law_date">Date</string>
+    <string name="law_title">Title</string>
+    <string name="law_subject">Subject</string>
+    <string name="law_description">Description</string>
 
     <!-- Party Item -->
     <string name="party_label">Label:</string>

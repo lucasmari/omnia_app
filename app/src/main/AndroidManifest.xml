@@ -71,6 +71,8 @@
 
         <activity android:name=".activities.FrontsActivity" />
 
+        <activity android:name=".activities.LawsActivity" />
+
         <activity
             android:name=".activities.MainActivity">
             <meta-data
