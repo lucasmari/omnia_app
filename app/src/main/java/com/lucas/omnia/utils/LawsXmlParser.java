@@ -1,6 +1,5 @@
 package com.lucas.omnia.utils;
 
-import android.util.Log;
 import android.util.Xml;
 
 import com.lucas.omnia.models.Entry;
@@ -58,6 +57,9 @@ public class LawsXmlParser {
         parser.require(XmlPullParser.START_TAG, ns, "srw_dc:dc");
         String type = null;
         String date = null;
+        String urn = null;
+        String locality = null;
+        String authority = null;
         String title = null;
         String subject = null;
         String description = null;
@@ -70,6 +72,12 @@ public class LawsXmlParser {
                 type = readType(parser);
             } else if (name.equals("dc:date")) {
                 date = readDate(parser);
+            } else if (name.equals("urn")) {
+                urn = readUrn(parser);
+            } else if (name.equals("localidade")) {
+                locality = readLocality(parser);
+            } else if (name.equals("autoridade")) {
+                authority = readAuthority(parser);
             } else if (name.equals("dc:title")) {
                 title = readTitle(parser);
             } else if (name.equals("dc:subject")) {
@@ -80,10 +88,10 @@ public class LawsXmlParser {
                 skip(parser);
             }
         }
-        return new Entry(type, date, title, subject, description);
+        return new Entry(type, date, urn, locality, authority, title, subject, description);
     }
 
-    // Processes tyep tags in the feed.
+    // Processes type tags in the feed.
     private String readType(XmlPullParser parser) throws IOException, XmlPullParserException {
         parser.require(XmlPullParser.START_TAG, ns, "tipoDocumento");
         String type = readText(parser);
@@ -91,12 +99,36 @@ public class LawsXmlParser {
         return type;
     }
 
-    // Processes title tags in the feed.
+    // Processes date tags in the feed.
     private String readDate(XmlPullParser parser) throws IOException, XmlPullParserException {
         parser.require(XmlPullParser.START_TAG, ns, "dc:date");
         String date = readText(parser);
         parser.require(XmlPullParser.END_TAG, ns, "dc:date");
         return date;
+    }
+
+    // Processes urn tags in the feed.
+    private String readUrn(XmlPullParser parser) throws IOException, XmlPullParserException {
+        parser.require(XmlPullParser.START_TAG, ns, "urn");
+        String urn = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "urn");
+        return urn;
+    }
+
+    // Processes locality tags in the feed.
+    private String readLocality(XmlPullParser parser) throws IOException, XmlPullParserException {
+        parser.require(XmlPullParser.START_TAG, ns, "localidade");
+        String locality = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "localidade");
+        return locality;
+    }
+
+    // Processes authority tags in the feed.
+    private String readAuthority(XmlPullParser parser) throws IOException, XmlPullParserException {
+        parser.require(XmlPullParser.START_TAG, ns, "autoridade");
+        String authority = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "autoridade");
+        return authority;
     }
 
     // Processes title tags in the feed.
@@ -107,7 +139,7 @@ public class LawsXmlParser {
         return title;
     }
 
-    // Processes title tags in the feed.
+    // Processes subject tags in the feed.
     private String readSubject(XmlPullParser parser) throws IOException, XmlPullParserException {
         parser.require(XmlPullParser.START_TAG, ns, "dc:subject");
         String subject = readText(parser);
@@ -116,15 +148,14 @@ public class LawsXmlParser {
     }
 
     // Processes description tags in the feed.
-    private String readDescription(XmlPullParser parser) throws IOException,
-            XmlPullParserException {
+    private String readDescription(XmlPullParser parser) throws IOException, XmlPullParserException {
         parser.require(XmlPullParser.START_TAG, ns, "dc:description");
         String description = readText(parser);
         parser.require(XmlPullParser.END_TAG, ns, "dc:description");
         return description;
     }
 
-    // For the tags title and description, extracts their text values.
+    // For the tags, extracts their text values.
     private String readText(XmlPullParser parser) throws IOException, XmlPullParserException {
         String result = "";
         if (parser.next() == XmlPullParser.TEXT) {

@@ -104,8 +104,9 @@
     <!-- RepliesActivity -->
     <string name="replies_title">Replies</string>
 
-    <!-- SearchResultsActivity -->
-    <string name="search_results_title">Search Results</string>
+    <!-- SearchUserActivity -->
+    <string name="search_user_title">Search Results</string>
+    <string name="search_user_tv_none">No results…</string>
 
     <!-- SettingsActivity -->
     <string name="settings_title">Settings</string>
@@ -258,6 +259,8 @@
     <!-- Law Item -->
     <string name="law_type">Type</string>
     <string name="law_date">Date</string>
+    <string name="law_locality">Locality</string>
+    <string name="law_authority">Authority</string>
     <string name="law_title">Title</string>
     <string name="law_subject">Subject</string>
     <string name="law_description">Description</string>

@@ -18,11 +18,20 @@
             android:layout_height="?attr/actionBarSize"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
             app:layout_scrollFlags="enterAlways"
-            app:title="@string/search_results_title"
+            app:title="@string/search_user_title"
             app:titleTextAppearance="@android:style/TextAppearance.Medium"
             tools:ignore="UnusedAttribute" />
 
     </com.google.android.material.appbar.AppBarLayout>
+
+    <TextView
+        android:id="@+id/search_user_tv_none"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="@string/search_user_tv_none"
+        android:textSize="20sp"
+        android:visibility="gone" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/search_results_rv"

@@ -5,18 +5,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,7 +19,6 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.lucas.omnia.R;
 import com.lucas.omnia.adapters.SearchResultsAdapter;
-import com.lucas.omnia.adapters.SubscriptionsAdapter;
 import com.lucas.omnia.models.User;
 
 import java.util.ArrayList;
@@ -35,18 +29,20 @@ import java.util.List;
  * Created by Lucas on 21/01/2018.
  */
 
-public class SearchResultsActivity extends BaseActivity {
+public class SearchUserActivity extends BaseActivity {
 
-    private static final String TAG = "SearchResultsActivity";
+    private static final String TAG = "SearchUserActivity";
     private final Context context = this;
     private DatabaseReference usersReference;
+    private TextView noneTv;
     private RecyclerView recyclerView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search_results);
+        setContentView(R.layout.activity_search_user);
 
+        noneTv = findViewById(R.id.search_user_tv_none);
         recyclerView = findViewById(R.id.search_results_rv);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -87,9 +83,10 @@ public class SearchResultsActivity extends BaseActivity {
                     userList.add(user);
                 }
 
-                final SearchResultsAdapter recyclerAdapter = new SearchResultsAdapter(context,
-                        userList);
-                recyclerView.setAdapter(recyclerAdapter);
+                final SearchResultsAdapter recyclerAdapter = new SearchResultsAdapter(context, userList);
+
+                if (recyclerAdapter.getItemCount() == 0) noneTv.setVisibility(View.VISIBLE);
+                else recyclerView.setAdapter(recyclerAdapter);
             }
 
             @Override

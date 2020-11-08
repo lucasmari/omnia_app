@@ -28,8 +28,8 @@ public class LawsActivity extends BaseActivity {
 
     private TextView noneTv;
     private RecyclerView recyclerView;
-    private final String URL = "https://www.lexml.gov.br/busca/SRU?operation=searchRetrieve&query" +
-            "=\"";
+    private final String SEARCH_URL = "https://www.lexml.gov.br/busca/SRU?operation=searchRetrieve&query=\"";
+    private final String ITEM_URL = "https://www.lexml.gov.br/urn/";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,7 +48,7 @@ public class LawsActivity extends BaseActivity {
             showProgressBar();
             String query = searchEt.getText().toString();
             query = query.replace(' ', '+');
-            String url = URL + query + "\"";
+            String url = SEARCH_URL + query + "\"";
             new DownloadXmlTask().execute(url);
         });
         noneTv = findViewById(R.id.laws_tv_none);
@@ -108,7 +108,7 @@ public class LawsActivity extends BaseActivity {
         return new LawAdapter(entries);
     }
 
-    // Given a string representation of a URL, sets up a connection and gets
+    // Given a string representation of a SEARCH_URL, sets up a connection and gets
 // an input stream.
     private InputStream downloadUrl(String urlString) throws IOException {
         URL url = new URL(urlString);

@@ -77,7 +77,7 @@ public class MainActivity extends BaseActivity implements SharedPreferences.OnSh
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
         searchView.setSearchableInfo( searchManager.getSearchableInfo(new
-                ComponentName(this, SearchResultsActivity.class)));
+                ComponentName(this, SearchUserActivity.class)));
 
         return true;
     }
