@@ -71,7 +71,7 @@
 
         <activity android:name=".activities.FrontsActivity" />
 
-        <activity android:name=".activities.LawsActivity" />
+        <activity android:name=".activities.LawPageActivity" />
 
         <activity
             android:name=".activities.MainActivity">
@@ -134,6 +134,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.MainActivity" />
         </activity>
+
+        <activity android:name=".activities.SearchLawActivity" />
 
         <activity
             android:name=".activities.SearchUserActivity"

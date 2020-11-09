@@ -18,7 +18,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.lucas.omnia.R;
-import com.lucas.omnia.adapters.SearchResultsAdapter;
+import com.lucas.omnia.adapters.SearchUserAdapter;
 import com.lucas.omnia.models.User;
 
 import java.util.ArrayList;
@@ -83,7 +83,7 @@ public class SearchUserActivity extends BaseActivity {
                     userList.add(user);
                 }
 
-                final SearchResultsAdapter recyclerAdapter = new SearchResultsAdapter(context, userList);
+                final SearchUserAdapter recyclerAdapter = new SearchUserAdapter(context, userList);
 
                 if (recyclerAdapter.getItemCount() == 0) noneTv.setVisibility(View.VISIBLE);
                 else recyclerView.setAdapter(recyclerAdapter);

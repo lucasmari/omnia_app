@@ -90,7 +90,7 @@ public class MainActivity extends BaseActivity implements SharedPreferences.OnSh
                 startActivity(intent);
                 return true;
             case R.id.action_laws:
-                intent = new Intent(this, LawsActivity.class);
+                intent = new Intent(this, SearchLawActivity.class);
                 startActivity(intent);
                 return true;
             default:

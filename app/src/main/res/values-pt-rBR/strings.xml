@@ -52,12 +52,6 @@
     <!-- FrontsActivity -->
     <string name="fronts_title">Frentes</string>
 
-    <!-- LawsActivity -->
-    <string name="laws_title">Leis</string>
-    <string name="laws_et_hint">Busque uma lei</string>
-    <string name="laws_search_description">busca</string>
-    <string name="laws_tv_none">Nenhum resultado…</string>
-
     <!-- MainActivity -->
     <string name="main_toast_press_back">Pressione novamente para sair</string>
     <string name="main_email_toast_verification">Email não verificado</string>
@@ -99,6 +93,12 @@
 
     <!-- RepliesActivity -->
     <string name="replies_title">Respostas</string>
+
+    <!-- SearchLawActivity -->
+    <string name="search_law_title">Leis</string>
+    <string name="search_law_et_hint">Busque uma lei</string>
+    <string name="search_law_ib_description">busca</string>
+    <string name="search_law_tv_none">Nenhum resultado…</string>
 
     <!-- SearchUserActivity -->
     <string name="search_user_title">Resultados da Pesquisa</string>
@@ -254,7 +254,7 @@
     <!-- Law Item -->
     <string name="law_type">Tipo</string>
     <string name="law_date">Data</string>
-    <string name="law_locality">Localidade</string>
+    <string name="law_locale">Localidade</string>
     <string name="law_authority">Autoridade</string>
     <string name="law_title">Título</string>
     <string name="law_subject">Assunto</string>

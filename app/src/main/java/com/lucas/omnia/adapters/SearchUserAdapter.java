@@ -16,12 +16,12 @@ import com.lucas.omnia.models.User;
 
 import java.util.List;
 
-public class SearchResultsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class SearchUserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private final List<User> userList;
     private final Context context;
 
-    public SearchResultsAdapter(Context context, List<User> userList) {
+    public SearchUserAdapter(Context context, List<User> userList) {
         this.context = context;
         this.userList = userList;
     }

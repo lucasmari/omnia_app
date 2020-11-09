@@ -2,7 +2,7 @@ package com.lucas.omnia.utils;
 
 import android.util.Xml;
 
-import com.lucas.omnia.models.Entry;
+import com.lucas.omnia.models.Law;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -15,7 +15,7 @@ import java.util.List;
 public class LawsXmlParser {
     private static final String ns = null;
 
-    public List<Entry> parse(InputStream in) throws XmlPullParserException, IOException {
+    public List<Law> parse(InputStream in) throws XmlPullParserException, IOException {
         try {
             XmlPullParser parser = Xml.newPullParser();
             parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
@@ -27,8 +27,8 @@ public class LawsXmlParser {
         }
     }
 
-    private List<Entry> readRecords(XmlPullParser parser) throws XmlPullParserException, IOException {
-        List<Entry> entries = new ArrayList<>();
+    private List<Law> readRecords(XmlPullParser parser) throws XmlPullParserException, IOException {
+        List<Law> laws = new ArrayList<>();
 
         parser.require(XmlPullParser.START_TAG, ns, "srw:searchRetrieveResponse");
         while (parser.next() != XmlPullParser.END_DOCUMENT) {
@@ -41,70 +41,45 @@ public class LawsXmlParser {
             } else if (name.equals("srw:record")) {
             } else if (name.equals("srw:recordData")) {
             } else if (name.equals("srw_dc:dc")) {
-                entries.add(readEntry(parser));
+                laws.add(readLaw(parser));
             } else {
                 skip(parser);
             }
         }
-        return entries;
+        return laws;
     }
 
     // Parses the contents of an entry. If it encounters a title, description, or link tag, hands
     // them
     // off
 // to their respective "read" methods for processing. Otherwise, skips the tag.
-    private Entry readEntry(XmlPullParser parser) throws XmlPullParserException, IOException {
+    private Law readLaw(XmlPullParser parser) throws XmlPullParserException, IOException {
         parser.require(XmlPullParser.START_TAG, ns, "srw_dc:dc");
-        String type = null;
-        String date = null;
         String urn = null;
-        String locality = null;
+        String locale = null;
         String authority = null;
         String title = null;
-        String subject = null;
         String description = null;
         while (parser.next() != XmlPullParser.END_TAG) {
             if (parser.getEventType() != XmlPullParser.START_TAG) {
                 continue;
             }
             String name = parser.getName();
-            if (name.equals("tipoDocumento")) {
-                type = readType(parser);
-            } else if (name.equals("dc:date")) {
-                date = readDate(parser);
-            } else if (name.equals("urn")) {
+            if (name.equals("urn")) {
                 urn = readUrn(parser);
             } else if (name.equals("localidade")) {
-                locality = readLocality(parser);
+                locale = readLocale(parser);
             } else if (name.equals("autoridade")) {
                 authority = readAuthority(parser);
             } else if (name.equals("dc:title")) {
                 title = readTitle(parser);
-            } else if (name.equals("dc:subject")) {
-                subject = readSubject(parser);
             } else if (name.equals("dc:description")) {
                 description = readDescription(parser);
             } else {
                 skip(parser);
             }
         }
-        return new Entry(type, date, urn, locality, authority, title, subject, description);
-    }
-
-    // Processes type tags in the feed.
-    private String readType(XmlPullParser parser) throws IOException, XmlPullParserException {
-        parser.require(XmlPullParser.START_TAG, ns, "tipoDocumento");
-        String type = readText(parser);
-        parser.require(XmlPullParser.END_TAG, ns, "tipoDocumento");
-        return type;
-    }
-
-    // Processes date tags in the feed.
-    private String readDate(XmlPullParser parser) throws IOException, XmlPullParserException {
-        parser.require(XmlPullParser.START_TAG, ns, "dc:date");
-        String date = readText(parser);
-        parser.require(XmlPullParser.END_TAG, ns, "dc:date");
-        return date;
+        return new Law(urn, locale, authority, title, description);
     }
 
     // Processes urn tags in the feed.
@@ -115,12 +90,12 @@ public class LawsXmlParser {
         return urn;
     }
 
-    // Processes locality tags in the feed.
-    private String readLocality(XmlPullParser parser) throws IOException, XmlPullParserException {
+    // Processes locale tags in the feed.
+    private String readLocale(XmlPullParser parser) throws IOException, XmlPullParserException {
         parser.require(XmlPullParser.START_TAG, ns, "localidade");
-        String locality = readText(parser);
+        String locale = readText(parser);
         parser.require(XmlPullParser.END_TAG, ns, "localidade");
-        return locality;
+        return locale;
     }
 
     // Processes authority tags in the feed.
@@ -137,14 +112,6 @@ public class LawsXmlParser {
         String title = readText(parser);
         parser.require(XmlPullParser.END_TAG, ns, "dc:title");
         return title;
-    }
-
-    // Processes subject tags in the feed.
-    private String readSubject(XmlPullParser parser) throws IOException, XmlPullParserException {
-        parser.require(XmlPullParser.START_TAG, ns, "dc:subject");
-        String subject = readText(parser);
-        parser.require(XmlPullParser.END_TAG, ns, "dc:subject");
-        return subject;
     }
 
     // Processes description tags in the feed.

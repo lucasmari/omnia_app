@@ -12,8 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lucas.omnia.R;
-import com.lucas.omnia.adapters.LawAdapter;
-import com.lucas.omnia.models.Entry;
+import com.lucas.omnia.adapters.SearchLawAdapter;
+import com.lucas.omnia.models.Law;
 import com.lucas.omnia.utils.LawsXmlParser;
 
 import org.xmlpull.v1.XmlPullParserException;
@@ -24,26 +24,25 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
 
-public class LawsActivity extends BaseActivity {
+public class SearchLawActivity extends BaseActivity {
 
     private TextView noneTv;
     private RecyclerView recyclerView;
-    private final String SEARCH_URL = "https://www.lexml.gov.br/busca/SRU?operation=searchRetrieve&query=\"";
-    private final String ITEM_URL = "https://www.lexml.gov.br/urn/";
+    private final String SEARCH_URL = "https://www.lexml.gov.br/busca/SRU?query=urn=lei&query=description=\"";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_laws);
+        setContentView(R.layout.activity_search_law);
 
-        setProgressBar(R.id.laws_pb);
+        setProgressBar(R.id.search_law_pb);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView = findViewById(R.id.laws_rv);
+        recyclerView = findViewById(R.id.search_law_rv);
         recyclerView.setLayoutManager(layoutManager);
 
-        EditText searchEt = findViewById(R.id.laws_et);
-        ImageButton searchBt = findViewById(R.id.laws_ib_search);
+        EditText searchEt = findViewById(R.id.search_law_et);
+        ImageButton searchBt = findViewById(R.id.search_law_ib_search);
         searchBt.setOnClickListener(v -> {
             showProgressBar();
             String query = searchEt.getText().toString();
@@ -51,7 +50,7 @@ public class LawsActivity extends BaseActivity {
             String url = SEARCH_URL + query + "\"";
             new DownloadXmlTask().execute(url);
         });
-        noneTv = findViewById(R.id.laws_tv_none);
+        noneTv = findViewById(R.id.search_law_tv_none);
     }
 
     // Implementation of AsyncTask used to download XML feed from stackoverflow.com.
@@ -63,8 +62,14 @@ public class LawsActivity extends BaseActivity {
 
         @Override
         protected void onPostExecute(RecyclerView.Adapter result) {
-            if (result.getItemCount() == 0) noneTv.setVisibility(View.VISIBLE);
-            else recyclerView.setAdapter(result);
+            if (result.getItemCount() == 0) {
+                noneTv.setVisibility(View.VISIBLE);
+                recyclerView.setAdapter(null);
+            }
+            else {
+                noneTv.setVisibility(View.GONE);
+                recyclerView.setAdapter(result);
+            }
             hideProgressBar();
         }
     }
@@ -75,7 +80,7 @@ public class LawsActivity extends BaseActivity {
         InputStream stream = null;
         // Instantiate the parser
         LawsXmlParser lawsXmlParser = new LawsXmlParser();
-        List<Entry> entries = null;
+        List<Law> laws = null;
 
         try {
             try {
@@ -85,7 +90,7 @@ public class LawsActivity extends BaseActivity {
             }
 
             try {
-                entries = lawsXmlParser.parse(stream);
+                laws = lawsXmlParser.parse(stream);
             } catch (XmlPullParserException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -103,9 +108,9 @@ public class LawsActivity extends BaseActivity {
             }
         }
 
-        entries.addAll(entries);
+        laws.addAll(laws);
 
-        return new LawAdapter(entries);
+        return new SearchLawAdapter(this, laws);
     }
 
     // Given a string representation of a SEARCH_URL, sets up a connection and gets

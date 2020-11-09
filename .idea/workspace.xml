@@ -11,8 +11,8 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="laws" />
-    <option name="TOOL_WINDOW_LOG_LEVEL" value="debug" />
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="gov" />
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="info" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
   </component>
   <component name="AutoImportSettings">
@@ -21,15 +21,17 @@
   <component name="ChangeListManager">
     <list default="true" id="2ac92bed-bd23-46bb-86d7-38e880627bec" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lucas/omnia/activities/LawsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lucas/omnia/activities/LawsActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lucas/omnia/activities/LawsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lucas/omnia/activities/SearchLawActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lucas/omnia/activities/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lucas/omnia/activities/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lucas/omnia/activities/SearchResultsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lucas/omnia/activities/SearchUserActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lucas/omnia/adapters/LawAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lucas/omnia/adapters/LawAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lucas/omnia/models/Entry.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lucas/omnia/models/Entry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lucas/omnia/activities/SearchUserActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lucas/omnia/activities/SearchUserActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lucas/omnia/adapters/LawAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lucas/omnia/adapters/SearchLawAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lucas/omnia/adapters/SearchResultsAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lucas/omnia/adapters/SearchUserAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lucas/omnia/models/Entry.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lucas/omnia/models/Law.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lucas/omnia/utils/LawsXmlParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lucas/omnia/utils/LawsXmlParser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_search_results.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_search_user.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_laws.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_search_law.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_law.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_law.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/values-pt-rBR/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values-pt-rBR/strings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
@@ -39,7 +41,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[Pixel_2_API_29]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$/..">
       <ProjectState />
@@ -107,15 +109,15 @@
     <property name="sync.plugin.last.upgrade.timestamp" value="1529541721933" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Lucas.ASUS\AndroidStudioProjects\Omnia\app\src\main\java\com\lucas\omnia" />
+    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.lucas.omnia" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/../app/src/main/res/values-pt-rBR" />
       <recent name="$PROJECT_DIR$/../app" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Lucas.ASUS\AndroidStudioProjects\Omnia\app\src\main\java\com\lucas\omnia" />
     </key>
   </component>
   <component name="RunManager">
@@ -283,6 +285,10 @@
     </state>
     <state x="514" y="182" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1602626278839" />
     <state x="366" y="137" width="624" height="529" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.28.1366.740@0.28.1366.740" timestamp="1599939639256" />
+    <state x="737" y="425" width="445" height="271" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1604865575758">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="737" y="425" width="445" height="271" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.27.1920.1053@0.27.1920.1053" timestamp="1604865575758" />
     <state x="585" y="198" width="524" height="507" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1603831311122">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
@@ -310,28 +316,28 @@
     <state x="655" y="168" width="424" height="491" key="FileChooserDialogImpl/0.27.1920.1053@0.27.1920.1053" timestamp="1602620914151" />
     <state x="466" y="127" width="424" height="548" key="FileChooserDialogImpl/0.28.1366.740@0.28.1366.740" timestamp="1601051743834" />
     <state x="655" y="169" width="424" height="491" key="FileChooserDialogImpl/0.28.1920.1052@0.28.1920.1052" timestamp="1601678075907" />
-    <state width="1878" height="268" key="GridCell.Tab.0.bottom" timestamp="1604795582210">
+    <state width="1878" height="268" key="GridCell.Tab.0.bottom" timestamp="1604954931579">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1878" height="268" key="GridCell.Tab.0.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1604795582210" />
+    <state width="1878" height="268" key="GridCell.Tab.0.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1604954931579" />
     <state width="1324" height="227" key="GridCell.Tab.0.bottom/0.28.1366.740@0.28.1366.740" timestamp="1601063979586" />
     <state width="1878" height="280" key="GridCell.Tab.0.bottom/0.28.1920.1052@0.28.1920.1052" timestamp="1602022575000" />
-    <state width="1878" height="268" key="GridCell.Tab.0.center" timestamp="1604795582210">
+    <state width="1878" height="268" key="GridCell.Tab.0.center" timestamp="1604954931579">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1878" height="268" key="GridCell.Tab.0.center/0.27.1920.1053@0.27.1920.1053" timestamp="1604795582210" />
+    <state width="1878" height="268" key="GridCell.Tab.0.center/0.27.1920.1053@0.27.1920.1053" timestamp="1604954931579" />
     <state width="1324" height="227" key="GridCell.Tab.0.center/0.28.1366.740@0.28.1366.740" timestamp="1601063979584" />
     <state width="1878" height="280" key="GridCell.Tab.0.center/0.28.1920.1052@0.28.1920.1052" timestamp="1602022575000" />
-    <state width="1878" height="268" key="GridCell.Tab.0.left" timestamp="1604795582210">
+    <state width="1878" height="268" key="GridCell.Tab.0.left" timestamp="1604954931579">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1878" height="268" key="GridCell.Tab.0.left/0.27.1920.1053@0.27.1920.1053" timestamp="1604795582210" />
+    <state width="1878" height="268" key="GridCell.Tab.0.left/0.27.1920.1053@0.27.1920.1053" timestamp="1604954931579" />
     <state width="1324" height="227" key="GridCell.Tab.0.left/0.28.1366.740@0.28.1366.740" timestamp="1601063979583" />
     <state width="1878" height="280" key="GridCell.Tab.0.left/0.28.1920.1052@0.28.1920.1052" timestamp="1602022575000" />
-    <state width="1878" height="268" key="GridCell.Tab.0.right" timestamp="1604795582210">
+    <state width="1878" height="268" key="GridCell.Tab.0.right" timestamp="1604954931579">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1878" height="268" key="GridCell.Tab.0.right/0.27.1920.1053@0.27.1920.1053" timestamp="1604795582210" />
+    <state width="1878" height="268" key="GridCell.Tab.0.right/0.27.1920.1053@0.27.1920.1053" timestamp="1604954931579" />
     <state width="1324" height="227" key="GridCell.Tab.0.right/0.28.1366.740@0.28.1366.740" timestamp="1601063979585" />
     <state width="1878" height="280" key="GridCell.Tab.0.right/0.28.1920.1052@0.28.1920.1052" timestamp="1602022575000" />
     <state width="1878" height="332" key="GridCell.Tab.1.bottom" timestamp="1603895102553">
@@ -365,10 +371,10 @@
     </state>
     <state width="498" height="445" key="SwitcherDM/0.27.1920.1053@0.27.1920.1053" timestamp="1602773246984" />
     <state width="498" height="445" key="SwitcherDM/0.28.1920.1052@0.28.1920.1052" timestamp="1601747855284" />
-    <state x="391" y="178" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1603547334488">
+    <state x="391" y="178" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1604954086978">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="391" y="178" key="Vcs.Push.Dialog.v2/0.27.1920.1053@0.27.1920.1053" timestamp="1603547334488" />
+    <state x="391" y="178" width="800" height="535" key="Vcs.Push.Dialog.v2/0.27.1920.1053@0.27.1920.1053" timestamp="1604954086978" />
     <state x="278" y="134" width="800" height="535" key="Vcs.Push.Dialog.v2/0.28.1366.740@0.28.1366.740" timestamp="1601053926646" />
     <state x="141" y="170" width="1639" height="768" key="com.android.tools.idea.avdmanager.AvdListDialog" timestamp="1601677352166">
       <screen x="0" y="28" width="1920" height="1052" />
@@ -398,16 +404,16 @@
       <screen x="0" y="28" width="1366" height="740" />
     </state>
     <state x="412" y="180" width="531" height="471" key="extract.method.dialog/0.28.1366.740@0.28.1366.740" timestamp="1601064057668" />
-    <state x="0" y="27" width="899" height="1053" key="find.popup" timestamp="1604091985115">
+    <state x="0" y="27" width="899" height="1053" key="find.popup" timestamp="1604869560093">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="0" y="27" width="899" height="1053" key="find.popup/0.27.1920.1053@0.27.1920.1053" timestamp="1604091985115" />
+    <state x="0" y="27" width="899" height="1053" key="find.popup/0.27.1920.1053@0.27.1920.1053" timestamp="1604869560093" />
     <state x="0" y="28" width="639" height="740" key="find.popup/0.28.1366.740@0.28.1366.740" timestamp="1600638508214" />
     <state x="0" y="28" width="899" height="1052" key="find.popup/0.28.1920.1052@0.28.1920.1052" timestamp="1601682854348" />
-    <state x="488" y="235" key="run.anything.popup" timestamp="1603826331707">
+    <state x="488" y="235" key="run.anything.popup" timestamp="1604954877859">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="488" y="235" key="run.anything.popup/0.27.1920.1053@0.27.1920.1053" timestamp="1603826331707" />
+    <state x="488" y="235" key="run.anything.popup/0.27.1920.1053@0.27.1920.1053" timestamp="1604954877859" />
     <state x="347" y="174" key="run.anything.popup/0.28.1366.740@0.28.1366.740" timestamp="1600107453775" />
     <state x="488" y="236" key="run.anything.popup/0.28.1920.1052@0.28.1920.1052" timestamp="1602015600697" />
     <state x="486" y="112" width="945" height="965" key="search.everywhere.popup" timestamp="1603996585247">
