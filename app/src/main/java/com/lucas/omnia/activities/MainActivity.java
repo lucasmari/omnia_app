@@ -108,12 +108,6 @@ public class MainActivity extends BaseActivity implements SharedPreferences.OnSh
         this.doubleBackToExitPressedOnce = true;
         Toast.makeText(this, getString(R.string.main_toast_press_back), Toast.LENGTH_SHORT).show();
 
-        new Handler().postDelayed(new Runnable() {
-
-            @Override
-            public void run() {
-                doubleBackToExitPressedOnce=false;
-            }
-        }, 2000);
+        new Handler().postDelayed(() -> doubleBackToExitPressedOnce=false, 2000);
     }
 }

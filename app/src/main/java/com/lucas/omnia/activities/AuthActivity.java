@@ -6,6 +6,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.core.util.PatternsCompat;
+
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -34,9 +36,9 @@ public class AuthActivity extends BaseActivity implements View.OnClickListener {
     private DatabaseReference databaseReference;
 
     // Tags
+    private static final String TAG = "AuthActivity";
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_FAILURE = "failure";
-    private static final String TAG = "AuthActivity";
     private static final int RC_SIGN_IN = 1;
 
     @Override
@@ -75,12 +77,17 @@ public class AuthActivity extends BaseActivity implements View.OnClickListener {
         String password = binding.authTietPass.getText().toString();
 
         Log.d(TAG, "signUp");
-        if (!validateForm(email, password)) {
+        if (validateEmail(email)) {
+            binding.authTietEmail.setError(getString(R.string.auth_invalid_email));
+            return;
+        }
+
+        if (validatePassword(password)) {
+            binding.authTietPass.setError(getString(R.string.auth_invalid_password));
             return;
         }
 
         showProgressBar();
-
         firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
@@ -102,12 +109,17 @@ public class AuthActivity extends BaseActivity implements View.OnClickListener {
         String password = binding.authTietPass.getText().toString();
 
         Log.d(TAG, "signIn");
-        if (!validateForm(email, password)) {
+        if (validateEmail(email)) {
+            binding.authTietEmail.setError(getString(R.string.auth_invalid_email));
+            return;
+        }
+
+        if (validatePassword(password)) {
+            binding.authTietPass.setError(getString(R.string.auth_invalid_password));
             return;
         }
 
         showProgressBar();
-
         firebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
@@ -159,7 +171,6 @@ public class AuthActivity extends BaseActivity implements View.OnClickListener {
 
     private void firebaseAuthWithGoogle(String idToken) {
         showProgressBar();
-
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
         firebaseAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, task -> {
@@ -177,18 +188,12 @@ public class AuthActivity extends BaseActivity implements View.OnClickListener {
                 });
     }
 
-    public boolean validateForm(String email, String password) {
-        boolean result = true;
+    public boolean validateEmail(String email) {
+        return email.isEmpty() || !PatternsCompat.EMAIL_ADDRESS.matcher(email).matches();
+    }
 
-        if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            binding.authTietEmail.setError(getString(R.string.auth_invalid_email));
-            result = false;
-        }
-        if (password.isEmpty() || password.length() < 6 || password.length() > 15) {
-            binding.authTietPass.setError(getString(R.string.auth_invalid_password));
-            result = false;
-        }
-        return result;
+    public boolean validatePassword(String password) {
+        return password.isEmpty() || password.length() < 6 || password.length() > 15;
     }
 
     private void onSignUpSuccess(FirebaseUser user) {
@@ -211,7 +216,7 @@ public class AuthActivity extends BaseActivity implements View.OnClickListener {
         finish();
     }
 
-    private String usernameFromEmail(String email) {
+    public String usernameFromEmail(String email) {
         if (email.contains("@")) {
             return email.split("@")[0];
         } else {

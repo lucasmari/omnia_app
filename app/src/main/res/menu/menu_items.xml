@@ -15,7 +15,7 @@
 
     <item
         android:id="@+id/action_notification"
-        android:icon="@drawable/ic_notifications"
+        android:icon="@drawable/ic_notification"
         android:orderInCategory="3"
         android:title="Item"
         app:showAsAction="ifRoom"
