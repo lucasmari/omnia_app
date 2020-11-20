@@ -46,11 +46,16 @@ public class SearchLawActivity extends BaseActivity {
         searchBt.setOnClickListener(v -> {
             showProgressBar();
             String query = searchEt.getText().toString();
-            query = query.replace(' ', '+');
-            String url = SEARCH_URL + query + "\"";
+            String url = composeQuery(query);
             new DownloadXmlTask().execute(url);
         });
         noneTv = findViewById(R.id.search_law_tv_none);
+    }
+
+    public String composeQuery(String query) {
+        query = query.replace(' ', '+');
+
+        return SEARCH_URL + query + "\"";
     }
 
     // Implementation of AsyncTask used to download XML feed from stackoverflow.com.
@@ -74,7 +79,7 @@ public class SearchLawActivity extends BaseActivity {
         }
     }
 
-    // Uploads XML from stackoverflow.com, parses it, and combines it with
+    // Uploads XML, parses it, and combines it with
 // HTML markup. Returns HTML string.
     private RecyclerView.Adapter loadXmlFromNetwork(String urlString) {
         InputStream stream = null;
@@ -91,9 +96,7 @@ public class SearchLawActivity extends BaseActivity {
 
             try {
                 laws = lawsXmlParser.parse(stream);
-            } catch (XmlPullParserException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
+            } catch (XmlPullParserException | IOException e) {
                 e.printStackTrace();
             }
             // Makes sure that the InputStream is closed after the app is

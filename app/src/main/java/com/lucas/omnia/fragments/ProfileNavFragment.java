@@ -78,12 +78,11 @@ public class ProfileNavFragment extends Fragment {
     private static DatabaseReference usersReference;
 
     private static final String TAG = "ProfileNavFragment";
-    private static final String FRAGMENT_TAG = "EditDialogFragment";
     private static final String STORAGE_PATH = "/profile-picture/profile.jpg";
 
     // Permissions
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
-    private static String[] PERMISSIONS_STORAGE = {
+    private static final String[] PERMISSIONS_STORAGE = {
             Manifest.permission.READ_EXTERNAL_STORAGE
     };
 
@@ -172,8 +171,7 @@ public class ProfileNavFragment extends Fragment {
         u.setAbout(aboutEt.getText().toString());
         saveUser(u);
 
-        Toast.makeText(getContext(), getString(R.string.profile_toast_about),
-                Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), getString(R.string.profile_toast_about), Toast.LENGTH_SHORT).show();
 
     }
 
