@@ -31,7 +31,7 @@ import com.lucas.omnia.activities.NewReplyActivity;
 import com.lucas.omnia.activities.UserPageActivity;
 import com.lucas.omnia.models.Comment;
 import com.lucas.omnia.models.Reply;
-import com.lucas.omnia.viewholder.ReplyViewHolder;
+import com.lucas.omnia.viewholders.ReplyViewHolder;
 
 import static com.lucas.omnia.activities.RepliesActivity.commentKey;
 import static com.lucas.omnia.activities.RepliesActivity.commentReference;

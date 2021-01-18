@@ -10,21 +10,39 @@ import com.lucas.omnia.models.Post
 import java.util.*
 
 class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    var titleView: TextView
-    var authorView: TextView
-    var timestampView: TextView
-    var editedView: TextView
-    var bodyView: TextView
-    var bodyImageView: ImageView
-    var upVotesView: TextView
-    var downVotesView: TextView
-    var commentsView: TextView
-    var upVoteButton: ImageButton
-    var downVoteButton: ImageButton
-    var commentButton: ImageButton
-    var shareButton: ImageButton
-    var moreButton: ImageButton
-    var date = Date()
+    private var titleView: TextView = itemView.findViewById(R.id.post_tv_title)
+
+    @JvmField
+    var authorView: TextView = itemView.findViewById(R.id.post_tv_author)
+    private var timestampView: TextView = itemView.findViewById(R.id.post_tv_timestamp)
+
+    @JvmField
+    var editedView: TextView = itemView.findViewById(R.id.post_tv_edited)
+
+    @JvmField
+    var bodyView: TextView = itemView.findViewById(R.id.post_tv_body)
+
+    @JvmField
+    var bodyImageView: ImageView = itemView.findViewById(R.id.post_iv_body_image)
+    private var upVotesView: TextView = itemView.findViewById(R.id.post_tv_upvote_count)
+    private var downVotesView: TextView = itemView.findViewById(R.id.post_tv_downvote_count)
+    private var commentsView: TextView = itemView.findViewById(R.id.post_tv_comment_count)
+
+    @JvmField
+    var upVoteButton: ImageButton = itemView.findViewById(R.id.post_ib_upvote)
+
+    @JvmField
+    var downVoteButton: ImageButton = itemView.findViewById(R.id.post_ib_downvote)
+
+    @JvmField
+    var commentButton: ImageButton = itemView.findViewById(R.id.post_ib_comment)
+
+    @JvmField
+    var shareButton: ImageButton = itemView.findViewById(R.id.post_ib_share)
+
+    @JvmField
+    var moreButton: ImageButton = itemView.findViewById(R.id.post_ib_more)
+    private var date = Date()
     fun bindToPost(post: Post, upVoteClickListener: View.OnClickListener?, downVoteClickListener: View.OnClickListener?) {
         titleView.text = post.title
         authorView.text = post.author
@@ -46,39 +64,32 @@ class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val diffWeeks = timeDiff / (60 * 60 * 1000 * 24 * 7)
         val diffMonths = (timeDiff / (60 * 60 * 1000 * 24 * 30.41666666)).toLong()
         val diffYears = timeDiff / (60.toLong() * 60 * 1000 * 24 * 365)
-        return if (diffSeconds < 1) {
-            "less than a second"
-        } else if (diffMinutes < 1) {
-            "$diffSeconds s"
-        } else if (diffHours < 1) {
-            "$diffMinutes min"
-        } else if (diffDays < 1) {
-            "$diffHours h"
-        } else if (diffWeeks < 1) {
-            "$diffDays d"
-        } else if (diffMonths < 1) {
-            "$diffWeeks w"
-        } else if (diffYears < 1) {
-            "$diffMonths m"
-        } else {
-            "$diffYears y"
+        return when {
+            diffSeconds < 1 -> {
+                "less than a second"
+            }
+            diffMinutes < 1 -> {
+                "$diffSeconds s"
+            }
+            diffHours < 1 -> {
+                "$diffMinutes min"
+            }
+            diffDays < 1 -> {
+                "$diffHours h"
+            }
+            diffWeeks < 1 -> {
+                "$diffDays d"
+            }
+            diffMonths < 1 -> {
+                "$diffWeeks w"
+            }
+            diffYears < 1 -> {
+                "$diffMonths m"
+            }
+            else -> {
+                "$diffYears y"
+            }
         }
     }
 
-    init {
-        titleView = itemView.findViewById(R.id.post_tv_title)
-        authorView = itemView.findViewById(R.id.post_tv_author)
-        timestampView = itemView.findViewById(R.id.post_tv_timestamp)
-        editedView = itemView.findViewById(R.id.post_tv_edited)
-        bodyView = itemView.findViewById(R.id.post_tv_body)
-        bodyImageView = itemView.findViewById(R.id.post_iv_body_image)
-        upVotesView = itemView.findViewById(R.id.post_tv_upvote_count)
-        downVotesView = itemView.findViewById(R.id.post_tv_downvote_count)
-        commentsView = itemView.findViewById(R.id.post_tv_comment_count)
-        upVoteButton = itemView.findViewById(R.id.post_ib_upvote)
-        downVoteButton = itemView.findViewById(R.id.post_ib_downvote)
-        commentButton = itemView.findViewById(R.id.post_ib_comment)
-        shareButton = itemView.findViewById(R.id.post_ib_share)
-        moreButton = itemView.findViewById(R.id.post_ib_more)
-    }
 }

@@ -27,17 +27,13 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -46,10 +42,10 @@ import com.lucas.omnia.R;
 import com.lucas.omnia.activities.MainActivity;
 import com.lucas.omnia.activities.ProfileSettingsActivity;
 import com.lucas.omnia.activities.SubscriptionsActivity;
-import com.lucas.omnia.activities.UserPageActivity;
-import com.lucas.omnia.activities.UserPostsActivity;
 import com.lucas.omnia.models.User;
 import com.lucas.omnia.utils.ImageLoadAsyncTask;
+
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -358,7 +354,11 @@ public class ProfileNavFragment extends Fragment {
         });
     }
 
-    private void saveUser(User u) {
+    String toJson(User user){
+        return new Gson().toJson(user);
+    }
+
+    public void saveUser(User u) {
         SharedPreferences.Editor prefsEditor = sharedPreferences.edit();
         Gson gson = new Gson();
         String json = gson.toJson(u);
@@ -366,7 +366,7 @@ public class ProfileNavFragment extends Fragment {
         prefsEditor.apply();
     }
 
-    private User getUserLocal() {
+    public User getUserLocal() {
         Gson gson = new Gson();
         String json = sharedPreferences.getString("User", "");
 

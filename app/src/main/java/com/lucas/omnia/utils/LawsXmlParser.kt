@@ -11,14 +11,12 @@ import java.util.*
 class LawsXmlParser {
     @Throws(XmlPullParserException::class, IOException::class)
     fun parse(`in`: InputStream): List<Law> {
-        return try {
+        return `in`.use { `in` ->
             val parser = Xml.newPullParser()
             parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false)
             parser.setInput(`in`, null)
             parser.nextTag()
             readRecords(parser)
-        } finally {
-            `in`.close()
         }
     }
 

@@ -32,7 +32,7 @@ import com.lucas.omnia.activities.RepliesActivity;
 import com.lucas.omnia.activities.UserPageActivity;
 import com.lucas.omnia.models.Comment;
 import com.lucas.omnia.models.Post;
-import com.lucas.omnia.viewholder.CommentViewHolder;
+import com.lucas.omnia.viewholders.CommentViewHolder;
 
 import static com.lucas.omnia.activities.CommentsActivity.addFab;
 import static com.lucas.omnia.activities.CommentsActivity.postKey;

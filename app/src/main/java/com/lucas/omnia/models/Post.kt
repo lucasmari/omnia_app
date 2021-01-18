@@ -5,31 +5,28 @@ import com.google.firebase.database.IgnoreExtraProperties
 import java.util.*
 
 @IgnoreExtraProperties
-class Post {
-    var uid: String? = null
-    var author: String? = null
+data class Post(var uid: String? = null, var author: String? = null, var title: String? = null, var body: String? = null) {
+    @JvmField
     var timestamp: Long = 0
-    var title: String? = null
-    var body: String? = null
+    @JvmField
     var edited = false
+    @JvmField
     var hasImage = false
+    @JvmField
     var upVoteCount = 0
+    @JvmField
     var downVoteCount = 0
+    @JvmField
     var votesBalance = 0
+    @JvmField
     var commentCount = 0
+    @JvmField
     var upVotes: Map<String, Boolean> = HashMap()
+    @JvmField
     var downVotes: Map<String, Boolean> = HashMap()
 
-    constructor() {
-        // Default constructor required for calls to DataSnapshot.getValue(Post.class)
-    }
-
-    constructor(uid: String?, author: String?, title: String?, body: String?) {
-        this.uid = uid
-        this.author = author
-        this.title = title
-        this.body = body
-    }
+    // Default constructor required for calls to DataSnapshot.getValue(Post.class)
+    constructor() : this("", "", "", "")
 
     @Exclude
     fun toMap(): Map<String, Any?> {

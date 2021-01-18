@@ -1,3 +1,3 @@
 package com.lucas.omnia.models
 
-class Front(val name: String)
+data class Front(val name: String)

@@ -2,7 +2,7 @@ package com.lucas.omnia.activities;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class SearchLawActivityTest {
     private final SearchLawActivity searchLawActivity = new SearchLawActivity();

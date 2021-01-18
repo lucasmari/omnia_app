@@ -5,19 +5,10 @@ import com.lucas.omnia.R
 import com.lucas.omnia.activities.*
 import java.util.*
 
-class Inspection {
-    var name: String? = null
-        private set
-    var activityClass: Class<*>? = null
-        private set
-
-    constructor() {}
-    private constructor(name: String, activityClass: Class<*>) {
-        this.name = name
-        this.activityClass = activityClass
-    }
+data class Inspection(var name: String? = null, var activityClass: Class<*>? = null) {
 
     companion object {
+        @JvmStatic
         fun createInspectionList(resources: Resources): ArrayList<Inspection> {
             val inspectionList = ArrayList<Inspection>()
             inspectionList.add(Inspection(resources.getString(R.string.inspection_item_1), BlocksActivity::class.java))

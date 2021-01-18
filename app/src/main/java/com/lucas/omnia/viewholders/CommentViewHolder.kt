@@ -11,20 +11,29 @@ import com.lucas.omnia.models.Comment
 import java.util.*
 
 class CommentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    var authorView: TextView
-    var timestampView: TextView
-    var editedView: TextView
-    var bodyView: TextView
-    var upVotesView: TextView
-    var downVotesView: TextView
-    var repliesView: TextView
-    var upVoteButton: ImageButton
-    var downVoteButton: ImageButton
-    var moreButton: ImageButton
-    var replyButton: Button
-    var repliesButton: Button
-    var repliesLayout: LinearLayout
-    var date = Date()
+    @JvmField
+    var authorView: TextView = itemView.findViewById(R.id.comment_tv_author)
+    private var timestampView: TextView = itemView.findViewById(R.id.comment_tv_timestamp)
+    @JvmField
+    var editedView: TextView = itemView.findViewById(R.id.comment_tv_edited)
+    private var bodyView: TextView = itemView.findViewById(R.id.comment_tv_body)
+    private var upVotesView: TextView = itemView.findViewById(R.id.comment_tv_upvote_count)
+    private var downVotesView: TextView = itemView.findViewById(R.id.comment_tv_downvote_count)
+    private var repliesView: TextView = itemView.findViewById(R.id.comment_tv_reply_count)
+    @JvmField
+    var upVoteButton: ImageButton = itemView.findViewById(R.id.comment_ib_upvote)
+    @JvmField
+    var downVoteButton: ImageButton = itemView.findViewById(R.id.comment_ib_downvote)
+    @JvmField
+    var moreButton: ImageButton = itemView.findViewById(R.id.comment_ib_more)
+    @JvmField
+    var replyButton: Button = itemView.findViewById(R.id.comment_bt_reply)
+    @JvmField
+    var repliesButton: Button = itemView.findViewById(R.id.comment_bt_replies)
+    @JvmField
+    var repliesLayout: LinearLayout = itemView.findViewById(R.id.comment_ll)
+    private var date = Date()
+
     fun bindToComment(comment: Comment, upVoteClickListener: View.OnClickListener?, downVoteClickListener: View.OnClickListener?) {
         authorView.text = comment.author
         timestampView.text = getTimeDiff(comment)
@@ -45,38 +54,31 @@ class CommentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val diffWeeks = timeDiff / (60 * 60 * 1000 * 24 * 7)
         val diffMonths = (timeDiff / (60 * 60 * 1000 * 24 * 30.41666666)).toLong()
         val diffYears = timeDiff / (60.toLong() * 60 * 1000 * 24 * 365)
-        return if (diffSeconds < 1) {
-            "less than a second"
-        } else if (diffMinutes < 1) {
-            "$diffSeconds s"
-        } else if (diffHours < 1) {
-            "$diffMinutes min"
-        } else if (diffDays < 1) {
-            "$diffHours h"
-        } else if (diffWeeks < 1) {
-            "$diffDays d"
-        } else if (diffMonths < 1) {
-            "$diffWeeks w"
-        } else if (diffYears < 1) {
-            "$diffMonths m"
-        } else {
-            "$diffYears y"
+        return when {
+            diffSeconds < 1 -> {
+                "less than a second"
+            }
+            diffMinutes < 1 -> {
+                "$diffSeconds s"
+            }
+            diffHours < 1 -> {
+                "$diffMinutes min"
+            }
+            diffDays < 1 -> {
+                "$diffHours h"
+            }
+            diffWeeks < 1 -> {
+                "$diffDays d"
+            }
+            diffMonths < 1 -> {
+                "$diffWeeks w"
+            }
+            diffYears < 1 -> {
+                "$diffMonths m"
+            }
+            else -> {
+                "$diffYears y"
+            }
         }
-    }
-
-    init {
-        authorView = itemView.findViewById(R.id.comment_tv_author)
-        timestampView = itemView.findViewById(R.id.comment_tv_timestamp)
-        editedView = itemView.findViewById(R.id.comment_tv_edited)
-        bodyView = itemView.findViewById(R.id.comment_tv_body)
-        upVotesView = itemView.findViewById(R.id.comment_tv_upvote_count)
-        downVotesView = itemView.findViewById(R.id.comment_tv_downvote_count)
-        repliesView = itemView.findViewById(R.id.comment_tv_reply_count)
-        upVoteButton = itemView.findViewById(R.id.comment_ib_upvote)
-        downVoteButton = itemView.findViewById(R.id.comment_ib_downvote)
-        moreButton = itemView.findViewById(R.id.comment_ib_more)
-        replyButton = itemView.findViewById(R.id.comment_bt_reply)
-        repliesButton = itemView.findViewById(R.id.comment_bt_replies)
-        repliesLayout = itemView.findViewById(R.id.comment_ll)
     }
 }

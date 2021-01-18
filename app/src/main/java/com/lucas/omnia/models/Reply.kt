@@ -5,27 +5,21 @@ import com.google.firebase.database.IgnoreExtraProperties
 import java.util.*
 
 @IgnoreExtraProperties
-class Reply {
-    var uid: String? = null
-    var author: String? = null
+data class Reply(var uid: String? = null, var author: String? = null, var body: String? = null) {
+    @JvmField
     var timestamp: Long = 0
-    var body: String? = null
+    @JvmField
     var edited = false
+    @JvmField
     var upVoteCount = 0
+    @JvmField
     var downVoteCount = 0
+    @JvmField
     var votesBalance = 0
+    @JvmField
     var upVotes: Map<String, Boolean> = HashMap()
+    @JvmField
     var downVotes: Map<String, Boolean> = HashMap()
-
-    constructor() {
-        // Default constructor required for calls to DataSnapshot.getValue(Reply.class)
-    }
-
-    constructor(uid: String?, author: String?, body: String?) {
-        this.uid = uid
-        this.author = author
-        this.body = body
-    }
 
     @Exclude
     fun toMap(): Map<String, Any?> {
