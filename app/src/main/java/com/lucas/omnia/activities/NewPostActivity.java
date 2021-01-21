@@ -5,6 +5,8 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -62,7 +64,7 @@ public class NewPostActivity extends BaseActivity {
         databaseReference.child("users").child(userId).addListenerForSingleValueEvent(
                 new ValueEventListener() {
                     @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         User user = dataSnapshot.getValue(User.class);
 
                         if (user == null) {
@@ -71,14 +73,14 @@ public class NewPostActivity extends BaseActivity {
                                     getString(R.string.new_post_toast_user_fetch_error),
                                     Toast.LENGTH_SHORT).show();
                         } else {
-                            writeNewPost(userId, user.username, title, body);
+                            writeNewPost(userId, user.getUsername(), title, body);
                         }
                         setEditingEnabled(true);
                         finish();
                     }
 
                     @Override
-                    public void onCancelled(DatabaseError databaseError) {
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
                         Log.e(TAG, "getUser:onCancelled", databaseError.toException());
                         setEditingEnabled(true);
                     }

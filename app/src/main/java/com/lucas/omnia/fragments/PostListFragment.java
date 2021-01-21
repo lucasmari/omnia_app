@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -55,7 +56,7 @@ public abstract class PostListFragment extends Fragment {
     public PostListFragment() {}
 
     @Override
-    public View onCreateView (LayoutInflater inflater, ViewGroup container,
+    public View onCreateView (@NonNull LayoutInflater inflater, ViewGroup container,
                               Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         View rootView = inflater.inflate(R.layout.fragment_posts, container, false);
@@ -89,21 +90,22 @@ public abstract class PostListFragment extends Fragment {
 
         recyclerAdapter = new FirebaseRecyclerAdapter<Post, PostViewHolder>(options) {
 
+            @NonNull
             @Override
-            public PostViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+            public PostViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
                 LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
                 return new PostViewHolder(inflater.inflate(R.layout.item_post, viewGroup, false));
             }
 
             @Override
-            protected void onBindViewHolder(PostViewHolder viewHolder, int position, final Post post) {
+            protected void onBindViewHolder(@NonNull PostViewHolder viewHolder, int position, @NonNull final Post post) {
                 final DatabaseReference postRef = getRef(position);
                 final String postKey = postRef.getKey();
 
                 // Determine if the post has image/video
                 if (post.hasImage) {
                     viewHolder.bodyView.setVisibility(View.GONE);
-                    fetchProfileImage(post.uid, postKey, viewHolder.bodyImageView);
+                    fetchProfileImage(post.getUid(), postKey, viewHolder.bodyImageView);
                 } else {
                     viewHolder.bodyView.setVisibility(View.VISIBLE);
                     viewHolder.bodyImageView.setVisibility(View.GONE);
@@ -134,13 +136,13 @@ public abstract class PostListFragment extends Fragment {
 
                 viewHolder.authorView.setOnClickListener(v -> {
                     Intent intent = new Intent(getActivity(), UserPageActivity.class);
-                    intent.putExtra(UserPageActivity.EXTRA_USER_KEY, post.uid);
+                    intent.putExtra(UserPageActivity.EXTRA_USER_KEY, post.getUid());
                     startActivity(intent);
                 });
 
                 DatabaseReference globalPostRef = databaseReference.child("posts").child(postKey);
                 DatabaseReference userPostRef =
-                        databaseReference.child("user-posts").child(post.uid).child(postKey);
+                        databaseReference.child("user-posts").child(post.getUid()).child(postKey);
                 viewHolder.bindToPost(post, upVoteButton -> {
                     // Run two transactions
                     onUpVoteClicked(globalPostRef);
@@ -157,20 +159,16 @@ public abstract class PostListFragment extends Fragment {
                     startActivity(intent);
                 });
 
-                viewHolder.shareButton.setOnClickListener(v -> {
-                    sharePost(post);
-                });
+                viewHolder.shareButton.setOnClickListener(v -> sharePost(post));
 
-                viewHolder.moreButton.setOnClickListener(v -> {
-                    moreOptions(post, postKey);
-                });
+                viewHolder.moreButton.setOnClickListener(v -> moreOptions(post, postKey));
             }
         };
 
         recyclerView.setAdapter(recyclerAdapter);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 if (dy > 0 && addFab.getVisibility() == View.VISIBLE) {
                     addFab.hide();
@@ -193,15 +191,14 @@ public abstract class PostListFragment extends Fragment {
                     postImgView, false);
             imageLoadAsyncTask.execute();
             postImgView.setVisibility(View.VISIBLE);
-        }).addOnFailureListener(exception -> {
-            Toast.makeText(getContext(), getString(R.string.profile_toast_fetch_error), Toast.LENGTH_SHORT).show();
-        });
+        }).addOnFailureListener(exception -> Toast.makeText(getContext(), getString(R.string.profile_toast_fetch_error), Toast.LENGTH_SHORT).show());
     }
 
     private void onUpVoteClicked(DatabaseReference postRef) {
         postRef.runTransaction(new Transaction.Handler() {
+            @NonNull
             @Override
-            public Transaction.Result doTransaction(MutableData mutableData) {
+            public Transaction.Result doTransaction(@NonNull MutableData mutableData) {
                 Post p = mutableData.getValue(Post.class);
                 if (p == null) {
                     return Transaction.success(mutableData);
@@ -243,7 +240,7 @@ public abstract class PostListFragment extends Fragment {
     private void onDownVoteClicked(DatabaseReference postRef) {
         postRef.runTransaction(new Transaction.Handler() {
             @Override
-            public Transaction.Result doTransaction(MutableData mutableData) {
+            public Transaction.Result doTransaction(@NonNull MutableData mutableData) {
                 Post p = mutableData.getValue(Post.class);
                 if (p == null) {
                     return Transaction.success(mutableData);
@@ -285,14 +282,14 @@ public abstract class PostListFragment extends Fragment {
     private void sharePost(Post post) {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType("text/plain");
-        shareIntent.putExtra(Intent.EXTRA_TITLE, post.title);
-        shareIntent.putExtra(Intent.EXTRA_TEXT, post.body);
+        shareIntent.putExtra(Intent.EXTRA_TITLE, post.getTitle());
+        shareIntent.putExtra(Intent.EXTRA_TEXT, post.getBody());
         startActivity(Intent.createChooser(shareIntent, getString(R.string.share_title)));
     }
 
     private void moreOptions(Post post, String postKey) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        if (!getUid().equals(post.uid)) {
+        if (!getUid().equals(post.getUid())) {
             builder.setItems(getResources().getStringArray(R.array.options3), (dialog, which) -> {
                 if (which == 0) {
                     //reportPost();
@@ -334,16 +331,12 @@ public abstract class PostListFragment extends Fragment {
                     Toast.makeText(context, getString(R.string.post_list_toast_deleting), Toast.LENGTH_SHORT).show();
 
                     databaseReference.child("posts").child(postKey).removeValue();
-                    databaseReference.child("user-posts").child(post.uid).child(postKey).removeValue();
+                    databaseReference.child("user-posts").child(post.getUid()).child(postKey).removeValue();
 
-                    StorageReference postImgRef = storageRef.child(post.uid + "/posts/" + postKey);
+                    StorageReference postImgRef = storageRef.child(post.getUid() + "/posts/" + postKey);
 
-                    postImgRef.delete().addOnSuccessListener(aVoid -> {
-                        Toast.makeText(context, getString(R.string.post_list_toast_success),
-                                Toast.LENGTH_SHORT).show();
-                    }).addOnFailureListener(exception -> {
-                        Toast.makeText(context, getString(R.string.post_list_toast_failure), Toast.LENGTH_SHORT).show();
-                    });
+                    postImgRef.delete().addOnSuccessListener(aVoid -> Toast.makeText(context, getString(R.string.post_list_toast_success),
+                            Toast.LENGTH_SHORT).show()).addOnFailureListener(exception -> Toast.makeText(context, getString(R.string.post_list_toast_failure), Toast.LENGTH_SHORT).show());
                 })
                 .setNegativeButton(getString(R.string.alert_dialog_bt_negative), null)
                 .show();

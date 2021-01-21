@@ -5,6 +5,8 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,10 +33,8 @@ public class NewReplyActivity extends BaseActivity {
     private static final String REQUIRED = "Required";
 
     private String commentKey;
-    private String replyKey;
     private DatabaseReference databaseReference;
     private DatabaseReference commentReference;
-    private DatabaseReference replyReference;
     private String author;
 
     private ActivityNewReplyBinding binding;
@@ -57,24 +57,23 @@ public class NewReplyActivity extends BaseActivity {
 
         if (getIntent().hasExtra(EXTRA_REPLY_KEY)) {
             // Get reply key from intent
-            replyKey = getIntent().getStringExtra(EXTRA_REPLY_KEY);
+            String replyKey = getIntent().getStringExtra(EXTRA_REPLY_KEY);
             if (replyKey == null) {
                 throw new IllegalArgumentException("Must pass EXTRA_REPLY_KEY");
             }
 
-            replyReference =
-                    databaseReference.child("comment-replies").child(commentKey).child(replyKey);
+            DatabaseReference replyReference = databaseReference.child("comment-replies").child(commentKey).child(replyKey);
             replyReference.addListenerForSingleValueEvent(
                     new ValueEventListener() {
                         @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             Reply reply = dataSnapshot.getValue(Reply.class);
 
-                            author = reply.author;
+                            author = reply.getAuthor();
                         }
 
                         @Override
-                        public void onCancelled(DatabaseError databaseError) {
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
                             Log.e(TAG, "loadReply:onCancelled", databaseError.toException());
                             setEditingEnabled(true);
                         }
@@ -83,14 +82,14 @@ public class NewReplyActivity extends BaseActivity {
             commentReference.addListenerForSingleValueEvent(
                     new ValueEventListener() {
                         @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             Comment comment = dataSnapshot.getValue(Comment.class);
 
-                            author = comment.author;
+                            author = comment.getAuthor();
                         }
 
                         @Override
-                        public void onCancelled(DatabaseError databaseError) {
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
                             Log.e(TAG, "loadReply:onCancelled", databaseError.toException());
                             setEditingEnabled(true);
                         }
@@ -117,7 +116,7 @@ public class NewReplyActivity extends BaseActivity {
         databaseReference.child("users").child(userId).addListenerForSingleValueEvent(
                 new ValueEventListener() {
                     @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         User user = dataSnapshot.getValue(User.class);
 
                         if (user == null) {
@@ -126,7 +125,7 @@ public class NewReplyActivity extends BaseActivity {
                                     getString(R.string.new_post_toast_user_fetch_error),
                                     Toast.LENGTH_SHORT).show();
                         } else {
-                            writeNewReply(userId, user.username, body);
+                            writeNewReply(userId, user.getUsername(), body);
                             incrementRepliesCount();
                         }
                         setEditingEnabled(true);
@@ -134,7 +133,7 @@ public class NewReplyActivity extends BaseActivity {
                     }
 
                     @Override
-                    public void onCancelled(DatabaseError databaseError) {
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
                         Log.e(TAG, "getUser:onCancelled", databaseError.toException());
                         setEditingEnabled(true);
                     }
@@ -166,8 +165,9 @@ public class NewReplyActivity extends BaseActivity {
 
     private void incrementRepliesCount() {
         commentReference.runTransaction(new Transaction.Handler() {
+            @NonNull
             @Override
-            public Transaction.Result doTransaction(MutableData mutableData) {
+            public Transaction.Result doTransaction(@NonNull MutableData mutableData) {
                 Comment c = mutableData.getValue(Comment.class);
                 if (c == null) {
                     return Transaction.success(mutableData);

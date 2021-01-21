@@ -50,7 +50,7 @@ public class SearchLawAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 Law law = lawList.get(position);
 
                 Intent intent = new Intent(context, LawPageActivity.class);
-                intent.putExtra(LawPageActivity.EXTRA_LAW_URN, law.urn);
+                intent.putExtra(LawPageActivity.EXTRA_LAW_URN, law.getUrn());
                 context.startActivity(intent);
             }
         }
@@ -64,17 +64,17 @@ public class SearchLawAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
         Law law = lawList.get(position);
         TextView localeTextView = ((LawViewHolder) viewHolder).localeTextView;
         TextView authorityTextView = ((LawViewHolder) viewHolder).authorityTextView;
         TextView titleTextView = ((LawViewHolder) viewHolder).titleTextView;
         TextView descriptionTextView = ((LawViewHolder) viewHolder).descriptionTextView;
 
-        localeTextView.setText(law.locale);
-        authorityTextView.setText(law.authority);
-        titleTextView.setText(law.title);
-        descriptionTextView.setText(law.description);
+        localeTextView.setText(law.getLocale());
+        authorityTextView.setText(law.getAuthority());
+        titleTextView.setText(law.getTitle());
+        descriptionTextView.setText(law.getDescription());
     }
 
     @Override

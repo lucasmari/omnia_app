@@ -9,8 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
+import androidx.annotation.NonNull;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -21,8 +20,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.lucas.omnia.R;
-import com.lucas.omnia.fragments.CommentListFragment;
-import com.lucas.omnia.fragments.UserPostsTabFragment;
 import com.lucas.omnia.models.User;
 import com.lucas.omnia.utils.ImageLoadAsyncTask;
 
@@ -41,7 +38,6 @@ public class UserPageActivity extends BaseActivity {
     private TextView usernameTv;
     private TextView subCountTv;
     private TextView aboutTv;
-    private Button postsButton;
     private Button subButton;
 
     DatabaseReference userRef;
@@ -68,7 +64,7 @@ public class UserPageActivity extends BaseActivity {
 
         setupUserPage();
 
-        postsButton = findViewById(R.id.user_page_bt_posts);
+        Button postsButton = findViewById(R.id.user_page_bt_posts);
         if (userKey.equals(getUid())) postsButton.setVisibility(View.GONE);
         else postsButton.setOnClickListener(v -> openUserPosts());
 
@@ -87,7 +83,7 @@ public class UserPageActivity extends BaseActivity {
         userRef.addListenerForSingleValueEvent(
                 new ValueEventListener() {
                     @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         User u = dataSnapshot.getValue(User.class);
 
                         if (u == null) {
@@ -101,7 +97,7 @@ public class UserPageActivity extends BaseActivity {
                     }
 
                     @Override
-                    public void onCancelled(DatabaseError databaseError) {
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
                         Log.e(TAG, "getUser:onCancelled", databaseError.toException());
                     }
                 });
@@ -109,7 +105,7 @@ public class UserPageActivity extends BaseActivity {
         currentUserRef.addListenerForSingleValueEvent(
                 new ValueEventListener() {
                     @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         User u = dataSnapshot.getValue(User.class);
 
                         if (u == null) {
@@ -125,17 +121,17 @@ public class UserPageActivity extends BaseActivity {
                     }
 
                     @Override
-                    public void onCancelled(DatabaseError databaseError) {
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
                         Log.e(TAG, "getUser:onCancelled", databaseError.toException());
                     }
                 });
     }
 
     private void setUser(User u) {
-        usernameTv.setText(u.username);
+        usernameTv.setText(u.getUsername());
         subCountTv.setText(String.valueOf(u.subCount));
-        if (u.hasPhoto) fetchProfileImage();
-        if (u.about != null) aboutTv.setText(u.about);
+        if (u.getHasPhoto()) fetchProfileImage();
+        if (u.getAbout() != null) aboutTv.setText(u.getAbout());
     }
 
     private void fetchProfileImage() {
@@ -151,17 +147,15 @@ public class UserPageActivity extends BaseActivity {
             ImageLoadAsyncTask imageLoadAsyncTask = new ImageLoadAsyncTask(userImgUrl,
                     userImgView, true);
             imageLoadAsyncTask.execute();
-        }).addOnFailureListener(exception -> {
-            Toast.makeText(UserPageActivity.this, getString(R.string.profile_toast_fetch_error),
-                    Toast.LENGTH_SHORT).show();
-        });
+        }).addOnFailureListener(exception -> Toast.makeText(UserPageActivity.this, getString(R.string.profile_toast_fetch_error),
+                Toast.LENGTH_SHORT).show());
     }
 
     private void verifySub() {
         currentUserRef.addListenerForSingleValueEvent(
                 new ValueEventListener() {
                     @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         User u = dataSnapshot.getValue(User.class);
 
                         if (u == null) {
@@ -179,7 +173,7 @@ public class UserPageActivity extends BaseActivity {
                     }
 
                     @Override
-                    public void onCancelled(DatabaseError databaseError) {
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
                         Log.e(TAG, "getUser:onCancelled", databaseError.toException());
                     }
                 });
@@ -187,8 +181,9 @@ public class UserPageActivity extends BaseActivity {
 
     private void unsetSub(User current) {
         userRef.runTransaction(new Transaction.Handler() {
+            @NonNull
             @Override
-            public Transaction.Result doTransaction(MutableData mutableData) {
+            public Transaction.Result doTransaction(@NonNull MutableData mutableData) {
                 User u = mutableData.getValue(User.class);
                 if (u == null) {
                     return Transaction.success(mutableData);
@@ -219,8 +214,9 @@ public class UserPageActivity extends BaseActivity {
 
     private void setSub(User current) {
         userRef.runTransaction(new Transaction.Handler() {
+            @NonNull
             @Override
-            public Transaction.Result doTransaction(MutableData mutableData) {
+            public Transaction.Result doTransaction(@NonNull MutableData mutableData) {
                 User u = mutableData.getValue(User.class);
                 if (u == null) {
                     return Transaction.success(mutableData);
@@ -228,7 +224,7 @@ public class UserPageActivity extends BaseActivity {
 
                 u.subCount = u.subCount + 1;
                 runOnUiThread(() -> {
-                    current.subs.put(userKey, u.username);
+                    current.subs.put(userKey, u.getUsername());
                     currentUserRef.child("subs").setValue(current.subs);
                     subButton.setText(getString(R.string.user_page_bt_unsub));
                     subCountTv.setText(String.valueOf(u.subCount));

@@ -45,8 +45,6 @@ import com.lucas.omnia.activities.SubscriptionsActivity;
 import com.lucas.omnia.models.User;
 import com.lucas.omnia.utils.ImageLoadAsyncTask;
 
-import org.json.JSONObject;
-
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -109,9 +107,7 @@ public class ProfileNavFragment extends Fragment {
                 SubscriptionsActivity.class)));
 
         profileImgView = view.findViewById(R.id.profile_iv);
-        profileImgView.setOnClickListener(v -> {
-            verifyStoragePermissions();
-        });
+        profileImgView.setOnClickListener(v -> verifyStoragePermissions());
 
         ImageButton editIb = view.findViewById(R.id.profile_ib_edit);
         editIb.setOnClickListener(v -> editUsername());
@@ -135,7 +131,7 @@ public class ProfileNavFragment extends Fragment {
         databaseReference.child("users").child(userId).addListenerForSingleValueEvent(
                 new ValueEventListener() {
                     @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         User u = dataSnapshot.getValue(User.class);
 
                         if (u == null) {
@@ -150,7 +146,7 @@ public class ProfileNavFragment extends Fragment {
                     }
 
                     @Override
-                    public void onCancelled(DatabaseError databaseError) {
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
                         Log.e(TAG, "getUser:onCancelled", databaseError.toException());
                     }
                 });
@@ -204,7 +200,7 @@ public class ProfileNavFragment extends Fragment {
     private void updateUser(String username) {
         usersReference.orderByChild("username").equalTo(username).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()) {
                     Toast.makeText(getContext(),
                             getString(R.string.profile_toast_username_exists),
@@ -229,7 +225,7 @@ public class ProfileNavFragment extends Fragment {
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
                 Log.e(TAG, "updateUser:onCancelled", databaseError.toException());
             }
         });
@@ -239,7 +235,7 @@ public class ProfileNavFragment extends Fragment {
         DatabaseReference postsReference = databaseReference.child("posts");
         postsReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     for(DataSnapshot d : dataSnapshot.getChildren()) {
                         if (d.child("uid").getValue().toString().equals(userId)) {
@@ -252,7 +248,7 @@ public class ProfileNavFragment extends Fragment {
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
                 Log.e(TAG, "updatePosts:onCancelled", databaseError.toException());
             }
         });
@@ -260,7 +256,7 @@ public class ProfileNavFragment extends Fragment {
         DatabaseReference userPostsReference = databaseReference.child("user-posts").child(userId);
         userPostsReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     for(DataSnapshot d : dataSnapshot.getChildren()) {
                         HashMap<String, Object> result = new HashMap<>();
@@ -271,7 +267,7 @@ public class ProfileNavFragment extends Fragment {
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
                 Log.e(TAG, "updatePosts:onCancelled", databaseError.toException());
             }
         });
@@ -332,10 +328,10 @@ public class ProfileNavFragment extends Fragment {
     }
 
     private void setUser(User u) {
-        usernameTv.setText(u.username);
+        usernameTv.setText(u.getUsername());
         subCountTv.setText(String.valueOf(u.subCount));
-        if (u.hasPhoto) fetchProfileImage();
-        if (u.about != null) aboutEt.setText(u.about);
+        if (u.getHasPhoto()) fetchProfileImage();
+        if (u.getAbout() != null) aboutEt.setText(u.getAbout());
     }
 
     private void fetchProfileImage() {
@@ -349,13 +345,7 @@ public class ProfileNavFragment extends Fragment {
             ImageLoadAsyncTask imageLoadAsyncTask = new ImageLoadAsyncTask(profileImgUrl,
                     profileImgView, true);
             imageLoadAsyncTask.execute();
-        }).addOnFailureListener(exception -> {
-            Toast.makeText(getContext(), getString(R.string.profile_toast_fetch_error), Toast.LENGTH_SHORT).show();
-        });
-    }
-
-    String toJson(User user){
-        return new Gson().toJson(user);
+        }).addOnFailureListener(exception -> Toast.makeText(getContext(), getString(R.string.profile_toast_fetch_error), Toast.LENGTH_SHORT).show());
     }
 
     public void saveUser(User u) {

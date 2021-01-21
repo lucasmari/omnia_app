@@ -44,7 +44,7 @@ public class SearchUserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 User user = userList.get(position);
 
                 Intent intent = new Intent(context, UserPageActivity.class);
-                intent.putExtra(UserPageActivity.EXTRA_USER_KEY, user.uid);
+                intent.putExtra(UserPageActivity.EXTRA_USER_KEY, user.getUid());
                 context.startActivity(intent);
             }
         }
@@ -59,11 +59,11 @@ public class SearchUserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
         TextView userTextView =
                 ((UserViewHolder) viewHolder).userTextView;
         User user = userList.get(position);
-        userTextView.setText(user.username);
+        userTextView.setText(user.getUsername());
     }
 
     @Override

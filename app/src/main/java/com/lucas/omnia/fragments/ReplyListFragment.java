@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -46,7 +47,7 @@ public class ReplyListFragment extends Fragment {
     private RecyclerView recyclerView;
 
     @Override
-    public View onCreateView (LayoutInflater inflater, ViewGroup container,
+    public View onCreateView (@NonNull LayoutInflater inflater, ViewGroup container,
                               Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         View rootView = inflater.inflate(R.layout.fragment_posts, container, false);
@@ -78,14 +79,15 @@ public class ReplyListFragment extends Fragment {
 
         recyclerAdapter = new FirebaseRecyclerAdapter<Reply, ReplyViewHolder>(options) {
 
+            @NonNull
             @Override
-            public ReplyViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+            public ReplyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
                 LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
                 return new ReplyViewHolder(inflater.inflate(R.layout.item_reply, viewGroup, false));
             }
 
             @Override
-            protected void onBindViewHolder(ReplyViewHolder viewHolder, int position, final Reply reply) {
+            protected void onBindViewHolder(@NonNull ReplyViewHolder viewHolder, int position, @NonNull final Reply reply) {
                 final DatabaseReference replyRef = getRef(position);
                 final String replyKey = replyRef.getKey();
 
@@ -114,21 +116,15 @@ public class ReplyListFragment extends Fragment {
 
                 viewHolder.authorView.setOnClickListener(v -> {
                     Intent intent = new Intent(getActivity(), UserPageActivity.class);
-                    intent.putExtra(UserPageActivity.EXTRA_USER_KEY, reply.uid);
+                    intent.putExtra(UserPageActivity.EXTRA_USER_KEY, reply.getUid());
                     startActivity(intent);
                 });
 
                 DatabaseReference globalReplyRef =
                         databaseReference.child("comment-replies").child(commentKey).child(replyKey);
-                viewHolder.bindToReply(reply, upVoteButton -> {
-                    onUpVoteClicked(globalReplyRef);
-                }, downVoteButton -> {
-                    onDownVoteClicked(globalReplyRef);
-                });
+                viewHolder.bindToReply(reply, upVoteButton -> onUpVoteClicked(globalReplyRef), downVoteButton -> onDownVoteClicked(globalReplyRef));
 
-                viewHolder.moreButton.setOnClickListener(v -> {
-                    moreOptions(reply, replyKey);
-                });
+                viewHolder.moreButton.setOnClickListener(v -> moreOptions(reply, replyKey));
 
                 viewHolder.replyButton.setOnClickListener(v -> {
                     Intent intent = new Intent(getActivity(), NewReplyActivity.class);
@@ -144,8 +140,9 @@ public class ReplyListFragment extends Fragment {
 
     private void onUpVoteClicked(DatabaseReference replyRef) {
         replyRef.runTransaction(new Transaction.Handler() {
+            @NonNull
             @Override
-            public Transaction.Result doTransaction(MutableData mutableData) {
+            public Transaction.Result doTransaction(@NonNull MutableData mutableData) {
                 Reply r = mutableData.getValue(Reply.class);
                 if (r == null) {
                     return Transaction.success(mutableData);
@@ -186,8 +183,9 @@ public class ReplyListFragment extends Fragment {
 
     private void onDownVoteClicked(DatabaseReference replyRef) {
         replyRef.runTransaction(new Transaction.Handler() {
+            @NonNull
             @Override
-            public Transaction.Result doTransaction(MutableData mutableData) {
+            public Transaction.Result doTransaction(@NonNull MutableData mutableData) {
                 Reply r = mutableData.getValue(Reply.class);
                 if (r == null) {
                     return Transaction.success(mutableData);
@@ -228,7 +226,7 @@ public class ReplyListFragment extends Fragment {
 
     private void moreOptions(Reply reply, String replyKey) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        if (getUid().equals(reply.uid)) {
+        if (getUid().equals(reply.getUid())) {
             builder.setItems(getResources().getStringArray(R.array.options1), (dialog, which) -> {
                 switch (which) {
                     case 0:
@@ -272,8 +270,9 @@ public class ReplyListFragment extends Fragment {
 
     private void decrementRepliesCount() {
         commentReference.runTransaction(new Transaction.Handler() {
+            @NonNull
             @Override
-            public Transaction.Result doTransaction(MutableData mutableData) {
+            public Transaction.Result doTransaction(@NonNull MutableData mutableData) {
                 Comment c = mutableData.getValue(Comment.class);
                 if (c == null) {
                     return Transaction.success(mutableData);
@@ -317,9 +316,8 @@ public class ReplyListFragment extends Fragment {
     }
 
     public Query getQuery(DatabaseReference databaseReference) {
-        Query topRepliesQuery = databaseReference.child("comment-replies")
-                .child(commentKey).orderByChild("votesBalance").limitToFirst(100);
 
-        return topRepliesQuery;
-    };
+        return databaseReference.child("comment-replies")
+                .child(commentKey).orderByChild("votesBalance").limitToFirst(100);
+    }
 }

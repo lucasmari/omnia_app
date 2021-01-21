@@ -5,6 +5,8 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -14,9 +16,6 @@ import com.lucas.omnia.R;
 import com.lucas.omnia.databinding.ActivityEditPostBinding;
 import com.lucas.omnia.models.Post;
 import com.lucas.omnia.models.User;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class EditPostActivity extends BaseActivity {
 
@@ -49,15 +48,15 @@ public class EditPostActivity extends BaseActivity {
         postReference.addListenerForSingleValueEvent(
                 new ValueEventListener() {
                     @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         Post post = dataSnapshot.getValue(Post.class);
 
-                        binding.editPostEtTitle.setText(post.title);
-                        binding.editPostEtBody.setText(post.body);
+                        binding.editPostEtTitle.setText(post.getTitle());
+                        binding.editPostEtBody.setText(post.getBody());
                     }
 
                     @Override
-                    public void onCancelled(DatabaseError databaseError) {
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
                         Log.e(TAG, "loadPost:onCancelled", databaseError.toException());
                         setEditingEnabled(true);
                     }
@@ -90,7 +89,7 @@ public class EditPostActivity extends BaseActivity {
         databaseReference.child("users").child(userId).addListenerForSingleValueEvent(
                 new ValueEventListener() {
                     @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         User user = dataSnapshot.getValue(User.class);
 
                         if (user == null) {
@@ -106,7 +105,7 @@ public class EditPostActivity extends BaseActivity {
                     }
 
                     @Override
-                    public void onCancelled(DatabaseError databaseError) {
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
                         Log.e(TAG, "getUser:onCancelled", databaseError.toException());
                         setEditingEnabled(true);
                     }

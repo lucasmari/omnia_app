@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -48,7 +49,7 @@ public class CommentListFragment extends Fragment {
     private RecyclerView recyclerView;
 
     @Override
-    public View onCreateView (LayoutInflater inflater, ViewGroup container,
+    public View onCreateView (@NonNull LayoutInflater inflater, ViewGroup container,
                               Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         View rootView = inflater.inflate(R.layout.fragment_posts, container, false);
@@ -80,14 +81,15 @@ public class CommentListFragment extends Fragment {
 
         recyclerAdapter = new FirebaseRecyclerAdapter<Comment, CommentViewHolder>(options) {
 
+            @NonNull
             @Override
-            public CommentViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+            public CommentViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
                 LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
                 return new CommentViewHolder(inflater.inflate(R.layout.item_comment, viewGroup, false));
             }
 
             @Override
-            protected void onBindViewHolder(CommentViewHolder viewHolder, int position, final Comment comment) {
+            protected void onBindViewHolder(@NonNull CommentViewHolder viewHolder, int position, @NonNull final Comment comment) {
                 final DatabaseReference commentRef = getRef(position);
                 final String commentKey = commentRef.getKey();
 
@@ -116,21 +118,15 @@ public class CommentListFragment extends Fragment {
 
                 viewHolder.authorView.setOnClickListener(v -> {
                     Intent intent = new Intent(getActivity(), UserPageActivity.class);
-                    intent.putExtra(UserPageActivity.EXTRA_USER_KEY, comment.uid);
+                    intent.putExtra(UserPageActivity.EXTRA_USER_KEY, comment.getUid());
                     startActivity(intent);
                 });
 
                 DatabaseReference globalCommentRef =
                         databaseReference.child("post-comments").child(postKey).child(commentKey);
-                viewHolder.bindToComment(comment, upVoteButton -> {
-                    onUpVoteClicked(globalCommentRef);
-                }, downVoteButton -> {
-                    onDownVoteClicked(globalCommentRef);
-                });
+                viewHolder.bindToComment(comment, upVoteButton -> onUpVoteClicked(globalCommentRef), downVoteButton -> onDownVoteClicked(globalCommentRef));
 
-                viewHolder.moreButton.setOnClickListener(v -> {
-                    moreOptions(comment, commentKey);
-                });
+                viewHolder.moreButton.setOnClickListener(v -> moreOptions(comment, commentKey));
 
                 viewHolder.replyButton.setOnClickListener(v -> {
                     Intent intent = new Intent(getActivity(), NewReplyActivity.class);
@@ -155,7 +151,7 @@ public class CommentListFragment extends Fragment {
         recyclerView.setAdapter(recyclerAdapter);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 if (dy > 0 && addFab.getVisibility() == View.VISIBLE) {
                     addFab.hide();
@@ -169,8 +165,9 @@ public class CommentListFragment extends Fragment {
 
     private void onUpVoteClicked(DatabaseReference commentRef) {
         commentRef.runTransaction(new Transaction.Handler() {
+            @NonNull
             @Override
-            public Transaction.Result doTransaction(MutableData mutableData) {
+            public Transaction.Result doTransaction(@NonNull MutableData mutableData) {
                 Comment c = mutableData.getValue(Comment.class);
                 if (c == null) {
                     return Transaction.success(mutableData);
@@ -211,8 +208,9 @@ public class CommentListFragment extends Fragment {
 
     private void onDownVoteClicked(DatabaseReference commentRef) {
         commentRef.runTransaction(new Transaction.Handler() {
+            @NonNull
             @Override
-            public Transaction.Result doTransaction(MutableData mutableData) {
+            public Transaction.Result doTransaction(@NonNull MutableData mutableData) {
                 Comment c = mutableData.getValue(Comment.class);
                 if (c == null) {
                     return Transaction.success(mutableData);
@@ -253,7 +251,7 @@ public class CommentListFragment extends Fragment {
 
     private void moreOptions(Comment comment, String commentKey) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        if (getUid().equals(comment.uid)) {
+        if (getUid().equals(comment.getUid())) {
             builder.setItems(getResources().getStringArray(R.array.options1), (dialog, which) -> {
                 switch (which) {
                     case 0:
@@ -297,8 +295,9 @@ public class CommentListFragment extends Fragment {
 
     private void decrementCommentsCount() {
         postReference.runTransaction(new Transaction.Handler() {
+            @NonNull
             @Override
-            public Transaction.Result doTransaction(MutableData mutableData) {
+            public Transaction.Result doTransaction(@NonNull MutableData mutableData) {
                 Post p = mutableData.getValue(Post.class);
                 if (p == null) {
                     return Transaction.success(mutableData);
@@ -342,9 +341,8 @@ public class CommentListFragment extends Fragment {
     }
 
     public Query getQuery(DatabaseReference databaseReference) {
-        Query topCommentsQuery = databaseReference.child("post-comments")
-                .child(postKey).orderByChild("votesBalance").limitToFirst(100);
 
-        return topCommentsQuery;
-    };
+        return databaseReference.child("post-comments")
+                .child(postKey).orderByChild("votesBalance").limitToFirst(100);
+    }
 }

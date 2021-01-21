@@ -5,6 +5,8 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -12,12 +14,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.lucas.omnia.R;
 import com.lucas.omnia.databinding.ActivityEditReplyBinding;
 import com.lucas.omnia.models.Reply;
-import com.lucas.omnia.models.User;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import static com.lucas.omnia.activities.CommentsActivity.postKey;
 import static com.lucas.omnia.activities.RepliesActivity.commentKey;
 
 public class EditReplyActivity extends BaseActivity {
@@ -51,14 +48,14 @@ public class EditReplyActivity extends BaseActivity {
         replyReference.addListenerForSingleValueEvent(
                 new ValueEventListener() {
                     @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         Reply reply = dataSnapshot.getValue(Reply.class);
 
-                        binding.editReplyEtBody.setText(reply.body);
+                        binding.editReplyEtBody.setText(reply.getBody());
                     }
 
                     @Override
-                    public void onCancelled(DatabaseError databaseError) {
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
                         Log.e(TAG, "loadReply:onCancelled", databaseError.toException());
                         setEditingEnabled(true);
                     }
