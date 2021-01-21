@@ -21,10 +21,6 @@ import java.util.Map;
 
 import static android.content.Context.MODE_PRIVATE;
 
-/**
- * Created by Lucas on 27/10/2017.
- */
-
 public class UpVotedPostsTabFragment extends PostListFragment {
 
     private static final String TAG = "UpVotedPostsTabFragment";

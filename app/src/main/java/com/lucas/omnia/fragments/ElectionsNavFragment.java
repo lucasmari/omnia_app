@@ -9,10 +9,6 @@ import androidx.fragment.app.Fragment;
 
 import com.lucas.omnia.R;
 
-/**
- * Created by Lucas on 06/11/2017.
- */
-
 public class ElectionsNavFragment extends Fragment {
 
     @Override

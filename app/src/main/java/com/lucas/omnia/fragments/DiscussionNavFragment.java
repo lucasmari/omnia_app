@@ -9,10 +9,6 @@ import androidx.fragment.app.Fragment;
 
 import com.lucas.omnia.R;
 
-/**
- * Created by Lucas on 29/10/2017.
- */
-
 public class DiscussionNavFragment extends Fragment {
 
 

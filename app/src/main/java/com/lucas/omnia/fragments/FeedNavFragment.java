@@ -17,10 +17,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.lucas.omnia.R;
 
-/**
- * Created by Lucas on 10/10/2017.
- */
-
 public class FeedNavFragment extends Fragment{
 
     public static FloatingActionButton addFab;

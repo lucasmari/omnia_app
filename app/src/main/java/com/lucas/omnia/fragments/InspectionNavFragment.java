@@ -16,10 +16,6 @@ import com.lucas.omnia.models.Inspection;
 
 import java.util.List;
 
-/**
- * Created by Lucas on 06/11/2017.
- */
-
 public class InspectionNavFragment extends Fragment {
 
     private RecyclerView recyclerView;

@@ -53,10 +53,6 @@ import java.util.HashMap;
 import static android.content.Context.MODE_PRIVATE;
 
 
-/**
- * Created by Lucas on 29/10/2017.
- */
-
 public class ProfileNavFragment extends Fragment {
 
     private static String userId;
