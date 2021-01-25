@@ -20,6 +20,7 @@ import java.util.*
 class PartiesActivity : BaseActivity {
     private var requestQueue: RequestQueue? = null
 
+    constructor() {}
     private constructor(context: Context) {
         ctx = context
         requestQueue = getRequestQueue()

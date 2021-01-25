@@ -27,9 +27,11 @@ class EditReplyActivity : BaseActivity() {
         requireNotNull(replyKey) { "Must pass EXTRA_REPLY_KEY" }
 
         // Initialize Database
-        val replyReference = databaseRef!!.child("comment-replies")
-                .child(RepliesActivity.commentKey).child(replyKey!!)
-        replyReference.addListenerForSingleValueEvent(
+        val replyReference = RepliesActivity.commentKey?.let {
+            databaseRef!!.child("comment-replies")
+                .child(it).child(replyKey!!)
+        }
+        replyReference?.addListenerForSingleValueEvent(
                 object : ValueEventListener {
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
                         val reply = dataSnapshot.getValue(Reply::class.java)
@@ -56,8 +58,8 @@ class EditReplyActivity : BaseActivity() {
         // Disable button so there are no multi-Replies
         setEditingEnabled(false)
         Toast.makeText(this, getString(R.string.new_reply_toast_replying), Toast.LENGTH_SHORT).show()
-        databaseRef!!.child("comment-replies").child(RepliesActivity.commentKey).child(replyKey!!).child("body").setValue(body)
-        databaseRef!!.child("comment-replies").child(RepliesActivity.commentKey).child(replyKey!!).child("edited").setValue(true)
+        RepliesActivity.commentKey?.let { databaseRef!!.child("comment-replies").child(it).child(replyKey!!).child("body").setValue(body) }
+        RepliesActivity.commentKey?.let { databaseRef!!.child("comment-replies").child(it).child(replyKey!!).child("edited").setValue(true) }
         setEditingEnabled(true)
         finish()
     }

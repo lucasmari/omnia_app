@@ -17,9 +17,9 @@ data class Reply(var uid: String? = null, var author: String? = null, var body: 
     @JvmField
     var votesBalance = 0
     @JvmField
-    var upVotes: Map<String, Boolean> = HashMap()
+    var upVotes: MutableMap<String, Boolean> = HashMap()
     @JvmField
-    var downVotes: Map<String, Boolean> = HashMap()
+    var downVotes: MutableMap<String, Boolean> = HashMap()
 
     @Exclude
     fun toMap(): Map<String, Any?> {

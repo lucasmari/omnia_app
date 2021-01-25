@@ -208,7 +208,7 @@ class AuthActivity : BaseActivity(), View.OnClickListener {
 
     private fun writeNewUser(userId: String, name: String?, email: String?) {
         val user = User(name, email, 0)
-        databaseReference!!.child("users").child(userId).setValue(user)
+        databaseReference.child("users").child(userId).setValue(user)
     }
 
     private fun forgotPass() {

@@ -21,9 +21,9 @@ data class Post(var uid: String? = null, var author: String? = null, var title: 
     @JvmField
     var commentCount = 0
     @JvmField
-    var upVotes: Map<String, Boolean> = HashMap()
+    var upVotes: MutableMap<String, Boolean> = HashMap()
     @JvmField
-    var downVotes: Map<String, Boolean> = HashMap()
+    var downVotes: MutableMap<String, Boolean> = HashMap()
 
     // Default constructor required for calls to DataSnapshot.getValue(Post.class)
     constructor() : this("", "", "", "")

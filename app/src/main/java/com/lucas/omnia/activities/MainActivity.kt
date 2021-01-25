@@ -87,6 +87,7 @@ class MainActivity : BaseActivity(), OnSharedPreferenceChangeListener {
     }
 
     companion object {
+        const val RESULT_OK = -1
         const val TAG = "MainActivity"
     }
 }
