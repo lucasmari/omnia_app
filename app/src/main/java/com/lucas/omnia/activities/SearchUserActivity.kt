@@ -27,7 +27,7 @@ class SearchUserActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search_user)
         noneTv = findViewById(R.id.search_user_tv_none)
-        val recyclerView: RecyclerView? = findViewById(R.id.search_results_rv)
+        recyclerView = findViewById(R.id.search_results_rv)
         recyclerView?.setHasFixedSize(true)
         val layoutManager = LinearLayoutManager(this)
         recyclerView?.layoutManager = layoutManager
@@ -61,7 +61,9 @@ class SearchUserActivity : BaseActivity() {
                     userList.add(user)
                 }
                 val recyclerAdapter = SearchUserAdapter(context, userList)
-                if (recyclerAdapter.itemCount == 0) noneTv!!.visibility = View.VISIBLE else recyclerView!!.adapter = recyclerAdapter
+                Log.e(TAG, recyclerAdapter.itemCount.toString())
+                if (recyclerAdapter.itemCount == 0) noneTv!!.visibility = View.VISIBLE else
+                    recyclerView!!.adapter = recyclerAdapter
             }
 
             override fun onCancelled(error: DatabaseError) {

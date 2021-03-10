@@ -20,7 +20,7 @@ import java.util.*
 class PropositionsActivity : BaseActivity {
     private var requestQueue: RequestQueue? = null
 
-    constructor() {}
+    constructor()
     private constructor(context: Context) {
         ctx = context
         requestQueue = getRequestQueue()

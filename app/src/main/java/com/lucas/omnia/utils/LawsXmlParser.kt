@@ -10,14 +10,14 @@ import java.util.*
 
 class LawsXmlParser {
     @Throws(XmlPullParserException::class, IOException::class)
-    fun parse(`in`: InputStream): List<Law> {
+    fun parse(`in`: InputStream): MutableList<Law> {
         return `in`.use { `in` ->
             val parser = Xml.newPullParser()
             parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false)
             parser.setInput(`in`, null)
             parser.nextTag()
             readRecords(parser)
-        }
+        } as MutableList<Law>
     }
 
     @Throws(XmlPullParserException::class, IOException::class)
@@ -28,15 +28,20 @@ class LawsXmlParser {
             if (parser.eventType != XmlPullParser.START_TAG) {
                 continue
             }
-            val name = parser.name
             // Starts by looking for the entry tag
-            if (name == "srw:records") {
-            } else if (name == "srw:record") {
-            } else if (name == "srw:recordData") {
-            } else if (name == "srw_dc:dc") {
-                laws.add(readLaw(parser))
-            } else {
-                skip(parser)
+            when (parser.name) {
+                "srw:records" -> {
+                }
+                "srw:record" -> {
+                }
+                "srw:recordData" -> {
+                }
+                "srw_dc:dc" -> {
+                    laws.add(readLaw(parser))
+                }
+                else -> {
+                    skip(parser)
+                }
             }
         }
         return laws

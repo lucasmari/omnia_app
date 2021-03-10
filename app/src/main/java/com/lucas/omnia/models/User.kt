@@ -14,7 +14,7 @@ data class User(var uid: String?, var username: String?) {
     @JvmField
     var subCount = 0
     @JvmField
-    var subs: Map<String, String> = HashMap()
+    var subs: MutableMap<String, String> = HashMap()
 
     // Default constructor required for calls to DataSnapshot.getValue(User.class)
     constructor() : this("", "")

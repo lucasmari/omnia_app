@@ -11,7 +11,9 @@ import com.lucas.omnia.R
 import com.lucas.omnia.activities.LawPageActivity
 import com.lucas.omnia.models.Law
 
-class SearchLawAdapter(private val context: Context, private val lawList: List<Law>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class SearchLawAdapter(private val context: Context, private val lawList: MutableList<Law>?) :
+    RecyclerView
+.Adapter<RecyclerView.ViewHolder>() {
     inner class LawViewHolder internal constructor(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
         var localeTextView: TextView = itemView.findViewById(R.id.law_tv_locale_body)
         var authorityTextView: TextView = itemView.findViewById(R.id.law_tv_authority_body)
@@ -20,7 +22,7 @@ class SearchLawAdapter(private val context: Context, private val lawList: List<L
         override fun onClick(view: View) {
             val position = adapterPosition
             if (position != RecyclerView.NO_POSITION) {
-                val (urn) = lawList[position]
+                val (urn) = lawList!![position]
                 val intent = Intent(context, LawPageActivity::class.java)
                 intent.putExtra(LawPageActivity.EXTRA_LAW_URN, urn)
                 context.startActivity(intent)
@@ -38,7 +40,7 @@ class SearchLawAdapter(private val context: Context, private val lawList: List<L
     }
 
     override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
-        val (_, locale, authority, title, description) = lawList[position]
+        val (_, locale, authority, title, description) = lawList!![position]
         val localeTextView = (viewHolder as LawViewHolder).localeTextView
         val authorityTextView = viewHolder.authorityTextView
         val titleTextView = viewHolder.titleTextView
@@ -50,6 +52,6 @@ class SearchLawAdapter(private val context: Context, private val lawList: List<L
     }
 
     override fun getItemCount(): Int {
-        return lawList.size
+        return lawList!!.size
     }
 }

@@ -17,6 +17,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
@@ -28,15 +29,13 @@ import com.lucas.omnia.activities.CommentsActivity
 import com.lucas.omnia.activities.EditPostActivity
 import com.lucas.omnia.activities.UserPageActivity
 import com.lucas.omnia.models.Post
-import com.lucas.omnia.utils.ImageLoadAsyncTask
 import com.lucas.omnia.viewholders.PostViewHolder
 import java.net.MalformedURLException
-import java.net.URL
 
 abstract class PostListFragment : Fragment() {
     private var databaseReference: DatabaseReference? = null
     private var storageRef: StorageReference? = null
-    private var postImgUrl: URL? = null
+    private var postImgUrl: String? = null
     private var recyclerAdapter: FirebaseRecyclerAdapter<Post, PostViewHolder>? = null
     private var recyclerView: RecyclerView? = null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -148,13 +147,13 @@ abstract class PostListFragment : Fragment() {
         val postImgRef = storageRef!!.child("$userId/posts/$postKey")
         postImgRef.downloadUrl.addOnSuccessListener { uri: Uri ->
             try {
-                postImgUrl = URL(uri.toString())
+                postImgUrl = uri.toString()
             } catch (e: MalformedURLException) {
                 e.printStackTrace()
             }
-            val imageLoadAsyncTask = ImageLoadAsyncTask(postImgUrl,
-                    postImgView, false)
-            imageLoadAsyncTask.execute()
+            postImgView.load(postImgUrl) {
+                crossfade(true)
+            }
             postImgView.visibility = View.VISIBLE
         }.addOnFailureListener { Toast.makeText(context, getString(R.string.profile_toast_fetch_error), Toast.LENGTH_SHORT).show() }
     }

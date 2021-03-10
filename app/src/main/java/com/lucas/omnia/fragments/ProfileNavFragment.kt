@@ -18,6 +18,8 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
+import coil.load
+import coil.transform.CircleCropTransformation
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
@@ -28,14 +30,12 @@ import com.lucas.omnia.activities.MainActivity
 import com.lucas.omnia.activities.ProfileSettingsActivity
 import com.lucas.omnia.activities.SubscriptionsActivity
 import com.lucas.omnia.models.User
-import com.lucas.omnia.utils.ImageLoadAsyncTask
 import java.io.IOException
 import java.net.MalformedURLException
-import java.net.URL
 import java.util.*
 
 class ProfileNavFragment : Fragment() {
-    private var profileImgUrl: URL? = null
+    private var profileImgUrl: String? = null
     private var profileImgView: ImageView? = null
     private var usernameTv: TextView? = null
     private var subCountTv: TextView? = null
@@ -43,9 +43,6 @@ class ProfileNavFragment : Fragment() {
     private var storageRef: StorageReference? = null
     private var sharedPreferences: SharedPreferences? = null
     private var databaseReference: DatabaseReference? = null
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -65,7 +62,7 @@ class ProfileNavFragment : Fragment() {
                     SubscriptionsActivity::class.java))
         }
         profileImgView = view.findViewById(R.id.profile_iv)
-        profileImgView?.setOnClickListener { v: View? ->
+        profileImgView?.setOnClickListener {
             verifyStoragePermissions()
         }
         val editIb = view.findViewById<ImageButton>(R.id.profile_ib_edit)
@@ -90,7 +87,7 @@ class ProfileNavFragment : Fragment() {
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
                         val u = dataSnapshot.getValue(User::class.java)
                         if (u == null) {
-                            Log.e(TAG, "User " + userId + " is unexpectedly null")
+                            Log.e(TAG, "User $userId is unexpectedly null")
                             Toast.makeText(context,
                                     getString(R.string.new_post_toast_user_fetch_error),
                                     Toast.LENGTH_SHORT).show()
@@ -139,7 +136,7 @@ class ProfileNavFragment : Fragment() {
                 .setTitle(getString(R.string.profile_ad_username))
                 .setView(editText)
                 .setPositiveButton(getString(R.string.alert_dialog_bt_save)
-                ) { dialog1: DialogInterface?, which1: Int ->
+                ) { _: DialogInterface?, _: Int ->
                     val username = editText.text.toString()
                     updateUser(username)
                 }
@@ -222,7 +219,6 @@ class ProfileNavFragment : Fragment() {
         val chooserIntent = Intent(Intent.ACTION_CHOOSER)
         chooserIntent.putExtra(Intent.EXTRA_INTENT, contentSelectionIntent)
         chooserIntent.putExtra(Intent.EXTRA_TITLE, "Image Chooser")
-        val RESULT_LOAD_IMG = 1
         startActivityForResult(chooserIntent, RESULT_LOAD_IMG)
     }
 
@@ -234,7 +230,7 @@ class ProfileNavFragment : Fragment() {
                 if (dataUri != null) {
                     val profileImgRef = storageRef!!.child(userId + STORAGE_PATH)
                     profileImgRef.putFile(dataUri)
-                    setProfileImage(dataUri)
+                    setProfileImage(dataUri.toString())
 
                     // Set hasPhoto in database
                     usersReference!!.child(userId!!).child("hasPhoto").setValue(true)
@@ -251,23 +247,16 @@ class ProfileNavFragment : Fragment() {
         }
     }
 
-    @Throws(IOException::class)
-    private fun setProfileImage(dataUri: Uri) {
-        val bitmap = MediaStore.Images.Media.getBitmap(requireActivity().contentResolver, dataUri)
-        val circleBitmap = Bitmap.createBitmap(bitmap.width, bitmap.height,
-                Bitmap.Config.ARGB_8888)
-        val shader = BitmapShader(bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP)
-        val paint = Paint()
-        paint.shader = shader
-        paint.isAntiAlias = true
-        val c = Canvas(circleBitmap)
-        c.drawCircle((bitmap.width / 2).toFloat(), (bitmap.height / 2).toFloat(), (bitmap.width / 2).toFloat(), paint)
-        profileImgView!!.setImageBitmap(circleBitmap)
+    private fun setProfileImage(dataString: String?) {
+        profileImgView?.load(dataString) {
+            crossfade(true)
+            transformations(CircleCropTransformation())
+        }
     }
 
     private fun setUser(u: User) {
         usernameTv!!.text = u.username
-        subCountTv!!.text = java.lang.String.valueOf(u.subCount)
+        subCountTv!!.text = u.subCount.toString()
         if (u.hasPhoto) fetchProfileImage()
         if (u.about != null) aboutEt!!.setText(u.about)
     }
@@ -276,14 +265,12 @@ class ProfileNavFragment : Fragment() {
         val profileImgRef = storageRef!!.child(userId + STORAGE_PATH)
         profileImgRef.downloadUrl.addOnSuccessListener { uri: Uri ->
             try {
-                profileImgUrl = URL(uri.toString())
+                profileImgUrl = uri.toString()
             } catch (e: MalformedURLException) {
                 e.printStackTrace()
             }
-            val imageLoadAsyncTask = ImageLoadAsyncTask(profileImgUrl,
-                    profileImgView, true)
-            imageLoadAsyncTask.execute()
-        }.addOnFailureListener { exception: Exception? -> Toast.makeText(context, getString(R.string.profile_toast_fetch_error), Toast.LENGTH_SHORT).show() }
+            setProfileImage(profileImgUrl)
+        }.addOnFailureListener { Toast.makeText(context, getString(R.string.profile_toast_fetch_error), Toast.LENGTH_SHORT).show() }
     }
 
     fun saveUser(u: User?) {
@@ -306,6 +293,7 @@ class ProfileNavFragment : Fragment() {
         private var usersReference: DatabaseReference? = null
         private const val TAG = "ProfileNavFragment"
         private const val STORAGE_PATH = "/profile-picture/profile.jpg"
+        private const val RESULT_LOAD_IMG = 1
 
         // Permissions
         private const val REQUEST_EXTERNAL_STORAGE = 1
