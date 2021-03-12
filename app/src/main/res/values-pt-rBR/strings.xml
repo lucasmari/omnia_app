@@ -187,6 +187,18 @@
     <string name="inspection_item_8">Votações</string>
     <string name="inspection_item_9">Órgãos</string>
 
+    <!-- ___________________________________ Utils _____________________________________ -->
+
+    <!-- TimestampBuilder -->
+    <string name="timestamp_builder_less_text">há menos de um segundo</string>
+    <string name="timestamp_builder_seconds_text">s</string>
+    <string name="timestamp_builder_minutes_text">min</string>
+    <string name="timestamp_builder_hours_text">h</string>
+    <string name="timestamp_builder_days_text">d</string>
+    <string name="timestamp_builder_weeks_text">sem</string>
+    <string name="timestamp_builder_months_text">m</string>
+    <string name="timestamp_builder_years_text">a</string>
+
     <!-- ___________________________________ Menu _____________________________________ -->
 
     <!-- BottomNavigation Items -->
