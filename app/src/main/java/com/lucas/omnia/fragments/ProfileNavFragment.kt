@@ -2,15 +2,12 @@ package com.lucas.omnia.fragments
 
 import android.Manifest
 import android.app.AlertDialog
-import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
-import android.graphics.*
 import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -24,28 +21,30 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import com.google.gson.Gson
 import com.lucas.omnia.R
 import com.lucas.omnia.activities.MainActivity
 import com.lucas.omnia.activities.ProfileSettingsActivity
 import com.lucas.omnia.activities.SubscriptionsActivity
 import com.lucas.omnia.models.User
+import kotlinx.serialization.*
+import kotlinx.serialization.json.Json
 import java.io.IOException
 import java.net.MalformedURLException
 import java.util.*
 
-class ProfileNavFragment : Fragment() {
+class ProfileNavFragment(private val sharedPreferences: SharedPreferences) : Fragment() {
     private var profileImgUrl: String? = null
     private var profileImgView: ImageView? = null
     private var usernameTv: TextView? = null
     private var subCountTv: TextView? = null
     private var aboutEt: EditText? = null
     private var storageRef: StorageReference? = null
-    private var sharedPreferences: SharedPreferences? = null
     private var databaseReference: DatabaseReference? = null
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_profile, container, false)
     }
 
@@ -58,49 +57,58 @@ class ProfileNavFragment : Fragment() {
         saveBt.setOnClickListener { addAbout() }
         val subsBt = view.findViewById<Button>(R.id.profile_bt_subs)
         subsBt.setOnClickListener { v: View ->
-            startActivity(Intent(v.context,
-                    SubscriptionsActivity::class.java))
+            startActivity(
+                Intent(
+                    v.context,
+                    SubscriptionsActivity::class.java
+                )
+            )
         }
         profileImgView = view.findViewById(R.id.profile_iv)
         profileImgView?.setOnClickListener {
             verifyStoragePermissions()
         }
         val editIb = view.findViewById<ImageButton>(R.id.profile_ib_edit)
-        editIb.setOnClickListener { v: View? -> editUsername() }
+        editIb.setOnClickListener { editUsername() }
         val settingsIb = view.findViewById<ImageButton>(R.id.profile_ib)
         settingsIb.setOnClickListener { v: View ->
-            startActivity(Intent(v.context,
-                    ProfileSettingsActivity::class.java))
+            startActivity(
+                Intent(
+                    v.context,
+                    ProfileSettingsActivity::class.java
+                )
+            )
         }
         val storage = FirebaseStorage.getInstance()
         storageRef = storage.reference
         databaseReference = FirebaseDatabase.getInstance().reference
         userId = FirebaseAuth.getInstance().currentUser!!.uid
         usersReference = databaseReference!!.child("users")
-        sharedPreferences = requireActivity().getPreferences(Context.MODE_PRIVATE)
-        if (!sharedPreferences?.contains("User")!!) fetchUser() else setUser(userLocal)
+        if (!sharedPreferences.contains("User")) fetchUser() else setUser(getUser())
     }
 
     fun fetchUser() {
         databaseReference!!.child("users").child(userId!!).addListenerForSingleValueEvent(
-                object : ValueEventListener {
-                    override fun onDataChange(dataSnapshot: DataSnapshot) {
-                        val u = dataSnapshot.getValue(User::class.java)
-                        if (u == null) {
-                            Log.e(TAG, "User $userId is unexpectedly null")
-                            Toast.makeText(context,
-                                    getString(R.string.new_post_toast_user_fetch_error),
-                                    Toast.LENGTH_SHORT).show()
-                        } else {
-                            setUser(u)
-                            saveUser(u)
-                        }
+            object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    val u = dataSnapshot.getValue(User::class.java)
+                    if (u == null) {
+                        Log.e(TAG, "User $userId is unexpectedly null")
+                        Toast.makeText(
+                            context,
+                            getString(R.string.new_post_toast_user_fetch_error),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    } else {
+                        setUser(u)
+                        saveUser(u)
                     }
+                }
 
-                    override fun onCancelled(databaseError: DatabaseError) {
-                        Log.e(TAG, "getUser:onCancelled", databaseError.toException())
-                    }
-                })
+                override fun onCancelled(databaseError: DatabaseError) {
+                    Log.e(TAG, "getUser:onCancelled", databaseError.toException())
+                }
+            })
     }
 
     private fun addAbout() {
@@ -110,20 +118,22 @@ class ProfileNavFragment : Fragment() {
         usersReference!!.child(userId!!).child("about").setValue(aboutEt!!.text.toString())
 
         // Save about in SharedPreferences
-        val u = userLocal
+        val u = getUser()
         u.about = aboutEt!!.text.toString()
         saveUser(u)
         Toast.makeText(context, getString(R.string.profile_toast_about), Toast.LENGTH_SHORT).show()
     }
 
     private fun verifyStoragePermissions() {
-        val readPermission = ActivityCompat.checkSelfPermission(requireContext(),
-                Manifest.permission.READ_EXTERNAL_STORAGE)
+        val readPermission = ActivityCompat.checkSelfPermission(
+            requireContext(),
+            Manifest.permission.READ_EXTERNAL_STORAGE
+        )
         if (readPermission != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(
-                    requireActivity(),
-                    PERMISSIONS_STORAGE,
-                    REQUEST_EXTERNAL_STORAGE
+                requireActivity(),
+                PERMISSIONS_STORAGE,
+                REQUEST_EXTERNAL_STORAGE
             )
         } else {
             openChooser()
@@ -133,46 +143,60 @@ class ProfileNavFragment : Fragment() {
     private fun editUsername() {
         val editText = EditText(context)
         AlertDialog.Builder(context)
-                .setTitle(getString(R.string.profile_ad_username))
-                .setView(editText)
-                .setPositiveButton(getString(R.string.alert_dialog_bt_save)
-                ) { _: DialogInterface?, _: Int ->
-                    val username = editText.text.toString()
-                    updateUser(username)
-                }
-                .setNegativeButton(getString(R.string.alert_dialog_bt_cancel), null)
-                .show()
+            .setTitle(getString(R.string.profile_ad_username))
+            .setView(editText)
+            .setPositiveButton(
+                getString(R.string.alert_dialog_bt_save)
+            ) { _: DialogInterface?, _: Int ->
+                val username = editText.text.toString()
+                updateUser(username)
+            }
+            .setNegativeButton(getString(R.string.alert_dialog_bt_cancel), null)
+            .show()
     }
 
     private fun updateUser(username: String) {
-        usersReference!!.orderByChild("username").equalTo(username).addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    Toast.makeText(context,
-                            getString(R.string.profile_toast_username_exists),
-                            Toast.LENGTH_SHORT).show()
-                } else if (username.length < 16) {
-                    Toast.makeText(context, getString(R.string.profile_toast_saving), Toast.LENGTH_SHORT).show()
-                    usernameTv!!.text = username
+        usersReference!!.orderByChild("username").equalTo(username)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    when {
+                        dataSnapshot.exists() -> {
+                            Toast.makeText(
+                                context,
+                                getString(R.string.profile_toast_username_exists),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                        username.length < 16 -> {
+                            Toast.makeText(
+                                context,
+                                getString(R.string.profile_toast_saving),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            usernameTv!!.text = username
 
-                    // Save username in database
-                    usersReference!!.child(userId!!).child("username").setValue(username)
+                            // Save username in database
+                            usersReference!!.child(userId!!).child("username").setValue(username)
 
-                    // Save username in SharedPreferences
-                    val u = userLocal
-                    u.username = username
-                    saveUser(u)
-                    updatePosts(username)
-                } else {
-                    Toast.makeText(context,
-                            getString(R.string.profile_toast_validation), Toast.LENGTH_LONG).show()
+                            // Save username in SharedPreferences
+                            val u = getUser()
+                            u.username = username
+                            saveUser(u)
+                            updatePosts(username)
+                        }
+                        else -> {
+                            Toast.makeText(
+                                context,
+                                getString(R.string.profile_toast_validation), Toast.LENGTH_LONG
+                            ).show()
+                        }
+                    }
                 }
-            }
 
-            override fun onCancelled(databaseError: DatabaseError) {
-                Log.e(TAG, "updateUser:onCancelled", databaseError.toException())
-            }
-        })
+                override fun onCancelled(databaseError: DatabaseError) {
+                    Log.e(TAG, "updateUser:onCancelled", databaseError.toException())
+                }
+            })
     }
 
     private fun updatePosts(username: String) {
@@ -236,7 +260,7 @@ class ProfileNavFragment : Fragment() {
                     usersReference!!.child(userId!!).child("hasPhoto").setValue(true)
 
                     // Save hasPhoto in SharedPreferences
-                    val u = userLocal
+                    val u = getUser()
                     u.hasPhoto = true
                     saveUser(u)
                 }
@@ -270,23 +294,27 @@ class ProfileNavFragment : Fragment() {
                 e.printStackTrace()
             }
             setProfileImage(profileImgUrl)
-        }.addOnFailureListener { Toast.makeText(context, getString(R.string.profile_toast_fetch_error), Toast.LENGTH_SHORT).show() }
-    }
-
-    fun saveUser(u: User?) {
-        val prefsEditor = sharedPreferences!!.edit()
-        val gson = Gson()
-        val json = gson.toJson(u)
-        prefsEditor.putString("User", json)
-        prefsEditor.apply()
-    }
-
-    val userLocal: User
-        get() {
-            val gson = Gson()
-            val json = sharedPreferences!!.getString("User", "")
-            return gson.fromJson(json, User::class.java)
+        }.addOnFailureListener {
+            Toast.makeText(
+                context,
+                getString(R.string.profile_toast_fetch_error),
+                Toast.LENGTH_SHORT
+            ).show()
         }
+    }
+
+    fun saveUser(u: User): Boolean {
+        val string = Json.encodeToString(u)
+        val prefsEditor = sharedPreferences.edit()
+        prefsEditor.putString("User", string)
+        prefsEditor.apply()
+        return prefsEditor.commit()
+    }
+
+    fun getUser(): User {
+        val string = sharedPreferences.getString("User", "")
+        return Json.decodeFromString(string!!)
+    }
 
     companion object {
         private var userId: String? = null
@@ -298,7 +326,7 @@ class ProfileNavFragment : Fragment() {
         // Permissions
         private const val REQUEST_EXTERNAL_STORAGE = 1
         private val PERMISSIONS_STORAGE = arrayOf(
-                Manifest.permission.READ_EXTERNAL_STORAGE
+            Manifest.permission.READ_EXTERNAL_STORAGE
         )
     }
 }

@@ -2,7 +2,9 @@ package com.lucas.omnia.activities
 
 import android.app.SearchManager
 import android.content.ComponentName
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import android.os.Bundle
 import android.os.Handler
@@ -21,14 +23,17 @@ import com.lucas.omnia.utils.BottomNavItemSelectedListener
 
 class MainActivity : BaseActivity(), OnSharedPreferenceChangeListener {
     private var doubleBackToExitPressedOnce = false
+    private lateinit var sharedPreferences: SharedPreferences
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setupSharedPreferences()
+        sharedPreferences = this.getPreferences(Context.MODE_PRIVATE)
         val toolbar = findViewById<Toolbar>(R.id.main_tb)
         setSupportActionBar(toolbar)
         val viewPager = findViewById<ViewPager>(R.id.main_cvp)
-        val adapter = AppFragmentPageAdapter(supportFragmentManager)
+        val adapter = AppFragmentPageAdapter(supportFragmentManager, sharedPreferences)
         viewPager.adapter = adapter
         viewPager.offscreenPageLimit = adapter.count - 1
         val navigation = findViewById<BottomNavigationView>(R.id.main_bnv)

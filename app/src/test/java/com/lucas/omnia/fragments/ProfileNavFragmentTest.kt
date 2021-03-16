@@ -1,8 +1,7 @@
 package com.lucas.omnia.fragments
 
 import android.content.SharedPreferences
-import com.lucas.omnia.utils.SharedPreferenceEntry
-import com.lucas.omnia.utils.SharedPreferencesHelper
+import com.lucas.omnia.models.User
 import org.junit.Before
 import org.junit.Test
 import org.junit.jupiter.api.Assertions.*
@@ -15,86 +14,88 @@ import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
 class ProfileNavFragmentTest {
-    private lateinit var sharedPreferenceEntry: SharedPreferenceEntry
-    private lateinit var mockSharedPreferencesHelper: SharedPreferencesHelper
-    private lateinit var mockBrokenSharedPreferencesHelper: SharedPreferencesHelper
+    private lateinit var userEntry: User
+    private lateinit var mockProfileNavFragment: ProfileNavFragment
+    private lateinit var mockBrokenProfileNavFragment: ProfileNavFragment
 
-    @Mock private lateinit var mockSharedPreferences: SharedPreferences
-    @Mock private lateinit var mockBrokenSharedPreferences: SharedPreferences
-    @Mock private lateinit var mockEditor: SharedPreferences.Editor
-    @Mock private lateinit var mockBrokenEditor: SharedPreferences.Editor
+    @Mock
+    private lateinit var mockSharedPreferences: SharedPreferences
+    @Mock
+    private lateinit var mockBrokenSharedPreferences: SharedPreferences
+    @Mock
+    private lateinit var mockEditor: SharedPreferences.Editor
+    @Mock
+    private lateinit var mockBrokenEditor: SharedPreferences.Editor
 
-    @Before fun initMocks() {
-        sharedPreferenceEntry = SharedPreferenceEntry(UID, USERNAME)
+    @Before
+    fun initMocks() {
+        userEntry = User(UID, USERNAME)
 
         // Create a mocked SharedPreferences.
-        mockSharedPreferencesHelper = createMockSharedPreference()
+        mockProfileNavFragment = createMockSharedPreference()
 
         // Create a mocked SharedPreferences that fails at saving data.
-        mockBrokenSharedPreferencesHelper = createBrokenMockSharedPreference()
+        mockBrokenProfileNavFragment = createBrokenMockSharedPreference()
     }
 
-    @Test fun sharedPreferencesHelper_SaveAndReadPersonalInformation() {
+    @Test
+    fun profileNavFragment_SaveAndReadPersonalInformation() {
         // Save the personal information to SharedPreferences
-        val success = mockSharedPreferencesHelper.savePersonalInfo(sharedPreferenceEntry)
-        assertTrue(success, "Checking that SharedPreferenceEntry.save... returns true")
+        assertTrue(mockProfileNavFragment.saveUser(userEntry))
 
         // Read personal information from SharedPreferences
-        val savedSharedPreferenceEntry = mockSharedPreferencesHelper.getPersonalInfo()
+        val savedUser = mockProfileNavFragment.getUser()
 
         // Make sure both written and retrieved personal information are equal.
         assertEquals(
-            "0",
-            sharedPreferenceEntry.uid, savedSharedPreferenceEntry.uid
+            userEntry.uid, savedUser.uid
         )
         assertEquals(
-            "test",
-            sharedPreferenceEntry.username, savedSharedPreferenceEntry.username
+            userEntry.username, savedUser.username
         )
     }
 
-    @Test fun sharedPreferencesHelper_SavePersonalInformationFailed_ReturnsFalse() {
-        // Read personal information from a broken SharedPreferencesHelper
-        val success = mockBrokenSharedPreferencesHelper.savePersonalInfo(sharedPreferenceEntry)
-        assertFalse(
-            success,
-            "Makes sure writing to a broken SharedPreferencesHelper returns false"
-        )
+    @Test
+    fun profileNavFragment_SavePersonalInformationFailed_ReturnsFalse() {
+        // Read personal information from a broken ProfileNavFragment
+            assertFalse(
+                mockBrokenProfileNavFragment.saveUser(userEntry)
+            )
     }
 
     /**
      * Creates a mocked SharedPreferences.
      */
-    private fun createMockSharedPreference(): SharedPreferencesHelper {
+    private fun createMockSharedPreference(): ProfileNavFragment {
         // Mocking reading the SharedPreferences as if mockSharedPreferences was previously written
         // correctly.
-        given(mockSharedPreferences.getString(eq(SharedPreferencesHelper.KEY_ID), anyString()))
-            .willReturn(sharedPreferenceEntry.uid)
-        given(mockSharedPreferences.getString(eq(SharedPreferencesHelper.KEY_USERNAME), anyString()))
-            .willReturn(sharedPreferenceEntry.username)
+        given(mockSharedPreferences.getString(eq(USER), anyString()))
+            .willReturn(RETURN_VALUE)
 
         // Mocking a successful commit.
         given(mockEditor.commit()).willReturn(true)
 
         // Return the MockEditor when requesting it.
         given(mockSharedPreferences.edit()).willReturn(mockEditor)
-        return SharedPreferencesHelper(mockSharedPreferences)
+        return ProfileNavFragment(mockSharedPreferences)
     }
 
     /**
      * Creates a mocked SharedPreferences that fails when writing.
      */
-    private fun createBrokenMockSharedPreference(): SharedPreferencesHelper {
+    private fun createBrokenMockSharedPreference(): ProfileNavFragment {
         // Mocking a commit that fails.
         given(mockBrokenEditor.commit()).willReturn(false)
 
         // Return the broken MockEditor when requesting it.
         given(mockBrokenSharedPreferences.edit()).willReturn(mockBrokenEditor)
-        return SharedPreferencesHelper(mockBrokenSharedPreferences)
+        return ProfileNavFragment(mockBrokenSharedPreferences)
     }
 
     companion object {
-        private const val UID = "0"
-        private const val USERNAME = "test"
+        const val UID = "0"
+        const val USERNAME = "test"
+        const val USER = "User"
+        const val RETURN_VALUE = """{"uid": "0", "username": "test"}"""
     }
 }

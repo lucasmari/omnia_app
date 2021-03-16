@@ -2,9 +2,11 @@ package com.lucas.omnia.models
 
 import com.google.firebase.database.IgnoreExtraProperties
 import java.util.*
+import kotlinx.serialization.*
 
 @IgnoreExtraProperties
-data class User(var uid: String?, var username: String?) {
+@Serializable
+data class User(var uid: String? = null, var username: String? = null) {
     @JvmField
     var email: String? = null
     var hasPhoto = false
@@ -19,7 +21,7 @@ data class User(var uid: String?, var username: String?) {
     // Default constructor required for calls to DataSnapshot.getValue(User.class)
     constructor() : this("", "")
 
-    constructor(username: String?, email: String?, subCount: Int) : this() {
+    constructor(username: String? = null, email: String? = null, subCount: Int) : this() {
         this.username = username
         this.email = email
         this.subCount = subCount
